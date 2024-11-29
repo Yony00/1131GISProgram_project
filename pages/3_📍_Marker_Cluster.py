@@ -21,10 +21,10 @@ with st.expander("See source code"):
         m = leafmap.Map(center=[40, -100], zoom=4)
         cities = "https://raw.githubusercontent.com/giswqs/leafmap/master/examples/data/us_cities.csv"
         regions = "https://raw.githubusercontent.com/giswqs/leafmap/master/examples/data/us_regions.geojson"
-        MS="https://raw.githubusercontent.com/RGT1143022/datafor1127/main/MSwithGEO10.geojson"
+        regions2="https://raw.githubusercontent.com/RGT1143022/datafor1127/main/MSwithGEO10.geojson"
 
        # m.add_geojson(regions, layer_name="US Regions")
-        m.add_geojson(MS, layer_name="Man Single Player Count")
+        m.add_geojson(regions2, layer_name="Man Single Player Count")
 
         #m.add_points_from_xy(
         #    cities,
