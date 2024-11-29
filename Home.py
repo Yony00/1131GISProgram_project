@@ -26,6 +26,7 @@ st.markdown(
 st.header("Instructions")
 
 markdown = """
+7777777
 1. For the [GitHub repository](https://github.com/opengeos/streamlit-map-template) or [use it as a template](https://github.com/opengeos/streamlit-map-template/generate) for your own project.
 2. Customize the sidebar by changing the sidebar text and logo in each Python files.
 3. Find your favorite emoji from https://emojipedia.org.
