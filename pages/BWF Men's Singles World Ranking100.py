@@ -51,12 +51,12 @@ if "date_id_dict" in st.session_state:
 
     with button_area:
         # 每行顯示五個按鈕
-        columns = st.columns(5)  # 分成 5 列
+        columns = st.columns(10)  # 分成 5 列
         for idx, (date, date_id) in enumerate(date_id_dict.items()):
             # 確保每 5 個按鈕放在同一行
-            col_idx = idx % 5  # 計算該按鈕應該顯示在第幾列
+            col_idx = idx % 10  # 計算該按鈕應該顯示在第幾列
             with columns[col_idx]:
-                if st.button(f"Get Ranking for \n{date}", key=f"button_{date}"):  # 使用 `key` 來確保每個按鈕有唯一 ID
+                if st.button(f"Get Ranking for {date}", key=f"button_{date}"):  # 使用 `key` 來確保每個按鈕有唯一 ID
                     try:
                         # 確保字典中有對應的日期
                         selected_id = date_id  # 根據選擇的日期，獲取對應的 ID
