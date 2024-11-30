@@ -34,8 +34,8 @@ st.session_state.first_scrape_done = True  # 設定標記，表示第一次爬�
 
 # 顯示排名資料
 with table_area:
-st.write("Below is the BWF Men's Singles World Ranking for 11/26/2024:")
-st.write(df_initial)
+    st.write("Below is the BWF Men's Singles World Ranking for 11/26/2024:")
+    st.write(df_initial)
 ################
 
 # 第一個按鈕：抓取固定日期11/26/2024資料並取得ID對應字典
