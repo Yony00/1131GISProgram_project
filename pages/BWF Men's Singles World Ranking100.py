@@ -20,8 +20,8 @@ if st.button("Get Ranking for 11/26/2024"):
         # 設定 URL（您可以在這裡更改URL）
         url = "https://bwf.tournamentsoftware.com/ranking/category.aspx?id=43340&category=472&C472FOC=&p=1&ps=100"
 
-        # 呼叫爬蟲，獲取排名資料
-        df_initial = scrape_bwf_ranking(url)
+        # 呼叫爬蟲，獲取排名資料並抓取日期-ID對應字典
+        df_initial, date_id_dict = scrape_bwf_ranking(url)
 
         # 顯示排名資料
         st.write("Below is the BWF Men's Singles World Ranking for 11/26/2024:", df_initial)
