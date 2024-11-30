@@ -31,19 +31,16 @@ def scrape_bwf_ranking():
         # 確保每行包含足夠的列數（根據需要提取的欄位數量）
         if len(cols) >= 8:  # 假設表格至少有8列數據
             rank = cols[0].text.strip()
-            player = cols[1].text.strip()
-            country = cols[2].text.strip()
-            member_id = cols[3].text.strip()  # 新增 Member ID 欄位
-            points = cols[4].text.strip()
-            tournaments = cols[5].text.strip()
-            confederation = cols[6].text.strip()  # 新增 Confederation 欄位
-            country_2 = cols[7].text.strip()  # 假設有兩個 Country 欄位
+            player = cols[3].text.strip()
+            country = cols[8].text.strip()
+            points = cols[5].text.strip()
+            confederation = cols[7].text.strip()  # 新增 Confederation 欄位
             
             # 每一行的資料
-            data.append([rank, player, country, member_id, points, tournaments, confederation, country_2])
+            data.append([rank, player, country,  points, confederation])
 
     # 設定欄位名稱
-    columns = ["Rank", "Player", "Country", "Member ID", "Points", "Tournaments", "Confederation", "Country"]
+    columns = ["Rank", "Player", "Country",  "Points", "Confederation"]
     df = pd.DataFrame(data, columns=columns)
     
     return df
