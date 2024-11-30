@@ -17,12 +17,23 @@ def scrape_bwf_ranking(url):
 
     if not table:
         print("Error: No table found")
-        return None
+        return None, {}
 
     # 提取表格中的行
     rows = table.find_all('tr')[1:]  # 跳過表頭
     data = []
     
+    # 解析日期ID對應字典
+    date_id_dict = {}
+    select_box = soup.find('select', {'id': 'cphPage_cphPage_cphPage_dlPublication'})
+    if select_box:
+        options = select_box.find_all('option')
+        for option in options:
+            date_text = option.text.strip()
+            date_id = option['value']
+            date_id_dict[date_text] = date_id
+
+    # 提取排名資料
     for row in rows:
         cols = row.find_all('td')
         
@@ -42,5 +53,6 @@ def scrape_bwf_ranking(url):
     columns = ["Rank", "Player", "Country", "Points", "Confederation"]
     df = pd.DataFrame(data, columns=columns)
     
-    return df
+    return df, date_id_dict
+
 
