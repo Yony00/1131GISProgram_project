@@ -3,9 +3,14 @@ import pandas as pd
 import os
 
 # 確保 Playwright 的瀏覽器已經安裝
-if not os.path.exists('/home/appuser/.cache/ms-playwright'):
-    from playwright.__main__ import install
-    install()
+def ensure_playwright_installed():
+    from playwright.sync_api import install
+    try:
+        install()
+    except Exception as e:
+        print("Error installing Playwright:", e)
+
+ensure_playwright_installed()
 
 def scrape_bwf_ranking():
     with sync_playwright() as p:
