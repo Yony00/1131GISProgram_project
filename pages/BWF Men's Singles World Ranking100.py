@@ -55,10 +55,10 @@ if "date_id_dict" in st.session_state:
 
     with button_area:
         # 每行顯示五個按鈕
-        columns = st.columns(5)  # 分成 5 列
+        columns = st.columns(7)  # 分成 5 列
         for idx, (date, date_id) in enumerate(date_id_dict.items()):
             # 確保每 5 個按鈕放在同一行
-            col_idx = idx % 5  # 計算該按鈕應該顯示在第幾列
+            col_idx = idx % 7  # 計算該按鈕應該顯示在第幾列
             with columns[col_idx]:
                 if st.button(f" {date}", key=f"button_{date}"):  # 使用 `key` 來確保每個按鈕有唯一 ID
                     try:
