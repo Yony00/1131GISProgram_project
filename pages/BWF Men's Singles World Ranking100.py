@@ -71,4 +71,3 @@ if "date_id_dict" in st.session_state:
 
                     except Exception as e:
                         st.error(f"Error occurred: {e}")
-
