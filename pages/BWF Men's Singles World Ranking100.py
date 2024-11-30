@@ -13,32 +13,26 @@ table_area = st.container()
 button_area = st.container()
 
 # 檢查是否已經存儲過第一次爬蟲的資料
-if "df_initial" in st.session_state:
-    df_initial = st.session_state.df_initial
-    date_id_dict = st.session_state.date_id_dict  # 從 session_state 中獲取日期ID對應字典
-    
-    with table_area:
-        st.write("Below is the BWF Men's Singles World Ranking for 11/26/2024:")
-        st.write(df_initial)
+if "df_initial" not in st.session_state:  # 只有在第一次爬蟲未完成時才會執行
+    try:
+        url = "https://bwf.tournamentsoftware.com/ranking/category.aspx?id=43340&category=472&C472FOC=&p=1&ps=100"
 
-############
-url = "https://bwf.tournamentsoftware.com/ranking/category.aspx?id=43340&category=472&C472FOC=&p=1&ps=100"
+        # 呼叫第一次爬蟲，獲取排名資料並抓取日期-ID對應字典
+        df_initial, date_id_dict = scrape_bwf_ranking(url)
 
-# 呼叫第一次爬蟲，獲取排名資料並抓取日期-ID對應字典
-df_initial, date_id_dict = scrape_bwf_ranking(url)
+        # 儲存第一次爬蟲結果到 session_state 中
+        st.session_state.df_initial = df_initial
+        st.session_state.date_id_dict = date_id_dict  # 儲存日期-ID對應字典
+        st.session_state.first_scrape_done = True  # 設定標記，表示第一次爬蟲已經完成
 
-# 儲存第一次爬蟲結果到 session_state 中
-st.session_state.df_initial = df_initial
-st.session_state.date_id_dict = date_id_dict  # 儲存日期-ID對應字典
-st.session_state.first_scrape_done = True  # 設定標記，表示第一次爬蟲已經完成
+    except Exception as e:
+        st.error(f"Error occurred: {e}")
 
 # 顯示排名資料
-with table_area:
-    st.write("Below is the BWF Men's Singles World Ranking for 11/26/2024:")
-    st.write(df_initial)
-################
-
-
+if "df_initial" in st.session_state:
+    with table_area:
+        st.write("Below is the BWF Men's Singles World Ranking for 11/26/2024:")
+        st.write(st.session_state.df_initial)
 
 # 顯示所有日期的按鈕
 if "date_id_dict" in st.session_state:
@@ -66,3 +60,4 @@ if "date_id_dict" in st.session_state:
 
                     except Exception as e:
                         st.error(f"Error occurred: {e}")
+
