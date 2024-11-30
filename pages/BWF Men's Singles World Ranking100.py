@@ -43,11 +43,14 @@ if st.button("Get Ranking for 11/26/2024"):
 # 第二個按鈕：根據選擇的日期執行爬蟲
 if 'selected_id' in st.session_state and st.button("Get Ranking for Selected Date"):
     try:
-        # 呼叫第二個爬蟲，抓取選擇日期的資料
+        # 取得選擇的日期 ID
         selected_id = st.session_state.selected_id
+        
+        # 呼叫第二個爬蟲，抓取選擇日期的資料
         df_selected = scrape_bwf_ranking_by_date(selected_id)
 
         # 顯示選擇日期的排名資料
+        selected_date = list(date_id_dict.keys())[list(date_id_dict.values()).index(selected_id)]  # 取得選擇的日期
         st.write(f"Below is the BWF Men's Singles World Ranking for {selected_date}:", df_selected)
 
         # 提供下載 CSV 檔案的功能
@@ -60,6 +63,4 @@ if 'selected_id' in st.session_state and st.button("Get Ranking for Selected Dat
 
     except Exception as e:
         st.error(f"Error occurred: {e}")
-
-
 
