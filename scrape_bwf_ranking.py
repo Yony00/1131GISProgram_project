@@ -2,10 +2,8 @@ import requests
 from bs4 import BeautifulSoup
 import pandas as pd
 
+# 第一次爬蟲，取得指定日期的排名和 ID 對應字典
 def scrape_bwf_ranking_initial(url):
-    # 使用傳入的 URL 進行爬蟲
-    response = requests.get(url)
-
     # 設置 User-Agent 防止被封鎖
     headers = {
         'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36'
@@ -26,7 +24,7 @@ def scrape_bwf_ranking_initial(url):
     rows = table.find_all('tr')[1:]  # 跳過表頭
     data = []
     date_id_dict = {}
-    
+
     # 獲取日期和 ID 的對應字典
     select_element = soup.find('select', {'id': 'cphPage_cphPage_cphPage_dlPublication'})
     if select_element:
@@ -59,10 +57,10 @@ def scrape_bwf_ranking_initial(url):
     return df, date_id_dict
 
 
-def scrape_bwf_ranking_by_date(date_id):
-    # 使用傳入的 date_id 生成相應的 URL
+# 根據選擇的日期 ID 進行爬蟲
+def scrape_bwf_ranking_for_date(date_id):
     url = f"https://bwf.tournamentsoftware.com/ranking/category.aspx?id={date_id}&category=472&C472FOC=&p=1&ps=100"
-
+    
     # 設置 User-Agent 防止被封鎖
     headers = {
         'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36'
@@ -82,7 +80,8 @@ def scrape_bwf_ranking_by_date(date_id):
     # 提取表格中的行
     rows = table.find_all('tr')[1:]  # 跳過表頭
     data = []
-    
+
+    # 處理排名資料
     for row in rows:
         cols = row.find_all('td')
         
@@ -103,5 +102,3 @@ def scrape_bwf_ranking_by_date(date_id):
     df = pd.DataFrame(data, columns=columns)
     
     return df
-
-
