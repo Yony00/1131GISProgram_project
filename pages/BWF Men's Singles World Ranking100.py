@@ -32,46 +32,35 @@ if st.button("Get Ranking for 11/26/2024"):
         st.session_state.df_initial = df_initial
         st.session_state.date_id_dict = date_id_dict  # 儲存日期-ID對應字典
 
-        # 顯示日期選擇功能
-        st.write("Select a different date to get the ranking:")
-        date_options = list(date_id_dict.keys())  # 從爬蟲結果中獲取日期
-        selected_date = st.selectbox("Select Date", date_options, key="date_selector")  # 使用key來標識
-
-        # 儲存選擇的日期 ID
-        if selected_date:
-            selected_id = date_id_dict[selected_date]
-            st.session_state.selected_date = selected_date  # 儲存選擇的日期
-            st.session_state.selected_id = selected_id  # 儲存選擇的 ID
-
     except Exception as e:
         st.error(f"Error occurred: {e}")
 
-# 顯示目前選擇的日期，這個部分會更新
-if 'selected_date' in st.session_state:
-    selected_date = st.session_state.selected_date
-    st.write(f"Currently Selected Date: {selected_date}")  # 顯示當前選擇的日期
-
-# 第二個按鈕：根據選擇的日期執行爬蟲
-if 'selected_id' in st.session_state and st.session_state.selected_id:
-    if st.button("Get Ranking for Selected Date"):
-        try:
-            # 取得選擇的日期 ID
-            selected_id = st.session_state.selected_id
+# 固定指定日期 11/12/2024 進行第二次爬蟲
+if st.button("Get Ranking for 11/12/2024"):
+    try:
+        # 確保字典中有對應的日期
+        if '11/12/2024' in date_id_dict:
+            selected_id = date_id_dict['11/12/2024']  # 直接指定日期為 11/12/2024 的 ID
 
             # 呼叫第二個爬蟲，根據 ID 獲取該日期的資料
             df_selected = scrape_bwf_ranking_by_date(selected_id)
 
             # 顯示選擇日期的排名資料
-            selected_date = st.session_state.selected_date  # 從 session_state 中讀取選擇的日期
-            st.write(f"Below is the BWF Men's Singles World Ranking for {selected_date}:", df_selected)
+            st.write("Below is the BWF Men's Singles World Ranking for 11/12/2024:", df_selected)
 
             # 提供下載 CSV 檔案的功能
             st.download_button(
-                label="Download CSV for Selected Date",
+                label="Download CSV for 11/12/2024",
                 data=df_selected.to_csv(index=False),
-                file_name=f"bwf_ranking_{selected_date}.csv",
+                file_name="bwf_ranking_11_12_2024.csv",
                 mime="text/csv"
             )
+
+        else:
+            st.error("Date '11/12/2024' not found in date ID dictionary.")
+
+    except Exception as e:
+        st.error(f"Error occurred: {e}")
 
         except Exception as e:
             st.error(f"Error occurred: {e}")
