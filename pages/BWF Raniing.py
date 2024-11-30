@@ -1,4 +1,4 @@
-playwright install
+ install playwright
 
 import streamlit as st
 import pandas as pd
