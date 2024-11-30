@@ -14,9 +14,6 @@ def scrape_bwf_ranking():
     # 解析 HTML
     soup = BeautifulSoup(response.content, 'html.parser')
 
-    # 打印 HTML 結構，檢查是否正確提取資料
-    print(soup.prettify()[:500])  # 可以檢查前500個字符來理解頁面結構
-
     # 查找表格，這是存放選手排名的地方
     table = soup.find('table', {'class': 'ruler'})
 
@@ -31,19 +28,24 @@ def scrape_bwf_ranking():
     for row in rows:
         cols = row.find_all('td')
         
-        # 確保行中包含預期的數據
-        if len(cols) >= 5:  # 根據表格結構，確保每一行至少有5列數據
+        # 確保每行包含足夠的列數（根據需要提取的欄位數量）
+        if len(cols) >= 8:  # 假設表格至少有8列數據
             rank = cols[0].text.strip()
             player = cols[1].text.strip()
             country = cols[2].text.strip()
-            points = cols[3].text.strip()
-            tournaments = cols[4].text.strip()
-            data.append([rank, player, country, points, tournaments])
+            member_id = cols[3].text.strip()  # 新增 Member ID 欄位
+            points = cols[4].text.strip()
+            tournaments = cols[5].text.strip()
+            confederation = cols[6].text.strip()  # 新增 Confederation 欄位
+            country_2 = cols[7].text.strip()  # 假設有兩個 Country 欄位
+            
+            # 每一行的資料
+            data.append([rank, player, country, member_id, points, tournaments, confederation, country_2])
 
-    columns = ["Rank", "Player", "Country", "Points", "Tournaments"]
+    # 設定欄位名稱
+    columns = ["Rank", "Player", "Country", "Member ID", "Points", "Tournaments", "Confederation", "Country"]
     df = pd.DataFrame(data, columns=columns)
     
-    # 顯示 DataFrame 並返回
     return df
 
 
