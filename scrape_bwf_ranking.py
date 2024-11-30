@@ -2,9 +2,7 @@ import requests
 from bs4 import BeautifulSoup
 import pandas as pd
 
-def scrape_bwf_ranking():
-    url = "https://bwf.tournamentsoftware.com/ranking/category.aspx?id=43340&category=472&C472FOC=&p=1&ps=100"
-
+def scrape_bwf_ranking(url):
     # 設置 User-Agent 防止被封鎖
     headers = {
         'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36'
@@ -32,18 +30,17 @@ def scrape_bwf_ranking():
         if len(cols) >= 8:  # 假設表格至少有8列數據
             rank = cols[0].text.strip()
             player = cols[4].text.strip()
-            player=player[5:]
+            player = player[5:]
             country = cols[10].text.strip()
             points = cols[7].text.strip()
             confederation = cols[9].text.strip()  # 新增 Confederation 欄位
             
             # 每一行的資料
-            data.append([rank, player, country,  points, confederation])
+            data.append([rank, player, country, points, confederation])
 
     # 設定欄位名稱
-    columns = ["Rank", "Player", "Country",  "Points", "Confederation"]
+    columns = ["Rank", "Player", "Country", "Points", "Confederation"]
     df = pd.DataFrame(data, columns=columns)
     
     return df
-
 
