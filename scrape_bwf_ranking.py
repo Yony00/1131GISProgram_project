@@ -4,9 +4,6 @@ import pandas as pd
 
 def scrape_bwf_ranking():
     url =     "https://bwf.tournamentsoftware.com/ranking/category.aspx?id=43340&category=472&C472FOC=&p=1&ps=100"
-    url= "https://bwf.tournamentsoftware.com/ranking/category.aspx?id=43340&category=473&C473FOC=&p=1&ps=100"
-    urlwoman2="https://bwf.tournamentsoftware.com/ranking/category.aspx?id=43270&category=473&C473FOC=&p=1&ps=100"
-    urlwoman3="https://bwf.tournamentsoftware.com/ranking/category.aspx?id=43155&category=473&C473FOC=&p=1&ps=100"
     # 設置 User-Agent 防止被封鎖
     headers = {
         'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36'
