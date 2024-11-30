@@ -38,14 +38,12 @@ with st.expander("See source code"):
 
 m.to_streamlit(height=700)
 
-import pandas as pd
+import geopandas as gpd
 
 
 @st.cache_data
 def load_data():
-    data_frame = pd.DataFrame(
-       regions2
-    )
+    data_frame = gpd.read_file(regions2)
     return data_frame
 
 
