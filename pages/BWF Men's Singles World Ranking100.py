@@ -22,26 +22,28 @@ if "df_initial" in st.session_state:
         st.write(df_initial)
 
 # 第一個按鈕：抓取固定日期11/26/2024資料並取得ID對應字典
-with button_area:
-    if st.button("Get Ranking for 11/26/2024"):
-        try:
-            # 設定 URL
-            url = "https://bwf.tournamentsoftware.com/ranking/category.aspx?id=43340&category=472&C472FOC=&p=1&ps=100"
+if "first_scrape_done" not in st.session_state or not st.session_state.first_scrape_done:
+    with button_area:
+        if st.button("Get Ranking for 11/26/2024"):
+            try:
+                # 設定 URL
+                url = "https://bwf.tournamentsoftware.com/ranking/category.aspx?id=43340&category=472&C472FOC=&p=1&ps=100"
 
-            # 呼叫第一次爬蟲，獲取排名資料並抓取日期-ID對應字典
-            df_initial, date_id_dict = scrape_bwf_ranking(url)
+                # 呼叫第一次爬蟲，獲取排名資料並抓取日期-ID對應字典
+                df_initial, date_id_dict = scrape_bwf_ranking(url)
 
-            # 儲存第一次爬蟲結果到 session_state 中
-            st.session_state.df_initial = df_initial
-            st.session_state.date_id_dict = date_id_dict  # 儲存日期-ID對應字典
+                # 儲存第一次爬蟲結果到 session_state 中
+                st.session_state.df_initial = df_initial
+                st.session_state.date_id_dict = date_id_dict  # 儲存日期-ID對應字典
+                st.session_state.first_scrape_done = True  # 設定標記，表示第一次爬蟲已經完成
 
-            # 顯示排名資料
-            with table_area:
-                st.write("Below is the BWF Men's Singles World Ranking for 11/26/2024:")
-                st.write(df_initial)
+                # 顯示排名資料
+                with table_area:
+                    st.write("Below is the BWF Men's Singles World Ranking for 11/26/2024:")
+                    st.write(df_initial)
 
-        except Exception as e:
-            st.error(f"Error occurred: {e}")
+            except Exception as e:
+                st.error(f"Error occurred: {e}")
 
 # 顯示所有日期的按鈕
 if "date_id_dict" in st.session_state:
@@ -69,3 +71,4 @@ if "date_id_dict" in st.session_state:
 
                     except Exception as e:
                         st.error(f"Error occurred: {e}")
+
