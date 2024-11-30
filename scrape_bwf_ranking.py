@@ -1,5 +1,11 @@
 from playwright.sync_api import sync_playwright
 import pandas as pd
+import os
+
+# 確保 Playwright 的瀏覽器已經安裝
+if not os.path.exists('/home/appuser/.cache/ms-playwright'):
+    from playwright.__main__ import install
+    install()
 
 def scrape_bwf_ranking():
     with sync_playwright() as p:
@@ -32,6 +38,5 @@ def scrape_bwf_ranking():
     # 將數據存為 DataFrame 並返回
     columns = ["Rank", "Player", "Country", "Points", "Tournaments"]
     df = pd.DataFrame(data, columns=columns)
-    
     return df
 
