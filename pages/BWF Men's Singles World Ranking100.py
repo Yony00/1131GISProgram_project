@@ -22,24 +22,35 @@ if st.button("Get Ranking for 11/26/2024"):
         date_options = list(date_id_dict.keys())
         selected_date = st.selectbox("Select Date", date_options)
 
-        # 第二個按鈕：根據選擇的日期執行爬蟲
+        # 儲存選擇的日期 ID
         if selected_date:
             selected_id = date_id_dict[selected_date]
-            df_selected = scrape_bwf_ranking_by_date(selected_id)
-
-            # 顯示選擇日期的排名資料
-            st.write(f"Below is the BWF Men's Singles World Ranking for {selected_date}:", df_selected)
-
-            # 提供下載 CSV 檔案的功能
-            st.download_button(
-                label="Download CSV for Selected Date",
-                data=df_selected.to_csv(index=False),
-                file_name=f"bwf_ranking_{selected_date}.csv",
-                mime="text/csv"
-            )
+            st.session_state.selected_id = selected_id  # 儲存選擇的 ID
 
     except Exception as e:
         st.error(f"Error occurred: {e}")
+
+# 第二個按鈕：根據選擇的日期執行爬蟲
+if 'selected_id' in st.session_state and st.button("Get Ranking for Selected Date"):
+    try:
+        # 呼叫第二個爬蟲，抓取選擇日期的資料
+        selected_id = st.session_state.selected_id
+        df_selected = scrape_bwf_ranking_by_date(selected_id)
+
+        # 顯示選擇日期的排名資料
+        st.write(f"Below is the BWF Men's Singles World Ranking for {selected_date}:", df_selected)
+
+        # 提供下載 CSV 檔案的功能
+        st.download_button(
+            label="Download CSV for Selected Date",
+            data=df_selected.to_csv(index=False),
+            file_name=f"bwf_ranking_{selected_date}.csv",
+            mime="text/csv"
+        )
+
+    except Exception as e:
+        st.error(f"Error occurred: {e}")
+
 
 
 
