@@ -1,104 +1,68 @@
-import requests
-from bs4 import BeautifulSoup
+import streamlit as st
 import pandas as pd
+from scrape_bwf_ranking import scrape_bwf_ranking_initial, scrape_bwf_ranking_by_date
 
-# 第一次爬蟲，取得指定日期的排名和 ID 對應字典
-def scrape_bwf_ranking_initial(url):
-    # 設置 User-Agent 防止被封鎖
-    headers = {
-        'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36'
-    }
-    response = requests.get(url, headers=headers)
-    
-    # 解析 HTML
-    soup = BeautifulSoup(response.content, 'html.parser')
+# 設定頁面標題
+st.title("BWF Men's Singles World Ranking")
 
-    # 查找表格，這是存放選手排名的地方
-    table = soup.find('table', {'class': 'ruler'})
+# 先檢查 session_state 是否已經存儲過資料
+if "df_initial" in st.session_state:
+    df_initial = st.session_state.df_initial
+    st.write("Below is the BWF Men's Singles World Ranking for 11/26/2024:")
+    st.write(df_initial)
 
-    if not table:
-        print("Error: No table found")
-        return None, {}
+# 第一個按鈕：抓取固定日期11/26/2024資料並取得ID對應字典
+if st.button("Get Ranking for 11/26/2024"):
+    try:
+        # 設定 URL（您可以在這裡更改URL）
+        url = "https://bwf.tournamentsoftware.com/ranking/category.aspx?id=43340&category=472&C472FOC=&p=1&ps=100"
 
-    # 提取表格中的行
-    rows = table.find_all('tr')[1:]  # 跳過表頭
-    data = []
-    date_id_dict = {}
+        # 呼叫第一個爬蟲，獲取排名資料並取得日期- ID字典
+        df, date_id_dict = scrape_bwf_ranking_initial(url)
 
-    # 獲取日期和 ID 的對應字典
-    select_element = soup.find('select', {'id': 'cphPage_cphPage_cphPage_dlPublication'})
-    if select_element:
-        options = select_element.find_all('option')
-        for option in options:
-            date = option.text.strip()
-            date_id = option['value']
-            date_id_dict[date] = date_id
+        # 顯示排名資料
+        st.write("Below is the BWF Men's Singles World Ranking for 11/26/2024:", df)
 
-    # 處理排名資料
-    for row in rows:
-        cols = row.find_all('td')
+        # 儲存第一次爬蟲結果到 session_state 中
+        st.session_state.df_initial = df
+
+        # 儲存日期 ID 對應字典
+        st.session_state.date_id_dict = date_id_dict
+
+        # 顯示日期選擇功能
+        st.write("Select a different date to get the ranking:")
+        date_options = list(date_id_dict.keys())
+        selected_date = st.selectbox("Select Date", date_options)
+
+        # 儲存選擇的日期 ID
+        if selected_date:
+            selected_id = date_id_dict[selected_date]
+            st.session_state.selected_id = selected_id  # 儲存選擇的 ID
+
+    except Exception as e:
+        st.error(f"Error occurred: {e}")
+
+# 第二個按鈕：根據選擇的日期執行爬蟲
+if 'selected_id' in st.session_state and st.button("Get Ranking for Selected Date"):
+    try:
+        # 取得選擇的日期 ID
+        selected_id = st.session_state.selected_id
         
-        # 確保每行包含足夠的列數（根據需要提取的欄位數量）
-        if len(cols) >= 8:  # 假設表格至少有8列數據
-            rank = cols[0].text.strip()
-            player = cols[4].text.strip()
-            player = player[5:]  # 修正選手名字格式
-            country = cols[10].text.strip()
-            points = cols[7].text.strip()
-            confederation = cols[9].text.strip()  # 新增 Confederation 欄位
-            
-            # 每一行的資料
-            data.append([rank, player, country, points, confederation])
+        # 呼叫第二個爬蟲，抓取選擇日期的資料
+        df_selected = scrape_bwf_ranking_by_date(selected_id)
 
-    # 設定欄位名稱
-    columns = ["Rank", "Player", "Country", "Points", "Confederation"]
-    df = pd.DataFrame(data, columns=columns)
-    
-    return df, date_id_dict
+        # 顯示選擇日期的排名資料
+        selected_date = list(st.session_state.date_id_dict.keys())[list(st.session_state.date_id_dict.values()).index(selected_id)]  # 取得選擇的日期
+        st.write(f"Below is the BWF Men's Singles World Ranking for {selected_date}:", df_selected)
 
+        # 提供下載 CSV 檔案的功能
+        st.download_button(
+            label="Download CSV for Selected Date",
+            data=df_selected.to_csv(index=False),
+            file_name=f"bwf_ranking_{selected_date}.csv",
+            mime="text/csv"
+        )
 
-# 根據選擇的日期 ID 進行爬蟲
-def scrape_bwf_ranking_for_date(date_id):
-    url = f"https://bwf.tournamentsoftware.com/ranking/category.aspx?id={date_id}&category=472&C472FOC=&p=1&ps=100"
-    
-    # 設置 User-Agent 防止被封鎖
-    headers = {
-        'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36'
-    }
-    response = requests.get(url, headers=headers)
-    
-    # 解析 HTML
-    soup = BeautifulSoup(response.content, 'html.parser')
+    except Exception as e:
+        st.error(f"Error occurred: {e}")
 
-    # 查找表格，這是存放選手排名的地方
-    table = soup.find('table', {'class': 'ruler'})
-
-    if not table:
-        print("Error: No table found")
-        return None
-
-    # 提取表格中的行
-    rows = table.find_all('tr')[1:]  # 跳過表頭
-    data = []
-
-    # 處理排名資料
-    for row in rows:
-        cols = row.find_all('td')
-        
-        # 確保每行包含足夠的列數（根據需要提取的欄位數量）
-        if len(cols) >= 8:  # 假設表格至少有8列數據
-            rank = cols[0].text.strip()
-            player = cols[4].text.strip()
-            player = player[5:]  # 修正選手名字格式
-            country = cols[10].text.strip()
-            points = cols[7].text.strip()
-            confederation = cols[9].text.strip()  # 新增 Confederation 欄位
-            
-            # 每一行的資料
-            data.append([rank, player, country, points, confederation])
-
-    # 設定欄位名稱
-    columns = ["Rank", "Player", "Country", "Points", "Confederation"]
-    df = pd.DataFrame(data, columns=columns)
-    
-    return df
