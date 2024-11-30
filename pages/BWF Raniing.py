@@ -1,3 +1,5 @@
+playwright install
+
 import streamlit as st
 import pandas as pd
 from scrape_bwf_ranking import scrape_bwf_ranking  # 引入爬蟲腳本
