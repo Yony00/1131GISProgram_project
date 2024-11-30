@@ -35,7 +35,7 @@ if st.button("Get Ranking for 11/26/2024"):
         # 顯示日期選擇功能
         st.write("Select a different date to get the ranking:")
         date_options = list(date_id_dict.keys())  # 從爬蟲結果中獲取日期
-        selected_date = st.selectbox("Select Date", date_options)
+        selected_date = st.selectbox("Select Date", date_options, key="date_selector")  # 使用key來標識
 
         # 儲存選擇的日期 ID
         if selected_date:
