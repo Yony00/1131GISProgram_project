@@ -3,5 +3,7 @@ geopandas
 leafmap
 owslib
 streamlit
-playwright
 pandas
+
+requests
+beautifulsoup4
