@@ -1,4 +1,4 @@
-!/bin/bash
+#!/bin/bash
 
 # 確保 pip 是最新版本
 echo "Upgrading pip..."
