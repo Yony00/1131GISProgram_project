@@ -14,6 +14,7 @@ st.write(
     """)
 # 用來顯示表格的區域
 table_area = st.container()
+row1_1, row1_2 = table_area.columns((2, 3))
 
 # 按鈕區域
 button_area = st.container()
