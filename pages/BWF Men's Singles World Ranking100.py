@@ -3,21 +3,25 @@ import pandas as pd
 from scrape_bwf_ranking import scrape_bwf_ranking  # 引入第一次爬蟲的函數
 from scrape_bwf_ranking_by_date import scrape_bwf_ranking_by_date  # 引入第二次爬蟲的函數
 
+# 設定頁面配置為寬屏模式
+st.set_page_config(page_title="BWF Men's Singles World Ranking", layout="wide")
+
 # 設定頁面標題
 st.title("BWF Men's Singles World Ranking")
 st.write(
-        """
-    ##
+    """
+    ##  
     此爬蟲程式，抓取2024/11/26時BWF世界羽聯當週紀錄的世界排名資料，取前100名 \n
     此頁面顯示為男子單打項目 \n
     可選擇過去其他週次的紀錄進行比對
-    """)
+    """
+)
+
 # 用來顯示表格的區域
 table_area = st.container()
 
-############ˇˇ
+# 表格的左右分區
 row1_1, row1_2 = table_area.columns((1, 1))
-###########
 
 # 按鈕區域
 button_area = st.container()
@@ -31,7 +35,7 @@ if "df_initial" not in st.session_state:  # 只有在第一次爬蟲未完成時
         df_initial, date_id_dict = scrape_bwf_ranking(url)
 
         # 儲存第一次爬蟲結果到 session_state 中
-        df_initial.set_index("Rank" , inplace=True)
+        df_initial.set_index("Rank", inplace=True)
         st.session_state.df_initial = df_initial
         st.session_state.date_id_dict = date_id_dict  # 儲存日期-ID對應字典
         st.session_state.first_scrape_done = True  # 設定標記，表示第一次爬蟲已經完成
@@ -63,7 +67,7 @@ if "date_id_dict" in st.session_state:
 
                         # 呼叫第二個爬蟲，根據 ID 獲取該日期的資料
                         df_selected = scrape_bwf_ranking_by_date(selected_id)
-                        df_selected.set_index("Rank" , inplace=True)
+                        df_selected.set_index("Rank", inplace=True)
 
                         # 顯示選擇日期的排名資料
                         with row1_2:
@@ -72,4 +76,3 @@ if "date_id_dict" in st.session_state:
 
                     except Exception as e:
                         st.error(f"Error occurred: {e}")
-
