@@ -46,9 +46,10 @@ if st.button("Get Ranking for 11/26/2024"):
     except Exception as e:
         st.error(f"Error occurred: {e}")
 
-# 顯示目前選擇的日期
-if 'selected_date' in st.session_state and st.session_state.selected_date:
-    st.write(f"Currently Selected Date: {st.session_state.selected_date}")
+# 顯示目前選擇的日期，這個部分會更新
+if 'selected_date' in st.session_state:
+    selected_date = st.session_state.selected_date
+    st.write(f"Currently Selected Date: {selected_date}")  # 顯示當前選擇的日期
 
 # 第二個按鈕：根據選擇的日期執行爬蟲
 if 'selected_id' in st.session_state and st.session_state.selected_id:
