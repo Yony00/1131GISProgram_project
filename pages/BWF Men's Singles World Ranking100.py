@@ -16,7 +16,7 @@ st.write(
 table_area = st.container()
 
 ############ˇˇ
-row1_1, row1_2 = table_area.columns((2, 3))
+row1_1, row1_2 = table_area.columns((1, 1))
 ###########
 
 # 按鈕區域
