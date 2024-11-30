@@ -16,10 +16,12 @@ if "df_initial" in st.session_state:
 
 # 第一個按鈕：抓取固定日期11/26/2024資料並取得ID對應字典
 if st.button("Get Ranking for 11/26/2024"):
-
     try:
+        # 設定 URL（您可以在這裡更改URL）
+        url = "https://bwf.tournamentsoftware.com/ranking/category.aspx?id=43340&category=472&C472FOC=&p=1&ps=100"
+
         # 呼叫第一個爬蟲，獲取排名資料並取得日期- ID字典
-        df, date_id_dict = scrape_bwf_ranking_initial()
+        df, date_id_dict = scrape_bwf_ranking_initial(url)
 
         # 顯示排名資料
         st.write("Below is the BWF Men's Singles World Ranking for 11/26/2024:", df)
@@ -63,4 +65,5 @@ if 'selected_id' in st.session_state and st.button("Get Ranking for Selected Dat
 
     except Exception as e:
         st.error(f"Error occurred: {e}")
+
 
