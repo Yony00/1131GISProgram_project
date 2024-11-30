@@ -17,7 +17,7 @@ def scrape_bwf_ranking(url):
 
     if not table:
         print("Error: No table found")
-        return None
+        return None, {}
 
     # 提取表格中的行
     rows = table.find_all('tr')[1:]  # 跳過表頭
@@ -30,7 +30,7 @@ def scrape_bwf_ranking(url):
         if len(cols) >= 8:  # 假設表格至少有8列數據
             rank = cols[0].text.strip()
             player = cols[4].text.strip()
-            player=player[5:]
+            player = player[5:]
             country = cols[10].text.strip()
             points = cols[7].text.strip()
             confederation = cols[9].text.strip()  # 新增 Confederation 欄位
@@ -41,7 +41,17 @@ def scrape_bwf_ranking(url):
     # 設定欄位名稱
     columns = ["Rank", "Player", "Country", "Points", "Confederation"]
     df = pd.DataFrame(data, columns=columns)
-    
-    return df
+
+    # 取得所有日期與對應的 ID 字典
+    date_id_dict = {}
+    select_element = soup.find('select', {'id': 'cphPage_cphPage_cphPage_dlPublication'})
+    if select_element:
+        options = select_element.find_all('option')
+        for option in options:
+            date = option.text.strip()
+            id_value = option['value']
+            date_id_dict[date] = id_value
+
+    return df, date_id_dict
 
 
