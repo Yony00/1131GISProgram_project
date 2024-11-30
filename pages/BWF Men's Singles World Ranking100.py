@@ -23,10 +23,12 @@ if st.button("Get Ranking for 11/26/2024"):
         date_options = list(date_id_dict.keys())
         selected_date = st.selectbox("Select Date", date_options)
 
-        # 根據選擇的日期抓取對應的 ID 和排名資料
+        # 當使用者選擇日期後，再次執行爬蟲並顯示選擇日期的資料
         if selected_date:
             selected_id = date_id_dict[selected_date]
             selected_url = f"https://bwf.tournamentsoftware.com/ranking/category.aspx?id={selected_id}&category=472&C472FOC=&p=1&ps=100"
+
+            # 執行爬蟲抓取所選日期的資料
             df_selected, _ = scrape_bwf_ranking(selected_url)
 
             # 顯示選擇日期的排名資料
@@ -42,4 +44,5 @@ if st.button("Get Ranking for 11/26/2024"):
 
     except Exception as e:
         st.error(f"Error occurred: {e}")
+
 
