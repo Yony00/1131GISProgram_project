@@ -32,7 +32,7 @@ def scrape_bwf_ranking():
         if len(cols) >= 8:  # 假設表格至少有8列數據
             rank = cols[0].text.strip()
             player = cols[4].text.strip()
-            country = cols[8].text.strip()
+            country = cols[10].text.strip()
             points = cols[5].text.strip()
             confederation = cols[7].text.strip()  # 新增 Confederation 欄位
             
