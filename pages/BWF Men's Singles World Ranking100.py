@@ -1,6 +1,7 @@
 import streamlit as st
 import pandas as pd
-from scrape_bwf_ranking import scrape_bwf_ranking_initial, scrape_bwf_ranking_by_date
+from scrape_bwf_ranking import scrape_bwf_ranking_initial
+from scrape_bwf_ranking_by_date import scrape_bwf_ranking_by_date  # 引入新的爬蟲函數
 
 # 設定頁面標題
 st.title("BWF Men's Singles World Ranking")
@@ -65,5 +66,6 @@ if 'selected_id' in st.session_state and st.button("Get Ranking for Selected Dat
 
     except Exception as e:
         st.error(f"Error occurred: {e}")
+
 
 
