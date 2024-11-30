@@ -2,7 +2,7 @@ install playwright
 
 import streamlit as st
 import pandas as pd
-from 2scrape_bwf_ranking import scrape_bwf_ranking  # 引入爬蟲腳本
+from NEWscrape_bwf_ranking import scrape_bwf_ranking  # 引入爬蟲腳本
 
 # 設定標題
 st.title("BWF Men's Singles World Ranking")
