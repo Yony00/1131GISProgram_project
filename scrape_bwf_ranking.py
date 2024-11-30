@@ -1,35 +1,31 @@
-from playwright.sync_api import sync_playwright
+import requests
+from bs4 import BeautifulSoup
 import pandas as pd
 
 def scrape_bwf_ranking():
-    with sync_playwright() as p:
-        browser = p.chromium.launch(headless=True)  # 啟動瀏覽器
-        page = browser.new_page()
+    # 設置目標 URL
+    url = "https://bwf.tournamentsoftware.com/ranking/ranking.aspx?rid=70"
 
-        # 進入目標網站
-        url = "https://bwf.tournamentsoftware.com/ranking/ranking.aspx?rid=70"
-        page.goto(url)
+    # 發送請求獲取網頁內容
+    response = requests.get(url)
 
-        # 點擊 "Men's Singles" 分頁
-        page.click("text=Men's Singles")
+    # 解析 HTML
+    soup = BeautifulSoup(response.content, 'html.parser')
 
-        # 點擊 "More" 按鈕以加載更多選手
-        while True:
-            try:
-                page.click("text=More", timeout=3000)
-            except:
-                break  # 沒有 "More" 按鈕時退出
+    # 找到排名表格
+    table = soup.find('table', {'class': 'ruler'})
 
-        # 提取表格數據
-        rows = page.query_selector_all("table.ruler tbody tr")
-        data = []
-        for row in rows:
-            cols = row.query_selector_all("td")
-            data.append([col.inner_text().strip() for col in cols])
+    # 提取表格中的行
+    rows = table.find_all('tr')[1:]  # 跳過表頭
 
-        browser.close()
+    data = []
+    for row in rows:
+        cols = row.find_all('td')
+        # 提取每一列的資料
+        data.append([col.text.strip() for col in cols])
 
-    # 將數據存為 DataFrame 並返回
+    # 將數據轉換為 DataFrame 並返回
     columns = ["Rank", "Player", "Country", "Points", "Tournaments"]
     df = pd.DataFrame(data, columns=columns)
     return df
+
