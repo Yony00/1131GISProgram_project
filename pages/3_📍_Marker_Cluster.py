@@ -37,3 +37,18 @@ with st.expander("See source code"):
         #)
 
 m.to_streamlit(height=700)
+
+import pandas as pd
+
+
+@st.cache_data
+def load_data():
+    data_frame = pd.DataFrame(
+       regions2
+    )
+    return data_frame
+
+
+data_frame = load_data()
+st.write("1 + 1 = ", 2)
+st.write("Below is a DataFrame:", data_frame, "Above is a dataframe.")
