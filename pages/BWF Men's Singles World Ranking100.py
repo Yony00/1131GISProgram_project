@@ -8,14 +8,24 @@ st.title("BWF Men's Singles World Ranking")
 # 用來儲存日期和ID對應字典
 date_id_dict = {}
 
+# 先檢查 session_state 是否已經存儲過資料
+if "df_initial" in st.session_state:
+    df_initial = st.session_state.df_initial
+    st.write("Below is the BWF Men's Singles World Ranking for 11/26/2024:")
+    st.write(df_initial)
+
 # 第一個按鈕：抓取固定日期11/26/2024資料並取得ID對應字典
 if st.button("Get Ranking for 11/26/2024"):
+
     try:
         # 呼叫第一個爬蟲，獲取排名資料並取得日期- ID字典
         df, date_id_dict = scrape_bwf_ranking_initial()
 
         # 顯示排名資料
         st.write("Below is the BWF Men's Singles World Ranking for 11/26/2024:", df)
+
+        # 儲存第一次爬蟲結果到 session_state 中
+        st.session_state.df_initial = df
 
         # 顯示日期選擇功能
         st.write("Select a different date to get the ranking:")
@@ -50,7 +60,6 @@ if 'selected_id' in st.session_state and st.button("Get Ranking for Selected Dat
 
     except Exception as e:
         st.error(f"Error occurred: {e}")
-
 
 
 
