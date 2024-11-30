@@ -1,30 +1,22 @@
 import streamlit as st
-import leafmap.foliumap as leafmap
+import pandas as pd
+from scrape_bwf_ranking import scrape_bwf_ranking  # 引入你的爬蟲腳本
 
-st.set_page_config(layout="wide")
+# 標題
+st.title("BWF Men's Singles World Ranking")
 
-markdown = """
-A Streamlit map template
-<https://github.com/opengeos/streamlit-map-template>
-"""
+# 撰寫一個按鈕來觸發爬蟲
+if st.button("Get Ranking"):
+    # 爬取排名資料
+    df = scrape_bwf_ranking()
 
-st.sidebar.title("About")
-st.sidebar.info(markdown)
-logo = "https://i.imgur.com/UbOXYAU.png"
-st.sidebar.image(logo)
+    # 顯示表格
+    st.dataframe(df)  # 顯示 DataFrame 作為表格
 
-st.title("Heatmap")
-
-with st.expander("See source code"):
-    with st.echo():
-        filepath = "https://raw.githubusercontent.com/giswqs/leafmap/master/examples/data/us_cities.csv"
-        m = leafmap.Map(center=[40, -100], zoom=4)
-        m.add_heatmap(
-            filepath,
-            latitude="latitude",
-            longitude="longitude",
-            value="pop_max",
-            name="Heat map",
-            radius=20,
-        )
-m.to_streamlit(height=700)
+    # 下載排名資料 CSV
+    st.download_button(
+        label="Download CSV",
+        data=df.to_csv(index=False),
+        file_name="bwf_ranking.csv",
+        mime="text/csv"
+    )
