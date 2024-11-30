@@ -32,20 +32,29 @@ if st.button("Get Ranking for 11/26/2024"):
         st.session_state.df_initial = df_initial
         st.session_state.date_id_dict = date_id_dict  # 儲存日期-ID對應字典
 
-        # 顯示日期選擇功能
-        st.write("Select a different date to get the ranking:")
-        date_options = list(date_id_dict.keys())
-        selected_date = st.selectbox("Select Date", date_options)
+        # 顯示日期選擇表格
+        st.write("Available dates for ranking:")
+        date_table = pd.DataFrame(list(date_id_dict.items()), columns=["Date", "ID"])
+        st.write(date_table)
 
-        # 儲存選擇的日期 ID
-        if selected_date:
-            selected_id = date_id_dict[selected_date]
-            st.session_state.selected_id = selected_id  # 儲存選擇的 ID
+        # 提示用戶輸入日期
+        st.write("Enter a date (e.g., 11/19/2024) to get the ranking:")
 
+        # 用戶輸入日期
+        selected_date_input = st.text_input("Enter Date", "")
+
+        # 儲存用戶輸入的日期
+        if selected_date_input:
+            selected_date_input = selected_date_input.strip()  # 去除多餘的空白
+            if selected_date_input in date_id_dict:
+                st.session_state.selected_id = date_id_dict[selected_date_input]  # 儲存選擇的 ID
+            else:
+                st.error("Invalid date entered. Please check the date and try again.")
+        
     except Exception as e:
         st.error(f"Error occurred while fetching 11/26/2024 data: {e}")
 
-# 第二個按鈕：根據選擇的日期執行爬蟲
+# 第二個按鈕：根據用戶輸入的日期執行爬蟲
 if 'selected_id' in st.session_state and st.button("Get Ranking for Selected Date"):
     try:
         # 取得選擇的日期 ID
