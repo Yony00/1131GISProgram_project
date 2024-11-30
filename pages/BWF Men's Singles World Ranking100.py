@@ -39,6 +39,12 @@ if st.button("Get Ranking for 11/26/2024"):
             selected_id = date_id_dict[selected_date]
             st.session_state.selected_id = selected_id  # 儲存選擇的 ID
 
+        # 顯示日期-ID對應字典的前五筆資料
+        st.write("Here are the first five entries from the date-ID dictionary:")
+        # 顯示字典前五筆資料
+        date_id_df = pd.DataFrame(list(date_id_dict.items())[:5], columns=["Date", "ID"])
+        st.write(date_id_df)
+
     except Exception as e:
         st.error(f"Error occurred: {e}")
 
