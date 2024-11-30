@@ -51,13 +51,5 @@ if "date_id_dict" in st.session_state:
                 # 顯示選擇日期的排名資料
                 st.write(f"Below is the BWF Men's Singles World Ranking for {date}:", df_selected)
 
-                # 提供下載 CSV 檔案的功能
-                st.download_button(
-                    label=f"Download CSV for {date}",
-                    data=df_selected.to_csv(index=False),
-                    file_name=f"bwf_ranking_{date}.csv",
-                    mime="text/csv"
-                )
-
             except Exception as e:
                 st.error(f"Error occurred: {e}")
