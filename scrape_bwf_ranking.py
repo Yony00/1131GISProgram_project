@@ -1,20 +1,9 @@
 from playwright.sync_api import sync_playwright
 import pandas as pd
-import os
-
-# 確保 Playwright 的瀏覽器已經安裝
-def ensure_playwright_installed():
-    from playwright.sync_api import install
-    try:
-        install()
-    except Exception as e:
-        print("Error installing Playwright:", e)
-
-ensure_playwright_installed()
 
 def scrape_bwf_ranking():
     with sync_playwright() as p:
-        browser = p.chromium.launch(headless=True)
+        browser = p.chromium.launch(headless=True)  # 啟動瀏覽器
         page = browser.new_page()
 
         # 進入目標網站
@@ -44,4 +33,3 @@ def scrape_bwf_ranking():
     columns = ["Rank", "Player", "Country", "Points", "Tournaments"]
     df = pd.DataFrame(data, columns=columns)
     return df
-
