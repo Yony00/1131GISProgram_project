@@ -48,6 +48,8 @@ if st.button("Get Ranking for 11/26/2024"):
             selected_date_input = selected_date_input.strip()  # 去除多餘的空白
             if selected_date_input in date_id_dict:
                 st.session_state.selected_id = date_id_dict[selected_date_input]  # 儲存選擇的 ID
+                # 顯示第二個按鈕
+                st.button("Get Ranking for Selected Date")  # 顯示第二個按鈕
             else:
                 st.error("Invalid date entered. Please check the date and try again.")
         
@@ -77,3 +79,4 @@ if 'selected_id' in st.session_state and st.button("Get Ranking for Selected Dat
 
     except Exception as e:
         st.error(f"Error occurred while fetching data for selected date: {e}")
+
