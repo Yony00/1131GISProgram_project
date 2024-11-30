@@ -43,40 +43,32 @@ if st.button("Get Ranking for 11/26/2024"):
         # 用戶輸入日期
         selected_date_input = st.text_input("Enter Date", "")
 
-        # 儲存用戶輸入的日期
+        # 儲存用戶輸入的日期並顯示第二個按鈕
         if selected_date_input:
             selected_date_input = selected_date_input.strip()  # 去除多餘的空白
             if selected_date_input in date_id_dict:
                 st.session_state.selected_id = date_id_dict[selected_date_input]  # 儲存選擇的 ID
+                st.session_state.selected_date = selected_date_input  # 儲存選擇的日期
+                st.write(f"Currently Selected Date: {selected_date_input}")
+                
                 # 顯示第二個按鈕
-                st.button("Get Ranking for Selected Date")  # 顯示第二個按鈕
+                if st.button("Get Ranking for Selected Date"):
+                    # 根據選擇的日期進行第二次爬蟲
+                    selected_id = st.session_state.selected_id
+                    df_selected = scrape_bwf_ranking_by_date(selected_id)
+
+                    # 顯示選擇日期的排名資料
+                    st.write(f"Below is the BWF Men's Singles World Ranking for {selected_date_input}:", df_selected)
+
+                    # 提供下載 CSV 檔案的功能
+                    st.download_button(
+                        label="Download CSV for Selected Date",
+                        data=df_selected.to_csv(index=False),
+                        file_name=f"bwf_ranking_{selected_date_input}.csv",
+                        mime="text/csv"
+                    )
             else:
                 st.error("Invalid date entered. Please check the date and try again.")
         
     except Exception as e:
         st.error(f"Error occurred while fetching 11/26/2024 data: {e}")
-
-# 第二個按鈕：根據用戶輸入的日期執行爬蟲
-if 'selected_id' in st.session_state and st.button("Get Ranking for Selected Date"):
-    try:
-        # 取得選擇的日期 ID
-        selected_id = st.session_state.selected_id
-        
-        # 呼叫第二個爬蟲，根據 ID 獲取該日期的資料
-        df_selected = scrape_bwf_ranking_by_date(selected_id)
-
-        # 顯示選擇日期的排名資料
-        selected_date = list(date_id_dict.keys())[list(date_id_dict.values()).index(selected_id)]  # 取得選擇的日期
-        st.write(f"Below is the BWF Men's Singles World Ranking for {selected_date}:", df_selected)
-
-        # 提供下載 CSV 檔案的功能
-        st.download_button(
-            label="Download CSV for Selected Date",
-            data=df_selected.to_csv(index=False),
-            file_name=f"bwf_ranking_{selected_date}.csv",
-            mime="text/csv"
-        )
-
-    except Exception as e:
-        st.error(f"Error occurred while fetching data for selected date: {e}")
-
