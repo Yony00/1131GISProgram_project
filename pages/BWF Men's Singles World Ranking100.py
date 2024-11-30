@@ -63,6 +63,7 @@ if "date_id_dict" in st.session_state:
 
                         # 呼叫第二個爬蟲，根據 ID 獲取該日期的資料
                         df_selected = scrape_bwf_ranking_by_date(selected_id)
+                        df_selected.set_index("Film" , inplace=True)
 
                         # 顯示選擇日期的排名資料
                         with row1_2:
