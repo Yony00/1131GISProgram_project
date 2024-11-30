@@ -9,6 +9,13 @@ st.title("BWF Men's Singles World Ranking")
 # 用來儲存日期和ID對應字典
 date_id_dict = {}
 
+# 檢查是否已經存儲過第一次爬蟲的資料
+if "df_initial" in st.session_state:
+    df_initial = st.session_state.df_initial
+    date_id_dict = st.session_state.date_id_dict  # 從 session_state 中獲取日期ID對應字典
+    st.write("Below is the BWF Men's Singles World Ranking for 11/26/2024:")
+    st.write(df_initial)
+
 # 第一個按鈕：抓取固定日期11/26/2024資料並取得ID對應字典
 if st.button("Get Ranking for 11/26/2024"):
     try:
@@ -39,6 +46,10 @@ if st.button("Get Ranking for 11/26/2024"):
     except Exception as e:
         st.error(f"Error occurred: {e}")
 
+# 確保選擇的日期仍然保存在 session_state 中，並且顯示選擇的日期
+if 'selected_date' in st.session_state and st.session_state.selected_date:
+    st.write(f"Selected Date: {st.session_state.selected_date}")
+
 # 第二個按鈕：根據選擇的日期執行爬蟲
 if 'selected_id' in st.session_state and st.session_state.selected_id:
     if st.button("Get Ranking for Selected Date"):
@@ -60,6 +71,9 @@ if 'selected_id' in st.session_state and st.session_state.selected_id:
                 file_name=f"bwf_ranking_{selected_date}.csv",
                 mime="text/csv"
             )
+
+        except Exception as e:
+            st.error(f"Error occurred: {e}")
 
         except Exception as e:
             st.error(f"Error occurred: {e}")
