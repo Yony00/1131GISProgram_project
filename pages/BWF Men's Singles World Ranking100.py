@@ -48,21 +48,24 @@ if "date_id_dict" in st.session_state:
     date_id_dict = st.session_state.date_id_dict
 
     with button_area:
-        # 為每個日期生成一個按鈕
-        for date, date_id in date_id_dict.items():
-            if st.button(f"Get Ranking for {date}", key=f"button_{date}"):  # 使用 `key` 來確保每個按鈕有唯一 ID
-                try:
-                    # 確保字典中有對應的日期
-                    selected_id = date_id  # 根據選擇的日期，獲取對應的 ID
+        # 每行顯示五個按鈕
+        columns = st.columns(5)  # 分成 5 列
+        for idx, (date, date_id) in enumerate(date_id_dict.items()):
+            # 確保每 5 個按鈕放在同一行
+            col_idx = idx % 5  # 計算該按鈕應該顯示在第幾列
+            with columns[col_idx]:
+                if st.button(f"Get Ranking for {date}", key=f"button_{date}"):  # 使用 `key` 來確保每個按鈕有唯一 ID
+                    try:
+                        # 確保字典中有對應的日期
+                        selected_id = date_id  # 根據選擇的日期，獲取對應的 ID
 
-                    # 呼叫第二個爬蟲，根據 ID 獲取該日期的資料
-                    df_selected = scrape_bwf_ranking_by_date(selected_id)
+                        # 呼叫第二個爬蟲，根據 ID 獲取該日期的資料
+                        df_selected = scrape_bwf_ranking_by_date(selected_id)
 
-                    # 顯示選擇日期的排名資料
-                    with table_area:
-                        st.write(f"Below is the BWF Men's Singles World Ranking for {date}:")
-                        st.write(df_selected)
+                        # 顯示選擇日期的排名資料
+                        with table_area:
+                            st.write(f"Below is the BWF Men's Singles World Ranking for {date}:")
+                            st.write(df_selected)
 
-                except Exception as e:
-                    st.error(f"Error occurred: {e}")
-
+                    except Exception as e:
+                        st.error(f"Error occurred: {e}")
