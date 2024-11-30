@@ -34,7 +34,7 @@ if st.button("Get Ranking for 11/26/2024"):
         date_options = list(date_id_dict.keys())  # 這裡可以設定日期-ID對應字典
         selected_date = st.selectbox("Select Date", date_options)
 
-        # 儲存選擇的日期 ID
+        # 儲存選擇的日期 ID 到 session_state
         if selected_date:
             selected_id = date_id_dict[selected_date]
             st.session_state.selected_id = selected_id  # 儲存選擇的 ID
@@ -59,6 +59,7 @@ if 'selected_id' in st.session_state and st.button("Get Ranking for Selected Dat
         df_selected = scrape_bwf_ranking_by_date(selected_id)  # 您需要實現這個函數
 
         # 顯示選擇日期的排名資料
+        selected_date = list(date_id_dict.keys())[list(date_id_dict.values()).index(selected_id)]  # 找到選擇日期
         st.write(f"Below is the BWF Men's Singles World Ranking for {selected_date}:", df_selected)
 
         # 提供下載 CSV 檔案的功能
@@ -71,4 +72,3 @@ if 'selected_id' in st.session_state and st.button("Get Ranking for Selected Dat
 
     except Exception as e:
         st.error(f"Error occurred: {e}")
-
