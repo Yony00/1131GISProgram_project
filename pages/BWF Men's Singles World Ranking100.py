@@ -46,9 +46,9 @@ if st.button("Get Ranking for 11/26/2024"):
     except Exception as e:
         st.error(f"Error occurred: {e}")
 
-# 確保選擇的日期仍然保存在 session_state 中，並且顯示選擇的日期
+# 顯示目前選擇的日期
 if 'selected_date' in st.session_state and st.session_state.selected_date:
-    st.write(f"Selected Date: {st.session_state.selected_date}")
+    st.write(f"Currently Selected Date: {st.session_state.selected_date}")
 
 # 第二個按鈕：根據選擇的日期執行爬蟲
 if 'selected_id' in st.session_state and st.session_state.selected_id:
@@ -71,9 +71,6 @@ if 'selected_id' in st.session_state and st.session_state.selected_id:
                 file_name=f"bwf_ranking_{selected_date}.csv",
                 mime="text/csv"
             )
-
-        except Exception as e:
-            st.error(f"Error occurred: {e}")
 
         except Exception as e:
             st.error(f"Error occurred: {e}")
