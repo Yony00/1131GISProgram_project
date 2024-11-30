@@ -5,7 +5,13 @@ from scrape_bwf_ranking_by_date import scrape_bwf_ranking_by_date  # 引入第�
 
 # 設定頁面標題
 st.title("BWF Men's Singles World Ranking")
-
+st.write(
+        """
+    ##
+    此爬蟲程式，抓取2024/11/26時BWF世界羽聯當週紀錄的世界排名資料，取前100名。
+    此頁面顯示為男子單打項目
+    可選擇過去其他週次的紀錄進行比對
+    """
 # 用來顯示表格的區域
 table_area = st.container()
 
