@@ -14,7 +14,10 @@ st.write(
     """)
 # 用來顯示表格的區域
 table_area = st.container()
+
+############ˇˇ
 row1_1, row1_2 = table_area.columns((2, 3))
+###########
 
 # 按鈕區域
 button_area = st.container()
@@ -37,7 +40,7 @@ if "df_initial" not in st.session_state:  # 只有在第一次爬蟲未完成時
 
 # 顯示排名資料
 if "df_initial" in st.session_state:
-    with table_area:
+    with row1_1:
         st.write("Below is the BWF Men's Singles World Ranking for 11/26/2024:")
         st.write(st.session_state.df_initial)
 
@@ -61,7 +64,7 @@ if "date_id_dict" in st.session_state:
                         df_selected = scrape_bwf_ranking_by_date(selected_id)
 
                         # 顯示選擇日期的排名資料
-                        with table_area:
+                        with row1_2:
                             st.write(f"Below is the BWF Men's Singles World Ranking for {date}:")
                             st.write(df_selected)
 
