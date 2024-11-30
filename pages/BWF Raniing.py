@@ -11,8 +11,8 @@ if st.button("Get Ranking"):
         # 執行爬蟲並取得排名資料
         df = scrape_bwf_ranking()
 
-        # 顯示 DataFrame
+        # 顯示排名資料
         st.write("Below is the BWF Men's Singles World Ranking:", df)
-
     except Exception as e:
         st.error(f"Error occurred: {e}")
+
