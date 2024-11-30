@@ -33,7 +33,7 @@ if st.button("Get Ranking for 11/26/2024"):
         st.session_state.date_id_dict = date_id_dict  # 儲存日期-ID對應字典
 
     except Exception as e:
-        st.error(f"Error occurred: {e}")
+        st.error(f"Error occurred while fetching 11/26/2024 data: {e}")
 
 # 固定指定日期 11/12/2024 進行第二次爬蟲
 if st.button("Get Ranking for 11/12/2024"):
@@ -60,7 +60,4 @@ if st.button("Get Ranking for 11/12/2024"):
             st.error("Date '11/12/2024' not found in date ID dictionary.")
 
     except Exception as e:
-        st.error(f"Error occurred: {e}")
-
-        except Exception as e:
-            st.error(f"Error occurred: {e}")
+        st.error(f"Error occurred while fetching 11/12/2024 data: {e}")
