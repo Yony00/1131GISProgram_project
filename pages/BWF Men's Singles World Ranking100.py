@@ -38,9 +38,9 @@ if "date_id_dict" in st.session_state:
     # 只取前五筆日期
     date_list = list(date_id_dict.keys())[:5]  # 取前五個日期
 
-    # 為每個日期生成一個按鈕
+    # 為每個日期生成一個按鈕，並指定唯一的 `key`
     for date in date_list:
-        if st.button(f"Get Ranking for {date}"):
+        if st.button(f"Get Ranking for {date}", key=f"button_{date}"):  # 使用 `key` 來確保每個按鈕有唯一 ID
             try:
                 # 確保字典中有對應的日期
                 selected_id = date_id_dict[date]  # 根據選擇的日期，獲取對應的 ID
