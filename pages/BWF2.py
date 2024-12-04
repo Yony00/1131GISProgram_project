@@ -53,7 +53,7 @@ if "date_id_dict" in st.session_state:
     date_id_dict = st.session_state.date_id_dict
 
     # 使用 selectbox 讓使用者選擇日期
-    selected_date = st.selectbox("Select a date to view the rankings:", [""] + list(date_id_dict.keys()))
+    selected_date = st.selectbox("選擇欲查詢的日期", [""] + list(date_id_dict.keys()))
 
     # 如果選擇了日期
     if selected_date:
