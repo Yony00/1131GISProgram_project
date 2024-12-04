@@ -25,6 +25,7 @@ table_area = st.container()
 
 # 表格的左右分區
 row1_1, row1_2 = table_area.columns((1, 1))
+row2_1, row2_2 = table_area.columns((1, 1))
 
 # 檢查是否已經存儲過第一次爬蟲的資料
 if "df_initial" not in st.session_state:  # 只有在第一次爬蟲未完成時才會執行
@@ -53,7 +54,8 @@ if "date_id_dict" in st.session_state:
     date_id_dict = st.session_state.date_id_dict
 
     # 使用 selectbox 讓使用者選擇日期
-    selected_date = st.selectbox("選擇欲查詢的日期", [""] + list(date_id_dict.keys()))
+    with row2_2:
+        selected_date = st.selectbox("選擇欲查詢的日期", [""] + list(date_id_dict.keys()))
 
     # 如果選擇了日期
     if selected_date:
