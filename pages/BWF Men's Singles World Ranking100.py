@@ -44,15 +44,7 @@ if "df_initial" not in st.session_state:  # 只有在第一次爬蟲未完成時
         st.session_state.df_initial = df_initial
         st.session_state.date_id_dict = date_id_dict  # 儲存日期-ID對應字典
         st.session_state.first_scrape_done = True  # 設定標記，表示第一次爬蟲已經完成
-        # 自動爬取所有日期的資料並存儲
-        for date, date_id in date_id_dict.items():
-            try:
-                df_selected = scrape_bwf_ranking_by_date(date_id)
-                df_selected.set_index("Rank", inplace=True)
-                # 將結果存入 session_state，使用日期作為鍵
-                st.session_state[date] = df_selected
-            except Exception as e:
-                st.error(f"Error fetching data for {date}: {e}")
+
 
     except Exception as e:
         st.error(f"Error occurred: {e}")
@@ -62,9 +54,7 @@ if "df_initial" in st.session_state:
     with row1_1:
         st.write("Below is the BWF Men's Singles World Ranking for 11/26/2024:")
         st.write(st.session_state.df_initial)
-    with row1_2:
-        st.write(f"Below is the BWF Men's Singles World Ranking for :")
-        st.write(st.session_state["11/19/2024"])
+
 # 顯示所有日期的按鈕
 if "date_id_dict" in st.session_state:
     date_id_dict = st.session_state.date_id_dict
