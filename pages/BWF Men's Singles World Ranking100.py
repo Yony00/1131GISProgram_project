@@ -62,7 +62,9 @@ if "df_initial" in st.session_state:
     with row1_1:
         st.write("Below is the BWF Men's Singles World Ranking for 11/26/2024:")
         st.write(st.session_state.df_initial)
-
+    with row1_2:
+        st.write(f"Below is the BWF Men's Singles World Ranking for :")
+        st.write(st.session_state[11/19/2024])
 # 顯示所有日期的按鈕
 if "date_id_dict" in st.session_state:
     date_id_dict = st.session_state.date_id_dict
