@@ -26,9 +26,6 @@ table_area = st.container()
 # 表格的左右分區
 row1_1, row1_2 = table_area.columns((1, 1))
 
-# 按鈕區域
-button_area = st.container()
-
 # 檢查是否已經存儲過第一次爬蟲的資料
 if "df_initial" not in st.session_state:  # 只有在第一次爬蟲未完成時才會執行
     try:
@@ -42,52 +39,35 @@ if "df_initial" not in st.session_state:  # 只有在第一次爬蟲未完成時
         st.session_state.df_initial = df_initial
         st.session_state.date_id_dict = date_id_dict  # 儲存日期-ID對應字典
         st.session_state.first_scrape_done = True  # 設定標記，表示第一次爬蟲已經完成
-
     except Exception as e:
         st.error(f"Error occurred: {e}")
 
-# 顯示排名資料
+# 顯示 11/26/2024 的排名資料
 if "df_initial" in st.session_state:
     with row1_1:
         st.write("Below is the BWF Men's Singles World Ranking for 11/26/2024:")
         st.write(st.session_state.df_initial)
 
-# 顯示所有日期的按鈕
+# 如果已經成功取得日期-ID 對應字典，生成 selectbox
 if "date_id_dict" in st.session_state:
     date_id_dict = st.session_state.date_id_dict
 
-    with button_area:
-        # 添加滾動樣式
-        st.markdown(
-            """
-            <style>
-            .scrollable-buttons {
-                height: 200px;  /* 調整區域高度 */
-                overflow-y: auto;  /* 垂直滾動 */
-                border: 1px solid #ccc;
-                padding: 10px;
-                border-radius: 5px;
-                background-color: #f9f9f9;
-            }
-            </style>
-            """,
-            unsafe_allow_html=True,
-        )
+    # 使用 selectbox 讓使用者選擇日期
+    selected_date = st.selectbox("Select a date to view the rankings:", [""] + list(date_id_dict.keys()))
 
-        # 滾動區域容器
-        st.markdown('<div class="scrollable-buttons">', unsafe_allow_html=True)
-        columns = st.columns(7)  # 分成多列按鈕
-        for idx, (date, date_id) in enumerate(date_id_dict.items()):
-            col_idx = idx % 7  # 計算按鈕應該顯示在哪一列
-            with columns[col_idx]:
-                if st.button(f"{date}", key=f"button_{date}"):
-                    try:
-                        # 呼叫第二次爬蟲
-                        df_selected = scrape_bwf_ranking_by_date(date_id)
-                        df_selected.set_index("Rank", inplace=True)
-                        with row1_2:
-                            st.write(f"Below is the BWF Men's Singles World Ranking for {date}:")
-                            st.write(df_selected)
-                    except Exception as e:
-                        st.error(f"Error occurred: {e}")
-        st.markdown('</div>', unsafe_allow_html=True)
+    # 如果選擇了日期
+    if selected_date:
+        try:
+            # 根據選擇的日期，獲取對應的 ID
+            selected_id = date_id_dict[selected_date]
+
+            # 呼叫第二次爬蟲，抓取該日期的排名資料
+            df_selected = scrape_bwf_ranking_by_date(selected_id)
+            df_selected.set_index("Rank", inplace=True)
+
+            # 顯示選擇日期的排名資料於 row1_2
+            with row1_2:
+                st.write(f"Below is the BWF Men's Singles World Ranking for {selected_date}:")
+                st.write(df_selected)
+        except Exception as e:
+            st.error(f"Error occurred while fetching data for {selected_date}: {e}")
