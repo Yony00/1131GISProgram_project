@@ -1,5 +1,6 @@
 import streamlit as st
 import pandas as pd
+import geopandas as gpd
 from scrape_bwf_ranking import scrape_bwf_ranking  # 引入第一次爬蟲的函數
 from scrape_bwf_ranking_by_date import scrape_bwf_ranking_by_date  # 引入第二次爬蟲的函數
 
@@ -73,3 +74,6 @@ if "date_id_dict" in st.session_state:
                 st.write(df_selected)
         except Exception as e:
             st.error(f"Error occurred while fetching data for {selected_date}: {e}")
+
+world_country=gpd.read_file("https://github.com/RGT1143022/BWF_world_country/releases/download/v1.0.0/BWF_world_country_.geojson")
+st.write(world_country)
