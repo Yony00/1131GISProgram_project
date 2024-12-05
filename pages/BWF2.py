@@ -34,14 +34,14 @@ if "df_initial" not in st.session_state:  # 只有在第一次爬蟲未完成時
         url = "https://bwf.tournamentsoftware.com/ranking/category.aspx?id=43340&category=472&C472FOC=&p=1&ps=100"
 
         # 呼叫第一次爬蟲，獲取排名資料並抓取日期-ID對應字典
-        df_initial, date_id_dict = scrape_bwf_ranking(url)
+        df_initial, date_id_dict,new_date = crape_bwf_ranking(url)
 
         # 儲存第一次爬蟲結果到 session_state 中
         df_initial.set_index("Rank", inplace=True)
         st.session_state.df_initial = df_initial
         st.session_state.date_id_dict = date_id_dict  # 儲存日期-ID對應字典
         st.session_state.first_scrape_done = True  # 設定標記，表示第一次爬蟲已經完成
-        #st.session_state.new_date=new_date # 儲存最新日期
+        st.session_state.new_date=new_date # 儲存最新日期
     except Exception as e:
         st.error(f"Error occurred: {e}")
 
