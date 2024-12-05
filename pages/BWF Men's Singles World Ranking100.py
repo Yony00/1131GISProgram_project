@@ -108,7 +108,8 @@ if selected_date:
 
 world_country=gpd.read_file("https://github.com/RGT1143022/BWF_world_country/releases/download/v1.0.0/BWF_world_country_true.geojson")
 
-
+st.write(df_selected1.head())  # 查看前几行数据
+st.write(df_selected1.columns)  # 查看列名
 #按照國家分組-左邊表格
 GB_country= df_selected1.groupby(by=['Country']).agg(
     player_count=('player_name', len),
