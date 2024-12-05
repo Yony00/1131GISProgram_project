@@ -108,8 +108,6 @@ if selected_date:
 
 world_country=gpd.read_file("https://github.com/RGT1143022/BWF_world_country/releases/download/v1.0.0/BWF_world_country_true.geojson")
 
-st.write(df_selected1.head())  # 查看前几行数据
-st.write(df_selected1.columns)  # 查看列名
 #按照國家分組-左邊表格
 GB_country= df_selected1.groupby(by=['Country']).agg(
     player_count=('Player', len),
@@ -118,6 +116,23 @@ GB_country= df_selected1.groupby(by=['Country']).agg(
 GB_country_TOP10=GB_country.nlargest(10,"player_count")
 
 with row3_1:
+    # 繪製條形圖
+    fig, ax = plt.subplots(figsize=(8, 6))
+    sns.barplot(data=GB_country_TOP10, x='player_count', y='Country', ax=ax)
+    ax.set_title("Example Bar Chart")
+
+    # 在 Streamlit 中顯示
+    st.pyplot(fig)
+
+
+#按照國家分組-右邊表格
+GB_country= df_selected.groupby(by=['Country']).agg(
+    player_count=('Player', len),
+    playername=('Player',';'.join)
+    )
+GB_country_TOP10=GB_country.nlargest(10,"player_count")
+
+with row3_2:
     # 繪製條形圖
     fig, ax = plt.subplots(figsize=(8, 6))
     sns.barplot(data=GB_country_TOP10, x='player_count', y='Country', ax=ax)
