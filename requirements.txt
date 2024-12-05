@@ -8,16 +8,3 @@ numpy
 requests
 beautifulsoup4
 inline
-squarify
-seaborn 
-
-
-matplotlib.pyplot
-
-matplotlib
-seaborn 
-plotly.offline
-plotly.express 
-plotly.graph_objects
-plotly.subplots
-squarify
