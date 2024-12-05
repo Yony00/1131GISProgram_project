@@ -50,10 +50,17 @@ if "df_initial" in st.session_state:
         st.write("Below is the BWF Men's Singles World Ranking for 11/26/2024:")
         st.write(st.session_state.df_initial)
 
+
 # 如果已經成功取得日期-ID 對應字典，生成 selectbox
 if "date_id_dict" in st.session_state:
     date_id_dict = st.session_state.date_id_dict
+ 
+    with row1_1:
+        selected_date1 = st.selectbox("選擇欲查詢的日期", [""] + list(date_id_dict.keys()))
+        selected_date1 = st.selectbox("選擇欲查詢的日期", [""] + list(date_id_dict.keys()))
 
+
+    
     # 使用 selectbox 讓使用者選擇日期
     with row2_2:
         selected_date = st.selectbox("選擇欲查詢的日期", [""] + list(date_id_dict.keys()))
@@ -76,4 +83,12 @@ if "date_id_dict" in st.session_state:
             st.error(f"Error occurred while fetching data for {selected_date}: {e}")
 
 world_country=gpd.read_file("https://github.com/RGT1143022/BWF_world_country/releases/download/v1.0.0/BWF_world_country_true.geojson")
-st.write(world_country)
+
+#案國家分組-最新日期
+#GB_country=st.session_state.df_initial.groupby(by=['Country']).agg(
+#    player_count=('player_name', len),
+#    playername=('player_name',';'.join)
+#    )
+#all_event_G_country_TOP10=all_event_G_country.nlargest(10,"player_count")
+#fig, axes = plt.subplots(figsize=(8,8 ))
+#sns.barplot(x="player_count", y="Country", data=all_event_G_country_TOP10)
