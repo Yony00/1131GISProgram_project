@@ -52,12 +52,15 @@ if "df_initial" not in st.session_state:  # 只有在第一次爬蟲未完成時
 #        st.write(st.session_state.df_initial)
 
 
-options = list(date_id_dict.keys())
-index = options.index( st.session_state.new_date)
+
 
 # 如果已經成功取得日期-ID 對應字典，生成 selectbox
 if "date_id_dict" in st.session_state:
     date_id_dict = st.session_state.date_id_dict
+
+options = list(date_id_dict.keys())
+index = options.index( st.session_state.new_date)
+
  
     with row2_1:
         selected_date1 = st.selectbox("選擇欲查詢的日期", [""] ,options,index)
