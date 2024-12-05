@@ -10,11 +10,7 @@ import matplotlib.pyplot as plt          # 匯入pyplot模組
 from matplotlib.figure import Figure
 from matplotlib.backends.backend_agg import FigureCanvasAgg as FigureCanvas
 from IPython.core.display import display
-
-
 import matplotlib
-
-
 import seaborn as sns
 import plotly.offline
 import plotly.express as px
