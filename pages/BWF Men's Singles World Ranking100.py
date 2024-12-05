@@ -124,19 +124,20 @@ with row3_1:
     # 在 Streamlit 中顯示
     st.pyplot(fig)
 
+if selected_date:
 
-#按照國家分組-右邊表格
-GB_country= df_selected.groupby(by=['Country']).agg(
-    player_count=('Player', len),
-    playername=('Player',';'.join)
-    )
-GB_country_TOP10=GB_country.nlargest(10,"player_count")
-
-with row3_2:
-    # 繪製條形圖
-    fig, ax = plt.subplots(figsize=(8, 6))
-    sns.barplot(data=GB_country_TOP10, x='player_count', y='Country', ax=ax)
-    ax.set_title("Example Bar Chart")
-
-    # 在 Streamlit 中顯示
-    st.pyplot(fig)
+    #按照國家分組-右邊表格
+    GB_country= df_selected.groupby(by=['Country']).agg(
+        player_count=('Player', len),
+        playername=('Player',';'.join)
+        )
+    GB_country_TOP10=GB_country.nlargest(10,"player_count")
+    
+    with row3_2:
+        # 繪製條形圖
+        fig, ax = plt.subplots(figsize=(8, 6))
+        sns.barplot(data=GB_country_TOP10, x='player_count', y='Country', ax=ax)
+        ax.set_title("Example Bar Chart")
+    
+        # 在 Streamlit 中顯示
+        st.pyplot(fig)
