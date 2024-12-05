@@ -10,3 +10,14 @@ beautifulsoup4
 inline
 squarify
 seaborn 
+
+
+import matplotlib.pyplot
+
+matplotlib
+seaborn 
+plotly.offline
+plotly.express 
+plotly.graph_objects
+plotly.subplots
+squarify
