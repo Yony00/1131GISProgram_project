@@ -58,11 +58,10 @@ if "df_initial" not in st.session_state:  # 只有在第一次爬蟲未完成時
 if "date_id_dict" in st.session_state:
     date_id_dict = st.session_state.date_id_dict
 
-options = list(date_id_dict.keys())
-index = options.index( st.session_state.new_date)
-
  
     with row2_1:
+        options = list(date_id_dict.keys())
+        index = options.index( st.session_state.new_date)
         selected_date1 = st.selectbox("選擇欲查詢的日期", [""] ,options,index)
 
     if selected_date1:
