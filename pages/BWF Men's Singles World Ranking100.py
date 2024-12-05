@@ -149,23 +149,32 @@ world_country=gpd.read_file("https://github.com/RGT1143022/BWF_world_country/rel
 GB_country_withGEO=pd.merge(GB_country,world_country,how='left',on='Country')
 GB_country_withGEO = gpd.GeoDataFrame(GB_country_withGEO,geometry=GB_country_withGEO['geometry'])
 
+# 定义一个样式函数，根据属性值设置颜色
+def style_function(GB_country_withGEO):
+    value = feature['player_count'] 
+    if value >= 1:
+        color = "green"
+    elif value > 10:
+        color = "yellow"
+    else:
+        color = "red"
+    return {
+        "fillColor": color,
+        "color": "black",  # 边框颜色
+        "weight": 1,       # 边框宽度
+        "fillOpacity": 0.6,  # 填充透明度
+    }
+
+
 m = leafmap.Map(center=[40, -100], zoom=4)
-#m.add_gdf(GB_country_withGEO, layer_name="Man Single Player Count")
-#m.to_streamlit(height=700)
+m.add_gdf(GB_country_withGEO, 
+          layer_name="Man Single Player Count",
+          style_function=style_function
+         )
 
 
-
-gdf =GB_country_withGEO
-
-# 添加颜色列（假设有一个数值列 'value' 来决定颜色）
-gdf['color'] = gdf['player_count'].apply(lambda x: 'red' if x > 10 else 'blue')
-
-# 创建地图
-m = leafmap.Map(center=(0, 0), zoom=2)
-
-# 添加 GeoDataFrame
-m.add_gdf(
-    gdf,
-    info_mode="on_hover",  # 显示信息方式
-    layer_name="Colored Layer",)
 m.to_streamlit(height=700)
+
+
+
+
