@@ -150,5 +150,22 @@ GB_country_withGEO=pd.merge(GB_country,world_country,how='left',on='Country')
 GB_country_withGEO = gpd.GeoDataFrame(GB_country_withGEO,geometry=GB_country_withGEO['geometry'])
 
 m = leafmap.Map(center=[40, -100], zoom=4)
-m.add_gdf(GB_country_withGEO, layer_name="Man Single Player Count")
+#m.add_gdf(GB_country_withGEO, layer_name="Man Single Player Count")
+#m.to_streamlit(height=700)
+
+
+
+gdf =GB_country_withGEO
+
+# 添加颜色列（假设有一个数值列 'value' 来决定颜色）
+gdf['color'] = gdf['player_count'].apply(lambda x: 'red' if x > 10 else 'blue')
+
+# 创建地图
+m = leafmap.Map(center=(0, 0), zoom=2)
+
+# 添加 GeoDataFrame
+m.add_gdf(
+    gdf,
+    info_mode="on_hover",  # 显示信息方式
+    layer_name="Colored Layer",
 m.to_streamlit(height=700)
