@@ -110,5 +110,6 @@ GB_country= df_selected1.groupby(by=['Country']).agg(
     playername=('player_name',';'.join)
     )
 GB_country_TOP10=GB_country.nlargest(10,"player_count")
-fig, axes = plt.subplots(figsize=(8,8 ))
-sns.barplot(x="player_count", y="Country", data=all_event_G_country_TOP10)
+fig, ax = plt.subplots(figsize=(8,8 ))
+sns.barplot(x="player_count", y="Country", data=GB_country_TOP10,ax=ax)
+st.pyplot(fig)
