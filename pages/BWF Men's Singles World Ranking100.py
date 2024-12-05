@@ -7,6 +7,7 @@ import numpy as np
 
 import matplotlib.pyplot as plt
 import seaborn as sns
+import leafmap.foliumap as leafmap
 
 # 設定頁面配置為寬屏模式
 st.set_page_config(page_title="BWF Men's Singles World Ranking", layout="wide")
