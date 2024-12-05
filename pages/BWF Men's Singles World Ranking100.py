@@ -144,8 +144,8 @@ if selected_date:
         st.pyplot(fig)
 ####################################################################################ˇ
 #MAP
-with st.echo():
-    m = leafmap.Map(center=[40, -100], zoom=4)
-    regions2="https://raw.githubusercontent.com/RGT1143022/datafor1127/main/newMSwithGEO10.geojson"
-    m.add_geojson(regions2, layer_name="Man Single Player Count")
+
+m = leafmap.Map(center=[40, -100], zoom=4)
+regions2="https://raw.githubusercontent.com/RGT1143022/datafor1127/main/newMSwithGEO10.geojson"
+m.add_geojson(regions2, layer_name="Man Single Player Count")
 m.to_streamlit(height=700)
