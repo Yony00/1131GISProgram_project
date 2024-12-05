@@ -45,11 +45,11 @@ if "df_initial" not in st.session_state:  # 只有在第一次爬蟲未完成時
     except Exception as e:
         st.error(f"Error occurred: {e}")
 
-# 顯示 11/26/2024 的排名資料
-#if "df_initial" in st.session_state:
-#    with row1_1:
-#        st.write("Below is the BWF Men's Singles World Ranking for 11/26/2024:")
-#        st.write(st.session_state.df_initial)
+ 顯示 11/26/2024 的排名資料
+if "df_initial" in st.session_state:
+    with row1_1:
+        st.write("Below is the BWF Men's Singles World Ranking for 11/26/2024:")
+        st.write(st.session_state.df_initial)
 
 
 
@@ -59,26 +59,26 @@ if "date_id_dict" in st.session_state:
     date_id_dict = st.session_state.date_id_dict
 
  
-    with row2_1:
-        options = list(date_id_dict.keys())
-        index = options.index( st.session_state.new_date)
-        selected_date1 = st.selectbox("選擇欲查詢的日期", [""] ,options,index)
+.#    with row2_1:
+ #       options = list(date_id_dict.keys())
+ #       index = options.index( st.session_state.new_date)
+ #       selected_date1 = st.selectbox("選擇欲查詢的日期", [""] ,options,index)
 
-    if selected_date1:
-        try:
+#    if selected_date1:
+#        try:
             # 根據選擇的日期，獲取對應的 ID
-            selected_id1 = date_id_dict[selected_date1]
+#            selected_id1 = date_id_dict[selected_date1]
 
             # 呼叫第二次爬蟲，抓取該日期的排名資料
-            df_selected1 = scrape_bwf_ranking_by_date(selected_id1)
-            df_selected1.set_index("Rank", inplace=True)
+#            df_selected1 = scrape_bwf_ranking_by_date(selected_id1)
+#            df_selected1.set_index("Rank", inplace=True)
 
             # 顯示選擇日期的排名資料於 row1_1
-            with row1_1:
-                st.write(f"Below is the BWF Men's Singles World Ranking for {selected_date1}:")
-                st.write(df_selected1)
-        except Exception as e:
-            st.error(f"Error occurred while fetching data for {selected_date1}: {e}")
+#            with row1_1:
+#                st.write(f"Below is the BWF Men's Singles World Ranking for {selected_date1}:")
+#                st.write(df_selected1)
+#        except Exception as e:
+#            st.error(f"Error occurred while fetching data for {selected_date1}: {e}")
     
     # 使用 selectbox 讓使用者選擇日期
     with row2_2:
