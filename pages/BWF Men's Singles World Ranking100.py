@@ -3,6 +3,7 @@ import pandas as pd
 import geopandas as gpd
 from scrape_bwf_ranking import scrape_bwf_ranking  # 引入第一次爬蟲的函數
 from scrape_bwf_ranking_by_date import scrape_bwf_ranking_by_date  # 引入第二次爬蟲的函數
+import numpy as np
 
 ####統計圖
 import matplotlib.pyplot as plt          # 匯入pyplot模組
