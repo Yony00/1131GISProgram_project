@@ -112,8 +112,8 @@ st.write(df_selected1.head())  # 查看前几行数据
 st.write(df_selected1.columns)  # 查看列名
 #按照國家分組-左邊表格
 GB_country= df_selected1.groupby(by=['Country']).agg(
-    player_count=('player', len),
-    playername=('player',';'.join)
+    player_count=('Player', len),
+    playername=('Player',';'.join)
     )
 GB_country_TOP10=GB_country.nlargest(10,"player_count")
 
