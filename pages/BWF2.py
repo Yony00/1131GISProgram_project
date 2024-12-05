@@ -45,7 +45,7 @@ if "df_initial" not in st.session_state:  # 只有在第一次爬蟲未完成時
     except Exception as e:
         st.error(f"Error occurred: {e}")
 
- 顯示 11/26/2024 的排名資料
+# 顯示 11/26/2024 的排名資料
 if "df_initial" in st.session_state:
     with row1_1:
         st.write("Below is the BWF Men's Singles World Ranking for 11/26/2024:")
