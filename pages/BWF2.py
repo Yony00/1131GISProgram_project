@@ -59,7 +59,7 @@ if "date_id_dict" in st.session_state:
     date_id_dict = st.session_state.date_id_dict
 
  
-.#    with row2_1:
+#    with row2_1:
  #       options = list(date_id_dict.keys())
  #       index = options.index( st.session_state.new_date)
  #       selected_date1 = st.selectbox("選擇欲查詢的日期", [""] ,options,index)
