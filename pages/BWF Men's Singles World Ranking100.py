@@ -139,5 +139,5 @@ if selected_date:
 
     
         # 在 Streamlit 中顯示
-         st.write("每個國家前一百名的選手數統計(取前十多的國家)")
+        st.write("每個國家前一百名的選手數統計(取前十多的國家)")
         st.pyplot(fig)
