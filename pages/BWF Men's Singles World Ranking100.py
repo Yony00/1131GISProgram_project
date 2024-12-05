@@ -107,7 +107,6 @@ if selected_date:
 
 
 
-world_country=gpd.read_file("https://github.com/RGT1143022/BWF_world_country/releases/download/v1.0.0/BWF_world_country_true.geojson")
 
 #按照國家分組-左邊表格
 GB_country= df_selected1.groupby(by=['Country']).agg(
@@ -144,8 +143,12 @@ if selected_date:
         st.pyplot(fig)
 ####################################################################################ˇ
 #MAP
+world_country=gpd.read_file("https://github.com/RGT1143022/BWF_world_country/releases/download/v1.0.0/BWF_world_country_true.geojson")
+
+#賦予geometry轉換為gdf-左
+GB_country_withGEO=pd.merge(GB_country,world_country,how='left',on='Country')
+GB_country_withGEO = gpd.GeoDataFrame(GB_country_withGEO,geometry=GB_country_withGEO['geometry'])
 
 m = leafmap.Map(center=[40, -100], zoom=4)
-regions2="https://raw.githubusercontent.com/RGT1143022/datafor1127/main/newMSwithGEO10.geojson"
-m.add_geojson(regions2, layer_name="Man Single Player Count")
+m.add_GeoDataFrame(GB_country_withGEO, layer_name="Man Single Player Count")
 m.to_streamlit(height=700)
