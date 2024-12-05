@@ -31,6 +31,7 @@ table_area = st.container()
 # 表格的左右分區
 row1_1, row1_2 = table_area.columns((1, 1))
 row2_1, row2_2 = table_area.columns((1, 1))
+row3_1, row3_2 = table_area.columns((1, 1))
 
 # 檢查是否已經存儲過第一次爬蟲的資料
 if "df_initial" not in st.session_state:  # 只有在第一次爬蟲未完成時才會執行
@@ -114,13 +115,14 @@ world_country=gpd.read_file("https://github.com/RGT1143022/BWF_world_country/rel
 #sns.barplot(x="player_count", y="Country", data=GB_country_TOP10,ax=ax)
 #st.pyplot(fig)
 # 假设有一个示例 DataFrame
-data = {'Category': ['A', 'B', 'C', 'D'], 'Value': [10, 20, 30, 40]}
-df = pd.DataFrame(data)
+with row3_1:
+    data = {'Category': ['A', 'B', 'C', 'D'], 'Value': [10, 20, 30, 40]}
+    df = pd.DataFrame(data)
 
-# 繪製條形圖
-fig, ax = plt.subplots(figsize=(8, 6))
-sns.barplot(data=df, x='Category', y='Value', ax=ax)
-ax.set_title("Example Bar Chart")
+    # 繪製條形圖
+    fig, ax = plt.subplots(figsize=(8, 6))
+    sns.barplot(data=df, x='Category', y='Value', ax=ax)
+    ax.set_title("Example Bar Chart")
 
-# 在 Streamlit 中顯示
-st.pyplot(fig)
+    # 在 Streamlit 中顯示
+    st.pyplot(fig)
