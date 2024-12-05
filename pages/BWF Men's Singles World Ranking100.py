@@ -5,19 +5,8 @@ from scrape_bwf_ranking import scrape_bwf_ranking  # 引入第一次爬蟲的函
 from scrape_bwf_ranking_by_date import scrape_bwf_ranking_by_date  # 引入第二次爬蟲的函數
 import numpy as np
 
-####統計圖
-import matplotlib.pyplot as plt          # 匯入pyplot模組
-from matplotlib.figure import Figure
-from matplotlib.backends.backend_agg import FigureCanvasAgg as FigureCanvas
-from IPython.core.display import display
-import matplotlib
+import matplotlib.pyplot as plt
 import seaborn as sns
-import plotly.offline
-import plotly.express as px
-import plotly.graph_objects as go
-import plotly.subplots
-import squarify
-###
 
 # 設定頁面配置為寬屏模式
 st.set_page_config(page_title="BWF Men's Singles World Ranking", layout="wide")
