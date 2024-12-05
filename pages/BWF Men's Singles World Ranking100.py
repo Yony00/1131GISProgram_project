@@ -167,5 +167,5 @@ m = leafmap.Map(center=(0, 0), zoom=2)
 m.add_gdf(
     gdf,
     info_mode="on_hover",  # 显示信息方式
-    layer_name="Colored Layer",
+    layer_name="Colored Layer",)
 m.to_streamlit(height=700)
