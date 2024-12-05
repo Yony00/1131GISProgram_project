@@ -41,7 +41,7 @@ if "df_initial" not in st.session_state:  # 只有在第一次爬蟲未完成時
         st.session_state.df_initial = df_initial
         st.session_state.date_id_dict = date_id_dict  # 儲存日期-ID對應字典
         st.session_state.first_scrape_done = True  # 設定標記，表示第一次爬蟲已經完成
-        st.session_state.new_date=new_date # 儲存最新日期
+        #st.session_state.new_date=new_date # 儲存最新日期
     except Exception as e:
         st.error(f"Error occurred: {e}")
 
@@ -57,28 +57,6 @@ if "df_initial" in st.session_state:
 # 如果已經成功取得日期-ID 對應字典，生成 selectbox
 if "date_id_dict" in st.session_state:
     date_id_dict = st.session_state.date_id_dict
-
- 
-#    with row2_1:
- #       options = list(date_id_dict.keys())
- #       index = options.index( st.session_state.new_date)
- #       selected_date1 = st.selectbox("選擇欲查詢的日期", [""] ,options,index)
-
-#    if selected_date1:
-#        try:
-            # 根據選擇的日期，獲取對應的 ID
-#            selected_id1 = date_id_dict[selected_date1]
-
-            # 呼叫第二次爬蟲，抓取該日期的排名資料
-#            df_selected1 = scrape_bwf_ranking_by_date(selected_id1)
-#            df_selected1.set_index("Rank", inplace=True)
-
-            # 顯示選擇日期的排名資料於 row1_1
-#            with row1_1:
-#                st.write(f"Below is the BWF Men's Singles World Ranking for {selected_date1}:")
-#                st.write(df_selected1)
-#        except Exception as e:
-#            st.error(f"Error occurred while fetching data for {selected_date1}: {e}")
     
     # 使用 selectbox 讓使用者選擇日期
     with row2_2:
