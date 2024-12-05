@@ -150,5 +150,5 @@ GB_country_withGEO=pd.merge(GB_country,world_country,how='left',on='Country')
 GB_country_withGEO = gpd.GeoDataFrame(GB_country_withGEO,geometry=GB_country_withGEO['geometry'])
 
 m = leafmap.Map(center=[40, -100], zoom=4)
-m.add_GeoDataFrame(GB_country_withGEO, layer_name="Man Single Player Count")
+m.add_gdf(GB_country_withGEO, layer_name="Man Single Player Count")
 m.to_streamlit(height=700)
