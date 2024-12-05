@@ -141,3 +141,9 @@ if selected_date:
         # 在 Streamlit 中顯示
         st.write("每個國家前一百名的選手數統計(取前十多的國家)")
         st.pyplot(fig)
+####################################################################################ˇ
+#MAP
+with st.echo():
+    m = leafmap.Map(center=[40, -100], zoom=4)
+    regions2="https://raw.githubusercontent.com/RGT1143022/datafor1127/main/newMSwithGEO10.geojson"
+    m.add_geojson(regions2, layer_name="Man Single Player Count")
