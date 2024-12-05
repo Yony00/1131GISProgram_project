@@ -22,6 +22,8 @@ def scrape_bwf_ranking(url):
     # 提取表格中的行
     rows = table.find_all('tr')[1:]  # 跳過表頭
     data = []
+
+    isnew=1
     
     # 解析日期ID對應字典
     date_id_dict = {}
@@ -32,6 +34,9 @@ def scrape_bwf_ranking(url):
             date_text = option.text.strip()
             date_id = option['value']
             date_id_dict[date_text] = date_id
+            while isnew == 1:
+                new_date=date_text
+                isnew=0
 
     # 提取排名資料
     for row in rows:
@@ -53,6 +58,6 @@ def scrape_bwf_ranking(url):
     columns = ["Rank", "Player", "Country", "Points", "Confederation"]
     df = pd.DataFrame(data, columns=columns)
     
-    return df, date_id_dict
+    return df, date_id_dict,new_date
 
 
