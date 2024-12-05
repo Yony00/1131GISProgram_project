@@ -4,7 +4,7 @@ leafmap
 owslib
 streamlit
 pandas
-
+numpy
 requests
 beautifulsoup4
 inline
