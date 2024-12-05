@@ -12,7 +12,7 @@ squarify
 seaborn 
 
 
-import matplotlib.pyplot
+matplotlib.pyplot
 
 matplotlib
 seaborn 
