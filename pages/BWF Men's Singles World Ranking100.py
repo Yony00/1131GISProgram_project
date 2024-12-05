@@ -99,13 +99,12 @@ if selected_date:
     except Exception as e:
         st.error(f"Error occurred while fetching data for {selected_date}: {e}")
 
-#world_country=gpd.read_file("https://github.com/RGT1143022/BWF_world_country/releases/download/v1.0.0/BWF_world_country_true.geojson")
-
-#案國家分組-最新日期
-#GB_country=st.session_state.df_initial.groupby(by=['Country']).agg(
-#    player_count=('player_name', len),
-#    playername=('player_name',';'.join)
-#    )
-#all_event_G_country_TOP10=all_event_G_country.nlargest(10,"player_count")
-#fig, axes = plt.subplots(figsize=(8,8 ))
-#sns.barplot(x="player_count", y="Country", data=all_event_G_country_TOP10)
+world_country=gpd.read_file("https://github.com/RGT1143022/BWF_world_country/releases/download/v1.0.0/BWF_world_country_true.geojson")
+#按照國家分組-左邊表格
+GB_country=st.df_selected1.groupby(by=['Country']).agg(
+    player_count=('player_name', len),
+    playername=('player_name',';'.join)
+    )
+GB_country_TOP10=GB_country.nlargest(10,"player_count")
+fig, axes = plt.subplots(figsize=(8,8 ))
+sns.barplot(x="player_count", y="Country", data=all_event_G_country_TOP10)
