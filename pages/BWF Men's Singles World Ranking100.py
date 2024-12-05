@@ -105,11 +105,22 @@ if selected_date:
 
 world_country=gpd.read_file("https://github.com/RGT1143022/BWF_world_country/releases/download/v1.0.0/BWF_world_country_true.geojson")
 #按照國家分組-左邊表格
-GB_country= df_selected1.groupby(by=['Country']).agg(
-    player_count=('player_name', len),
-    playername=('player_name',';'.join)
-    )
-GB_country_TOP10=GB_country.nlargest(10,"player_count")
-fig, ax = plt.subplots(figsize=(8,8 ))
-sns.barplot(x="player_count", y="Country", data=GB_country_TOP10,ax=ax)
+#GB_country= df_selected1.groupby(by=['Country']).agg(
+#    player_count=('player_name', len),
+#    playername=('player_name',';'.join)
+#    )
+#GB_country_TOP10=GB_country.nlargest(10,"player_count")
+#fig, ax = plt.subplots(figsize=(8,8 ))
+#sns.barplot(x="player_count", y="Country", data=GB_country_TOP10,ax=ax)
+#st.pyplot(fig)
+# 假设有一个示例 DataFrame
+data = {'Category': ['A', 'B', 'C', 'D'], 'Value': [10, 20, 30, 40]}
+df = pd.DataFrame(data)
+
+# 繪製條形圖
+fig, ax = plt.subplots(figsize=(8, 6))
+sns.barplot(data=df, x='Category', y='Value', ax=ax)
+ax.set_title("Example Bar Chart")
+
+# 在 Streamlit 中顯示
 st.pyplot(fig)
