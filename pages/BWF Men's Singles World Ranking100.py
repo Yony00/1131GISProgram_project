@@ -68,7 +68,7 @@ if "date_id_dict" in st.session_state:
             df_selected1.set_index("Rank", inplace=True)
 
             # 顯示選擇日期的排名資料於 row1_2
-            with row1_2:
+            with row1_1:
                 st.write(f"Below is the BWF Men's Singles World Ranking for {selected_date1}:")
                 st.write(df_selected1)
         except Exception as e:
