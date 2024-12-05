@@ -120,8 +120,8 @@ with row3_1:
     fig, ax = plt.subplots(figsize=(8, 6))
     sns.barplot(data=GB_country_TOP10, x='player_count', y='Country', ax=ax)
     # 在 Streamlit 中顯示
-    st.pyplot(fig)
     st.write("每個國家前一百名的選手數統計(取前十多的國家)")
+    st.pyplot(fig)
 
 if selected_date:
 
@@ -139,5 +139,5 @@ if selected_date:
 
     
         # 在 Streamlit 中顯示
+         st.write("每個國家前一百名的選手數統計(取前十多的國家)")
         st.pyplot(fig)
-        st.write("每個國家前一百名的選手數統計(取前十多的國家)")
