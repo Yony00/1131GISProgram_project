@@ -121,7 +121,7 @@ with row3_1:
 
     # 繪製條形圖
     fig, ax = plt.subplots(figsize=(8, 6))
-    sns.barplot(data=df, x='Category', y='Value', ax=ax)
+    sns.barplot(data=df_selected1, x='player_count', y='Country', ax=ax)
     ax.set_title("Example Bar Chart")
 
     # 在 Streamlit 中顯示
