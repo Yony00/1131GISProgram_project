@@ -51,53 +51,53 @@ if "date_id_dict" in st.session_state:
     date_id_dict = st.session_state.date_id_dict
 
 ##################
-        # 使用 selectbox1 讓使用者選擇日期(預設為st.session_state.new_date
-    options = list(date_id_dict.keys())
-    index = options.index(st.session_state.new_date)
-    with row2_1:
+# 使用 selectbox1 讓使用者選擇日期(預設為 st.session_state.new_date)
+options = list(date_id_dict.keys())
+index = options.index(st.session_state.new_date)
 
-        selected_date1 = st.selectbox("選擇欲查詢的日期", [""] +options,index)
+with row2_1:
+    selected_date1 = st.selectbox(
+        "選擇欲查詢的日期 (預設最新日期)",
+        options,
+        index=index,
+        key="selectbox_date1",  # 添加唯一的 key
+    )
 
-    # 如果選擇了日期
-    if selected_date1:
-        try:
-            # 根據選擇的日期，獲取對應的 ID
-            selected_id1 = date_id_dict[selected_date1]
+# 如果選擇了日期
+if selected_date1:
+    try:
+        selected_id1 = date_id_dict[selected_date1]
+        df_selected1 = scrape_bwf_ranking_by_date(selected_id1)
+        df_selected1.set_index("Rank", inplace=True)
 
-            # 呼叫第二次爬蟲，抓取該日期的排名資料
-            df_selected1 = scrape_bwf_ranking_by_date(selected_id1)
-            df_selected1.set_index("Rank", inplace=True)
+        # 顯示選擇日期的排名資料於 row1_1
+        with row1_1:
+            st.write(f"Below is the BWF Men's Singles World Ranking for {selected_date1}:")
+            st.write(df_selected1)
+    except Exception as e:
+        st.error(f"Error occurred while fetching data for {selected_date1}: {e}")
 
-            # 顯示選擇日期的排名資料於 row1_2
-            with row1_1:
-                st.write(f"Below is the BWF Men's Singles World Ranking for {selected_date1}:")
-                st.write(df_selected1)
-        except Exception as e:
-            st.error(f"Error occurred while fetching data for {selected_date1}: {e}")
+# 第二个 selectbox，选择其他日期
+with row2_2:
+    selected_date = st.selectbox(
+        "選擇欲查詢的日期",
+        [""] + list(date_id_dict.keys()),
+        key="selectbox_date2",  # 添加唯一的 key
+    )
 
-#################
+# 如果選擇了日期
+if selected_date:
+    try:
+        selected_id = date_id_dict[selected_date]
+        df_selected = scrape_bwf_ranking_by_date(selected_id)
+        df_selected.set_index("Rank", inplace=True)
 
-    
-    # 使用 selectbox 讓使用者選擇日期
-    with row2_2:
-        selected_date = st.selectbox("選擇欲查詢的日期", [""] + list(date_id_dict.keys()))
-
-    # 如果選擇了日期
-    if selected_date:
-        try:
-            # 根據選擇的日期，獲取對應的 ID
-            selected_id = date_id_dict[selected_date]
-
-            # 呼叫第二次爬蟲，抓取該日期的排名資料
-            df_selected = scrape_bwf_ranking_by_date(selected_id)
-            df_selected.set_index("Rank", inplace=True)
-
-            # 顯示選擇日期的排名資料於 row1_2
-            with row1_2:
-                st.write(f"Below is the BWF Men's Singles World Ranking for {selected_date}:")
-                st.write(df_selected)
-        except Exception as e:
-            st.error(f"Error occurred while fetching data for {selected_date}: {e}")
+        # 顯示選擇日期的排名資料於 row1_2
+        with row1_2:
+            st.write(f"Below is the BWF Men's Singles World Ranking for {selected_date}:")
+            st.write(df_selected)
+    except Exception as e:
+        st.error(f"Error occurred while fetching data for {selected_date}: {e}")
 
 #world_country=gpd.read_file("https://github.com/RGT1143022/BWF_world_country/releases/download/v1.0.0/BWF_world_country_true.geojson")
 
