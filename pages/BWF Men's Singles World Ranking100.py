@@ -151,7 +151,7 @@ GB_country_withGEO = gpd.GeoDataFrame(GB_country_withGEO,geometry=GB_country_wit
 
 # 定义一个样式函数，根据属性值设置颜色
 def style_function(GB_country_withGEO):
-    value = feature['player_count'] 
+    value = GB_country_withGEO['player_count'] 
     if value >= 1:
         color = "green"
     elif value > 10:
