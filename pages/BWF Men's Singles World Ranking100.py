@@ -119,7 +119,7 @@ with row3_1:
     # 繪製條形圖
     fig, ax = plt.subplots(figsize=(8, 6))
     sns.barplot(data=GB_country_TOP10, x='player_count', y='Country', ax=ax)
-    ax.set_title("Example Bar Chart")
+    ax.set_title("每個國家的選手數(前一百名內)")
 
     # 在 Streamlit 中顯示
     st.pyplot(fig)
