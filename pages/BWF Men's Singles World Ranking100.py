@@ -51,10 +51,11 @@ if "date_id_dict" in st.session_state:
     date_id_dict = st.session_state.date_id_dict
 
 ##################
-        # 使用 selectbox 讓使用者選擇日期
+        # 使用 selectbox1 讓使用者選擇日期(預設為st.session_state.new_date
+    options = list(date_id_dict.keys())
+    index = options.index(st.session_state.new_date)
     with row2_1:
-        options = list(date_id_dict.keys())
-        index = options.index(st.session_state.new_date)
+
         selected_date1 = st.selectbox("選擇欲查詢的日期", [""] +options,index)
 
     # 如果選擇了日期
