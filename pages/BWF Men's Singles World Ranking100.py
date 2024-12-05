@@ -4,6 +4,33 @@ import geopandas as gpd
 from scrape_bwf_ranking import scrape_bwf_ranking  # 引入第一次爬蟲的函數
 from scrape_bwf_ranking_by_date import scrape_bwf_ranking_by_date  # 引入第二次爬蟲的函數
 
+####統計圖
+import matplotlib.pyplot as plt          # 匯入pyplot模組
+from matplotlib.figure import Figure
+from matplotlib.backends.backend_agg import FigureCanvasAgg as FigureCanvas
+from IPython.core.display import display
+# Colab 進行matplotlib繪圖時顯示繁體中文
+# 下載台北思源黑體並命名taipei_sans_tc_beta.ttf，移至指定路徑
+!wget -O TaipeiSansTCBeta-Regular.ttf https://drive.google.com/uc?id=1eGAsTN1HBpJAkeVM57_C7ccp7hbgSz3_&export=download
+
+import matplotlib
+
+# 改style要在改font之前
+# plt.style.use('seaborn')
+
+matplotlib.font_manager.fontManager.addfont('TaipeiSansTCBeta-Regular.ttf')
+matplotlib.rc('font', family='Taipei Sans TC Beta')
+
+!pip install squarify
+
+import seaborn as sns
+import plotly.offline
+import plotly.express as px
+import plotly.graph_objects as go
+import plotly.subplots
+import squarify
+###
+
 # 設定頁面配置為寬屏模式
 st.set_page_config(page_title="BWF Men's Singles World Ranking", layout="wide")
 
