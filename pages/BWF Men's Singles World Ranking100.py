@@ -124,7 +124,7 @@ with row3_1:
     st.write("每個國家前一百名的選手數統計(取前十多的國家)")
     st.pyplot(fig)
 
-if selected_date:
+if selected_date2:
 
     #按照國家分組-右邊表格
     GB_country2= df_selected2.groupby(by=['Country']).agg(
