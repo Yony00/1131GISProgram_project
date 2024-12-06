@@ -205,7 +205,7 @@ if selected_date:
         value = feature["properties"][value_column]
         opacity = norm(value)  # 將數值正規化到 [0, 1] 範圍
         return {
-            "fillColor": "#0000FF",  # 固定藍色 (十六進制格式)
+            "fillColor": "#FF0000",  # 固定紅色 (十六進制格式)
             "color": "black",        # 邊框顏色
             "weight": 1,             # 邊框寬度
             "fillOpacity": opacity,  # 根據數值調整透明度
