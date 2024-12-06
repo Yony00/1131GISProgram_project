@@ -177,6 +177,7 @@ m.add_gdf(
     gdf1,
     layer_name=f"BWF Men's Singles World Ranking for {selected_date1}:",
     style_function=style_function,
+    info_mode='on_click'
 )
 
 # 顯示地圖
