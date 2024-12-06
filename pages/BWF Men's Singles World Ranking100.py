@@ -161,5 +161,41 @@ m.add_gdf(GB_country_withGEO,
 m.to_streamlit(height=700)
 
 
+####################
+import leafmap.foliumap as leafmap
+import geopandas as gpd
+from matplotlib.colors import Normalize
+
+# 讀取 GeoDataFrame
+gdf = GB_country_withGEO
+
+# 假設 gdf 中的數值欄位名為 'value'
+value_column = 'player_count'
+
+# 創建數值正規化範圍
+norm = Normalize(vmin=gdf[value_column].min(), vmax=gdf[value_column].max())
+
+# 定義樣式函數（固定藍色，透明度根據數值設置）
+def style_function(feature):
+    value = feature["properties"][value_column]
+    opacity = norm(value)  # 將數值正規化到 [0, 1] 範圍
+    return {
+        "fillColor": "#0000FF",  # 固定藍色 (十六進制格式)
+        "color": "black",        # 邊框顏色
+        "weight": 1,             # 邊框寬度
+        "fillOpacity": opacity,  # 根據數值調整透明度
+    }
+
+# 創建地圖並添加 GeoDataFrame
+m = leafmap.Map(center=(0, 0), zoom=2)
+m.add_gdf(
+    gdf,
+    layer_name="Blue Transparency Layer",
+    style_function=style_function,
+)
+
+# 顯示地圖
+m.to_streamlit()
+
 
 
