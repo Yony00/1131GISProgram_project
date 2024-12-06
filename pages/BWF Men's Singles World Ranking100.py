@@ -153,6 +153,7 @@ GB_country_withGEO = gpd.GeoDataFrame(GB_country_withGEO,geometry=GB_country_wit
 m = leafmap.Map(center=[40, -100], zoom=4)
 m.add_gdf(GB_country_withGEO, 
           layer_name="Man Single Player Count",
+          info_mode='on_click'
          # style_function=style_function
          )
 
