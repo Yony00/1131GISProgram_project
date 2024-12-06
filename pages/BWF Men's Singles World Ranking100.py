@@ -186,7 +186,7 @@ m.to_streamlit()
 ##畫地圖-右表格
 if selected_date2:
     #賦予geometry轉換為gdf-右
-    GB_country2_withGEO2=pd.merge(GB_country2,world_country,how='left',on='Country')
+    GB_country2_withGEO=pd.merge(GB_country2,world_country,how='left',on='Country')
     GB_country2_withGEO = gpd.GeoDataFrame(GB_country2_withGEO,geometry=GB_country2_withGEO['geometry'])
     
     #畫地圖-左表格
@@ -211,8 +211,7 @@ if selected_date2:
             "fillOpacity": opacity,  # 根據數值調整透明度
         }
     
-    # 創建地圖並添加 GeoDataFrame
-    m = leafmap.Map(center=(0, 0), zoom=2)
+    # 加入之前地圖
     m.add_gdf(
         gdf2,
         layer_name=f"BWF Men's Singles World Ranking for {selected_date2}:",
