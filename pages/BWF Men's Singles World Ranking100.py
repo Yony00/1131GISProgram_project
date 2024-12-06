@@ -184,7 +184,7 @@ m.add_gdf(
 m.to_streamlit()
 
 ##畫地圖-右表格
-if selected_date:
+if selected_date2:
     #賦予geometry轉換為gdf-右
     GB_country2_withGEO2=pd.merge(GB_country2,world_country,how='left',on='Country')
     GB_country2_withGEO = gpd.GeoDataFrame(GB_country2_withGEO,geometry=GB_country2_withGEO['geometry'])
