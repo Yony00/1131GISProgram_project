@@ -210,7 +210,7 @@ if selected_date2:
         }
     
     # 創建地圖並添加 GeoDataFrame
-    #m = leafmap.Map(center=(0, 0), zoom=2)
+    m = leafmap.Map(center=(0, 0), zoom=2)
     m.split_map(left_layer="CartoDB.Positron", right_layer="CartoDB.DarkMatter")
 
 
