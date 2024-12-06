@@ -211,15 +211,13 @@ if selected_date2:
     
     # 創建地圖並添加 GeoDataFrame
     m = leafmap.Map(center=(0, 0), zoom=2)
-    m.split_map(left_layer="CartoDB.Positron", right_layer="CartoDB.DarkMatter")
 
 
 
 
     m.add_gdf(
         gdf1,
-        #layer_name=f"BWF Men's Singles World Ranking for {selected_date1}:",
-        layer_name="Left Layer - GDF1", 
+        layer_name=f"BWF Men's Singles World Ranking for {selected_date1}:",
         style_function=style_function,
         info_mode='on_click',
         to_left=True
@@ -255,8 +253,7 @@ if selected_date2:
 
     m.add_gdf(
         gdf2,
-        #layer_name=f"BWF Men's Singles World Ranking for {selected_date2}:",
-        layer_name="Right Layer - GDF2", 
+        layer_name=f"BWF Men's Singles World Ranking for {selected_date2}:",
         style_function=style_function,
         info_mode='on_click',
          to_right=True
