@@ -1,51 +1,22 @@
-import streamlit as st
-import leafmap.foliumap as leafmap
-
-st.set_page_config(layout="wide")
-
-markdown = """
-A Streamlit map template
-<https://github.com/opengeos/streamlit-map-template>
-"""
-
-st.sidebar.title("About")
-st.sidebar.info(markdown)
-logo = "https://i.imgur.com/UbOXYAU.png"
-st.sidebar.image(logo)
-
-st.title("Marker Cluster")
-
-with st.expander("See source code"):
-    with st.echo():
-
-        m = leafmap.Map(center=[40, -100], zoom=4)
-        cities = "https://raw.githubusercontent.com/giswqs/leafmap/master/examples/data/us_cities.csv"
-        regions = "https://raw.githubusercontent.com/giswqs/leafmap/master/examples/data/us_regions.geojson"
-        regions2="https://raw.githubusercontent.com/RGT1143022/datafor1127/main/newMSwithGEO10.geojson"
-
-       # m.add_geojson(regions, layer_name="US Regions")
-        m.add_geojson(regions2, layer_name="Man Single Player Count")
-
-        #m.add_points_from_xy(
-        #    cities,
-        #    x="longitude",
-        #    y="latitude",
-        #    color_column="region",
-        #    icon_names=["gear", "map", "leaf", "globe"],
-        #    spin=True,
-        #    add_legend=True,
-        #)
-
-m.to_streamlit(height=700)
-
 import geopandas as gpd
+import leafmap
 
+# 创建两个简单的 GeoDataFrame
+data1 = {'geometry': ['POINT (0 0)', 'POINT (1 1)', 'POINT (2 2)']}
+gdf1 = gpd.GeoDataFrame(data1, geometry='geometry')
+gdf1.set_crs("EPSG:4326", inplace=True)
 
-@st.cache_data
-def load_data():
-    data_frame = gpd.read_file(regions2)
-    return data_frame
+data2 = {'geometry': ['POINT (0 1)', 'POINT (1 2)', 'POINT (2 3)']}
+gdf2 = gpd.GeoDataFrame(data2, geometry='geometry')
+gdf2.set_crs("EPSG:4326", inplace=True)
 
+# 创建地图
+m = leafmap.Map()
 
-data_frame = load_data()
-st.write("Below is a DataFrame:", data_frame, )
+# 尝试分割地图
+try:
+    m.split_map(gdf1, gdf2, left_layer_name="Layer 1", right_layer_name="Layer 2")
+    m.to_streamlit(height=700)
+
+except Exception as e:
+    print(f"Error: {e}")
