@@ -8,6 +8,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 import seaborn as sns
 import leafmap.foliumap as leafmap
+from matplotlib.colors import Normalize
 
 # 設定頁面配置為寬屏模式
 st.set_page_config(page_title="BWF Men's Singles World Ranking", layout="wide")
@@ -142,38 +143,22 @@ if selected_date:
         st.write("每個國家前一百名的選手數統計(取前十多的國家)")
         st.pyplot(fig)
 ####################################################################################ˇ
-#MAP
 world_country=gpd.read_file("https://github.com/RGT1143022/BWF_world_country/releases/download/v1.0.0/BWF_world_country_true.geojson")
 
 #賦予geometry轉換為gdf-左
 GB_country_withGEO=pd.merge(GB_country,world_country,how='left',on='Country')
 GB_country_withGEO = gpd.GeoDataFrame(GB_country_withGEO,geometry=GB_country_withGEO['geometry'])
 
-
-m = leafmap.Map(center=[40, -100], zoom=4)
-m.add_gdf(GB_country_withGEO, 
-          layer_name="Man Single Player Count",
-          info_mode='on_click'
-         # style_function=style_function
-         )
-
-
-m.to_streamlit(height=700)
-
-
-####################
-import leafmap.foliumap as leafmap
-import geopandas as gpd
-from matplotlib.colors import Normalize
+#畫地圖-左表格
 
 # 讀取 GeoDataFrame
-gdf = GB_country_withGEO
+gdf1 = GB_country_withGEO
 
 # 假設 gdf 中的數值欄位名為 'value'
 value_column = 'player_count'
 
 # 創建數值正規化範圍
-norm = Normalize(vmin=gdf[value_column].min(), vmax=gdf[value_column].max())
+norm = Normalize(vmin=gdf1[value_column].min(), vmax=gdf1[value_column].max())
 
 # 定義樣式函數（固定藍色，透明度根據數值設置）
 def style_function(feature):
@@ -189,8 +174,8 @@ def style_function(feature):
 # 創建地圖並添加 GeoDataFrame
 m = leafmap.Map(center=(0, 0), zoom=2)
 m.add_gdf(
-    gdf,
-    layer_name="Blue Transparency Layer",
+    gdf1,
+    layer_name=f"BWF Men's Singles World Ranking for {selected_date1}:",
     style_function=style_function,
 )
 
