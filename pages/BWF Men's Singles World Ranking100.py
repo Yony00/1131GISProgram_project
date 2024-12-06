@@ -251,9 +251,7 @@ if selected_date2:
         style_function=style_function,
         info_mode='on_click'
     )
-    m.split_map(
-            left_layer=gdf1, right_layer=gdf2
-        )
+    #m.split_map(left_layer=gdf1, right_layer=gdf2)
     
     # 顯示地圖
     m.to_streamlit()
