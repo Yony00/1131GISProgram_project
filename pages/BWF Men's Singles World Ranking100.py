@@ -259,6 +259,8 @@ if selected_date2:
          to_right=True
     )
 
+     m.split_map(gdf1,gdf2)
+
 
     # 顯示地圖
     m.to_streamlit()
