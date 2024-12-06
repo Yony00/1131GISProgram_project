@@ -86,25 +86,25 @@ if selected_date1:
 
 # 第二个 selectbox，选择其他日期
 with row2_2:
-    selected_date = st.selectbox(
+    selected_date2 = st.selectbox(
         "選擇欲查詢的日期",
         [""] + list(date_id_dict.keys()),
         key="selectbox_date2",  # 添加唯一的 key
     )
 
 # 如果選擇了日期
-if selected_date:
+if selected_date2:
     try:
-        selected_id = date_id_dict[selected_date]
-        df_selected = scrape_bwf_ranking_by_date(selected_id)
-        df_selected.set_index("Rank", inplace=True)
+        selected_id2 = date_id_dict[selected_date2]
+        df_selected2 = scrape_bwf_ranking_by_date(selected_id2)
+        df_selected2.set_index("Rank", inplace=True)
 
         # 顯示選擇日期的排名資料於 row1_2
         with row1_2:
-            st.write(f"Below is the BWF Men's Singles World Ranking for {selected_date}:")
-            st.write(df_selected)
+            st.write(f"Below is the BWF Men's Singles World Ranking for {selected_date2}:")
+            st.write(df_selected2)
     except Exception as e:
-        st.error(f"Error occurred while fetching data for {selected_date}: {e}")
+        st.error(f"Error occurred while fetching data for {selected_date2}: {e}")
 
 
 
@@ -127,16 +127,16 @@ with row3_1:
 if selected_date:
 
     #按照國家分組-右邊表格
-    GB_country= df_selected.groupby(by=['Country']).agg(
+    GB_country2= df_selected2.groupby(by=['Country']).agg(
         player_count=('Player', len),
         playername=('Player',';'.join)
         )
-    GB_country_TOP10=GB_country.nlargest(10,"player_count")
+    GB_country2_TOP10=GB_country2.nlargest(10,"player_count")
     
     with row3_2:
         # 繪製條形圖
         fig, ax = plt.subplots(figsize=(8, 6))
-        sns.barplot(data=GB_country_TOP10, x='player_count', y='Country', ax=ax)
+        sns.barplot(data=GB_country2_TOP10, x='player_count', y='Country', ax=ax)
 
     
         # 在 Streamlit 中顯示
@@ -182,6 +182,46 @@ m.add_gdf(
 
 # 顯示地圖
 m.to_streamlit()
+
+##畫地圖-右表格
+if selected_date:
+    #賦予geometry轉換為gdf-右
+    GB_country2_withGEO2=pd.merge(GB_country2,world_country,how='left',on='Country')
+    GB_country2_withGEO = gpd.GeoDataFrame(GB_country2_withGEO,geometry=GB_country2_withGEO['geometry'])
+    
+    #畫地圖-左表格
+    
+    # 讀取 GeoDataFrame
+    gdf2 = GB_country2_withGEO
+    
+    # 假設 gdf 中的數值欄位名為 'value'
+    value_column = 'player_count'
+    
+    # 創建數值正規化範圍
+    norm = Normalize(vmin=gdf2[value_column].min(), vmax=gdf2[value_column].max())
+    
+    # 定義樣式函數（固定藍色，透明度根據數值設置）
+    def style_function(feature):
+        value = feature["properties"][value_column]
+        opacity = norm(value)  # 將數值正規化到 [0, 1] 範圍
+        return {
+            "fillColor": "#0000FF",  # 固定藍色 (十六進制格式)
+            "color": "black",        # 邊框顏色
+            "weight": 1,             # 邊框寬度
+            "fillOpacity": opacity,  # 根據數值調整透明度
+        }
+    
+    # 創建地圖並添加 GeoDataFrame
+    m = leafmap.Map(center=(0, 0), zoom=2)
+    m.add_gdf(
+        gdf2,
+        layer_name=f"BWF Men's Singles World Ranking for {selected_date2}:",
+        style_function=style_function,
+        info_mode='on_click'
+    )
+    
+    # 顯示地圖
+    m.to_streamlit()
 
 
 
