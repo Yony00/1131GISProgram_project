@@ -188,11 +188,7 @@ if not selected_date2:
 ##畫地圖-左+右表格
 if selected_date2:
         #畫地圖-左表格
-    m = leafmap.Map(center=(0, 0), zoom=2)
 
-    m.split_map(left_layer=f"BWF Men's Singles World Ranking for {selected_date1}:", 
-                right_layer=f"BWF Men's Singles World Ranking for {selected_date2}:"
-               )
     # 讀取 GeoDataFrame
     gdf1 = GB_country_withGEO
     
@@ -214,6 +210,8 @@ if selected_date2:
         }
     
     # 創建地圖並添加 GeoDataFrame
+    m = leafmap.Map(center=(0, 0), zoom=2)
+
     m.add_gdf(
         gdf1,
         layer_name=f"BWF Men's Singles World Ranking for {selected_date1}:",
