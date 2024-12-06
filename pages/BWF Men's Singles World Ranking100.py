@@ -188,7 +188,9 @@ if not selected_date2:
 ##畫地圖-左+右表格
 if selected_date2:
         #畫地圖-左表格
-    
+    m.split_map(left_layer=f"BWF Men's Singles World Ranking for {selected_date1}:", 
+                right_layer=f"BWF Men's Singles World Ranking for {selected_date2}:"
+               )
     # 讀取 GeoDataFrame
     gdf1 = GB_country_withGEO
     
@@ -251,9 +253,7 @@ if selected_date2:
         style_function=style_function,
         info_mode='on_click'
     )
-    m.split_map(left_layer=f"BWF Men's Singles World Ranking for {selected_date1}:", 
-                right_layer=f"BWF Men's Singles World Ranking for {selected_date2}:"
-               )
+
     
     # 顯示地圖
     m.to_streamlit()
