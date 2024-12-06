@@ -188,78 +188,8 @@ if not selected_date2:
 ##畫地圖-左+右表格
 if selected_date2:
 
-    #  #畫地圖-左表格
-    # # 讀取 GeoDataFrame
-    # gdf1 = GB_country_withGEO
-    
-    # # 假設 gdf 中的數值欄位名為 'value'
-    # value_column = 'player_count'
-    
-    # # 創建數值正規化範圍
-    # norm = Normalize(vmin=gdf1[value_column].min(), vmax=gdf1[value_column].max())
-    
-    # # 定義樣式函數（固定藍色，透明度根據數值設置）
-    # def style_function(feature):
-    #     value = feature["properties"][value_column]
-    #     opacity = norm(value)  # 將數值正規化到 [0, 1] 範圍
-    #     return {
-    #         "fillColor": "#0000FF",  # 固定藍色 (十六進制格式)
-    #         "color": "black",        # 邊框顏色
-    #         "weight": 1,             # 邊框寬度
-    #         "fillOpacity": opacity,  # 根據數值調整透明度
-    #     }
-    
-    # # 創建地圖並添加 GeoDataFrame
-    # m = leafmap.Map(center=(0, 0), zoom=2)
-
-    # m.add_gdf(
-    #     gdf1,
-    #     layer_name=f"BWF Men's Singles World Ranking for {selected_date1}:",
-    #     style_function=style_function,
-    #     info_mode='on_click'
-    # )
-    
-    # #賦予geometry轉換為gdf-右
-    # GB_country2_withGEO=pd.merge(GB_country2,world_country,how='left',on='Country')
-    # GB_country2_withGEO = gpd.GeoDataFrame(GB_country2_withGEO,geometry=GB_country2_withGEO['geometry'])
-    
-    # #畫地圖-右表格
-    
-    # # 讀取 GeoDataFrame
-    # gdf2 = GB_country2_withGEO
-    
-    # # 假設 gdf 中的數值欄位名為 'value'
-    # value_column = 'player_count'
-    
-    # # 創建數值正規化範圍
-    # norm = Normalize(vmin=gdf2[value_column].min(), vmax=gdf2[value_column].max())
-    
-    # # 定義樣式函數（固定藍色，透明度根據數值設置）
-    # def style_function(feature):
-    #     value = feature["properties"][value_column]
-    #     opacity = norm(value)  # 將數值正規化到 [0, 1] 範圍
-    #     return {
-    #         "fillColor": "#ff0000",  # 固定紅色 (十六進制格式)
-    #         "color": "black",        # 邊框顏色
-    #         "weight": 1,             # 邊框寬度
-    #         "fillOpacity": opacity,  # 根據數值調整透明度
-    #     }
-    
-    # # 加入之前地圖
-    # m.add_gdf(
-    #     gdf2,
-    #     layer_name=f"BWF Men's Singles World Ranking for {selected_date2}:",
-    #     style_function=style_function,
-    #     info_mode='on_click'
-    # )
-
-
-
-
-
-
-
- # 讀取 GeoDataFrame
+     #畫地圖-左表格
+    # 讀取 GeoDataFrame
     gdf1 = GB_country_withGEO
     
     # 假設 gdf 中的數值欄位名為 'value'
@@ -278,20 +208,20 @@ if selected_date2:
             "weight": 1,             # 邊框寬度
             "fillOpacity": opacity,  # 根據數值調整透明度
         }
-
     
-    # 在左側地圖添加第一個 GeoDataFrame
-    m = leafmap.Map(center=(0, 0), zoom=2,split_map=True)
-    m.split_map(left_layer="Layer 1")
+    # 創建地圖並添加 GeoDataFrame
+    #m = leafmap.Map(center=(0, 0), zoom=2)
+    m = leafmap.SplitMap()
+
+
     m.add_gdf(
         gdf1,
-        #layer_name=f"BWF Men's Singles World Ranking for {selected_date1}:",
-        layer_name="Layer 1",
+        layer_name=f"BWF Men's Singles World Ranking for {selected_date1}:",
         style_function=style_function,
         info_mode='on_click'
-    )    
-    # 在右側地圖添加第二個 GeoDataFrame
-        #賦予geometry轉換為gdf-右
+    )
+    
+    #賦予geometry轉換為gdf-右
     GB_country2_withGEO=pd.merge(GB_country2,world_country,how='left',on='Country')
     GB_country2_withGEO = gpd.GeoDataFrame(GB_country2_withGEO,geometry=GB_country2_withGEO['geometry'])
     
@@ -316,15 +246,16 @@ if selected_date2:
             "weight": 1,             # 邊框寬度
             "fillOpacity": opacity,  # 根據數值調整透明度
         }
-    m.split_map(right_layer="Layer 2")
+    
+    # 加入之前地圖
     m.add_gdf(
         gdf2,
-        #layer_name=f"BWF Men's Singles World Ranking for {selected_date2}:",
-        layer_name="Layer 2",
+        layer_name=f"BWF Men's Singles World Ranking for {selected_date2}:",
         style_function=style_function,
         info_mode='on_click'
     )
-    
+
+
     # 顯示地圖
     m.to_streamlit()
 
