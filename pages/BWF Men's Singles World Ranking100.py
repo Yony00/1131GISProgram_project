@@ -211,7 +211,7 @@ if selected_date2:
     
     # 創建地圖並添加 GeoDataFrame
     #m = leafmap.Map(center=(0, 0), zoom=2)
-    m = leafmap.SplitMap()
+    m = leafmap.SplitMap(center=(0, 0), zoom=2)
 
 
     m.add_gdf(
