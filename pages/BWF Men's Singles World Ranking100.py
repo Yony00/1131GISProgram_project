@@ -266,14 +266,14 @@ if selected_date2:
 
     # 通过选项控制图层的可见性
     m.layer_control = True  # 启用图层控制
-    if layer_choice == layer1_name:
-        m.set_layer_visibility(layer1_name, True)
-        m.set_layer_visibility(layer2_name, False)
+    # if layer_choice == layer1_name:
+    #     m.set_layer_visibility(layer1_name, True)
+    #     m.set_layer_visibility(layer2_name, False)
     
     
-    elif layer_choice == layer2_name:
-        m.set_layer_visibility(layer1_name, False)
-        m.set_layer_visibility(layer2_name, True)
+    # elif layer_choice == layer2_name:
+    #     m.set_layer_visibility(layer1_name, False)
+    #     m.set_layer_visibility(layer2_name, True)
 
 
 
