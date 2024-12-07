@@ -9,6 +9,8 @@ import matplotlib.pyplot as plt
 import seaborn as sns
 import leafmap.foliumap as leafmap
 from matplotlib.colors import Normalize
+from folium.plugins import LayerControl
+
 
 # 設定頁面配置為寬屏模式
 st.set_page_config(page_title="BWF Men's Singles World Ranking", layout="wide")
@@ -258,42 +260,9 @@ if selected_date2:
         info_mode='on_click',
          to_right=True
     )
-    
-    layer1_name=f"BWF Men's Singles World Ranking for {selected_date1}:"
-    layer2_name=f"BWF Men's Singles World Ranking for {selected_date2}:"
-    
+    LayerControl().add_to(m)
 
-
-
-    # 添加切换逻辑
-    custom_js = """
-    function toggleLayer(layerName) {
-        for (let layer of Object.values(map._layers)) {
-            if (layer.options && layer.options.name === layerName) {
-                if (!map.hasLayer(layer)) {
-                    map.addLayer(layer);
-                } else {
-                    map.removeLayer(layer);
-                }
-            } else if (layer.options && layer.options.name !== layerName) {
-                if (map.hasLayer(layer)) {
-                    map.removeLayer(layer);
-                }
-            }
-        }
-    }
-    """
-    
-    m.add_js(custom_js)
-    
-    # 添加按钮用于切换图层
-    toggle_html = """
-    <div style="position: fixed; bottom: 50px; left: 50px; z-index: 9999;">
-      <button onclick="toggleLayer('Layer 1')">Toggle Layer 1</button>
-      <button onclick="toggleLayer('Layer 2')">Toggle Layer 2</button>
-    </div>
-    """
-    m.add_html(toggle_html)
+   
 
 
 
