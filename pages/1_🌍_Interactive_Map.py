@@ -32,7 +32,6 @@ with col1:
 
     m.to_streamlit(height=700)
 
-
 import streamlit as st
 import leafmap.foliumap as leafmap
 
@@ -46,6 +45,5 @@ m.add_basemap("OpenTopoMap")
 m.to_streamlit(height=700)
 
 # 获取地图的中心坐标
-center = m.st_map_center
+center = m.st_map_center()  # 调用方法获取实际值
 st.write(f"当前地图中心坐标: {center}")
-
