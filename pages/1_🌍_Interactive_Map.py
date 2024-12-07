@@ -19,20 +19,18 @@ options = list(leafmap.basemaps.keys())
 index = options.index("OpenTopoMap")
 
 with col2:
-
     basemap = st.selectbox("Select a basemap:", options, index)
 
-
 with col1:
-
     m = leafmap.Map(
         locate_control=True, latlon_control=True, draw_export=True, minimap_control=True
     )
     m.add_basemap(basemap)
     m.to_streamlit(height=700)
-    
-   
-    st.write(m.zoom)
+
+# 现在地图渲染完毕后，显示其缩放级别
+st.write(f"当前缩放级别: {m.zoom}")
+
     
 m2 = leafmap.Map()
 m2.to_streamlit(height=700)
