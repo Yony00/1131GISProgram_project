@@ -9,6 +9,7 @@ import matplotlib.pyplot as plt
 import seaborn as sns
 import leafmap.foliumap as leafmap
 from matplotlib.colors import Normalize
+import folium
 from folium.plugins import LayerControl
 
 
