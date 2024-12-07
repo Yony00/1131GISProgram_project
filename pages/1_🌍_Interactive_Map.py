@@ -30,7 +30,7 @@ with col1:
     )
     m.add_basemap(basemap)
     m.to_streamlit(height=700)
-    
+    st.write(m.center.value)
 
     
 m2 = leafmap.Map()
