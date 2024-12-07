@@ -32,7 +32,6 @@ with col1:
     m.to_streamlit(height=700)
 
 
-    
 import streamlit as st
 import leafmap.foliumap as leafmap
 
@@ -45,7 +44,7 @@ m.to_streamlit()
 # 获取当前视角边界框
 def get_bounds(m):
     bounds = m.get_bounds()  # 获取视角边界
-    if bounds:  # 如果 bounds 不为 None
+    if bounds and all(bounds):  # 如果 bounds 非空并且所有值不为 None
         south, west, north, east = bounds
         return {
             'south': south,
@@ -62,5 +61,3 @@ if bounds:
     st.write(f"南边界: {bounds['south']}, 北边界: {bounds['north']}, 西边界: {bounds['west']}, 东边界: {bounds['east']}")
 else:
     st.write("无法获取地图的视角边界")
-
-
