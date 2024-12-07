@@ -347,14 +347,16 @@ if selected_date2:
 
     selected_layer = st.radio("切换图层", ['Layer 1', 'Layer 2'], index=0)
     
-    # 根据用户选择更新图层显示状态
-    for layer_name in layer_dict:
-        if layer_name == selected_layer:
-            # 显示选定图层
-            leafmap.set_layer_visibility(layer_dict[layer_name], True)
-        else:
-            # 隐藏未选定图层
-            leafmap.set_layer_visibility(layer_dict[layer_name], False)
+   # 确保图层在更新状态之前不为空
+    if layer_dict[selected_layer]: 
+        # 根据用户选择更新图层显示状态
+        for layer_name in layer_dict:
+            if layer_name == selected_layer:
+                # 显示选定图层
+                leafmap.set_layer_visibility(layer_dict[layer_name], True)
+            else:
+                # 隐藏未选定图层
+                leafmap.set_layer_visibility(layer_dict[layer_name], False)
 
      #顯示地圖
     m.to_streamlit()
