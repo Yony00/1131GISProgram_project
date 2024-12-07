@@ -44,10 +44,11 @@ m.add_basemap("OpenTopoMap")
 # 显示地图
 m.to_streamlit(height=700)
 
-# 获取和显示当前缩放级别
-def display_zoom(m):
+# 定义一个函数来显示当前的缩放级别
+def display_zoom():
     st.write(f"当前缩放级别: {m.zoom}")
 
 # 为地图添加缩放事件监听
-m.on_zoom_changed(lambda e: display_zoom(m))  # Ensure m is correctly passed to the lambda function
+m.on_zoom_changed(lambda e: display_zoom())  # Call display_zoom to show the current zoom level
+
 
