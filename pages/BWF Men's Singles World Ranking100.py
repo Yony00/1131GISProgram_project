@@ -266,14 +266,18 @@ if selected_date2:
              to_right=True
         )
         
-        def sync_view(e):
-            m2.fit_bounds(m.get_bounds())
-        
-        m.get_root().add_child(folium.Element(sync_view))
+
          #顯示地圖
         m2.to_streamlit()
 
-
+        # 设置右图台的视角与左图台同步
+        def sync_view(e):
+            bounds = m.get_bounds()
+            m2.fit_bounds(bounds)
+        
+        
+        # 绑定视角同步事件
+        m.on_move(sync_view)
 
 
 
