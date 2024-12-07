@@ -325,6 +325,7 @@ if selected_date2:
             }
         
         # 加入之前地圖
+        m = leafmap.Map(center=(0, 0), zoom=2)
     
         m.add_gdf(
             gdf2,
