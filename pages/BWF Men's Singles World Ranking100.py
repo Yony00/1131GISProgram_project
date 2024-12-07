@@ -215,10 +215,12 @@ if selected_date2:
     # 創建地圖並添加 GeoDataFrame
     m = leafmap.Map(center=(0, 0), zoom=2)
 
-
-
-
-    m.add_gdf(
+    # 创建图层字典
+    layer_dict = {
+        'Layer 1': None,
+        'Layer 2': None
+    }
+    layer_dict['Layer 1'] =    m.add_gdf(
         gdf1,
         layer_name=f"BWF Men's Singles World Ranking for {selected_date1}:",
         style_function=style_function,
@@ -253,8 +255,7 @@ if selected_date2:
         }
     
     # 加入之前地圖
-
-    m.add_gdf(
+    layer_dict['Layer 2'] = m.add_gdf(
         gdf2,
         layer_name=f"BWF Men's Singles World Ranking for {selected_date2}:",
         style_function=style_function,
@@ -345,6 +346,14 @@ if selected_date2:
 
 
 
+    selected_layer = st.radio("切换图层", ['Layer 1', 'Layer 2'], index=0)
+    
+    # 根据用户选择更新图层显示状态
+    for layer_name in layer_dict:
+        if layer_name == selected_layer:
+            leafmap.set_layer_visibility(layer_name, True)
+        else:
+            leafmap.set_layer_visibility(layer_name, False)
 
 
      #顯示地圖
