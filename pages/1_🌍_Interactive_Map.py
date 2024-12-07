@@ -49,4 +49,5 @@ def display_zoom(m):
     st.write(f"当前缩放级别: {m.zoom}")
 
 # 为地图添加缩放事件监听
-m.on_zoom_changed(lambda e: display_zoom(m))
+m.on_zoom_changed(lambda e: display_zoom(m))  # Ensure m is correctly passed to the lambda function
+
