@@ -46,6 +46,6 @@ m.add_basemap("OpenTopoMap")
 m.to_streamlit(height=700)
 
 # 获取地图的中心坐标
-center = m.st_map_center()
+center = m.st_map_center
 st.write(f"当前地图中心坐标: {center}")
 
