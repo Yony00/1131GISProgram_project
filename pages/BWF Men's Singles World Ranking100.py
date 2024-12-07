@@ -10,7 +10,7 @@ import seaborn as sns
 import leafmap.foliumap as leafmap
 from matplotlib.colors import Normalize
 import folium
-from folium.plugins import LayerControl
+
 
 
 # 設定頁面配置為寬屏模式
