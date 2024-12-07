@@ -298,6 +298,7 @@ if selected_date2:
                 info_mode='on_click',
                 to_left=True
             )
+         m.to_streamlit()
     elif option == selected_date2:
             gdf2 = GB_country2_withGEO
     
@@ -327,6 +328,7 @@ if selected_date2:
                 info_mode='on_click',
                  to_right=True
             )
+        m.to_streamlit()
 
 
    
@@ -339,7 +341,7 @@ if selected_date2:
 
 
     # 顯示地圖
-    m.to_streamlit()
+    #m.to_streamlit()
 
 
 
