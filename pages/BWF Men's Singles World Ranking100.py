@@ -262,18 +262,40 @@ if selected_date2:
     layer1_name=f"BWF Men's Singles World Ranking for {selected_date1}:"
     layer2_name=f"BWF Men's Singles World Ranking for {selected_date2}:"
     
-    layer_choice = st.radio("Select Layer to Display", [layer1_name, layer2_name])
 
-    # 通过选项控制图层的可见性
-    m.layer_control = True  # 启用图层控制
-    # if layer_choice == layer1_name:
-    #     m.set_layer_visibility(layer1_name, True)
-    #     m.set_layer_visibility(layer2_name, False)
+
+
+    # 添加切换逻辑
+    custom_js = """
+    function toggleLayer(layerName) {
+        for (let layer of Object.values(map._layers)) {
+            if (layer.options && layer.options.name === layerName) {
+                if (!map.hasLayer(layer)) {
+                    map.addLayer(layer);
+                } else {
+                    map.removeLayer(layer);
+                }
+            } else if (layer.options && layer.options.name !== layerName) {
+                if (map.hasLayer(layer)) {
+                    map.removeLayer(layer);
+                }
+            }
+        }
+    }
+    """
     
+    m.add_js(custom_js)
     
-    # elif layer_choice == layer2_name:
-    #     m.set_layer_visibility(layer1_name, False)
-    #     m.set_layer_visibility(layer2_name, True)
+    # 添加按钮用于切换图层
+    toggle_html = """
+    <div style="position: fixed; bottom: 50px; left: 50px; z-index: 9999;">
+      <button onclick="toggleLayer('Layer 1')">Toggle Layer 1</button>
+      <button onclick="toggleLayer('Layer 2')">Toggle Layer 2</button>
+    </div>
+    """
+    m.add_html(toggle_html)
+
+
 
 
 
