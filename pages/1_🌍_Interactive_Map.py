@@ -45,15 +45,22 @@ m.to_streamlit()
 # 获取当前视角边界框
 def get_bounds(m):
     bounds = m.get_bounds()  # 获取视角边界
-    south, west, north, east = bounds
-    return {
-        'south': south,
-        'west': west,
-        'north': north,
-        'east': east
-    }
+    if bounds:  # 如果 bounds 不为 None
+        south, west, north, east = bounds
+        return {
+            'south': south,
+            'west': west,
+            'north': north,
+            'east': east
+        }
+    else:
+        return None
 
 # 显示当前视角的边界框
 bounds = get_bounds(m)
-st.write(f"南边界: {bounds['south']}, 北边界: {bounds['north']}, 西边界: {bounds['west']}, 东边界: {bounds['east']}")
+if bounds:
+    st.write(f"南边界: {bounds['south']}, 北边界: {bounds['north']}, 西边界: {bounds['west']}, 东边界: {bounds['east']}")
+else:
+    st.write("无法获取地图的视角边界")
+
 
