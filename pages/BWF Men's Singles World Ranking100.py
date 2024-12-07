@@ -227,6 +227,11 @@ if selected_date2:
             to_left=True
         )      
         #顯示地圖
+        def sync_view(e):
+            bounds = 1.get_bounds()
+            m2.fit_bounds(bounds)
+        m.on_move(sync_view2)
+
         m.to_streamlit()
     with row4_2:
 
@@ -268,17 +273,26 @@ if selected_date2:
         
 
          #顯示地圖
+        def sync_view(e):
+            bounds = 1.get_bounds()
+            m2.fit_bounds(bounds)
+        m2.on_move(sync_view)
         m2.to_streamlit()
 
-        # 设置右图台的视角与左图台同步
-        def sync_view(e):
-            bounds = m.get_bounds()
-            m2.fit_bounds(bounds)
-        
-        
-        # 绑定视角同步事件
-        m.on_move(sync_view)
+# # 设置右图台的视角与左图台同步
+# def sync_view(e):
+#     bounds = 1.get_bounds()
+#     m2.fit_bounds(bounds)
 
+# def sync_view2(e):
+#     bounds = m2.get_bounds()
+#     m.fit_bounds(bounds)
+
+# # 为左图台添加事件监听，监视视角变化
+# m.on_move(sync_view2)
+
+# # 为右图台添加事件监听，监视视角变化
+# m2.on_move(sync_view)
 
 
 
