@@ -30,7 +30,8 @@ with col1:
     )
     m.add_basemap(basemap)
     m.to_streamlit(height=700)
-    st_map_bounds(self, st_component) ¶
+    bounds = st_map_bounds(m)
+    st.write(bounds)
 
 
     
