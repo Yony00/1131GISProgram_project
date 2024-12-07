@@ -30,10 +30,18 @@ with col1:
     )
     m.add_basemap(basemap)
     m.to_streamlit(height=700)
-    bounds = st_map_bounds(m)
-    st.write(bounds)
 
 
     
-m2 = leafmap.Map()
-m2.to_streamlit(height=700)
+import streamlit as st
+import leafmap.foliumap as leafmap
+
+# 创建一个 Leafmap 映射组件
+m = leafmap.Map(locate_control=True)
+
+# 显示地图
+m.to_streamlit()
+
+# 获取并显示当前视角边界框
+bounds = st_map_bounds(m)
+st.write(f"南边界: {bounds['south']}, 北边界: {bounds['north']}, 西边界: {bounds['west']}, 东边界: {bounds['east']}")
