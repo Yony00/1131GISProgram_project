@@ -265,9 +265,17 @@ if selected_date2:
             info_mode='on_click',
              to_right=True
         )
-
+        
+        # 监听左图台的视角变化
+        m.get_root().add_child(
+            folium.Map.on_move(lambda e: m2.fit_bounds(e.target.get_bounds()))
+        )
          #顯示地圖
         m2.to_streamlit()
+
+
+
+
 
 
 
