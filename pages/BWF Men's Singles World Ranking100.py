@@ -224,10 +224,6 @@ if selected_date2:
             to_left=True
         )      
         # 显示地图
-        def sync_view(e):
-            bounds = m.get_bounds()
-            m2.fit_bounds(bounds)
-        m.on_move(sync_view)
 
         m.to_streamlit()
     with row4_2:
@@ -267,12 +263,17 @@ if selected_date2:
         )
         
         # 显示地图
-        def sync_view(e):
-            bounds = m.get_bounds()
-            m2.fit_bounds(bounds)
-        m2.on_move(sync_view)
-        m2.to_streamlit()
 
+        m2.to_streamlit()
+        
+    def sync_view(e):
+        bounds = m.get_bounds()
+        m2.fit_bounds(bounds)
+    m.on_move(sync_view)
+    def sync_view(e):
+        bounds = m.get_bounds()
+        m2.fit_bounds(bounds)
+    m2.on_move(sync_view)
     # row4_1, row4_2 = table_area.columns((1, 1))
     # with row4_1:
         
