@@ -28,8 +28,8 @@ with col1:
     m.add_basemap(basemap)
     m.to_streamlit(height=700)
 
-# 现在地图渲染完毕后，显示其缩放级别
-st.write(f"当前缩放级别: {m.zoom}")
+# 等待地图渲染完毕再显示缩放级别
+st.write(f"当前缩放级别: {m.zoom if hasattr(m, 'zoom') else '未定义'}")
 
     
 m2 = leafmap.Map()
