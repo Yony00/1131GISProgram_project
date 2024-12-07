@@ -351,13 +351,11 @@ if selected_date2:
     # 根据用户选择更新图层显示状态
     for layer_name in layer_dict:
         if layer_name == selected_layer:
-            # 生成图层名的格式化字符串
-            layer_full_name = f"BWF Men's Singles World Ranking for {selected_date2}:"
-            leafmap.set_layer_visibility(layer_full_name, True)
+            # 显示选定图层
+            leafmap.set_layer_visibility(layer_dict[layer_name], True)
         else:
-            # 生成图层名的格式化字符串
-            layer_full_name = f"BWF Men's Singles World Ranking for {selected_date2}:"
-            leafmap.set_layer_visibility(layer_full_name, False)
+            # 隐藏未选定图层
+            leafmap.set_layer_visibility(layer_dict[layer_name], False)
 
      #顯示地圖
     m.to_streamlit()
