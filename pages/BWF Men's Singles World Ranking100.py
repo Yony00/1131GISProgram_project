@@ -261,6 +261,7 @@ if selected_date2:
         info_mode='on_click',
          to_right=True
     )
+    m.set_layer_visibility(f"BWF Men's Singles World Ranking for {selected_date2}:", False)
     
     # option = st.radio("切换图层", [selected_date1,selected_date2])
 
