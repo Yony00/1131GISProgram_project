@@ -274,7 +274,7 @@ if selected_date2:
 
          #顯示地圖
         def sync_view(e):
-            bounds = 1.get_bounds()
+            bounds = m.get_bounds()
             m2.fit_bounds(bounds)
         m2.on_move(sync_view)
         m2.to_streamlit()
