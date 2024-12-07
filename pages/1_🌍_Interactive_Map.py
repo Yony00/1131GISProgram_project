@@ -44,7 +44,7 @@ m.to_streamlit()
 # 获取当前视角边界框
 def get_bounds(m):
     bounds = m.get_bounds()  # 获取视角边界
-    if bounds and all(bounds):  # 如果 bounds 非空并且所有值不为 None
+    if bounds and len(bounds) == 4:  # 检查 bounds 是否为有效的四元素元组
         south, west, north, east = bounds
         return {
             'south': south,
