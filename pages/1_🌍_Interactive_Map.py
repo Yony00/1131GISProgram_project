@@ -31,7 +31,7 @@ with col1:
     m.add_basemap(basemap)
     m.to_streamlit(height=700)
     
-    bounds = m.center
+    bounds = m.zoom
     st.write(bounds)
     
 m2 = leafmap.Map()
