@@ -270,7 +270,7 @@ if selected_date2:
         m.set_layer_visibility(layer1_name, True)
         m.set_layer_visibility(layer2_name, False)
     
-    e
+    
     elif layer_choice == layer2_name:
         m.set_layer_visibility(layer1_name, False)
         m.set_layer_visibility(layer2_name, 
