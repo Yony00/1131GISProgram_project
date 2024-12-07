@@ -261,7 +261,8 @@ if selected_date2:
         info_mode='on_click',
          to_right=True
     )
-    LayerControl().add_to(m)
+    folium.LayerControl().add_to(m)
+
 
    
 
