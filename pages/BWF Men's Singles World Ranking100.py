@@ -258,6 +258,25 @@ if selected_date2:
         info_mode='on_click',
          to_right=True
     )
+    
+    layer1_name=f"BWF Men's Singles World Ranking for {selected_date1}:"
+    layer2_name=f"BWF Men's Singles World Ranking for {selected_date2}:"
+    
+    layer_choice = st.radio("Select Layer to Display", [layer1_name, layer2_name])
+
+    # 通过选项控制图层的可见性
+    m.layer_control = True  # 启用图层控制
+    if layer_choice == layer1_name:
+        m.set_layer_visibility(layer1_name, True)
+        m.set_layer_visibility(layer2_name, False)
+    
+    e
+    elif layer_choice == layer2_name:
+        m.set_layer_visibility(layer1_name, False)
+        m.set_layer_visibility(layer2_name, 
+        m.set_layer_visibilit
+    True)
+
 
 
 
