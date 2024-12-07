@@ -191,150 +191,150 @@ if not selected_date2:
 ##畫地圖-左+右表格
 if selected_date2:
 
-    #  #畫地圖-左表格
-    # # 讀取 GeoDataFrame
-    # gdf1 = GB_country_withGEO
+     #畫地圖-左表格
+    # 讀取 GeoDataFrame
+    gdf1 = GB_country_withGEO
     
-    # # 假設 gdf 中的數值欄位名為 'value'
-    # value_column = 'player_count'
+    # 假設 gdf 中的數值欄位名為 'value'
+    value_column = 'player_count'
     
-    # # 創建數值正規化範圍
-    # norm = Normalize(vmin=gdf1[value_column].min(), vmax=gdf1[value_column].max())
+    # 創建數值正規化範圍
+    norm = Normalize(vmin=gdf1[value_column].min(), vmax=gdf1[value_column].max())
     
-    # # 定義樣式函數（固定藍色，透明度根據數值設置）
-    # def style_function(feature):
-    #     value = feature["properties"][value_column]
-    #     opacity = norm(value)  # 將數值正規化到 [0, 1] 範圍
-    #     return {
-    #         "fillColor": "#0000FF",  # 固定藍色 (十六進制格式)
-    #         "color": "black",        # 邊框顏色
-    #         "weight": 1,             # 邊框寬度
-    #         "fillOpacity": opacity,  # 根據數值調整透明度
-    #     }
+    # 定義樣式函數（固定藍色，透明度根據數值設置）
+    def style_function(feature):
+        value = feature["properties"][value_column]
+        opacity = norm(value)  # 將數值正規化到 [0, 1] 範圍
+        return {
+            "fillColor": "#0000FF",  # 固定藍色 (十六進制格式)
+            "color": "black",        # 邊框顏色
+            "weight": 1,             # 邊框寬度
+            "fillOpacity": opacity,  # 根據數值調整透明度
+        }
     
-    # # 創建地圖並添加 GeoDataFrame
-    # m = leafmap.Map(center=(0, 0), zoom=2)
+    # 創建地圖並添加 GeoDataFrame
+    m = leafmap.Map(center=(0, 0), zoom=2)
 
 
 
 
-    # m.add_gdf(
-    #     gdf1,
-    #     layer_name=f"BWF Men's Singles World Ranking for {selected_date1}:",
-    #     style_function=style_function,
-    #     info_mode='on_click',
-    #     to_left=True
-    # )
+    m.add_gdf(
+        gdf1,
+        layer_name=f"BWF Men's Singles World Ranking for {selected_date1}:",
+        style_function=style_function,
+        info_mode='on_click',
+        to_left=True
+    )
     
     #賦予geometry轉換為gdf-右
     GB_country2_withGEO=pd.merge(GB_country2,world_country,how='left',on='Country')
     GB_country2_withGEO = gpd.GeoDataFrame(GB_country2_withGEO,geometry=GB_country2_withGEO['geometry'])
     
-    # #畫地圖-右表格
+    #畫地圖-右表格
     
-    # # 讀取 GeoDataFrame
-    # gdf2 = GB_country2_withGEO
+    # 讀取 GeoDataFrame
+    gdf2 = GB_country2_withGEO
     
-    # # 假設 gdf 中的數值欄位名為 'value'
-    # value_column = 'player_count'
+    # 假設 gdf 中的數值欄位名為 'value'
+    value_column = 'player_count'
     
-    # # 創建數值正規化範圍
-    # norm = Normalize(vmin=gdf2[value_column].min(), vmax=gdf2[value_column].max())
+    # 創建數值正規化範圍
+    norm = Normalize(vmin=gdf2[value_column].min(), vmax=gdf2[value_column].max())
     
-    # # 定義樣式函數（固定藍色，透明度根據數值設置）
-    # def style_function(feature):
-    #     value = feature["properties"][value_column]
-    #     opacity = norm(value)  # 將數值正規化到 [0, 1] 範圍
-    #     return {
-    #         "fillColor": "#ff0000",  # 固定紅色 (十六進制格式)
-    #         "color": "black",        # 邊框顏色
-    #         "weight": 1,             # 邊框寬度
-    #         "fillOpacity": opacity,  # 根據數值調整透明度
-    #     }
+    # 定義樣式函數（固定藍色，透明度根據數值設置）
+    def style_function(feature):
+        value = feature["properties"][value_column]
+        opacity = norm(value)  # 將數值正規化到 [0, 1] 範圍
+        return {
+            "fillColor": "#ff0000",  # 固定紅色 (十六進制格式)
+            "color": "black",        # 邊框顏色
+            "weight": 1,             # 邊框寬度
+            "fillOpacity": opacity,  # 根據數值調整透明度
+        }
     
-    # # 加入之前地圖
+    # 加入之前地圖
 
-    # m.add_gdf(
-    #     gdf2,
-    #     layer_name=f"BWF Men's Singles World Ranking for {selected_date2}:",
-    #     style_function=style_function,
-    #     info_mode='on_click',
-    #      to_right=True
-    # )
+    m.add_gdf(
+        gdf2,
+        layer_name=f"BWF Men's Singles World Ranking for {selected_date2}:",
+        style_function=style_function,
+        info_mode='on_click',
+         to_right=True
+    )
     
-    option = st.radio("切换图层", [selected_date1,selected_date2])
+    # option = st.radio("切换图层", [selected_date1,selected_date2])
 
-    # 根据选项显示图层
-    if option == selected_date1:
-         #畫地圖-左表格
-        # 讀取 GeoDataFrame
-        gdf1 = GB_country_withGEO
+    # # 根据选项显示图层
+    # if option == selected_date1:
+    #      #畫地圖-左表格
+    #     # 讀取 GeoDataFrame
+    #     gdf1 = GB_country_withGEO
         
-        # 假設 gdf 中的數值欄位名為 'value'
-        value_column = 'player_count'
+    #     # 假設 gdf 中的數值欄位名為 'value'
+    #     value_column = 'player_count'
         
-        # 創建數值正規化範圍
-        norm = Normalize(vmin=gdf1[value_column].min(), vmax=gdf1[value_column].max())
+    #     # 創建數值正規化範圍
+    #     norm = Normalize(vmin=gdf1[value_column].min(), vmax=gdf1[value_column].max())
         
-        # 定義樣式函數（固定藍色，透明度根據數值設置）
-        def style_function(feature):
-            value = feature["properties"][value_column]
-            opacity = norm(value)  # 將數值正規化到 [0, 1] 範圍
-            return {
-                "fillColor": "#0000FF",  # 固定藍色 (十六進制格式)
-                "color": "black",        # 邊框顏色
-                "weight": 1,             # 邊框寬度
-                "fillOpacity": opacity,  # 根據數值調整透明度
-            }
+    #     # 定義樣式函數（固定藍色，透明度根據數值設置）
+    #     def style_function(feature):
+    #         value = feature["properties"][value_column]
+    #         opacity = norm(value)  # 將數值正規化到 [0, 1] 範圍
+    #         return {
+    #             "fillColor": "#0000FF",  # 固定藍色 (十六進制格式)
+    #             "color": "black",        # 邊框顏色
+    #             "weight": 1,             # 邊框寬度
+    #             "fillOpacity": opacity,  # 根據數值調整透明度
+    #         }
         
-        # 創建地圖並添加 GeoDataFrame
-        m = leafmap.Map(center=(0, 0), zoom=2)
+    #     # 創建地圖並添加 GeoDataFrame
+    #     m = leafmap.Map(center=(0, 0), zoom=2)
     
     
     
     
-        m.add_gdf(
-            gdf1,
-            layer_name=f"BWF Men's Singles World Ranking for {selected_date1}:",
-            style_function=style_function,
-            info_mode='on_click',
-            to_left=True
-        )
-        m.to_streamlit()
-    elif option == selected_date2:
-        #畫地圖-右表格
+    #     m.add_gdf(
+    #         gdf1,
+    #         layer_name=f"BWF Men's Singles World Ranking for {selected_date1}:",
+    #         style_function=style_function,
+    #         info_mode='on_click',
+    #         to_left=True
+    #     )
+    #     m.to_streamlit()
+    # elif option == selected_date2:
+    #     #畫地圖-右表格
         
-        # 讀取 GeoDataFrame
-        gdf2 = GB_country2_withGEO
+    #     # 讀取 GeoDataFrame
+    #     gdf2 = GB_country2_withGEO
         
-        # 假設 gdf 中的數值欄位名為 'value'
-        value_column = 'player_count'
+    #     # 假設 gdf 中的數值欄位名為 'value'
+    #     value_column = 'player_count'
         
-        # 創建數值正規化範圍
-        norm = Normalize(vmin=gdf2[value_column].min(), vmax=gdf2[value_column].max())
+    #     # 創建數值正規化範圍
+    #     norm = Normalize(vmin=gdf2[value_column].min(), vmax=gdf2[value_column].max())
         
-        # 定義樣式函數（固定藍色，透明度根據數值設置）
-        def style_function(feature):
-            value = feature["properties"][value_column]
-            opacity = norm(value)  # 將數值正規化到 [0, 1] 範圍
-            return {
-                "fillColor": "#ff0000",  # 固定紅色 (十六進制格式)
-                "color": "black",        # 邊框顏色
-                "weight": 1,             # 邊框寬度
-                "fillOpacity": opacity,  # 根據數值調整透明度
-            }
+    #     # 定義樣式函數（固定藍色，透明度根據數值設置）
+    #     def style_function(feature):
+    #         value = feature["properties"][value_column]
+    #         opacity = norm(value)  # 將數值正規化到 [0, 1] 範圍
+    #         return {
+    #             "fillColor": "#ff0000",  # 固定紅色 (十六進制格式)
+    #             "color": "black",        # 邊框顏色
+    #             "weight": 1,             # 邊框寬度
+    #             "fillOpacity": opacity,  # 根據數值調整透明度
+    #         }
         
-        # 加入之前地圖
-        m = leafmap.Map(center=(0, 0), zoom=2)
+    #     # 加入之前地圖
+    #     m = leafmap.Map(center=(0, 0), zoom=2)
     
-        m.add_gdf(
-            gdf2,
-            layer_name=f"BWF Men's Singles World Ranking for {selected_date2}:",
-            style_function=style_function,
-            info_mode='on_click',
-             to_right=True
-        )
-        m.to_streamlit()
+    #     m.add_gdf(
+    #         gdf2,
+    #         layer_name=f"BWF Men's Singles World Ranking for {selected_date2}:",
+    #         style_function=style_function,
+    #         info_mode='on_click',
+    #          to_right=True
+    #     )
+    #     m.to_streamlit()
 
 
    
@@ -346,8 +346,8 @@ if selected_date2:
 
 
 
-    # 顯示地圖
-    #m.to_streamlit()
+     #顯示地圖
+    m.to_streamlit()
 
 
 
