@@ -265,7 +265,7 @@ if selected_date2:
     option = st.radio("切换图层", [selected_date1,selected_date2])
 
     # 根据选项显示图层
-    if option == selected_date2:
+    if option == selected_date1:
          #畫地圖-左表格
         # 讀取 GeoDataFrame
         gdf1 = GB_country_withGEO
