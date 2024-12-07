@@ -29,9 +29,23 @@ with col1:
         locate_control=True, latlon_control=True, draw_export=True, minimap_control=True
     )
     m.add_basemap(basemap)
-    m.st_map_center
+
     m.to_streamlit(height=700)
 
 
+import streamlit as st
+import leafmap.foliumap as leafmap
 
+# 创建交互式地图
+m = leafmap.Map(
+    locate_control=True, latlon_control=True, draw_export=True, minimap_control=True
+)
+m.add_basemap("OpenTopoMap")
+
+# 显示地图
+m.to_streamlit(height=700)
+
+# 获取地图的中心坐标
+center = m.st_map_center()
+st.write(f"当前地图中心坐标: {center}")
 
