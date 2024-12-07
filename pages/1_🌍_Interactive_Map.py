@@ -42,6 +42,18 @@ m = leafmap.Map(locate_control=True)
 # 显示地图
 m.to_streamlit()
 
-# 获取并显示当前视角边界框
-bounds = st_map_bounds(m)
+# 获取当前视角边界框
+def get_bounds(m):
+    bounds = m.get_bounds()  # 获取视角边界
+    south, west, north, east = bounds
+    return {
+        'south': south,
+        'west': west,
+        'north': north,
+        'east': east
+    }
+
+# 显示当前视角的边界框
+bounds = get_bounds(m)
 st.write(f"南边界: {bounds['south']}, 北边界: {bounds['north']}, 西边界: {bounds['west']}, 东边界: {bounds['east']}")
+
