@@ -29,26 +29,9 @@ with col1:
         locate_control=True, latlon_control=True, draw_export=True, minimap_control=True
     )
     m.add_basemap(basemap)
+    m.st_map_center
     m.to_streamlit(height=700)
 
 
-import streamlit as st
-import leafmap.foliumap as leafmap
-
-# 创建交互式地图
-m = leafmap.Map(
-    locate_control=True, latlon_control=True, draw_export=True, minimap_control=True
-)
-m.add_basemap("OpenTopoMap")
-
-# 显示地图
-m.to_streamlit(height=700)
-
-# 定义一个函数来显示当前的缩放级别
-def display_zoom():
-    st.write(f"当前缩放级别: {m.zoom}")
-
-# 为地图添加缩放事件监听
-m.on_zoom_changed(lambda e: display_zoom())  # Call display_zoom to show the current zoom level
 
 
