@@ -32,6 +32,7 @@ with col1:
     m.to_streamlit(height=700)
     
     bounds = m.get_bounds()
+    st.write(bounds)
     
 m2 = leafmap.Map()
 m2.to_streamlit(height=700)
