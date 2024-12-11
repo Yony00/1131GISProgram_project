@@ -1,5 +1,6 @@
 import streamlit as st
 import leafmap.foliumap as leafmap
+from streamlit_folium import st_folium
 
 markdown = """
 A Streamlit map template
