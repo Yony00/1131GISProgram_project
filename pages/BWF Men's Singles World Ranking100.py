@@ -325,8 +325,7 @@ if selected_date2:
         name=f"BWF Men's Singles World Ranking for {selected_date1}",
         style_function=style_function_blue,
         tooltip=folium.Tooltip(
-            fields=["Country", "player_count", "playername"], 
-            aliases=["Country:", "Player Count:", "Player Name:"]
+            text=lambda feature: f"Country: {feature['properties']['Country']}, Player Count: {feature['properties']['player_count']}, Player Name: {feature['properties']['playername']}"
         ),
     ).add_to(m1)
     
@@ -349,14 +348,14 @@ if selected_date2:
             name=f"BWF Men's Singles World Ranking for {selected_date2}",
             style_function=style_function_red,
             tooltip=folium.Tooltip(
-                fields=["Country", "player_count", "playername"], 
-                aliases=["Country:", "Player Count:", "Player Name:"]
+                text=lambda feature: f"Country: {feature['properties']['Country']}, Player Count: {feature['properties']['player_count']}, Player Name: {feature['properties']['playername']}"
             ),
         ).add_to(m2)
     
         # 將地圖嵌入到 Streamlit
         with row4_2:
             output2 = st_folium(m2, height=500, key="map2")
+
 
 
 
