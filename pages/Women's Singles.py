@@ -205,7 +205,7 @@ if not selected_date2:
     m = leafmap.Map(center=(0, 0), zoom=2)
     m.add_gdf(
         gdf1,
-        layer_name=f"BWF Women's  Singles World Ranking for {selected_date1}:",
+        layer_name=f"BWF Women's Singles World Ranking for {selected_date1}:",
         style_function=style_function,
         info_mode='on_click'
     )
