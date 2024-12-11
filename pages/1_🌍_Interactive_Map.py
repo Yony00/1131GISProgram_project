@@ -98,6 +98,7 @@ if output1:
     center = output1["center"]
     zoom = output1.get("zoom", initial_zoom)
     zoom = output1["zoom"]
+st.write(center)
 
 # 建立第二個地圖，將第一個地圖的狀態應用到第二個地圖
 m2 = folium.Map(location=center, zoom_start=zoom,tiles="Cartodb dark_matter")
