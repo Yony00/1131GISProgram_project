@@ -19,11 +19,15 @@ st.title("BWF世界羽球聯盟排名資料視覺化與互動地圖")
 
 st.markdown(
     """
-    This multipage app template demonstrates various interactive web apps created using [streamlit](https://streamlit.io) and [leafmap](https://leafmap.org). It is an open-source project and you are very welcome to contribute to the [GitHub repository](https://github.com/opengeos/streamlit-map-template).
+    內建爬蟲程式，抓取BWF世界羽聯有紀錄開始至今所有週次的世界排名資料，取前100名 \n
+    此專案提供單項的排名資料視覺化、互動地圖呈現，並且可選擇與其他週次比較\n
+    此程式ChatGPT出了90%力，感謝哆啦GPT夢    
     """
 )
 
-st.header("Instructions")
+st.header("    內建爬蟲程式，抓取BWF世界羽聯有紀錄開始至今所有週次的世界排名資料，取前100名 \n
+    此專案提供單項的排名資料視覺化、互動地圖呈現，並且可選擇與其他週次比較\n
+    此程式ChatGPT出了90%力，感謝哆啦GPT夢    ")
 
 markdown = """
 7777777
