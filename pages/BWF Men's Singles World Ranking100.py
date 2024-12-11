@@ -319,7 +319,7 @@ if selected_date2:
     # 初始化第一個 Folium 地圖
     m1 = folium.Map(location=[0, 0], zoom_start=2)
     
-    # 添加 gdf1 到地圖
+ # 添加 gdf1 到地圖
     folium.GeoJson(
         gdf1,
         name=f"BWF Men's Singles World Ranking for {selected_date1}",
