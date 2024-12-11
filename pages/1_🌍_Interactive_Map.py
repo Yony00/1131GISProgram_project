@@ -98,7 +98,7 @@ if output1:
     zoom = output1.get("zoom", initial_zoom)
 
 # 建立第二個地圖，將第一個地圖的狀態應用到第二個地圖
-m2 = folium.Map(location=center, zoom_start=zoom,basemap="HYBRID")
+m2 = folium.Map(location=center, zoom_start=zoom,tiles="Cartodb dark_matter")
 output2 = st_folium(m2, height=500, key="map2")
 
 st.write("地圖1中心:", output1.get("center", initial_location))
