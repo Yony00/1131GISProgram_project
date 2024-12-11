@@ -343,19 +343,32 @@ if selected_date2:
     
     
 if output:
-    center = (output["center"]["lat"],output["center"]["lng"])
+    center = (output["center"]["lat"], output["center"]["lng"])
     zoom = output["zoom"]
-    # 加入之前地圖 
 
+    # 初始化第二個地圖
+    m2 = leafmap.Map(location=center, zoom_start=zoom)
 
+    # 簡化 style_function 測試
+    def style_function(feature):
+        return {
+            "fillColor": "#ff0000",
+            "color": "black",
+            "weight": 1,
+            "fillOpacity": 0.5,
+        }
 
+    try:
+        # 添加 GeoDataFrame 到地圖
+        m2.add_gdf(
+            gdf2,
+            layer_name=f"BWF Men's Singles World Ranking for {selected_date2}:",
+            style_function=style_function,
+            info_mode='on_click'
+        )
+    except Exception as e:
+        st.error(f"添加 GeoDataFrame 到地圖時發生錯誤: {e}")
 
-m2 = leafmap.Map(location=center, zoom_start=zoom)
-m2.add_gdf(
-    gdf2,
-    layer_name=f"BWF Men's Singles World Ranking for {selected_date2}:",
-    style_function=style_function,
-    info_mode='on_click'
-)
-#with row4_2:
-output2 = st_folium(m2, height=500, key="map2")
+    # 顯示地圖
+    output2 = st_folium(m2, height=500, key="map2")
+
