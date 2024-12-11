@@ -32,11 +32,10 @@ with col1:
 
     m.to_streamlit(height=700)
 
-import streamlit as st
-from leafmap.foliumap import st_map, st_map_bounds
+
 
 # 建立地圖
-m = st_map(center=[40, -100], zoom=4)
+m=leafmap.Map(center=[40, -100], zoom=4)
 
 # 獲取地圖的顯示邊界
 bounds = st_map_bounds()
