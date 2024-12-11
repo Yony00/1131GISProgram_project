@@ -20,7 +20,8 @@ st.set_page_config(page_title="Men's Singles", layout="wide")
 
 # 設定頁面標題
 st.title("Men's Singles 男子單打")
-row0_1, row0_2 = table_area.columns((1, 1))
+
+row0_1, row0_2 = st.columns((1, 1))
 with row0_1:
     st.write(
         """
