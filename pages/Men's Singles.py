@@ -268,14 +268,14 @@ if selected_date2 and user_choice == "是":
         output1 = st_folium(m1, height=500, key="map1")
     
     # **右側地圖**
-if output1:
+if output1 and user_choice == "是":
     # 獲取中心和縮放
     center = [output1["center"]["lat"], output1["center"]["lng"]]
     zoom = output1["zoom"]
     #center = output1.get("center", [0, 0])
     #zoom = output1.get("zoom", 2)
 
-if center:
+if center and user_choice == "是":
     # 初始化第二個 Folium 地圖
     m2 = folium.Map(location=center, zoom_start=zoom)
 
