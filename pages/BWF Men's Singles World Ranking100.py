@@ -191,7 +191,9 @@ if not selected_date2:
     m.to_streamlit()
 
 ##畫地圖-左+右表格
-if selected_date2:
+#if selected_date2:
+if    df_selected2:
+    
     row4_1, row4_2 = table_area.columns((1, 1))
     with row4_1:
         
