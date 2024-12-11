@@ -347,6 +347,10 @@ if output:
     center = (output["center"]["lat"],output["center"]["lng"])
     zoom = output["zoom"]
     # 加入之前地圖 
+
+
+if output:
+
     m2 = leafmap.Map(location=center, zoom_start=zoom)
     m2.add_gdf(
         gdf2,
