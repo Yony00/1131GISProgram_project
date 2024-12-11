@@ -154,7 +154,7 @@ world_country=gpd.read_file("https://github.com/RGT1143022/BWF_world_country/rel
 GB_country_withGEO=pd.merge(GB_country,world_country,how='left',on='Country')
 GB_country_withGEO = gpd.GeoDataFrame(GB_country_withGEO,geometry=GB_country_withGEO['geometry'])
 
-if not selected_date2:
+if selected_date1:
 
     #畫地圖-左表格
     
