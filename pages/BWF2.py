@@ -35,7 +35,6 @@ table_area = st.container()
 
 # 表格的左右分區
 row1_1, row1_2 = table_area.columns((1, 1))
-row2_1, row2_2 = table_area.columns((1, 1))
 row3_1, row3_2 = table_area.columns((1, 1))
 
 # 檢查是否已經存儲過第一次爬蟲的資料
@@ -44,14 +43,14 @@ if "df_initial" not in st.session_state:  # 只有在第一次爬蟲未完成時
         url = "https://bwf.tournamentsoftware.com/ranking/category.aspx?id=43340&category=472&C472FOC=&p=1&ps=100"
 
         # 呼叫第一次爬蟲，獲取排名資料並抓取日期-ID對應字典
-        df_initial, date_id_dict,new_date = scrape_bwf_ranking(url)
+        df_initial, date_id_dict, new_date = scrape_bwf_ranking(url)
 
         # 儲存第一次爬蟲結果到 session_state 中
         df_initial.set_index("Rank", inplace=True)
         st.session_state.df_initial = df_initial
         st.session_state.date_id_dict = date_id_dict  # 儲存日期-ID對應字典
         st.session_state.first_scrape_done = True  # 設定標記，表示第一次爬蟲已經完成
-        st.session_state.new_date=new_date # 儲存最新日期
+        st.session_state.new_date = new_date  # 儲存最新日期
     except Exception as e:
         st.error(f"Error occurred: {e}")
 
@@ -135,29 +134,24 @@ if selected_date2:
         # 繪製條形圖
         fig, ax = plt.subplots(figsize=(8, 6))
         sns.barplot(data=GB_country2_TOP10, x='player_count', y='Country', ax=ax)
-
+    
         # 在 Streamlit 中顯示
         st.write("每個國家前一百名的選手數統計(取前十多的國家)")
         st.pyplot(fig)
 
-# 賦予geometry轉換為gdf-左
+####################################################################################ˇ
 world_country = gpd.read_file("https://github.com/RGT1143022/BWF_world_country/releases/download/v1.0.0/BWF_world_country_true.geojson")
 
+# 賦予 geometry 轉換為 GeoDataFrame - 左
 GB_country_withGEO = pd.merge(GB_country, world_country, how='left', on='Country')
 GB_country_withGEO = gpd.GeoDataFrame(GB_country_withGEO, geometry=GB_country_withGEO['geometry'])
 
 if not selected_date2:
-    # 畫地圖-左表格
-    # 讀取 GeoDataFrame
+    # 畫地圖 - 左表格
     gdf1 = GB_country_withGEO
-    
-    # 假設 gdf 中的數值欄位名為 'value'
     value_column = 'player_count'
-    
-    # 創建數值正規化範圍
     norm = Normalize(vmin=gdf1[value_column].min(), vmax=gdf1[value_column].max())
-    
-    # 定義樣式函數（固定藍色，透明度根據數值設置）
+
     def style_function(feature):
         value = feature["properties"][value_column]
         opacity = norm(value)  # 將數值正規化到 [0, 1] 範圍
@@ -167,8 +161,7 @@ if not selected_date2:
             "weight": 1,             # 邊框寬度
             "fillOpacity": opacity,  # 根據數值調整透明度
         }
-    
-    # 創建地圖並添加 GeoDataFrame
+
     m = leafmap.Map(center=(0, 0), zoom=2)
     m.add_gdf(
         gdf1,
@@ -176,84 +169,40 @@ if not selected_date2:
         style_function=style_function,
         info_mode='on_click'
     )
-    
-    # 顯示地圖
     m.to_streamlit()
 
-# 畫地圖-左+右表格
+# 畫地圖 - 左+右表格
 if selected_date2:
-    # 假設 gdf1 和 gdf2 是你的 GeoDataFrame
     # 賦予 geometry 轉換為 GeoDataFrame
     GB_country2_withGEO = pd.merge(GB_country2, world_country, how='left', on='Country')
     GB_country2_withGEO = gpd.GeoDataFrame(GB_country2_withGEO, geometry=GB_country2_withGEO['geometry'])
-    # 讀取 GeoDataFrame
     gdf2 = GB_country2_withGEO
     gdf1 = GB_country_withGEO
-    # 創建數值正規化範圍
     norm1 = Normalize(vmin=gdf1["player_count"].min(), vmax=gdf1["player_count"].max())
     norm2 = Normalize(vmin=gdf2["player_count"].min(), vmax=gdf2["player_count"].max())
-    
-    # 定義樣式函數
-    def style_function_blue(feature):
-        value = feature["properties"].get("player_count", 0)
-        opacity = norm1(value)
+
+    def style_function(feature, value_column):
+        value = feature["properties"][value_column]
+        opacity = norm1(value) if value_column == "player_count" else norm2(value)  # 根據選擇的數值計算透明度
         return {
-            "fillColor": "#0000FF",  # 藍色
-            "color": "black",        # 邊框顏色
+            "fillColor": "#0000FF",
+            "color": "black",
             "weight": 1,
             "fillOpacity": opacity,
         }
-    
-    def style_function_red(feature):
-        value = feature["properties"].get("player_count", 0)
-        opacity = norm2(value)
-        return {
-            "fillColor": "#FF0000",  # 紅色
-            "color": "black",        # 邊框顏色
-            "weight": 1,
-            "fillOpacity": opacity,
-        }
-    
-    # **左側地圖**
-    row4_1, row4_2 = st.columns(2)
-    
-    # 初始化第一個 Folium 地圖
-    m1 = folium.Map(location=[0, 0], zoom_start=2)
-    
- # 添加 gdf1 到地圖
-    folium.GeoJson(
-        gdf1,
+
+    m = folium.Map(location=(0, 0), zoom_start=2)
+    folium.Choropleth(
+        geo_data=gdf1,
         name=f"BWF Men's Singles World Ranking for {selected_date1}",
-        style_function=style_function_blue,
-        popup = folium.GeoJsonPopup(fields=["Country", "player_count","playername"], aliases=["Country:", "Player Count:","Player Name:"]),
-        popup_keep_highlighted=True
-    ).add_to(m1)
-    
-    # 將地圖嵌入到 Streamlit 並獲取交互結果
-    with row4_1:
-        output1 = st_folium(m1, height=500, key="map1")
-    
-    # **右側地圖**
-if output1:
-    # 獲取中心和縮放
-    center = [output1["center"]["lat"], output1["center"]["lng"]]
-    zoom = output1["zoom"]
-    #center = output1.get("center", [0, 0])
-    #zoom = output1.get("zoom", 2)
+        style_function=lambda x: style_function(x, "player_count")
+    ).add_to(m)
 
-if center:
-    # 初始化第二個 Folium 地圖
-    m2 = folium.Map(location=center, zoom_start=zoom)
-
-    # 添加 gdf2 到地圖
-    folium.GeoJson(
-        gdf2,
+    folium.Choropleth(
+        geo_data=gdf2,
         name=f"BWF Men's Singles World Ranking for {selected_date2}",
-        style_function=style_function_red,
-        popup = folium.GeoJsonPopup(fields=["Country", "player_count","playername"], aliases=["Country:", "Player Count:","Player Name:"]),
-        popup_keep_highlighted=True
-    ).add_to(m2)
+        style_function=lambda x: style_function(x, "player_count")
+    ).add_to(m)
 
-    # 將地圖嵌入到 Streamlit
-    with row4_2:
-        output2 = st_folium(m2, height=500, key="map2")
+    folium.LayerControl().add_to(m)
+    st_folium(m, width=700, height=500)
