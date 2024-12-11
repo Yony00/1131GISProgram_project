@@ -262,7 +262,7 @@ if selected_date2:
             }
         
         # 加入之前地圖
-        m2 = leafmap.Map(center=(0, 0), zoom=2)
+        m2 = leafmap.Map(location=[0, 0], zoom_start=2)
         m2.add_gdf(
             gdf2,
             layer_name=f"BWF Men's Singles World Ranking for {selected_date2}:",
@@ -270,7 +270,8 @@ if selected_date2:
             info_mode='on_click',
              to_right=True
         )
-        m2.to_streamlit()
+       #m2.to_streamlit()
+        output2 = st_folium(m2, height=500, key="map2")
         
 
     #      #顯示地圖
