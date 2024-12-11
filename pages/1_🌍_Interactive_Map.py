@@ -34,16 +34,13 @@ with col1:
 
 import streamlit as st
 from leafmap.foliumap import st_map, st_map_bounds
-import folium
 
-# 建立 Folium 地圖
-m = folium.Map(location=[20, 0], zoom_start=2)
+# 建立地圖
+m = st_map(center=[40, -100], zoom=4)
 
-# 在 Streamlit 中顯示地圖
-st_map(m)
-
-# 檢測地圖邊界
+# 獲取地圖的顯示邊界
 bounds = st_map_bounds()
-if bounds:
-    st.write("當前地圖邊界範圍為：")
-    st.write(bounds)
+
+# 顯示地圖和邊界
+st.write("地圖範圍:", bounds)
+
