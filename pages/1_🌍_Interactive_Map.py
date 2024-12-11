@@ -30,7 +30,13 @@ with col1:
     )
     m.add_basemap(basemap)
 
-    m.to_streamlit(height=700)
+    #m.to_streamlit(height=700)
+    # 嵌入地圖到 Streamlit 並返回互動結果
+    output = st_folium(m, height=700)
+
+    # 如果用戶與地圖交互，獲取顯示邊界
+    if output and "bounds" in output:
+        st.write("地圖顯示邊界:", output["bounds"])
 
 
 
