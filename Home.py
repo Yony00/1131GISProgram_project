@@ -15,7 +15,7 @@ logo = "https://i.imgur.com/UbOXYAU.png"
 st.sidebar.image(logo)
 
 # Customize page title
-st.title("BWF世界羽球聯盟排名資料爬蟲 /n
+st.title("BWF世界羽球聯盟排名資料爬蟲  \n
 視覺化與互動地圖")
 
 st.markdown(
