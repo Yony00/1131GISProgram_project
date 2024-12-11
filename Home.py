@@ -15,7 +15,8 @@ logo = "https://i.imgur.com/UbOXYAU.png"
 st.sidebar.image(logo)
 
 # Customize page title
-st.title("Streamlit for Geospatial Applications")
+st.title("BWF世界羽球聯盟排名資料爬蟲 /n
+視覺化與互動地圖")
 
 st.markdown(
     """
@@ -36,6 +37,4 @@ markdown = """
 
 st.markdown(markdown)
 
-m = leafmap.Map(minimap_control=True)
-m.add_basemap("OpenTopoMap")
-m.to_streamlit(height=500)
+
