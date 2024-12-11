@@ -334,27 +334,29 @@ if selected_date2:
         output1 = st_folium(m1, height=500, key="map1")
     
     # **右側地圖**
-if output1:
-    # 獲取中心和縮放
-    center = [output1["center"]["lat"], output1["center"]["lng"]]
-    zoom = output1["zoom"]
-
-    # 初始化第二個 Folium 地圖
-    m2 = folium.Map(location=center, zoom_start=zoom)
-
-    # 添加 gdf2 到地圖
-    folium.GeoJson(
-        gdf2,
-        name=f"BWF Men's Singles World Ranking for {selected_date2}",
-        style_function=style_function_red,
-        tooltip=folium.Tooltip(
-            text=lambda feature: f"Country: {feature['properties']['Country']}, Player Count: {feature['properties']['player_count']}, Player Name: {feature['properties']['playername']}"
-        ),
-    ).add_to(m2)
-
-    # 將地圖嵌入到 Streamlit
-    with row4_2:
-        output2 = st_folium(m2, height=500, key="map2")
+    if output1:
+        # 獲取中心和縮放
+        #center = [output1["center"]["lat"], output1["center"]["lng"]]
+        #zoom = output1["zoom"]
+        center = output1.get("center", [0, 0])
+        zoom = output1.get("zoom", 2)
+    
+        # 初始化第二個 Folium 地圖
+        m2 = folium.Map(location=center, zoom_start=zoom)
+    
+        # 添加 gdf2 到地圖
+        folium.GeoJson(
+            gdf2,
+            name=f"BWF Men's Singles World Ranking for {selected_date2}",
+            style_function=style_function_red,
+            tooltip=folium.Tooltip(
+                text=lambda feature: f"Country: {feature['properties']['Country']}, Player Count: {feature['properties']['player_count']}, Player Name: {feature['properties']['playername']}"
+            ),
+        ).add_to(m2)
+    
+        # 將地圖嵌入到 Streamlit
+        with row4_2:
+            output2 = st_folium(m2, height=500, key="map2")
 
 
 
