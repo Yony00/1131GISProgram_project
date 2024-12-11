@@ -36,7 +36,7 @@ with col1:
 
 # 建立地圖
 m=leafmap.Map(center=[40, -100], zoom=4)
- m.to_streamlit(height=700)
+m.to_streamlit(height=700)
 # 獲取地圖的顯示邊界
 bounds = m.st_map_bounds(st)
 
