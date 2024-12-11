@@ -66,7 +66,7 @@ if output and "bounds" in output:
 
 # 建立 Folium 地圖
 #m = folium.Map(location=[40, -100], zoom_start=4)
-m2 = leafmap.Map(location=[40, 100], zoom_start=4)
+m2 = leafmap.Map(location=[40, 100], zoom_start=7)
 
 # 嵌入地圖到 Streamlit 並返回互動結果
 output2 = st_folium(m2, height=700)
@@ -74,4 +74,5 @@ output2 = st_folium(m2, height=700)
 # 如果用戶與地圖交互，獲取顯示邊界
 if output2 and "bounds" in output2:
     st.write("地圖顯示邊界:", output2["bounds"])
+    st.write(output2["zoom"])
 
