@@ -364,6 +364,6 @@ if user_choice == "否" and selected_date2 :
         info_mode='on_click'
     )
     # 顯示地圖
-    with row4_1:
+    with row4_2:
         m2.to_streamlit()
 
