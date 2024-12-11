@@ -260,9 +260,9 @@ if selected_date2:
                 "weight": 1,             # 邊框寬度
                 "fillOpacity": opacity,  # 根據數值調整透明度
             }
-        if output1:
-            center = (output1["center"]["lat"],output1["center"]["lng"])
-            zoom = output1["zoom"]
+        if output:
+            center = (output["center"]["lat"],output["center"]["lng"])
+            zoom = output["zoom"]
         # 加入之前地圖
         
         m2 = leafmap.Map(location=center, zoom_start=zoom)
