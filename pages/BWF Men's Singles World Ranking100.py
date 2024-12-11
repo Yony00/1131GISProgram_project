@@ -309,8 +309,7 @@ if selected_date2:
         gdf1,
         layer_name=f"BWF Men's Singles World Ranking for {selected_date1}:",
         style_function=style_function,
-        info_mode='on_click',
-        to_left=True
+        info_mode='on_click'
     )      
     with row4_1:
         output = st_folium(m, height=500, key="map")
