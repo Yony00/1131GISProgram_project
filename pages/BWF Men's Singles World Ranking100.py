@@ -350,7 +350,10 @@ if selected_date2:
             gdf2,
             name=f"BWF Men's Singles World Ranking for {selected_date2}",
             style_function=style_function_red,
-            tooltip=folium.Tooltip(fields=["Country", "player_count", "playername"], aliases=["Country:", "Player Count:", "Player Name:"], localize=True),
+            tooltip=folium.Tooltip(
+                fields=["Country", "player_count", "playername"], 
+                aliases=["Country:", "Player Count:", "Player Name:"]
+            ),
         ).add_to(m2)
     
         # 將地圖嵌入到 Streamlit
