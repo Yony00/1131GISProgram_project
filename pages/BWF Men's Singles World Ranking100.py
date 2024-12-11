@@ -260,9 +260,12 @@ if selected_date2:
                 "weight": 1,             # 邊框寬度
                 "fillOpacity": opacity,  # 根據數值調整透明度
             }
-        
+        if output1:
+            center = (output1["center"]["lat"],output1["center"]["lng"])
+            zoom = output1["zoom"]
         # 加入之前地圖
-        m2 = leafmap.Map(location=[0, 0], zoom_start=2)
+        
+        m2 = leafmap.Map(location=center, zoom_start=zoom)
         m2.add_gdf(
             gdf2,
             layer_name=f"BWF Men's Singles World Ranking for {selected_date2}:",
