@@ -75,4 +75,5 @@ output2 = st_folium(m2, height=700)
 if output2 and "bounds" in output2:
     st.write("地圖顯示邊界:", output2["bounds"])
     st.write(output2["zoom"])
+    output2["zoom"]=output["zoom"]
 
