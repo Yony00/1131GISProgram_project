@@ -49,6 +49,8 @@ with row0_2:
         ##
         """
     )
+    user_choice = st.radio("選擇是或否：", ("是", "否"))
+
 
 # 用來顯示表格的區域
 table_area = st.container()
