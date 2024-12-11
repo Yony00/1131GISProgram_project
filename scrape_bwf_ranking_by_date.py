@@ -127,7 +127,8 @@ def MDscrape_bwf_ranking_by_date(selected_id):
             rank = cols[0].text.strip()
             player = cols[4].text.strip()
             flag = player[:5]  # 去除多餘的空白或特殊字元
-            player =player.replace(flag,"" )
+            player =player.replace(flag,"",1 )
+            player =player.replace(flag,"/",1 )
             country = cols[10].text.strip()
             points = cols[7].text.strip()
             confederation = cols[9].text.strip()  # 新增 Confederation 欄位
