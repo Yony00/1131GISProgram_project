@@ -47,7 +47,8 @@ from streamlit_folium import st_folium
 import folium
 
 # 建立 Folium 地圖
-m = folium.Map(location=[40, -100], zoom_start=4)
+#m = folium.Map(location=[40, -100], zoom_start=4)
+m = leafmap.Map(location=[40, -100], zoom_start=4)
 
 # 嵌入地圖到 Streamlit 並返回互動結果
 output = st_folium(m, height=700)
