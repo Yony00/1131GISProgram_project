@@ -33,17 +33,17 @@ with col1:
     m.to_streamlit(height=700)
 
 import streamlit as st
-import leafmap.foliumap as leafmap
+from leafmap.foliumap import st_map, st_map_bounds
+import folium
 
-# 创建交互式地图
-m = leafmap.Map(
-    locate_control=True, latlon_control=True, draw_export=True, minimap_control=True
-)
-m.add_basemap("OpenTopoMap")
+# 建立 Folium 地圖
+m = folium.Map(location=[20, 0], zoom_start=2)
 
-# 显示地图
-m.to_streamlit(height=700)
+# 在 Streamlit 中顯示地圖
+st_map(m)
 
-# 获取地图的中心坐标
-center = m.st_map_center(m)
-st.write(f"当前地图中心坐标: {center}")
+# 檢測地圖邊界
+bounds = st_map_bounds()
+if bounds:
+    st.write("當前地圖邊界範圍為：")
+    st.write(bounds)
