@@ -66,7 +66,7 @@ row3_1, row3_2 = table_area.columns((1, 1))
 # 檢查是否已經存儲過第一次爬蟲的資料
 if "df_initial" not in st.session_state:  # 只有在第一次爬蟲未完成時才會執行
     try:
-        url = "https://bwf.tournamentsoftware.com/ranking/category.aspx?id=43340&category=472&C472FOC=&p=1&ps=100"
+        url = "https://bwf.tournamentsoftware.com/ranking/category.aspx?id=43595&category=473&C473FOC=&p=1&ps=100"
 
         # 呼叫第一次爬蟲，獲取排名資料並抓取日期-ID對應字典
         df_initial, date_id_dict,new_date = scrape_bwf_ranking(url)
