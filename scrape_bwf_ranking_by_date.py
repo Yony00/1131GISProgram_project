@@ -144,7 +144,7 @@ def MDscrape_bwf_ranking_by_date(selected_id):
     
 def WDscrape_bwf_ranking_by_date(selected_id):
     # 使用選擇的日期 ID 設定對應的 URL
-    url = f"https://bwf.tournamentsoftware.com/ranking/category.aspx?id={selected_id}category=475&C475FOC=&p=1&ps=100"
+    url = f"https://bwf.tournamentsoftware.com/ranking/category.aspx?id={selected_id}&category=475&C475FOC=&p=1&ps=100"
 
     # 設置 User-Agent 防止被封鎖
     headers = {
