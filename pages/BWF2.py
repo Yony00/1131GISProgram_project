@@ -35,6 +35,7 @@ table_area = st.container()
 
 # 表格的左右分區
 row1_1, row1_2 = table_area.columns((1, 1))
+row2_1, row2_2 = table_area.columns((1, 1))
 row3_1, row3_2 = table_area.columns((1, 1))
 
 # 檢查是否已經存儲過第一次爬蟲的資料
