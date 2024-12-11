@@ -19,7 +19,7 @@ import folium
 st.set_page_config(page_title="BWF Men's Singles World Ranking", layout="wide")
 
 # 設定頁面標題
-st.title("BWF Men's Singles World Ranking")
+st.title("男子單打")
 st.write(
     """
     ##  
