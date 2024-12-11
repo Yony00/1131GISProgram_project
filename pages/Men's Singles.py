@@ -108,7 +108,7 @@ if selected_date2:
 
         # 顯示選擇日期的排名資料於 row1_2
         with row1_2:
-            st.write(f"下表為 {selected_date2}時 男子單打排名資料")
+            st.write(f"下表為 {selected_date2}  時 男子單打排名資料")
             st.write(df_selected2)
     except Exception as e:
         st.error(f"Error occurred while fetching data for {selected_date2}: {e}")
