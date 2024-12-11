@@ -232,7 +232,7 @@ if selected_date2:
     row4_1, row4_2 = st.columns(2)
     
     # 初始化第一個 Folium 地圖
-    m1 = folium.Map(location=[0, 0], zoom_start=2)
+    m1 = folium.Map(location=[0, 0], zoom_start=1)
     
  # 添加 gdf1 到地圖
     folium.GeoJson(
