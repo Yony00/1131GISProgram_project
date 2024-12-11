@@ -126,7 +126,7 @@ def MDscrape_bwf_ranking_by_date(selected_id):
         if len(cols) >= 8:  # 假設表格至少有8列數據
             rank = cols[0].text.strip()
             player = cols[4].text.strip()
-            flag = player[:4]  # 去除多餘的空白或特殊字元
+            flag = player[:5]  # 去除多餘的空白或特殊字元
             player.replace(flag,"" )
             country = cols[10].text.strip()
             points = cols[7].text.strip()
