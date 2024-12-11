@@ -9,6 +9,8 @@ import matplotlib.pyplot as plt
 import seaborn as sns
 import leafmap.foliumap as leafmap
 from matplotlib.colors import Normalize
+
+from streamlit_folium import st_folium
 import folium
 
 
@@ -217,7 +219,7 @@ if selected_date2:
             }
         
         # 創建地圖並添加 GeoDataFrame
-        m = leafmap.Map(center=(0, 0), zoom=2)
+        m = folium.Map(center=(0, 0), zoom=2)
     
         m.add_gdf(
             gdf1,
@@ -228,7 +230,9 @@ if selected_date2:
         )      
         #顯示地圖
 
-        m.to_streamlit()
+        #m.to_streamlit()
+        output = st_folium(m, height=500, key="map")
+
     with row4_2:
 
         #賦予geometry轉換為gdf-右
