@@ -34,12 +34,25 @@ with col1:
 
 
 
-# 建立地圖
-m=leafmap.Map(center=[40, -100], zoom=4)
-m.to_streamlit(height=700)
-# 獲取地圖的顯示邊界
-bounds = m.st_map_bounds()
+# # 建立地圖
+# m=leafmap.Map(center=[40, -100], zoom=4)
+# m.to_streamlit(height=700)
+# # 獲取地圖的顯示邊界
+# bounds = m.st_map_bounds()
 
-# 顯示地圖和邊界
-st.write("地圖範圍:", bounds)
+# # 顯示地圖和邊界
+# st.write("地圖範圍:", bounds)
+import streamlit as st
+from streamlit_folium import st_folium
+import folium
+
+# 建立 Folium 地圖
+m = folium.Map(location=[40, -100], zoom_start=4)
+
+# 嵌入地圖到 Streamlit 並返回互動結果
+output = st_folium(m, height=700)
+
+# 如果用戶與地圖交互，獲取顯示邊界
+if output and "bounds" in output:
+    st.write("地圖顯示邊界:", output["bounds"])
 
