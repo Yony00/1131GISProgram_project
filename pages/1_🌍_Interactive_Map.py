@@ -95,7 +95,7 @@ output1 = st_folium(m1, height=500, key="map1")
 # 取得第一個地圖的狀態
 if output1:
     center = output1.get("center", initial_location)
-    center = output1["center"]["lat"]
+    center = (output1["center"]["lat"],output1["center"]["lon"])
     zoom = output1.get("zoom", initial_zoom)
     zoom = output1["zoom"]
 st.write(center)
