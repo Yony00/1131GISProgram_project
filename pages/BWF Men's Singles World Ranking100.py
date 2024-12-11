@@ -324,9 +324,7 @@ if selected_date2:
         gdf1,
         name=f"BWF Men's Singles World Ranking for {selected_date1}",
         style_function=style_function_blue,
-        tooltip=folium.Tooltip(
-            text=lambda feature: f"Country: {feature['properties']['Country']}, Player Count: {feature['properties']['player_count']}, Player Name: {feature['properties']['playername']}"
-        ),
+        tooltip=folium.GeoJsonTooltip(fields=["Country", "player_count","playername"], aliases=["Country:", "Player Count:","Player Name:"]),
     ).add_to(m1)
     
     # 將地圖嵌入到 Streamlit 並獲取交互結果
@@ -349,9 +347,7 @@ if output1:
         gdf2,
         name=f"BWF Men's Singles World Ranking for {selected_date2}",
         style_function=style_function_red,
-        tooltip=folium.Tooltip(
-            text=lambda feature: f"Country: {feature['properties']['Country']}, Player Count: {feature['properties']['player_count']}, Player Name: {feature['properties']['playername']}"
-        ),
+        tooltip=folium.GeoJsonTooltip(fields=["Country", "player_count","playername"], aliases=["Country:", "Player Count:","Player Name:"]),
     ).add_to(m2)
 
     # 將地圖嵌入到 Streamlit
