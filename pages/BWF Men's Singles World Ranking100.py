@@ -281,13 +281,11 @@ if not selected_date2:
 
 
 if selected_date2:
-
-
     # 假設 gdf1 和 gdf2 是你的 GeoDataFrame
     # 賦予 geometry 轉換為 GeoDataFrame
     GB_country2_withGEO = pd.merge(GB_country2, world_country, how='left', on='Country')
     GB_country2_withGEO = gpd.GeoDataFrame(GB_country2_withGEO, geometry=GB_country2_withGEO['geometry'])
-    #             # 讀取 GeoDataFrame
+    # 讀取 GeoDataFrame
     gdf2 = GB_country2_withGEO
     gdf1 = GB_country_withGEO
     # 創建數值正規化範圍
