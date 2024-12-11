@@ -351,12 +351,11 @@ if output:
 
 
 m2 = leafmap.Map(location=center, zoom_start=zoom)
-# m2.add_gdf(
-#     gdf2,
-#     layer_name=f"BWF Men's Singles World Ranking for {selected_date2}:",
-#     style_function=style_function,
-#     info_mode='on_click',
-#      to_right=True
-# )
+m2.add_gdf(
+    gdf2,
+    layer_name=f"BWF Men's Singles World Ranking for {selected_date2}:",
+    style_function=style_function,
+    info_mode='on_click'
+)
 #with row4_2:
 output2 = st_folium(m2, height=500, key="map2")
