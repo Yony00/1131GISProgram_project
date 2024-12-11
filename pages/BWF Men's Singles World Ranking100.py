@@ -219,7 +219,7 @@ if selected_date2:
             }
         
         # 創建地圖並添加 GeoDataFrame
-        m = folium.Map(location=[0, 0], zoom_start=2)
+        m = leafmap.Map(location=[0, 0], zoom_start=2)
     
         m.add_gdf(
             gdf1,
