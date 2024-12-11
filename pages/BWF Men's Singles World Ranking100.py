@@ -255,6 +255,7 @@ if output1:
     #center = output1.get("center", [0, 0])
     #zoom = output1.get("zoom", 2)
 
+if center:
     # 初始化第二個 Folium 地圖
     m2 = folium.Map(location=center, zoom_start=zoom)
 
