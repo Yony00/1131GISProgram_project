@@ -193,6 +193,9 @@ if st.session_state.df is not None:
             # 若仍有 'NaN'，再轉換為整數，這時候應該會成功
             plt_df['Points'] = plt_df['Points'].fillna(0).astype(int)  # 如果還有 'NaN'，填充為 0 並轉換為整數
             plt_df['Rank'] = plt_df['Rank'].fillna(0).astype(int)  # 如果還有 'NaN'，填充為 0 並轉換為整數
+
+            fig, ax1 = plt.subplots(figsize=(10, 6))
+
             # 左Y軸（積分）折線圖
             sns.lineplot(data=plt_df, x=plt_df['Date'].dt.year, y='Points', ax=ax1, color='blue')
             ax1.set_xlabel('Year')
