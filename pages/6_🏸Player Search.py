@@ -7,6 +7,8 @@ from scrape_bwf_ranking_by_date import MDscrape_bwf_ranking_by_date  # 引入第
 from scrape_bwf_ranking_by_date import WSscrape_bwf_ranking_by_date  # 引入第二次爬蟲的函數
 from scrape_bwf_ranking_by_date import WDscrape_bwf_ranking_by_date  # 引入第二次爬蟲的函數
 from scrape_bwf_ranking_by_date import MXDscrape_bwf_ranking_by_date  # 引入第二次爬蟲的函數
+from scrape_bwf_ranking_by_name import scrape_bwf_ranking_by_name  # 引入名字爬蟲的函數
+
 
 import numpy as np
 
@@ -126,5 +128,5 @@ with row1_2:
     player_name = st.text_input("請輸入欲查詢的選手名(組合名)，格式參考上表：", "", key="player_name")
 st.markdown(f"<h4>以下是關於 {search_event} 項目， {player_name} 選手的歷年排名變化</h2>", unsafe_allow_html=True)
 
-
-
+df=scrape_bwf_ranking_by_name(date_id_dict,search_event,player_name)
+st.write(df)
