@@ -199,12 +199,13 @@ if player_name:
         )
     with row2_3:
         if data_end and data_start:
-            st.session_state.df['Date'] = pd.to_datetime(st.session_state.df['Date'], format='%m/%d/%Y')  # 將日期轉換為 datetime 格式
-            data_start = st.session_state.df.to_datetime(data_start, format='%m/%d/%Y')
+            df=st.session_state.df
+            df['Date'] = pd.to_datetime(df['Date'], format='%m/%d/%Y')  # 將日期轉換為 datetime 格式
+            data_start = pd.to_datetime(data_start, format='%m/%d/%Y')
             data_end = pd.to_datetime(data_end, format='%m/%d/%Y')
             
             # 篩選符合日期區間的資料
-            df2 = st.session_state.df[(st.session_state.df['Date'] >= data_start) & (st.session_state.df['Date'] <= data_end)]
+            df2 = df[(df['Date'] >= data_start) & (df['Date'] <= data_end)]
             
             # 將結果轉換回原來的日期格式
             df2['Date'] = df2['Date'].dt.strftime('%m/%d/%Y')
