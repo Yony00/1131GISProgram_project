@@ -34,7 +34,7 @@ st.write(
     ##
     """
 )
-row0_1, row0_2 = st.columns((2,1))
+row0_1, row0_2 = st.columns((1,2))
 
 
 # 用來顯示表格的區域
