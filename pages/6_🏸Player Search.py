@@ -178,54 +178,14 @@ row2_1, row2_2, row2_3 = st.columns((1,1,1))
 
 ##############
 # 確保網頁重跑後仍保留爬取的數據
-# if "df" not in st.session_state:
-#     st.session_state.df = None
-
-# if player_name and st.session_state.df is None:
-#     # 只在初次輸入名稱時爬取資料
-#     st.session_state.df = scrape_bwf_ranking_by_name(date_id_dict, search_event, player_name)
-
-# if st.session_state.df is not None:
-#     df = st.session_state.df
-
-#     with row2_1:
-#         # 顯示原始數據
-#         st.write("Original DataFrame:")
-#         st.write(df)
-
-#     # 下拉選擇日期範圍
-#     with row2_2:
-#         dateoptions = df['Date']
-#         data_end = st.selectbox("結束日期範圍", dateoptions, index=0, key="data_end")
-#         data_start = st.selectbox("開始日期範圍", dateoptions, index=len(dateoptions) - 1, key="data_start")
-
-#     # 篩選操作
-#     with row2_3:
-#         if data_end and data_start:
-#             # 篩選並顯示篩選後的數據
-#             df['Date'] = pd.to_datetime(df['Date'], format='%m/%d/%Y')
-#             data_start = pd.to_datetime(data_start, format='%m/%d/%Y')
-#             data_end = pd.to_datetime(data_end, format='%m/%d/%Y')
-
-#             # 篩選日期範圍內的數據
-#             df2 = df[(df['Date'] >= data_start) & (df['Date'] <= data_end)]
-#             df2['Date'] = df2['Date'].dt.strftime('%m/%d/%Y')  # 恢復日期格式
-#             st.write("Filtered DataFrame:")
-#             st.write(df2)
-
-
-
-#
-
-# 確保網頁重跑後仍保留爬取的數據
 if "df" not in st.session_state:
     st.session_state.df = None
 
-# 當使用者更改選手名稱時，重新爬取數據
+# 只有在使用者更改選手名稱時才重新爬取資料
 if player_name and st.session_state.df is None:
     st.session_state.df = scrape_bwf_ranking_by_name(date_id_dict, search_event, player_name)
+    st.experimental_rerun()  # 重跑網頁
 
-# 如果數據存在，進行顯示與篩選
 if st.session_state.df is not None:
     df = st.session_state.df
 
@@ -253,3 +213,6 @@ if st.session_state.df is not None:
             df2['Date'] = df2['Date'].dt.strftime('%m/%d/%Y')  # 恢復日期格式
             st.write("Filtered DataFrame:")
             st.write(df2)
+
+
+
