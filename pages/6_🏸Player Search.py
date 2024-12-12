@@ -190,6 +190,9 @@ if st.session_state.df is not None:
             # 繪製折線圖，僅顯示年份
             fig, ax = plt.subplots(figsize=(10, 6))
             sns.lineplot(data=plt_df, x=plt_df['Date'].dt.year, y='Points', ax=ax)
+            # 繪製 Y 軸的連續變數刻度
+            y_ticks = range(20000, plt_df['Points'].max() + 10000, 10000)  # 自動生成連續刻度
+            plt.yticks(y_ticks)
 
             plt.yticks(y_ticks)
             ax.set_xlabel('Year')
