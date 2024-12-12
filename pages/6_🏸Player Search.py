@@ -91,7 +91,7 @@ options = ["男子單打","男子雙打","女子單打","女子雙打","混合�
 index = options[1]
 
 options = list(("男子單打","男子雙打","女子單打","女子雙打","混合單打"))
-index = options.index(st.session_state.new_date)
+index = options[1]
 
 with row2_1:
     selected_date1 = st.selectbox(
