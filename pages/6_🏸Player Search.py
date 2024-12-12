@@ -222,9 +222,9 @@ if st.session_state.df is not None:
             ax1.set_title('積分與排名變化')
             plt.xticks(rotation=45)
             
-            # 創建副軸並顯示排名的長條圖
+           # 創建副軸並顯示排名的直向條形圖，條形圖越短表示排名越低
             ax2 = ax1.twinx()  # 共用 x 軸
-            sns.barplot(data=df, x='Date', y='Rank', ax=ax2, color='green', alpha=0.5)
+            sns.barplot(data=df, x='Date', y='Rank', ax=ax2, color='green', alpha=0.5, orient='h')  # orient='h' 使條形圖直向
             ax2.set_ylabel('Rank')
             
             # 添加一條紅色水平線在 y=0 處
