@@ -34,7 +34,7 @@ st.write(
     ##
     """
 )
-row0_1,XX, row0_2 = st.columns((3,1, 4))
+row0_1, row0_2 = st.columns((2,1))
 
 with row0_2:
     options_event = ["男子單打", "男子雙打", "女子單打", "女子雙打", "混合雙打"]
