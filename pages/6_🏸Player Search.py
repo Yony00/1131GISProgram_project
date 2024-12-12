@@ -41,7 +41,7 @@ row0_1, row0_2 = st.columns((1,2))
 table_area = st.container()
 
 # 表格的左右分區
-row1_1, row1_2 = table_area.columns((1, 1))
+#row1_1, row1_2 = table_area.columns((1, 1))
 # row2_1, row2_2 = table_area.columns((1, 1))
 # row3_1, row3_2 = table_area.columns((1, 1))
 
@@ -108,7 +108,7 @@ if selected_date1:
         df_selected1.set_index("Rank", inplace=True)
 
         # 顯示選擇日期的排名資料於 row1_1
-        with row0_1:
+        with table_area:
             st.write(f"下表為 {selected_date1}  時 {selected_event} 排名資料")
             st.write(df_selected1)
     except Exception as e:
