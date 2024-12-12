@@ -222,7 +222,7 @@ if st.session_state.df is not None:
             
             st.pyplot(fig)
             
-        if user_choice == "右":
+        if user_choice == "右表":
             plt_df=df2.copy()
             plt_df['Date'] = pd.to_datetime(plt_df['Date'], format='%m/%d/%Y')
              # 將 'Points' 列轉換為整數，處理 nodata 與 float64 型別
