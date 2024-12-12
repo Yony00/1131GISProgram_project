@@ -49,15 +49,15 @@ with row0_2:
     )
     # 顯示文字輸入框
     player_name = st.text_input("請輸入欲查詢的選手名(雙打則以/區隔)：", "", key="player_name")
-    st.write(player_name)
+
 
 # 用來顯示表格的區域
 table_area = st.container()
 
 # 表格的左右分區
 row1_1, row1_2 = table_area.columns((1, 1))
-row2_1, row2_2 = table_area.columns((1, 1))
-row3_1, row3_2 = table_area.columns((1, 1))
+# row2_1, row2_2 = table_area.columns((1, 1))
+# row3_1, row3_2 = table_area.columns((1, 1))
 
 # 檢查是否已經存儲過第一次爬蟲的資料
 if "df_initial" not in st.session_state:  # 只有在第一次爬蟲未完成時才會執行
@@ -116,3 +116,9 @@ if selected_date1:
             st.write(df_selected1)
     except Exception as e:
         st.error(f"Error occurred while fetching data for {selected_date1}: {e}")
+
+
+st.write("以下是關於",player_name,"選手 的歷年排名變化")
+
+
+
