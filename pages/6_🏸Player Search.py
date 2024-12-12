@@ -222,13 +222,14 @@ st.write("Original DataFrame:")
 st.write(st.session_state.df)
 
 # 日期選擇器
-dateoptions = st.session_state.df['Date']
+dateoptions = st.session_state.df['Date'].dt.strftime('%m/%d/%Y').tolist()  # 用於顯示的選項
 data_end = st.selectbox("結束日期範圍", dateoptions, index=0, key="data_end")
 data_start = st.selectbox("開始日期範圍", dateoptions, index=len(dateoptions) - 1, key="data_start")
 
-# 篩選邏輯
+# 轉換選擇的日期為 datetime 格式
 data_start_dt = datetime.strptime(data_start, '%m/%d/%Y')
 data_end_dt = datetime.strptime(data_end, '%m/%d/%Y')
+
 
 if data_start_dt <= data_end_dt:
     # 篩選數據並更新 `filtered_df`
