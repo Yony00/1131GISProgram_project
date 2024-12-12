@@ -221,8 +221,6 @@ if st.session_state.df is not None:
 
 #            
             # 繪製折線圖
-            fig, ax1 = plt.subplots(figsize=(10, 6))
-            
             # 左Y軸（積分）折線圖
             sns.lineplot(data=plt_df, x=plt_df['Date'].dt.year, y='Points', ax=ax1, color='blue')
             ax1.set_xlabel('Year')
@@ -232,7 +230,8 @@ if st.session_state.df is not None:
             # 添加一條紅色水平線在 y=0 處
             ax1.axhline(y=0, color='red', linestyle='--')
             
-            ax2 = ax1.twinx()  # 創建共享 x 軸但擁有不同 y 軸的副軸
+            # 創建共享 x 軸但擁有不同 y 軸的副軸
+            ax2 = ax1.twinx()
             sns.barplot(ax=ax2, x=plt_df['Date'].dt.year, y='Rank', data=plt_df, orient='h', color='gray')
             
             # 繪製 Y 軸的連續變數刻度
