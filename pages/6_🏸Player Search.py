@@ -179,7 +179,7 @@ if st.session_state.df is not None:
             df['Date'] = df['Date'].dt.strftime('%m/%d/%Y')  # 恢復日期格式
             st.write("日期已篩選:")
             st.write(df2)
-    with st.columns():
+    with st.container():
         user_choice = st.radio("使用哪張表格繪圖：", ("左表", "右表"))
         if user_choice == "左表":
             # 繪製條形圖
