@@ -193,40 +193,28 @@ if st.session_state.df is not None:
             # 若仍有 'NaN'，再轉換為整數，這時候應該會成功
             plt_df['Points'] = plt_df['Points'].fillna(0).astype(int)  # 如果還有 'NaN'，填充為 0 並轉換為整數
             plt_df['Rank'] = plt_df['Points'].fillna(0).astype(int)  # 如果還有 'NaN'，填充為 0 並轉換為整數
-
-            # 繪製折線圖，僅顯示年份
-
-
             # 繪製折線圖，僅顯示年份
             fig, ax = plt.subplots(figsize=(8, 4))
-            
-            # 繪製積分的折線圖
             sns.lineplot(data=plt_df, x=plt_df['Date'].dt.year, y='Points', ax=ax)
-            
+
+
             # 繪製 Y 軸的連續變數刻度
             y_ticks = range(20000, plt_df['Points'].max() + 10000, 10000)  # 自動生成連續刻度
             plt.yticks(y_ticks)
-            
             # 添加一條紅色水平線在 y=0 處
             red_line = ax.axhline(y=0, color='red', linestyle='--')
             
             # 使用線作為 handles 並顯示圖例
             ax.legend(handles=[red_line], labels=['nodata'])
+
+            # 繪製排名的長條圖
+            #sns.barplot(ax=ax, x=plt_df['Date'].dt.year, y='Rank', data=plt_df, orient='h')  # orient='h' 使條形圖直向
+
             
-            # 繪製排名的長條圖，並將其畫在另一個 y 軸（右邊）
-            ax2 = ax.twinx()  # 創建共享 x 軸但擁有不同 y 軸的副軸
-            sns.barplot(ax=ax2, x=plt_df['Date'].dt.year, y='Rank', data=plt_df, orient='h', color='gray')
-            
-            plt.xticks(rotation=45)  # 繪製 x 軸文字旋轉
+            plt.yticks(y_ticks)
             ax.set_xlabel('Year')
             ax.set_ylabel('Points')
             ax.set_title('積分、排名變化')
-            
-            # 確保 x 軸顯示年份，而不是日期的完整格式
-            ax.set_xticklabels([str(year) for year in plt_df['Date'].dt.year.unique()])
-            
-            plt.yticks(y_ticks)
-            plt.show()
-            
+            plt.xticks(rotation=45)  # 繪製 x 軸文字旋轉
             # 在 Streamlit 中顯示
             st.pyplot(fig)
