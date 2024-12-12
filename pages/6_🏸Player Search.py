@@ -86,7 +86,17 @@ if "date_id_dict" in st.session_state:
 options = list(date_id_dict.keys())
 index = options.index(st.session_state.new_date)
 
-with row1_1:
+with row0_1:
+    options_event = ["男子單打", "男子雙打", "女子單打", "女子雙打", "混合雙打"]
+    # 預設選中第二項 "男子雙打"
+    index = 0  # 索引從 0 開始
+    # 顯示下拉選單
+    selected_event = st.selectbox(
+        "選擇欲查詢的項目",  # 顯示的標題
+        options_event,  # 選項列表
+        index=index,  # 預設選中的索引
+        key="selectbox_event",  # 唯一的 key
+    )
     selected_date1 = st.selectbox(
         "選擇欲查詢的日期 (預設最新日期)",
         options,
