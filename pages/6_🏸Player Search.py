@@ -195,7 +195,7 @@ if st.session_state.df is not None:
 
     with row2_1:
         # 顯示原始數據
-        st.write("Original DataFrame:")
+        st.write("所有日期:")
         st.write(df)
 
     # 下拉選擇日期範圍
@@ -216,7 +216,7 @@ if st.session_state.df is not None:
             df2 = df[(df['Date'] >= data_start) & (df['Date'] <= data_end)]
             df2['Date'] = df2['Date'].dt.strftime('%m/%d/%Y')  # 恢復日期格式
             df['Date'] = df['Date'].dt.strftime('%m/%d/%Y')  # 恢復日期格式
-            st.write("Filtered DataFrame:")
+            st.write("日期已篩選:")
             st.write(df2)
 
 
