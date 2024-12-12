@@ -12,9 +12,13 @@ def scrape_bwf_ranking_by_name(date_id_dict, search_event, player_name):
         month_year = date.strftime('%m/%Y')
         if month_year not in monthly_latest:
             monthly_latest[month_year] = (date, id)
+        else:
+            # 比較當前日期與已存在的日期，保持最晚日期
+            if date > monthly_latest[month_year][0]:
+                monthly_latest[month_year] = (date, id)
     
-    # 提取每個月的最後一天的 ID
-    monthly_latest_id = {month: id for month, (date, id) in monthly_latest.items()}
+    # 提取每個月的最後一天的 ID，格式化為 MM/DD/YYYY
+    monthly_latest_id = {date.strftime('%m/%d/%Y'): id for date, id in monthly_latest.values()}
     date_id_dict=monthly_latest_id
     # 設定 URL 模板
     url_templates = {
