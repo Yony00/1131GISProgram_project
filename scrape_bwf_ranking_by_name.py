@@ -3,6 +3,19 @@ from bs4 import BeautifulSoup
 import pandas as pd
 
 def scrape_bwf_ranking_by_name(date_id_dict, search_event, player_name):
+
+    from datetime import datetime
+    # 轉換字典中的日期格式並按月分類
+    monthly_latest = {}
+    for date_str, id in date_id_dict.items():
+        date = datetime.strptime(date_str, '%m/%d/%Y')
+        month_year = date.strftime('%m/%Y')
+        if month_year not in monthly_latest:
+            monthly_latest[month_year] = (date, id)
+    
+    # 提取每個月的最後一天的 ID
+    monthly_latest_id = {month: id for month, (date, id) in monthly_latest.items()}
+    date_id_dict=monthly_latest_id
     # 設定 URL 模板
     url_templates = {
         "男子單打": "https://bwf.tournamentsoftware.com/ranking/category.aspx?id={id}&category=472&C472FOC=&p=1&ps=100",
