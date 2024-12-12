@@ -139,6 +139,7 @@ row2_1, row2_2, row2_3 = st.columns((1,1,1))
 
 if player_name:
     df=scrape_bwf_ranking_by_name(date_id_dict,search_event,player_name)
+    st.session_state.df = df
     with row2_1:
         st.write(df)
     with row2_2:
@@ -159,6 +160,7 @@ if player_name:
         )
     with row2_3:
         if data_end and data_start:
+            df=st.session_state.df
             df['Date'] = pd.to_datetime(df['Date'], format='%m/%d/%Y')  # 將日期轉換為 datetime 格式
             data_start = pd.to_datetime(data_start, format='%m/%d/%Y')
             data_end = pd.to_datetime(data_end, format='%m/%d/%Y')
