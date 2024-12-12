@@ -236,7 +236,7 @@ if st.session_state.df is not None:
             fig, ax1 = plt.subplots(figsize=(10, 6))
 
             # 左Y軸（積分）折線圖
-            sns.lineplot(data=plt_df, x=plt_df['Date'].dt.year, y='Points', ax=ax1, color='blue')
+            sns.lineplot(data=plt_df, x=plt_df['Date'], y='Points', ax=ax1, color='blue')
             ax1.set_xlabel('Year')
             ax1.set_ylabel('Points', color='blue')
             plt.xticks(rotation=45)  # 繪製 x 軸文字旋轉
@@ -246,7 +246,7 @@ if st.session_state.df is not None:
             
             # 右Y軸（Rank）折線圖
             ax2 = ax1.twinx()  # 共享 x 軸
-            sns.lineplot(data=plt_df, x=plt_df['Date'].dt.year, y='Rank', ax=ax2, color='green')
+            sns.lineplot(data=plt_df, x=plt_df['Date'], y='Rank', ax=ax2, color='green')
             y_ticks2 = range(0, plt_df['Rank'].max() + 10, 10)  # 自動生成連續刻度
             ax2.set_ylabel('Rank', color='green')
             ax2.set_yticks(y_ticks2)
