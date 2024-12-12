@@ -221,3 +221,43 @@ if st.session_state.df is not None:
             ax1.legend(handles=[red_line], labels=['nodata'], fontsize=20, loc='upper left')
             
             st.pyplot(fig)
+            
+        if user_choice == "右":
+            plt_df=df2.copy()
+            plt_df['Date'] = pd.to_datetime(plt_df['Date'], format='%m/%d/%Y')
+             # 將 'Points' 列轉換為整數，處理 nodata 與 float64 型別
+            plt_df['Points'] = plt_df['Points'].replace('nodata', np.nan).astype(float)  # 替換 'nodata' 為 np.nan 並轉換為浮點數
+            plt_df['Rank'] = plt_df['Rank'].replace('nodata', np.nan).astype(float)  # 替換 'nodata' 為 np.nan 並轉換為浮點數
+
+            # 若仍有 'NaN'，再轉換為整數，這時候應該會成功
+            plt_df['Points'] = plt_df['Points'].fillna(0).astype(int)  # 如果還有 'NaN'，填充為 0 並轉換為整數
+            plt_df['Rank'] = plt_df['Rank'].fillna(0).astype(int)  # 如果還有 'NaN'，填充為 0 並轉換為整數
+
+            fig, ax1 = plt.subplots(figsize=(10, 6))
+
+            # 左Y軸（積分）折線圖
+            sns.lineplot(data=plt_df, x=plt_df['Date'].dt.year, y='Points', ax=ax1, color='blue')
+            ax1.set_xlabel('Year')
+            ax1.set_ylabel('Points', color='blue')
+            plt.xticks(rotation=45)  # 繪製 x 軸文字旋轉
+            
+            # 添加一條紅色水平線在 y=0 處
+            ax1.axhline(y=0, color='red', linestyle='--')
+            
+            # 右Y軸（Rank）折線圖
+            ax2 = ax1.twinx()  # 共享 x 軸
+            sns.lineplot(data=plt_df, x=plt_df['Date'].dt.year, y='Rank', ax=ax2, color='green')
+            y_ticks2 = range(0, plt_df['Rank'].max() + 10, 10)  # 自動生成連續刻度
+            ax2.set_ylabel('Rank', color='green')
+            ax2.set_yticks(y_ticks2)
+            
+            # 繪製 Y 軸的連續變數刻度
+            y_ticks = range(20000, plt_df['Points'].max() + 10000, 10000)  # 自動生成連續刻度
+            ax1.set_yticks(y_ticks)
+            
+            # 使用線作為 handles 並顯示圖例
+            red_line = ax1.axhline(y=0, color='red', linestyle='--')
+            ax1.legend(handles=[red_line], labels=['nodata'], fontsize=20, loc='upper left')
+            
+            st.pyplot(fig)
+
