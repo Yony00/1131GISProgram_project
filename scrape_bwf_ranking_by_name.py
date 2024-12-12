@@ -4,25 +4,23 @@ import pandas as pd
 
 def scrape_bwf_ranking_by_name(date_id_dict, search_event, player_name):
 
-    from datetime import datetime
-    # 轉換字典中的日期格式並按月分類
-    monthly_latest = {}
-    for date_str, id in date_id_dict.items():
-        date = datetime.strptime(date_str, '%m/%d/%Y')
-        month_year = date.strftime('%m/%Y')
-        if month_year not in monthly_latest:
-            monthly_latest[month_year] = (date, id)
-        else:
-            # 比較當前日期與已存在的日期，保持最晚日期
-            if date > monthly_latest[month_year][0]:
-                monthly_latest[month_year] = (date, id)
+    # from datetime import datetime
+    # # 轉換字典中的日期格式並按月分類
+    # monthly_latest = {}
+    # for date_str, id in date_id_dict.items():
+    #     date = datetime.strptime(date_str, '%m/%d/%Y')
+    #     month_year = date.strftime('%m/%Y')
+    #     if month_year not in monthly_latest:
+    #         monthly_latest[month_year] = (date, id)
+    #     else:
+    #         # 比較當前日期與已存在的日期，保持最晚日期
+    #         if date > monthly_latest[month_year][0]:
+    #             monthly_latest[month_year] = (date, id)
     
-    # 提取每個月的最後一天的 ID，格式化為 MM/DD/YYYY
-    monthly_latest_id = {date.strftime('%m/%d/%Y'): id for date, id in monthly_latest.values()}
+    # # 提取每個月的最後一天的 ID，格式化為 MM/DD/YYYY
+    # monthly_latest_id = {date.strftime('%m/%d/%Y'): id for date, id in monthly_latest.values()}
 
 
-
-    
     # 轉換字典中的日期格式並按季度分類
     quarterly_latest = {}
     for date_str, id in date_id_dict.items():
@@ -38,7 +36,7 @@ def scrape_bwf_ranking_by_name(date_id_dict, search_event, player_name):
     
     # 提取每個季度的最後一天的 ID，格式化為 MM/DD/YYYY
     quarter_latest_id = {date.strftime('%m/%d/%Y'): id for date, id in quarterly_latest.values()}
-    
+    date_id_dict=quarter_latest_id
 
 
     
