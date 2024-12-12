@@ -214,7 +214,6 @@ if st.session_state.df is not None:
             plt.yticks(y_ticks)
             ax.set_xlabel('Year')
             ax.set_ylabel('Points')
-            ax.set_title('積分、排名變化')
             plt.xticks(rotation=45)  # 繪製 x 軸文字旋轉
             # 在 Streamlit 中顯示
             st.pyplot(fig)
