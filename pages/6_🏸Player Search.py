@@ -97,7 +97,7 @@ with row0_1:
         index=index,  # 預設選中的索引
         key="selectbox_event",  # 唯一的 key
     )
-with row1_1:
+with row0_2:
     selected_date1 = st.selectbox(
         "選擇欲查詢的日期 (預設最新日期)",
         options,
