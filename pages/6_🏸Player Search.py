@@ -232,10 +232,8 @@ if st.session_state.df is not None:
             # 添加一條紅色水平線在 y=0 處
             ax1.axhline(y=0, color='red', linestyle='--')
             
-            # 右Y軸（Rank）折線圖
-            ax2 = ax1.twinx()  # 共享 x 軸
-            sns.barplot(ax=ax2, x=plt_df['Date'].dt.year, y='Rank', data=plt_df)  # orient='h' 使條形圖直向
-            ax2.set_ylabel('Rank', color='green')
+            ax2 = ax.twinx()  # 創建共享 x 軸但擁有不同 y 軸的副軸
+            sns.barplot(ax=ax2, x=plt_df['Date'].dt.year, y='Rank', data=plt_df, orient='h', color='gray')
             
             # 繪製 Y 軸的連續變數刻度
             y_ticks = range(20000, plt_df['Points'].max() + 10000, 10000)  # 自動生成連續刻度
