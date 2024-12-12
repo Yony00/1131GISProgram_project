@@ -87,19 +87,20 @@ if "date_id_dict" in st.session_state:
 
 
 # 使用 selectbox1 讓使用者選擇項目
-options = ["男子單打","男子雙打","女子單打","女子雙打","混合單打",]
-index = options[1]
+options = ["男子單打", "男子雙打", "女子單打", "女子雙打", "混合雙打"]
 
-options = list(("男子單打","男子雙打","女子單打","女子雙打","混合單打"))
-index = options[1]
+# 預設選中第二項 "男子雙打"
+index = 0  # 索引從 0 開始
 
+# 顯示下拉選單
 with row2_1:
-    selected_date1 = st.selectbox(
-        "選擇欲查詢的日期 (預設最新日期)",
-        options,
-        index=index,
-        key="selectbox_date1",  # 添加唯一的 key
+    selected_event = st.selectbox(
+        "選擇欲查詢的項目",  # 顯示的標題
+        options,  # 選項列表
+        index=index,  # 預設選中的索引
+        key="selectbox_event",  # 唯一的 key
     )
+
 # 如果選擇了日期
 if selected_date1:
     try:
