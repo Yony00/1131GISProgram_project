@@ -134,5 +134,5 @@ st.markdown(f"<h4>以下是關於 {search_event} 項目， {player_name} 選手�
 
 if player_name:
     df=scrape_bwf_ranking_by_name(date_id_dict,search_event,player_name)
-if df:
+if df != {}:
     st.write(df)
