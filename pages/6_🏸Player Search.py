@@ -234,7 +234,7 @@ if st.session_state.df is not None:
             
             # 右Y軸（Rank）折線圖
             ax2 = ax1.twinx()  # 共享 x 軸
-            sns.lineplot(data=plt_df, x=plt_df['Date'].dt.year, y='Rank', ax=ax2, color='green')
+            sns.barplot(ax=ax, x=plt_df['Date'].dt.year, y='Rank', data=plt_df, orient='h')  # orient='h' 使條形圖直向
             ax2.set_ylabel('Rank', color='green')
             
             # 繪製 Y 軸的連續變數刻度
