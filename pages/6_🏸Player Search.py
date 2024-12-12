@@ -26,7 +26,6 @@ st.set_page_config(page_title="Men's Singles", layout="wide", page_icon=":🏸")
 # 設定頁面標題
 st.title("Men's Singles 男子單打")
 
-row0_1,XX, row0_2 = st.columns((3,1, 4))
 
 st.write(
     """
@@ -36,6 +35,7 @@ st.write(
     ##
     """
 )
+row0_1,XX, row0_2 = st.columns((3,1, 4))
 
 with row0_2:
     options_event = ["男子單打", "男子雙打", "女子單打", "女子雙打", "混合雙打"]
