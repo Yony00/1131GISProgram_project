@@ -192,49 +192,29 @@ if st.session_state.df is not None:
             # 若仍有 'NaN'，再轉換為整數，這時候應該會成功
             plt_df['Points'] = plt_df['Points'].fillna(0).astype(int)  # 如果還有 'NaN'，填充為 0 並轉換為整數
 
-         #    # 繪製折線圖，僅顯示年份
-         #    fig, ax = plt.subplots(figsize=(8, 4))
-         #    sns.lineplot(data=plt_df, x=plt_df['Date'].dt.year, y='Points', ax=ax)
+            # 繪製折線圖，僅顯示年份
+            fig, ax = plt.subplots(figsize=(8, 4))
+            sns.lineplot(data=plt_df, x=plt_df['Date'].dt.year, y='Points', ax=ax)
 
 
-         #    # 繪製 Y 軸的連續變數刻度
-         #    y_ticks = range(20000, plt_df['Points'].max() + 10000, 10000)  # 自動生成連續刻度
-         #    plt.yticks(y_ticks)
-         #    # 添加一條紅色水平線在 y=0 處
-         #    red_line = ax.axhline(y=0, color='red', linestyle='--')
-            
-         #    # 使用線作為 handles 並顯示圖例
-         #    ax.legend(handles=[red_line], labels=['nodata'])
-
-         #    plt.yticks(y_ticks)
-         #    ax.set_xlabel('Year')
-         #    ax.set_ylabel('Points')
-         #    ax.set_title('積分、排名變化')
-         #    plt.xticks(rotation=45)  # 繪製 x 軸文字旋轉
-         #    # 在 Streamlit 中顯示
-         #    st.pyplot(fig)
-        
-            # 繪製積分的折線圖
-            fig, ax1 = plt.subplots(figsize=(8, 4))
-            sns.lineplot(data=df, x='Date', y='Points', ax=ax1, color='blue', marker='o')
-            ax1.set_xlabel('Year')
-            ax1.set_ylabel('Points')
-            ax1.set_title('積分與排名變化')
-            plt.xticks(rotation=45)
-            
-           # 創建副軸並顯示排名的直向條形圖，條形圖越短表示排名越低
-            ax2 = ax1.twinx()  # 共用 x 軸
-            sns.barplot(data=df, x='Date', y='Rank', ax=ax2, color='green', alpha=0.5, orient='h')  # orient='h' 使條形圖直向
-            ax2.set_ylabel('Rank')
-            
+            # 繪製 Y 軸的連續變數刻度
+            y_ticks = range(20000, plt_df['Points'].max() + 10000, 10000)  # 自動生成連續刻度
+            plt.yticks(y_ticks)
             # 添加一條紅色水平線在 y=0 處
-            ax1.axhline(y=0, color='red', linestyle='--')
+            red_line = ax.axhline(y=0, color='red', linestyle='--')
             
             # 使用線作為 handles 並顯示圖例
-            red_line = ax1.axhline(y=0, color='red', linestyle='--')
-            ax1.legend(handles=[red_line], labels=['nodata'], edgecolor='red', facecolor='red')
+            ax.legend(handles=[red_line], labels=['nodata'])
+
+            sns.barplot(, ax=ax,x=plt_df['Date'].dt.year, y="Rank", data=plt_df)
+
             
+            plt.yticks(y_ticks)
+            ax.set_xlabel('Year')
+            ax.set_ylabel('Points')
+            ax.set_title('積分、排名變化')
+            plt.xticks(rotation=45)  # 繪製 x 軸文字旋轉
+            # 在 Streamlit 中顯示
             st.pyplot(fig)
-
-
-
+        
+    
