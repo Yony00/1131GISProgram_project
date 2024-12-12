@@ -19,7 +19,29 @@ def scrape_bwf_ranking_by_name(date_id_dict, search_event, player_name):
     
     # 提取每個月的最後一天的 ID，格式化為 MM/DD/YYYY
     monthly_latest_id = {date.strftime('%m/%d/%Y'): id for date, id in monthly_latest.values()}
-    date_id_dict=monthly_latest_id
+
+
+
+    
+    # 轉換字典中的日期格式並按季度分類
+    quarterly_latest = {}
+    for date_str, id in date_id_dict.items():
+        date = datetime.strptime(date_str, '%m/%d/%Y')
+        quarter = (date.month - 1) // 3 + 1  # 計算季度
+        quarter_key = f'Q{quarter}/{date.year}'  # 使用季度和年份作為字典鍵
+        if quarter_key not in quarterly_latest:
+            quarterly_latest[quarter_key] = (date, id)
+        else:
+            # 比較當前日期與已存在的日期，保持最晚日期
+            if date > quarterly_latest[quarter_key][0]:
+                quarterly_latest[quarter_key] = (date, id)
+    
+    # 提取每個季度的最後一天的 ID，格式化為 MM/DD/YYYY
+    quarter_latest_id = {date.strftime('%m/%d/%Y'): id for date, id in quarterly_latest.values()}
+    
+
+
+    
     # 設定 URL 模板
     url_templates = {
         "男子單打": "https://bwf.tournamentsoftware.com/ranking/category.aspx?id={id}&category=472&C472FOC=&p=1&ps=100",
