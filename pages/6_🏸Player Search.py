@@ -184,8 +184,11 @@ if st.session_state.df is not None:
         if user_choice == "左表":
             plt_df=df
             plt_df['Date'] = pd.to_datetime(plt_df['Date'], format='%m/%d/%Y')
-            # 將 'Points' 列轉換為整數，處理 nodata
+         # 將 'Points' 列轉換為整數，處理 nodata 與 float64 型別
             plt_df['Points'] = plt_df['Points'].replace('nodata', np.nan).astype(float)  # 替換 'nodata' 為 np.nan 並轉換為浮點數
+
+            # 若仍有 'NaN'，再轉換為整數，這時候應該會成功
+            plt_df['Points'] = plt_df['Points'].fillna(0).astype(int)  # 如果還有 'NaN'，填充為 0 並轉換為整數
 
             # 繪製折線圖，僅顯示年份
             fig, ax = plt.subplots(figsize=(10, 6))
