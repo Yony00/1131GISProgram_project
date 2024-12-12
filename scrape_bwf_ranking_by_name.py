@@ -31,14 +31,15 @@ def scrape_bwf_ranking_by_name(date_id_dict, search_event, player_name):
             response = requests.get(url, headers=headers)
             soup = BeautifulSoup(response.content, 'html.parser')
 
-            # 查找表格
+            # 查找表格，這是存放選手排名的地方
             table = soup.find('table', {'class': 'ruler'})
+        
             if not table:
-                results.append([date, "nodata", "nodata"])
-                continue
-
+                print("Error: No table found")
+                return None
+        
             # 提取表格中的行
-            rows = table.find_all('tr')[1:]
+            rows = table.find_all('tr')[1:]  # 跳過表頭
 
             found = False
             for row in rows:
@@ -59,7 +60,7 @@ def scrape_bwf_ranking_by_name(date_id_dict, search_event, player_name):
                     points = cols[7].text.strip()
 
                     # 如果找到目標選手
-                    if player_name in player:
+                    if player_name == player:
                         results.append([date, rank, points])
                         found = True
                         break
