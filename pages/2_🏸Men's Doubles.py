@@ -16,7 +16,7 @@ import folium
 
 
 # 設定頁面配置為寬屏模式
-st.set_page_config(page_title="Men's Doubles", layout="wide")
+st.set_page_config(page_title="Men's Doubles", layout="wide", page_icon=":🏸")
 
 # 設定頁面標題
 st.title("Men's Singles 男子雙打")
