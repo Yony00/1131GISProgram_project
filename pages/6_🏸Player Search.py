@@ -199,8 +199,8 @@ if st.session_state.df is not None:
             y_ticks = range(20000, plt_df['Points'].max() + 10000, 10000)  # 自動生成連續刻度
             plt.yticks(y_ticks)
             ax.axhline(y=0, color='red', linestyle='--')
-            # 添加 y = 0 處的文本
-            #ax.text(0, 0, 'nodata', ha='right', va='bottom', color='red')
+            ax.legend(['nodata (Red line)'])  # 用於顯示紅線的含義
+
 
             plt.yticks(y_ticks)
             ax.set_xlabel('Year')
