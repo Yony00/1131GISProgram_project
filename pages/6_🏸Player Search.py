@@ -63,8 +63,7 @@ if "date_id_dict" in st.session_state:
     date_id_dict = st.session_state.date_id_dict
 ##################
 
-st.write(date_id_dict)
-
+st.json(date_id_dict)
 ##################
 # 使用 selectbox1 讓使用者選擇日期(預設為 st.session_state.new_date)
 options = list(date_id_dict.keys())
