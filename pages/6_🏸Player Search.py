@@ -201,8 +201,8 @@ if st.session_state.df is not None:
     # 下拉選擇日期範圍
     with row2_2:
         dateoptions = df['Date']
-        data_end = st.selectbox("結束日期範圍", dateoptions, index=0, key="data_end")
-        data_start = st.selectbox("開始日期範圍", dateoptions, index=len(dateoptions) - 1, key="data_start")
+        data_end = st.selectbox("結束日期範圍", dateoptions, key="data_end")
+        data_start = st.selectbox("開始日期範圍", dateoptions, key="data_start")
 
     # 篩選操作
     with row2_3:
