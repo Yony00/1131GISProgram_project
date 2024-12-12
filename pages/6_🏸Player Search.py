@@ -206,7 +206,7 @@ if st.session_state.df is not None:
             # 使用線作為 handles 並顯示圖例
             ax.legend(handles=[red_line], labels=['nodata'])
 
-            sns.barplot(, ax=ax,x=plt_df['Date'].dt.year, y="Rank", data=plt_df)
+            sns.barplot(ax=ax,x=plt_df['Date'].dt.year, y="Rank", data=plt_df)
 
             
             plt.yticks(y_ticks)
