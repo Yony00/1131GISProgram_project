@@ -182,11 +182,14 @@ if st.session_state.df is not None:
     with st.container():
         user_choice = st.radio("使用哪張表格繪圖：", ("左表", "右表"))
         if user_choice == "左表":
-            # 繪製條形圖
-            fig, ax = plt.subplots(figsize=(8, 6))
-            sns.barplot(data=df, x=pd.to_datetime(df['Date'], format='%m/%d/%Y'), y='Points', ax=ax)
+            # 繪製長條圖
+            fig, ax = plt.subplots(figsize=(10, 6))
+            sns.barplot(data=df, x='Date', y='Points', ax=ax)
+            ax.set_xlabel('Date')
+            ax.set_ylabel('Points')
+            ax.set_title('積分、排名變化')
+            plt.xticks(rotation=45)  # 繪製 x 軸文字旋轉
             # 在 Streamlit 中顯示
-            st.write("積分、排名變化")
             st.pyplot(fig)
 
 
