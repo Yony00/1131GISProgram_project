@@ -214,7 +214,7 @@ row2_1, row2_2, row2_3 = st.columns((1,1,1))
 #             st.write(df2)
 # 初始化狀態
 if "df" not in st.session_state:
-    st.session_state.df =scrape_bwf_ranking_by_name(date_id_dict,search_event,player_name)
+    st.session_state.df = scrape_bwf_ranking_by_name(date_id_dict, search_event, player_name)
     st.session_state.filtered_df = st.session_state.df.copy()
 
 # 顯示原始數據
@@ -230,9 +230,8 @@ data_start = st.selectbox("開始日期範圍", dateoptions, index=len(dateoptio
 data_start_dt = datetime.strptime(data_start, '%m/%d/%Y')
 data_end_dt = datetime.strptime(data_end, '%m/%d/%Y')
 
-
+# 檢查日期區間有效性並篩選數據
 if data_start_dt <= data_end_dt:
-    # 篩選數據並更新 `filtered_df`
     st.session_state.filtered_df = st.session_state.df[
         (st.session_state.df['Date'] >= data_start_dt) &
         (st.session_state.df['Date'] <= data_end_dt)
