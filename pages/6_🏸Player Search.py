@@ -199,7 +199,7 @@ if st.session_state.df is not None:
             y_ticks = range(20000, plt_df['Points'].max() + 10000, 10000)  # 自動生成連續刻度
             plt.yticks(y_ticks)
             ax.axhline(y=0, color='red', linestyle='--')
-            ax.legend(['nodata (Red line)'],color='red')  # 用於顯示紅線的含義，並設定圖例位置
+            ax.legend(['nodata (Red line)'], loc='upper right', frameon=True, facecolor='white', edgecolor='red', color='red')  # 用於顯示紅線的含義，並設定圖例位置
 
 
 
