@@ -172,3 +172,40 @@ if player_name:
             df2['Date'] = df2['Date'].dt.strftime('%m/%d/%Y')
             st.write(df2)
             
+
+
+
+
+if player_name:
+    df=scrape_bwf_ranking_by_name(date_id_dict,search_event,player_name)
+    st.session_state.df = df
+    with row2_1:
+        st.write(st.session_state.df)
+    with row2_2:
+        dateoptions = st.session_state.df['Date']
+        index = 0  # 索引從 0 開始
+        # 顯示下拉選單
+        data_end = st.selectbox(
+            "結束日期範圍",  # 顯示的標題
+            dateoptions,  # 選項列表
+            index=index,  # 預設選中的索引
+            key="data_end",  # 唯一的 key
+        )    
+        data_start = st.selectbox(
+            "開始日期範圍",  # 顯示的標題
+            dateoptions,  # 選項列表
+            index=df.index.max(),  # 預設選中的索引
+            key="data_start",  # 唯一的 key
+        )
+    with row2_3:
+        if data_end and data_start:
+            st.session_state.df['Date'] = pd.to_datetime(st.session_state.df['Date'], format='%m/%d/%Y')  # 將日期轉換為 datetime 格式
+            data_start = st.session_state.df.to_datetime(data_start, format='%m/%d/%Y')
+            data_end = pd.to_datetime(data_end, format='%m/%d/%Y')
+            
+            # 篩選符合日期區間的資料
+            df2 = st.session_state.df[(st.session_state.df['Date'] >= data_start) & (st.session_state.df['Date'] <= data_end)]
+            
+            # 將結果轉換回原來的日期格式
+            df2['Date'] = df2['Date'].dt.strftime('%m/%d/%Y')
+            st.write(df2)
