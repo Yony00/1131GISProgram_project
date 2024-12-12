@@ -118,7 +118,7 @@ if selected_date1:
         st.error(f"Error occurred while fetching data for {selected_date1}: {e}")
 
 
-st.write("以下是關於",player_name,"選手 的歷年排名變化")
+st.header("以下是關於",player_name,"選手 的歷年排名變化")
 
 
 
