@@ -183,7 +183,7 @@ if st.session_state.df is not None:
         user_choice = st.radio("使用哪張表格繪圖：", ("左表", "右表"))
         if user_choice == "左表":
             fig, ax = plt.subplots(figsize=(10, 6))
-            sns.lineplot(data=df2, x='Date', y='Points', ax=ax)
+            sns.lineplot(data=df, x='Date', y='Points', ax=ax)
             ax.set_xlabel('Date')
             ax.set_ylabel('Points')
             ax.set_title('積分、排名變化')
