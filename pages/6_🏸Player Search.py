@@ -90,6 +90,9 @@ if "date_id_dict" in st.session_state:
 options = ["男子單打","男子雙打","女子單打","女子雙打","混合單打",]
 index = options[1]
 
+options = list("男子單打","男子雙打","女子單打","女子雙打","混合單打")
+index = options.index(st.session_state.new_date)
+
 with row2_1:
     selected_date1 = st.selectbox(
         "選擇欲查詢的日期 (預設最新日期)",
@@ -97,7 +100,6 @@ with row2_1:
         index=index,
         key="selectbox_date1",  # 添加唯一的 key
     )
-
 # 如果選擇了日期
 if selected_date1:
     try:
