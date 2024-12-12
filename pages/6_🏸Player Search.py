@@ -184,7 +184,7 @@ if st.session_state.df is not None:
     with row3_1:
         user_choice = st.radio("使用哪張表格繪圖：", ("左表", "右表"))
         if user_choice == "左表":
-            plt_df=df.cpoy()
+            plt_df=df.copy()
             plt_df['Date'] = pd.to_datetime(plt_df['Date'], format='%m/%d/%Y')
          # 將 'Points' 列轉換為整數，處理 nodata 與 float64 型別
             plt_df['Points'] = plt_df['Points'].replace('nodata', np.nan).astype(float)  # 替換 'nodata' 為 np.nan 並轉換為浮點數
