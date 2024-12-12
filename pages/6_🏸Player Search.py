@@ -211,7 +211,7 @@ if st.session_state.df is not None:
             data_end = pd.to_datetime(data_end, format='%m/%d/%Y')
 
             # 篩選日期範圍內的數據
-            df2 = df[(dfDate >= data_start) & (df['Date'] <= data_end)]
+            df2 = df[(dfDate >= data_start) & (dfDate <= data_end)]
             df2['Date'] = df2['Date'].dt.strftime('%m/%d/%Y')  # 恢復日期格式
             st.write("Filtered DataFrame:")
             st.write(df2)
