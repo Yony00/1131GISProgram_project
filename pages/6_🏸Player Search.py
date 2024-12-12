@@ -177,73 +177,38 @@ row2_1, row2_2, row2_3 = st.columns((1,1,1))
 
 
 ##############
-# # 確保網頁重跑後仍保留爬取的數據
-# if "df" not in st.session_state:
-#     st.session_state.df = None
-
-# if player_name and st.session_state.df is None:
-#     # 只在初次輸入名稱時爬取資料
-#     st.session_state.df = scrape_bwf_ranking_by_name(date_id_dict, search_event, player_name)
-
-# if st.session_state.df is not None:
-#     df = st.session_state.df
-
-#     with row2_1:
-#         # 顯示原始數據
-#         st.write("Original DataFrame:")
-#         st.write(df)
-
-#     # 下拉選擇日期範圍
-#     with row2_2:
-#         dateoptions = df['Date']
-#         data_end = st.selectbox("結束日期範圍", dateoptions, index=0, key="data_end")
-#         data_start = st.selectbox("開始日期範圍", dateoptions, index=len(dateoptions) - 1, key="data_start")
-
-#     # 篩選操作
-#     with row2_3:
-#         if data_end and data_start:
-#             # 篩選並顯示篩選後的數據
-#             df['Date'] = pd.to_datetime(df['Date'], format='%m/%d/%Y')
-#             data_start = pd.to_datetime(data_start, format='%m/%d/%Y')
-#             data_end = pd.to_datetime(data_end, format='%m/%d/%Y')
-
-#             # 篩選日期範圍內的數據
-#             df2 = df[(df['Date'] >= data_start) & (df['Date'] <= data_end)]
-#             df2['Date'] = df2['Date'].dt.strftime('%m/%d/%Y')  # 恢復日期格式
-#             st.write("Filtered DataFrame:")
-#             st.write(df2)
-
-# 初始化狀態
+# 確保網頁重跑後仍保留爬取的數據
 if "df" not in st.session_state:
+    st.session_state.df = None
+
+if player_name and st.session_state.df is None:
+    # 只在初次輸入名稱時爬取資料
     st.session_state.df = scrape_bwf_ranking_by_name(date_id_dict, search_event, player_name)
-    # 確保 Date 欄位轉換為 datetime
-    st.session_state.df['Date'] = pd.to_datetime(st.session_state.df['Date'], format='%m/%d/%Y')
-    st.session_state.filtered_df = st.session_state.df.copy()
 
-# 顯示原始數據
-st.write("Original DataFrame:")
-st.write(st.session_state.df)
+if st.session_state.df is not None:
+    df = st.session_state.df
 
-# 日期選擇器
-dateoptions = st.session_state.df['Date'].dt.strftime('%m/%d/%Y').tolist()  # 確保是字串列表
-data_end = st.selectbox("結束日期範圍", dateoptions, index=0, key="data_end")
-data_start = st.selectbox("開始日期範圍", dateoptions, index=len(dateoptions) - 1, key="data_start")
+    with row2_1:
+        # 顯示原始數據
+        st.write("Original DataFrame:")
+        st.write(df)
 
-# 確保選擇的日期是 datetime 格式
-data_start_dt = datetime.strptime(data_start, '%m/%d/%Y')
-data_end_dt = datetime.strptime(data_end, '%m/%d/%Y')
+    # 下拉選擇日期範圍
+    with row2_2:
+        dateoptions = df['Date']
+        data_end = st.selectbox("結束日期範圍", dateoptions, index=0, key="data_end")
+        data_start = st.selectbox("開始日期範圍", dateoptions, index=len(dateoptions) - 1, key="data_start")
 
-# 篩選數據
-if data_start_dt <= data_end_dt:
-    st.session_state.filtered_df = st.session_state.df[
-        (st.session_state.df['Date'] >= data_start_dt) &
-        (st.session_state.df['Date'] <= data_end_dt)
-    ]
+    # 篩選操作
+    with row2_3:
+        if data_end and data_start:
+            # 篩選並顯示篩選後的數據
+            df['Date'] = pd.to_datetime(df['Date'], format='%m/%d/%Y')
+            data_start = pd.to_datetime(data_start, format='%m/%d/%Y')
+            data_end = pd.to_datetime(data_end, format='%m/%d/%Y')
 
-# 顯示篩選後的結果
-st.write("Filtered DataFrame:")
-filtered_df = st.session_state.filtered_df.copy()
-filtered_df['Date'] = filtered_df['Date'].dt.strftime('%m/%d/%Y')  # 恢復日期格式顯示
-st.write(filtered_df)
-filtered_df['Date'] = filtered_df['Date'].dt.strftime('%m/%d/%Y')  # 恢復日期格式顯示
-st.write(filtered_df)
+            # 篩選日期範圍內的數據
+            df2 = df[(df['Date'] >= data_start) & (df['Date'] <= data_end)]
+            df2['Date'] = df2['Date'].dt.strftime('%m/%d/%Y')  # 恢復日期格式
+            st.write("Filtered DataFrame:")
+            st.write(df2)
