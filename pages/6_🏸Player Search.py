@@ -29,7 +29,6 @@ st.title("Men's Singles 男子單打")
 
 st.write(
     """
-    ##  
     此頁面提供單一選手的搜尋\n
     先選擇項目、再輸入選手名
     ##
