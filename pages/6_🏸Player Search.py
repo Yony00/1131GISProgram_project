@@ -119,7 +119,7 @@ if selected_date1:
         st.error(f"Error occurred while fetching data for {selected_date1}: {e}")
 
 
-row1_1, row1_2 = st.columns((2,1))
+row1_1, row1_2 ,row1_3= st.columns((2,1,1))
 with row1_2:
     options_event = ["男子單打", "男子雙打", "女子單打", "女子雙打", "混合雙打"]
     # 預設選中第二項 "男子雙打"
@@ -133,6 +133,11 @@ with row1_2:
     )
 with row1_1:
     player_name = st.text_input("請輸入欲查詢的選手名(組合名)，格式參考上表：", "", key="player_name")
+with row1_3:
+    st.write("若要更改查詢，請輸入新的選手名(組合名)，並選擇項目，按下下方按鈕即可")
+    if st.button("清除暫存資料"):   
+        st.session_state.clear()
+
 st.markdown(f"<h4>以下是關於 {search_event} 項目， {player_name} 選手的歷年排名變化</h2>", unsafe_allow_html=True)
 
 row2_1, row2_2, row2_3 = st.columns((1,1,1))
@@ -198,9 +203,6 @@ if st.session_state.df is not None:
         dateoptions = df['Date']
         data_end = st.selectbox("結束日期範圍", dateoptions, index=0, key="data_end")
         data_start = st.selectbox("開始日期範圍", dateoptions, index=len(dateoptions) - 1, key="data_start")
-        st.write("若要更改查詢，請輸入新的選手名(組合名)，並選擇項目，按下下方按鈕即可")
-        if st.button("清除暫存資料"):   
-            st.session_state.clear()
 
     # 篩選操作
     with row2_3:
