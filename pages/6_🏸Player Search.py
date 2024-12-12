@@ -43,12 +43,13 @@ with row0_2:
         key="selectbox_event",  # 唯一的 key
     )
     # 顯示文字輸入框
-    player_name = st.text_input("請輸入欲查詢的選手名(雙打則以/區隔)：", "", key="player_name")
+    st.text_input("請輸入欲查詢的選手名(雙打則以/區隔)：", "", key="player_name")
     # 顯示 "確定輸入" 按鈕
     if st.button("確定輸入"):
+        player_name = st.text_input("請輸入欲查詢的選手名(雙打則以/區隔)：", "", key="player_name")
     # 當按鈕被點擊後顯示用戶輸入的內容
-        if user_input.strip():  # 檢查輸入是否非空
-            st.write(f"你輸入的內容是：{user_input}")
+        # if user_input.strip():  # 檢查輸入是否非空
+        #     st.write(f"你輸入的內容是：{user_input}")
 
 
 
