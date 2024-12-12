@@ -247,7 +247,7 @@ if st.session_state.df is not None:
             # 右Y軸（Rank）折線圖
             ax2 = ax1.twinx()  # 共享 x 軸
             sns.lineplot(data=plt_df, x=plt_df['Date'], y='Rank', ax=ax2, color='green')
-            y_ticks2 = range(0, plt_df['Rank'].max() + 10, 10)  # 自動生成連續刻度
+            y_ticks2 = range(0, plt_df['Rank'].max() + 5, 5)  # 自動生成連續刻度
             ax2.set_ylabel('Rank', color='green')
             ax2.set_yticks(y_ticks2)
             
