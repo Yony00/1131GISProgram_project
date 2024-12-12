@@ -134,7 +134,7 @@ with row1_2:
 with row1_1:
     player_name = st.text_input("請輸入欲查詢的選手名(組合名)，格式參考上表：", "", key="player_name")
 with row1_3:
-    st.write("若要更改查詢，請在左次資料亭整好後，按下方按鈕即可")
+    st.write("若要更改查詢，請在左側資料調整好後，按下方按鈕即可")
     if st.button("清除暫存資料並重新查詢"):   
         st.session_state.clear()
 
