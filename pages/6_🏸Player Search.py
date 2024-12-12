@@ -3,6 +3,11 @@ import pandas as pd
 import geopandas as gpd
 from scrape_bwf_ranking import scrape_bwf_ranking  # 引入第一次爬蟲的函數
 from scrape_bwf_ranking_by_date import scrape_bwf_ranking_by_date  # 引入第二次爬蟲的函數
+from scrape_bwf_ranking_by_date import MDscrape_bwf_ranking_by_date  # 引入第二次爬蟲的函數
+from scrape_bwf_ranking_by_date import WSscrape_bwf_ranking_by_date  # 引入第二次爬蟲的函數
+from scrape_bwf_ranking_by_date import WDscrape_bwf_ranking_by_date  # 引入第二次爬蟲的函數
+from scrape_bwf_ranking_by_date import MXDscrape_bwf_ranking_by_date  # 引入第二次爬蟲的函數
+
 import numpy as np
 
 import matplotlib.pyplot as plt
@@ -32,13 +37,13 @@ with row0_1:
         """
     )
 with row0_2:
-    options = ["男子單打", "男子雙打", "女子單打", "女子雙打", "混合雙打"]
+    options_event = ["男子單打", "男子雙打", "女子單打", "女子雙打", "混合雙打"]
     # 預設選中第二項 "男子雙打"
     index = 0  # 索引從 0 開始
     # 顯示下拉選單
     selected_event = st.selectbox(
         "選擇欲查詢的項目",  # 顯示的標題
-        options,  # 選項列表
+        options_event,  # 選項列表
         index=index,  # 預設選中的索引
         key="selectbox_event",  # 唯一的 key
     )
@@ -93,12 +98,21 @@ with row2_1:
 if selected_date1:
     try:
         selected_id1 = date_id_dict[selected_date1]
-        df_selected1 = scrape_bwf_ranking_by_date(selected_id1)
+        if selected_event == "男子單打":
+            df_selected1 = scrape_bwf_ranking_by_date(selected_id1)
+        elif selected_event == "男子雙打":
+            df_selected1 = MDscrape_bwf_ranking_by_date(selected_id1)
+        elif selected_event == "女子單打":
+            df_selected1 = WSscrape_bwf_ranking_by_date(selected_id1)
+        elif selected_event == "女子雙打":
+            df_selected1 = WDscrape_bwf_ranking_by_date(selected_id1)
+        elif selected_event == "混合雙打":
+            df_selected1 = MXDscrape_bwf_ranking_by_date(selected_id1)
         df_selected1.set_index("Rank", inplace=True)
 
         # 顯示選擇日期的排名資料於 row1_1
         with row1_1:
-            st.write(f"下表為 {selected_date1}  時 男子單打排名資料")
+            st.write(f"下表為 {selected_date1}  時 {selected_event} 排名資料")
             st.write(df_selected1)
     except Exception as e:
         st.error(f"Error occurred while fetching data for {selected_date1}: {e}")
