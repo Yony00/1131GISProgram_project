@@ -200,7 +200,7 @@ if st.session_state.df is not None:
             plt.yticks(y_ticks)
             ax.axhline(y=0, color='red', linestyle='--')
             # 添加 y = 0 處的文本
-            ax.text(0, 0, 'nodata', ha='right', va='bottom', color='red')
+            #ax.text(0, 0, 'nodata', ha='right', va='bottom', color='red')
 
             plt.yticks(y_ticks)
             ax.set_xlabel('Year')
