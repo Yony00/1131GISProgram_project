@@ -212,7 +212,7 @@ row2_1, row2_2, row2_3 = st.columns((1,1,1))
 #             st.write(df2)
 # 初始化狀態
 if "df" not in st.session_state:
-    st.session_state.df = mock_scrape_bwf_ranking()
+    st.session_state.df =scrape_bwf_ranking_by_name(date_id_dict,search_event,player_name)
     st.session_state.filtered_df = st.session_state.df.copy()
 
 # 顯示原始數據
