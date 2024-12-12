@@ -206,12 +206,12 @@ if st.session_state.df is not None:
     with row2_3:
         if data_end and data_start:
             # 篩選並顯示篩選後的數據
-            df['Date'] = pd.to_datetime(df['Date'], format='%m/%d/%Y')
+            dfDate = pd.to_datetime(df['Date'], format='%m/%d/%Y')
             data_start = pd.to_datetime(data_start, format='%m/%d/%Y')
             data_end = pd.to_datetime(data_end, format='%m/%d/%Y')
 
             # 篩選日期範圍內的數據
-            df2 = df[(df['Date'] >= data_start) & (df['Date'] <= data_end)]
+            df2 = df[(dfDate >= data_start) & (df['Date'] <= data_end)]
             df2['Date'] = df2['Date'].dt.strftime('%m/%d/%Y')  # 恢復日期格式
             st.write("Filtered DataFrame:")
             st.write(df2)
