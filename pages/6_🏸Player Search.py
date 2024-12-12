@@ -28,7 +28,7 @@ from datetime import datetime
 st.set_page_config(page_title="Men's Singles", layout="wide", page_icon=":🏸")
 
 # 設定頁面標題
-st.title("Men's Singles 男子單打")
+st.title("聽定選手/組合搜尋")
 
 
 st.write(
