@@ -197,16 +197,16 @@ if player_name:
             index=df.index.max(),  # 預設選中的索引
             key="data_start",  # 唯一的 key
         )
-    with row2_3:
-        if data_end and data_start:
-            df=st.session_state.df
-            df['Date'] = pd.to_datetime(df['Date'], format='%m/%d/%Y')  # 將日期轉換為 datetime 格式
-            data_start = pd.to_datetime(data_start, format='%m/%d/%Y')
-            data_end = pd.to_datetime(data_end, format='%m/%d/%Y')
-            
-            # 篩選符合日期區間的資料
-            df2 = df[(df['Date'] >= data_start) & (df['Date'] <= data_end)]
-            
-            # 將結果轉換回原來的日期格式
-            df2['Date'] = df2['Date'].dt.strftime('%m/%d/%Y')
-            st.write(df2)
+with row2_3:
+    if data_end and data_start:
+        df=st.session_state.df
+        df['Date'] = pd.to_datetime(df['Date'], format='%m/%d/%Y')  # 將日期轉換為 datetime 格式
+        data_start = pd.to_datetime(data_start, format='%m/%d/%Y')
+        data_end = pd.to_datetime(data_end, format='%m/%d/%Y')
+        
+        # 篩選符合日期區間的資料
+        df2 = df[(df['Date'] >= data_start) & (df['Date'] <= data_end)]
+        
+        # 將結果轉換回原來的日期格式
+        df2['Date'] = df2['Date'].dt.strftime('%m/%d/%Y')
+        st.write(df2)
