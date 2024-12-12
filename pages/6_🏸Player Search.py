@@ -199,6 +199,9 @@ if st.session_state.df is not None:
         dateoptions = df['Date']
         data_end = st.selectbox("結束日期範圍", dateoptions, index=0, key="data_end")
         data_start = st.selectbox("開始日期範圍", dateoptions, index=len(dateoptions) - 1, key="data_start")
+        st.write("若要更改查詢，請輸入新的選手名(組合名)，並選擇項目，按下下方按鈕即可")
+        if st.button("清除暫存資料"):   
+            st.session_state.clear()
 
     # 篩選操作
     with row2_3:
