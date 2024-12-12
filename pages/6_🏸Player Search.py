@@ -138,7 +138,7 @@ with row1_3:
     if st.button("清除暫存資料並重新查詢"):   
         st.session_state.clear()
 
-st.markdown(f"<h4>以下是關於 {search_event} 項目， {player_name} 選手的歷年排名變化</h2>", unsafe_allow_html=True)
+st.markdown(f"<h4>以下是關於 {search_event} 項目， {player_name} 選手的歷年排名、積分變化</h2>", unsafe_allow_html=True)
 
 row2_1, row2_2, row2_3 = st.columns((1,1,1))
 
@@ -261,3 +261,18 @@ if st.session_state.df is not None:
             
             st.pyplot(fig)
 
+    row4_1, row4_2 = st.columns((1,2))
+
+    with row4_1:
+        st.write("與該國同時期其他選手/組合比較：")
+    with row4_2:
+        CP_dataoptions = list(date_id_dict.keys())
+        index = CP_dataoptions.index(st.session_state.new_date)
+
+        CP_data = st.selectbox(
+            "選擇欲查詢的日期 (預設最新日期)",
+            CP_dataoptions,
+            index=index,
+            key="CP_data",  # 添加唯一的 key
+            )
+      
