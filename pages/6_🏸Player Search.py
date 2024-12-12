@@ -27,15 +27,16 @@ st.set_page_config(page_title="Men's Singles", layout="wide", page_icon=":🏸")
 st.title("Men's Singles 男子單打")
 
 row0_1,XX, row0_2 = st.columns((3,1, 4))
-with row0_1:
-    st.write(
-        """
-        ##  
-        此頁面提供單一選手的搜尋\n
-        先選擇項目、再輸入選手名
-        ##
-        """
-    )
+
+st.write(
+    """
+    ##  
+    此頁面提供單一選手的搜尋\n
+    先選擇項目、再輸入選手名
+    ##
+    """
+)
+
 with row0_2:
     options_event = ["男子單打", "男子雙打", "女子單打", "女子雙打", "混合雙打"]
     # 預設選中第二項 "男子雙打"
@@ -86,7 +87,7 @@ if "date_id_dict" in st.session_state:
 options = list(date_id_dict.keys())
 index = options.index(st.session_state.new_date)
 
-with row2_1:
+with row1_1:
     selected_date1 = st.selectbox(
         "選擇欲查詢的日期 (預設最新日期)",
         options,
@@ -111,7 +112,7 @@ if selected_date1:
         df_selected1.set_index("Rank", inplace=True)
 
         # 顯示選擇日期的排名資料於 row1_1
-        with row1_1:
+        with row0_1:
             st.write(f"下表為 {selected_date1}  時 {selected_event} 排名資料")
             st.write(df_selected1)
     except Exception as e:
