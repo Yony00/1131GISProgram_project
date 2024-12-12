@@ -182,9 +182,11 @@ if st.session_state.df is not None:
     with st.container():
         user_choice = st.radio("使用哪張表格繪圖：", ("左表", "右表"))
         if user_choice == "左表":
+            plt_df=df
+            plt_df['Date'] = pd.to_datetime(plt_df['Date'], format='%m/%d/%Y')
             # 繪製折線圖，僅顯示年份
             fig, ax = plt.subplots(figsize=(10, 6))
-            sns.lineplot(data=df, x=df['Date'].dt.year, y='Points', ax=ax)
+            sns.lineplot(data=plt_df, x=plt_df['Date'].dt.year, y='Points', ax=ax)
             ax.set_xlabel('Year')
             ax.set_ylabel('Points')
             ax.set_title('積分、排名變化')
