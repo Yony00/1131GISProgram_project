@@ -49,8 +49,7 @@ with row0_2:
     # 當按鈕被點擊後顯示用戶輸入的內容
         if user_input.strip():  # 檢查輸入是否非空
             st.write(f"你輸入的內容是：{user_input}")
-        else:
-        st.warning("請輸入有效文字！")
+
 
 
 # 用來顯示表格的區域
