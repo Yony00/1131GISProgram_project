@@ -16,7 +16,7 @@ import folium
 
 
 # 設定頁面配置為寬屏模式
-st.set_page_config(page_title="Women's Singles", layout="wide")
+st.set_page_config(page_title="Women's Singles", layout="wide", page_icon=":🏸")
 
 # 設定頁面標題
 st.title("Women's Singles 女子單打")
