@@ -198,10 +198,11 @@ if st.session_state.df is not None:
             # 繪製 Y 軸的連續變數刻度
             y_ticks = range(20000, plt_df['Points'].max() + 10000, 10000)  # 自動生成連續刻度
             plt.yticks(y_ticks)
-            ax.axhline(y=0, color='red', linestyle='--')
-
-            # 使用 ax.axhline 的線作為 handles
-            ax.legend(handles=[ax.axhline(y=0, color='red', linestyle='--')], labels=['nodata (Red line)'], edgecolor='red', color='red')
+            # 添加一條紅色水平線在 y=0 處
+            red_line = ax.axhline(y=0, color='red', linestyle='--')
+            
+            # 使用線作為 handles 並顯示圖例
+            ax.legend(handles=[red_line], labels=['nodata'], edgecolor='red', facecolor='red')
 
             plt.yticks(y_ticks)
             ax.set_xlabel('Year')
