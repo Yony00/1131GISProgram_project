@@ -200,8 +200,7 @@ if st.session_state.df is not None:
             plt.yticks(y_ticks)
             ax.axhline(y=0, color='red', linestyle='--')
 
-            ax.text(0, 0, 'nodata', color='red', va='center', ha='right')
-            ax.legend(['nodata (Red line)'])  # 用於顯示紅線的含義
+            ax.legend(['nodata (Red line)'], edgecolor='red', facecolor='red', loc='upper right')
 
             plt.yticks(y_ticks)
             ax.set_xlabel('Year')
