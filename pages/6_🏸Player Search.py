@@ -208,7 +208,7 @@ if st.session_state.df is not None:
             ax.legend(handles=[red_line], labels=['nodata'])
 
             # 繪製排名的長條圖
-            sns.barplot(ax=ax, x=plt_df['Date'].dt.year, y='Rank', data=plt_df, orient='h')  # orient='h' 使條形圖直向
+            #sns.barplot(ax=ax, x=plt_df['Date'].dt.year, y='Rank', data=plt_df, orient='h')  # orient='h' 使條形圖直向
 
             
             plt.yticks(y_ticks)
