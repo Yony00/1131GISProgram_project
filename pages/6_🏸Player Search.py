@@ -133,6 +133,9 @@ with row1_1:
     player_name = st.text_input("請輸入欲查詢的選手名(組合名)，格式參考上表：", "", key="player_name")
 st.markdown(f"<h4>以下是關於 {search_event} 項目， {player_name} 選手的歷年排名變化</h2>", unsafe_allow_html=True)
 
-if player_name:
-    df=scrape_bwf_ranking_by_name(date_id_dict,search_event,player_name)
-    st.write(df)
+row2_1, row2_2, row2_3 = st.columns((1,1,1))
+
+with row2_1:
+    if player_name:
+        df=scrape_bwf_ranking_by_name(date_id_dict,search_event,player_name)
+        st.write(df)
