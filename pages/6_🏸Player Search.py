@@ -111,7 +111,7 @@ if selected_date1:
 
 
 row1_1, row1_2 = st.columns((1,2))
-with row1_2:
+with row1_1:
     options_event = ["男子單打", "男子雙打", "女子單打", "女子雙打", "混合雙打"]
     # 預設選中第二項 "男子雙打"
     index = 0  # 索引從 0 開始
