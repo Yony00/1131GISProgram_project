@@ -184,6 +184,8 @@ if st.session_state.df is not None:
         if user_choice == "左表":
             plt_df=df
             plt_df['Date'] = pd.to_datetime(plt_df['Date'], format='%m/%d/%Y')
+            plt_df['Points'] = plt_df['Points'].astype(int)
+
             # 繪製折線圖，僅顯示年份
             fig, ax = plt.subplots(figsize=(10, 6))
             sns.lineplot(data=plt_df, x=plt_df['Date'].dt.year, y='Points', ax=ax)
