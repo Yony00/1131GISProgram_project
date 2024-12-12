@@ -36,20 +36,6 @@ st.write(
 )
 row0_1, row0_2 = st.columns((2,1))
 
-with row0_2:
-    # options_event = ["男子單打", "男子雙打", "女子單打", "女子雙打", "混合雙打"]
-    # # 預設選中第二項 "男子雙打"
-    # index = 0  # 索引從 0 開始
-    # # 顯示下拉選單
-    # selected_event = st.selectbox(
-    #     "選擇欲查詢的項目",  # 顯示的標題
-    #     options_event,  # 選項列表
-    #     index=index,  # 預設選中的索引
-    #     key="selectbox_event",  # 唯一的 key
-    # )
-    # 顯示文字輸入框
-    player_name = st.text_input("請輸入欲查詢的選手名(雙打則以/區隔)：", "", key="player_name")
-
 
 # 用來顯示表格的區域
 table_area = st.container()
@@ -129,6 +115,7 @@ if selected_date1:
         st.error(f"Error occurred while fetching data for {selected_date1}: {e}")
 
 
+player_name = st.text_input("請輸入欲查詢的選手名(雙打則以/區隔)：", "", key="player_name")
 st.markdown(f"<h4>以下是關於 {player_name} 選手的歷年排名變化</h2>", unsafe_allow_html=True)
 
 
