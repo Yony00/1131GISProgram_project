@@ -225,15 +225,15 @@ st.write("Original DataFrame:")
 st.write(st.session_state.df)
 
 # 日期選擇器
-dateoptions = st.session_state.df['Date'].dt.strftime('%m/%d/%Y').tolist() 
+dateoptions = st.session_state.df['Date'].dt.strftime('%m/%d/%Y').tolist()  # 確保是字串列表
 data_end = st.selectbox("結束日期範圍", dateoptions, index=0, key="data_end")
 data_start = st.selectbox("開始日期範圍", dateoptions, index=len(dateoptions) - 1, key="data_start")
 
-# 轉換選擇的日期為 datetime 格式
+# 確保選擇的日期是 datetime 格式
 data_start_dt = datetime.strptime(data_start, '%m/%d/%Y')
 data_end_dt = datetime.strptime(data_end, '%m/%d/%Y')
 
-# 檢查日期區間有效性並篩選數據
+# 篩選數據
 if data_start_dt <= data_end_dt:
     st.session_state.filtered_df = st.session_state.df[
         (st.session_state.df['Date'] >= data_start_dt) &
@@ -243,5 +243,7 @@ if data_start_dt <= data_end_dt:
 # 顯示篩選後的結果
 st.write("Filtered DataFrame:")
 filtered_df = st.session_state.filtered_df.copy()
+filtered_df['Date'] = filtered_df['Date'].dt.strftime('%m/%d/%Y')  # 恢復日期格式顯示
+st.write(filtered_df)
 filtered_df['Date'] = filtered_df['Date'].dt.strftime('%m/%d/%Y')  # 恢復日期格式顯示
 st.write(filtered_df)
