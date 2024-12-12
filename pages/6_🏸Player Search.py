@@ -220,7 +220,8 @@ if st.session_state.df is not None:
 
 
 #            
-            # 繪製折線圖
+            fig, ax1 = plt.subplots(figsize=(10, 6))
+
             # 左Y軸（積分）折線圖
             sns.lineplot(data=plt_df, x=plt_df['Date'].dt.year, y='Points', ax=ax1, color='blue')
             ax1.set_xlabel('Year')
