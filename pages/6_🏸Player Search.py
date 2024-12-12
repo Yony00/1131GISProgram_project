@@ -191,7 +191,7 @@ if st.session_state.df is not None:
             plt_df['Points'] = plt_df['Points'].fillna(0).astype(int)  # 如果還有 'NaN'，填充為 0 並轉換為整數
 
             # 繪製折線圖，僅顯示年份
-            fig, ax = plt.subplots(figsize=(8, 4))
+            fig, ax = plt.subplots(figsize=(6, 3))
             sns.lineplot(data=plt_df, x=plt_df['Date'].dt.year, y='Points', ax=ax)
 
 
@@ -199,7 +199,7 @@ if st.session_state.df is not None:
             y_ticks = range(20000, plt_df['Points'].max() + 10000, 10000)  # 自動生成連續刻度
             plt.yticks(y_ticks)
             ax.axhline(y=0, color='red', linestyle='--')
-            ax.legend(['nodata (Red line)'])  # 用於顯示紅線的含義
+            ax.legend(['nodata (Red line)'], edgecolor='red', color='red')  # 用於顯示紅線的含義
 
             plt.yticks(y_ticks)
             ax.set_xlabel('Year')
