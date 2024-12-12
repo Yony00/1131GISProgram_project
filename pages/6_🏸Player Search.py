@@ -119,23 +119,23 @@ if selected_date1:
         st.error(f"Error occurred while fetching data for {selected_date1}: {e}")
 
 
-row1_1, row1_2 = st.columns((2,1))
-with row1_2:
-    options_event = ["男子單打", "男子雙打", "女子單打", "女子雙打", "混合雙打"]
-    # 預設選中第二項 "男子雙打"
-    index = 0  # 索引從 0 開始
-    # 顯示下拉選單
-    search_event = st.selectbox(
-        "該選手(組合)的項目",  # 顯示的標題
-        options_event,  # 選項列表
-        index=index,  # 預設選中的索引
-        key="search_event",  # 唯一的 key
-    )
-with row1_1:
-    player_name = st.text_input("請輸入欲查詢的選手名(組合名)，格式參考上表：", "", key="player_name")
-st.markdown(f"<h4>以下是關於 {search_event} 項目， {player_name} 選手的歷年排名變化</h2>", unsafe_allow_html=True)
+# row1_1, row1_2 = st.columns((2,1))
+# with row1_2:
+#     options_event = ["男子單打", "男子雙打", "女子單打", "女子雙打", "混合雙打"]
+#     # 預設選中第二項 "男子雙打"
+#     index = 0  # 索引從 0 開始
+#     # 顯示下拉選單
+#     search_event = st.selectbox(
+#         "該選手(組合)的項目",  # 顯示的標題
+#         options_event,  # 選項列表
+#         index=index,  # 預設選中的索引
+#         key="search_event",  # 唯一的 key
+#     )
+# with row1_1:
+#     player_name = st.text_input("請輸入欲查詢的選手名(組合名)，格式參考上表：", "", key="player_name")
+# st.markdown(f"<h4>以下是關於 {search_event} 項目， {player_name} 選手的歷年排名變化</h2>", unsafe_allow_html=True)
 
-row2_1, row2_2, row2_3 = st.columns((1,1,1))
+# row2_1, row2_2, row2_3 = st.columns((1,1,1))
 
 
 
@@ -178,32 +178,76 @@ row2_1, row2_2, row2_3 = st.columns((1,1,1))
 
 ##############
 # 確保網頁重跑後仍保留爬取的數據
-if "df" not in st.session_state:
-    st.session_state.df = None
+# if "df" not in st.session_state:
+#     st.session_state.df = None
 
-# 只有在使用者更改選手名稱時才重新爬取資料
-if player_name and st.session_state.df is None:
+# # 只有在使用者更改選手名稱時才重新爬取資料
+# if player_name and st.session_state.df is None:
+#     st.session_state.df = scrape_bwf_ranking_by_name(date_id_dict, search_event, player_name)
+#     st.experimental_rerun()  # 重跑網頁
+
+# if st.session_state.df is not None:
+#     df = st.session_state.df
+
+#     with row2_1:
+#         # 顯示原始數據
+#         st.write("Original DataFrame:")
+#         st.write(df)
+
+#     # 下拉選擇日期範圍
+#     with row2_2:
+#         dateoptions = df['Date']
+#         data_end = st.selectbox("結束日期範圍", dateoptions, index=0, key="data_end")
+#         data_start = st.selectbox("開始日期範圍", dateoptions, index=len(dateoptions) - 1, key="data_start")
+
+#     # 篩選操作
+#     with row2_3:
+#         if data_end and data_start:
+#             # 篩選並顯示篩選後的數據
+#             df['Date'] = pd.to_datetime(df['Date'], format='%m/%d/%Y')
+#             data_start = pd.to_datetime(data_start, format='%m/%d/%Y')
+#             data_end = pd.to_datetime(data_end, format='%m/%d/%Y')
+
+#             # 篩選日期範圍內的數據
+#             df2 = df[(df['Date'] >= data_start) & (df['Date'] <= data_end)]
+#             df2['Date'] = df2['Date'].dt.strftime('%m/%d/%Y')  # 恢復日期格式
+#             st.write("Filtered DataFrame:")
+#             st.write(df2)
+
+
+
+
+row1_1, row1_2 = st.columns((2, 1))
+
+# 顯示下拉選單和輸入框
+with row1_2:
+    options_event = ["男子單打", "男子雙打", "女子單打", "女子雙打", "混合雙打"]
+    index = 0
+    search_event = st.selectbox("該選手(組合)的項目", options_event, index=index, key="search_event")
+
+with row1_1:
+    player_name = st.text_input("請輸入欲查詢的選手名(組合名)，格式參考上表：", "", key="player_name")
+
+# 當player_name更改時，檢查並重新搜尋資料
+if st.session_state.get('player_name') != player_name:
+    st.session_state['player_name'] = player_name
     st.session_state.df = scrape_bwf_ranking_by_name(date_id_dict, search_event, player_name)
-    st.experimental_rerun()  # 重跑網頁
 
+# 若有數據則顯示
 if st.session_state.df is not None:
     df = st.session_state.df
 
     with row2_1:
-        # 顯示原始數據
         st.write("Original DataFrame:")
         st.write(df)
 
-    # 下拉選擇日期範圍
     with row2_2:
         dateoptions = df['Date']
         data_end = st.selectbox("結束日期範圍", dateoptions, index=0, key="data_end")
         data_start = st.selectbox("開始日期範圍", dateoptions, index=len(dateoptions) - 1, key="data_start")
 
-    # 篩選操作
     with row2_3:
         if data_end and data_start:
-            # 篩選並顯示篩選後的數據
             df['Date'] = pd.to_datetime(df['Date'], format='%m/%d/%Y')
             data_start = pd.to_datetime(data_start, format='%m/%d/%Y')
             data_end = pd.to_datetime(data_end, format='%m/%d/%Y')
@@ -213,6 +257,4 @@ if st.session_state.df is not None:
             df2['Date'] = df2['Date'].dt.strftime('%m/%d/%Y')  # 恢復日期格式
             st.write("Filtered DataFrame:")
             st.write(df2)
-
-
 
