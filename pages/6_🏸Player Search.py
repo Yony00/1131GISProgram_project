@@ -184,7 +184,7 @@ if st.session_state.df is not None:
         if user_choice == "左表":
             # 繪製條形圖
             fig, ax = plt.subplots(figsize=(8, 6))
-            sns.barplot(data=df, x='Date', y='Points', ax=ax)
+            sns.barplot(data=df, x=pd.to_datetime(df['Date'], format='%m/%d/%Y'), y='Points', ax=ax)
             # 在 Streamlit 中顯示
             st.write("積分、排名變化")
             st.pyplot(fig)
