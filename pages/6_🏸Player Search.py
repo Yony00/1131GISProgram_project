@@ -179,7 +179,9 @@ if st.session_state.df is not None:
             df['Date'] = df['Date'].dt.strftime('%m/%d/%Y')  # 恢復日期格式
             st.write("日期已篩選:")
             st.write(df2)
-    with st.container():
+    row3_1, row3_2 = st.columns((2,1))
+
+    with row3_1:
         user_choice = st.radio("使用哪張表格繪圖：", ("左表", "右表"))
         if user_choice == "左表":
             plt_df=df
@@ -191,7 +193,7 @@ if st.session_state.df is not None:
             plt_df['Points'] = plt_df['Points'].fillna(0).astype(int)  # 如果還有 'NaN'，填充為 0 並轉換為整數
 
             # 繪製折線圖，僅顯示年份
-            fig, ax = plt.subplots(figsize=(14, 10))
+            fig, ax = plt.subplots(figsize=(8, 4))
             sns.lineplot(data=plt_df, x=plt_df['Date'].dt.year, y='Points', ax=ax)
 
 
