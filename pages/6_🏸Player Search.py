@@ -40,11 +40,6 @@ row0_1, row0_2 = st.columns((1,2))
 # 用來顯示表格的區域
 table_area = st.container()
 
-# 表格的左右分區
-#row1_1, row1_2 = table_area.columns((1, 1))
-# row2_1, row2_2 = table_area.columns((1, 1))
-# row3_1, row3_2 = table_area.columns((1, 1))
-
 # 檢查是否已經存儲過第一次爬蟲的資料
 if "df_initial" not in st.session_state:  # 只有在第一次爬蟲未完成時才會執行
     try:
@@ -115,8 +110,21 @@ if selected_date1:
         st.error(f"Error occurred while fetching data for {selected_date1}: {e}")
 
 
-player_name = st.text_input("請輸入欲查詢的選手名(組合名)，格式參考上表：", "", key="player_name")
-st.markdown(f"<h4>以下是關於 {player_name} 選手的歷年排名變化</h2>", unsafe_allow_html=True)
+row1_1, row1_2 = st.columns((1,2))
+with row1_2:
+    options_event = ["男子單打", "男子雙打", "女子單打", "女子雙打", "混合雙打"]
+    # 預設選中第二項 "男子雙打"
+    index = 0  # 索引從 0 開始
+    # 顯示下拉選單
+    search_event = st.selectbox(
+        "選擇欲查詢的項目",  # 顯示的標題
+        options_event,  # 選項列表
+        index=index,  # 預設選中的索引
+        key="search_event",  # 唯一的 key
+    )
+with row1_2:
+    player_name = st.text_input("請輸入欲查詢的選手名(組合名)，格式參考上表：", "", key="player_name")
+st.markdown(f"<h4>以下是關於{search_event}項目， {player_name} 選手的歷年排名變化</h2>", unsafe_allow_html=True)
 
 
 
