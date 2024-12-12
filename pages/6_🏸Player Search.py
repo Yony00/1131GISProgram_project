@@ -218,6 +218,6 @@ if st.session_state.df is not None:
             
             # 使用線作為 handles 並顯示圖例
             red_line = ax1.axhline(y=0, color='red', linestyle='--')
-            ax1.legend(handles=[red_line], labels=['nodata'])
+            ax1.legend(handles=[red_line], labels=['nodata'], fontsize=12, loc='upper left')
             
             st.pyplot(fig)
