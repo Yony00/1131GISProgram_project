@@ -45,11 +45,6 @@ with row0_2:
     # 顯示文字輸入框
     player_name = st.text_input("請輸入欲查詢的選手名(雙打則以/區隔)：", "", key="player_name")
     st.write(player_name)
-    # 當按鈕被點擊後顯示用戶輸入的內容
-        # if user_input.strip():  # 檢查輸入是否非空
-        #     st.write(f"你輸入的內容是：{user_input}")
-
-
 
 # 用來顯示表格的區域
 table_area = st.container()
@@ -78,28 +73,20 @@ if "df_initial" not in st.session_state:  # 只有在第一次爬蟲未完成時
 
 if "date_id_dict" in st.session_state:
     date_id_dict = st.session_state.date_id_dict
-
 ##################
 
 
+##################
+# 使用 selectbox1 讓使用者選擇日期(預設為 st.session_state.new_date)
+options = list(date_id_dict.keys())
+index = options.index(st.session_state.new_date)
 
-
-
-
-
-# 使用 selectbox1 讓使用者選擇項目
-options = ["男子單打", "男子雙打", "女子單打", "女子雙打", "混合雙打"]
-
-# 預設選中第二項 "男子雙打"
-index = 0  # 索引從 0 開始
-
-# 顯示下拉選單
 with row2_1:
-    selected_event = st.selectbox(
-        "選擇欲查詢的項目",  # 顯示的標題
-        options,  # 選項列表
-        index=index,  # 預設選中的索引
-        key="selectbox_event",  # 唯一的 key
+    selected_date1 = st.selectbox(
+        "選擇欲查詢的日期 (預設最新日期)",
+        options,
+        index=index,
+        key="selectbox_date1",  # 添加唯一的 key
     )
 
 # 如果選擇了日期
@@ -115,4 +102,3 @@ if selected_date1:
             st.write(df_selected1)
     except Exception as e:
         st.error(f"Error occurred while fetching data for {selected_date1}: {e}")
-
