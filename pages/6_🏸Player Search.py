@@ -196,6 +196,7 @@ if st.session_state.df is not None:
 
             # 繪製折線圖，僅顯示年份
 
+
             # 繪製折線圖，僅顯示年份
             fig, ax = plt.subplots(figsize=(8, 4))
             
@@ -220,7 +221,12 @@ if st.session_state.df is not None:
             ax.set_xlabel('Year')
             ax.set_ylabel('Points')
             ax.set_title('積分、排名變化')
+            
+            # 確保 x 軸顯示年份，而不是日期的完整格式
+            ax.set_xticklabels([str(year) for year in plt_df['Date'].dt.year.unique()])
+            
             plt.yticks(y_ticks)
+            plt.show()
             
             # 在 Streamlit 中顯示
             st.pyplot(fig)
