@@ -212,9 +212,12 @@ row2_1, row2_2, row2_3 = st.columns((1,1,1))
 #             df2['Date'] = df2['Date'].dt.strftime('%m/%d/%Y')  # 恢復日期格式
 #             st.write("Filtered DataFrame:")
 #             st.write(df2)
+
 # 初始化狀態
 if "df" not in st.session_state:
     st.session_state.df = scrape_bwf_ranking_by_name(date_id_dict, search_event, player_name)
+    # 確保 Date 欄位轉換為 datetime
+    st.session_state.df['Date'] = pd.to_datetime(st.session_state.df['Date'], format='%m/%d/%Y')
     st.session_state.filtered_df = st.session_state.df.copy()
 
 # 顯示原始數據
