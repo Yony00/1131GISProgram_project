@@ -196,7 +196,10 @@ if st.session_state.df is not None:
 
             # 繪製折線圖，僅顯示年份
 
+            # 繪製折線圖，僅顯示年份
             fig, ax = plt.subplots(figsize=(8, 4))
+            
+            # 繪製積分的折線圖
             sns.lineplot(data=plt_df, x=plt_df['Date'].dt.year, y='Points', ax=ax)
             
             # 繪製 Y 軸的連續變數刻度
@@ -209,13 +212,15 @@ if st.session_state.df is not None:
             # 使用線作為 handles 並顯示圖例
             ax.legend(handles=[red_line], labels=['nodata'])
             
-            # 繪製排名的長條圖
-            sns.barplot(ax=ax, x=plt_df['Date'].dt.year, y='Rank', data=plt_df, orient='h')  # orient='h' 使條形圖直向
+            # 繪製排名的長條圖，並將其畫在另一個 y 軸（右邊）
+            ax2 = ax.twinx()  # 創建共享 x 軸但擁有不同 y 軸的副軸
+            sns.barplot(ax=ax2, x=plt_df['Date'].dt.year, y='Rank', data=plt_df, orient='h', color='gray')
             
             plt.xticks(rotation=45)  # 繪製 x 軸文字旋轉
             ax.set_xlabel('Year')
             ax.set_ylabel('Points')
             ax.set_title('積分、排名變化')
             plt.yticks(y_ticks)
+            
             # 在 Streamlit 中顯示
             st.pyplot(fig)
