@@ -1,6 +1,7 @@
 import requests
 from bs4 import BeautifulSoup
 import pandas as pd
+from datetime import datetime
 
 def scrape_bwf_ranking_by_name(date_id_dict, search_event, player_name):
 
