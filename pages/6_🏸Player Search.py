@@ -467,7 +467,7 @@ if st.session_state.df is not None:
             y=CP_df_event_MXD['Points'],
             text="Rank：\n"+CP_df_event_MXD['Rank'],      # 在長條圖上顯示排名
             textposition='outside',  # 設置文字顯示位置
-            textfont=dict(size=50),
+            textfont=dict(size=18),
         ))
         
         # 更新圖表標題與布局
@@ -477,7 +477,7 @@ if st.session_state.df is not None:
             xaxis_title="Players",
             yaxis_title="Points",
             legend_title="Event",
-            height=800,  # 調整圖表高度
+            height=1000,  # 調整圖表高度
             width=1500    # 可根據需要設置寬度
 
         )
