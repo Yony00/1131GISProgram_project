@@ -525,7 +525,7 @@ if st.session_state.df is not None:
                     width=1500  # 可根據需要設置寬度
                 )
             
-                fig.show()
+                st.plotly_chart(fig)
 
 
 
