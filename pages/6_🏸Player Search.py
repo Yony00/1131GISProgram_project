@@ -483,7 +483,7 @@ if st.session_state.df is not None:
             xaxis_title="Players",
             yaxis=dict(
                         title='Points',          # Y 軸的標題
-                        range=[0, 110000],        # Y 軸的範圍
+                        range=[0, 120000],        # Y 軸的範圍
                         ),
             legend_title="Event",
             height=700,  # 調整圖表高度
