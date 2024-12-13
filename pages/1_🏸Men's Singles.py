@@ -317,7 +317,7 @@ if selected_date2 and user_choice == "是":
         ).add_to(m2)
     else:
     # 使用已經存在的地圖
-        m1 = st.session_state['m1']
+        m2 = st.session_state['m2']
     with row4_2:
         output2 = st_folium(m2, height=500, key="map2")
         # 獲取中心和縮放
