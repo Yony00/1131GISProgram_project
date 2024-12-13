@@ -1,20 +1,16 @@
 import folium
-import pandas as pd
-import geopandas as gpd
 from streamlit_folium import st_folium
 import streamlit as st
 
 # 創建第一個地圖 m1
-m1 = folium.Map(location=[0, 0], zoom_start=1)  # 設定初始中心點和縮放級別
-folium.Marker([24, 120], popup='Point 1').add_to(m1)  # 在地圖上添加點物件
+m1 = folium.Map(location=[0, 0], zoom_start=5, control_scale=True)  # 使用控制縮放和比例尺
+folium.TileLayer('Stamen Terrain').add_to(m1)  # 使用不同的底圖 'Stamen Terrain'
 
 # 創建第二個地圖 m2
-m2 = folium.Map(location=[0, 0], zoom_start=1)  # 設定初始中心點和縮放級別
+m2 = folium.Map(location=[0, 0], zoom_start=5, control_scale=True)  # 使用控制縮放和比例尺
+folium.TileLayer('Stamen Toner').add_to(m2)  # 使用不同的底圖 'Stamen Toner'
 
-# 添加 gdf2 到地圖
-folium.Marker([25, 120], popup='Point 2').add_to(m2)  # 在地圖上添加點物件
-
-# 使用 st_folium 在 Streamlit 中顯示地圖
+# 使用 Streamlit 展示地圖
 row1, row2 = st.columns(2)
 
 with row1:
@@ -23,12 +19,15 @@ with row1:
 with row2:
     output2 = st_folium(m2, width=400, height=300, key="map2")
 
-    # 手動輸入中心位置
-    lat = st.number_input('輸入緯度', min_value=-90.0, max_value=90.0, value=float(output2["center"]["lat"]), format="%.6f")
-    lon = st.number_input('輸入經度', min_value=-180.0, max_value=180.0, value=float(output2["center"]["lng"]), format="%.6f")
+    # 設定同步移動和縮放
+    st.script_runner.heartbeat()
+    st.session_state.map_center = output1["center"]
+    st.session_state.map_zoom = output1["zoom"]
 
-    # 更新地圖的中心
-    m2.location = [lat, lon]
+    def sync_map(event):
+        # 根據另一個地圖的中心位置更新 m2 的中心和縮放級別
+        m2.location = st.session_state.map_center
+        m2.zoom_start = st.session_state.map_zoom
 
-    # 更新 `output2` 的中心位置呈現在 `st_folium` 上
-    output2 = st_folium(m2, width=400, height=300, key="map2")
+    st.session_state.sync_map = sync_map
+
