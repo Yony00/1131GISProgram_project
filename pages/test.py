@@ -14,7 +14,7 @@ st.write(output['zoom'])
 
 
 # 創建地圖
-m2 = folium.Map(location=[output['center']['lat'],output['center']['lon']], zoom_start=2)
+m2 = folium.Map(location=[output['center']['lat'],output['center']['lng']], zoom_start=2)
 
 # 在 Streamlit 中顯示地圖
 output2 = st_folium(m2, width=700, height=500, key="map2")
