@@ -210,7 +210,7 @@ if st.session_state.df is not None:
             plt_df['Date'] = pd.to_datetime(plt_df['Date'], format='%m/%d/%Y')
              # 將 'Points' 列轉換為整數，處理 nodata 與 float64 型別
             plt_df['Points'] = plt_df['Points'].replace('nodata', np.nan).astype(float)  # 替換 'nodata' 為 np.nan 並轉換為浮點數
-            plt_df['Rank'] = plt_df['Rank'].replace('nodata', 110).astype(float)  # 替換 'nodata' 為 np.nan 並轉換為浮點數
+            plt_df['Rank'] = plt_df['Rank'].replace('nodata', 105).astype(float)  # 替換 'nodata' 為 np.nan 並轉換為浮點數
 
             # 若仍有 'NaN'，再轉換為整數，這時候應該會成功
             plt_df['Points'] = plt_df['Points'].fillna(0).astype(int)  # 如果還有 'NaN'，填充為 0 並轉換為整數
@@ -226,7 +226,7 @@ if st.session_state.df is not None:
             
             # 添加一條紅色水平線在 y=0 處
             ax1.axhline(y=0, color='red', linestyle='--')
-            
+            ax1.axhline(y=0, color='coffee', linestyle='--')
             # 右Y軸（Rank）折線圖
             ax2 = ax1.twinx()  # 共享 x 軸
             sns.lineplot(data=plt_df, x=plt_df['Date'].dt.year, y='Rank', ax=ax2, color='green')
@@ -240,8 +240,9 @@ if st.session_state.df is not None:
             
             # 使用線作為 handles 並顯示圖例
             red_line = ax1.axhline(y=0, color='red', linestyle='--')
-            ax1.legend(handles=[red_line], labels=['nodata'], fontsize=20, loc='upper left')
-            
+            coffee_line = ax1.axhline(y=0, color='coffee', linestyle='--')
+            ax1.legend(handles=[red_line], labels=['Points nodata'], fontsize=20, loc='upper left')
+            ax1.legend(handles=[coffee_line], labels=['Rank nodata'], fontsize=20, loc='upper left')
             st.pyplot(fig)
             
         if user_choice == "右表":
