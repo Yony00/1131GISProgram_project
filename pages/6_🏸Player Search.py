@@ -226,93 +226,43 @@ if st.session_state.df is not None:
             st.pyplot(fig)
             
         if user_choice == "右表":
-                        # 確保數據被正確處理
-            plt_df = df2.copy()
+            plt_df=df2.copy()
             plt_df['Date'] = pd.to_datetime(plt_df['Date'], format='%m/%d/%Y')
-            
-            # 將 'Points' 和 'Rank' 列轉換為整數，並填充 'nodata' 為 0
-            plt_df['Points'] = plt_df['Points'].replace('nodata', np.nan).astype(float).fillna(0).astype(int)
-            plt_df['Rank'] = plt_df['Rank'].replace('nodata', np.nan).astype(float).fillna(0).astype(int)
-            
-            # 使用 plotly 繪製折線圖
-            fig = go.Figure()
-            
+             # 將 'Points' 列轉換為整數，處理 nodata 與 float64 型別
+            plt_df['Points'] = plt_df['Points'].replace('nodata', np.nan).astype(float)  # 替換 'nodata' 為 np.nan 並轉換為浮點數
+            plt_df['Rank'] = plt_df['Rank'].replace('nodata', np.nan).astype(float)  # 替換 'nodata' 為 np.nan 並轉換為浮點數
+
+            # 若仍有 'NaN'，再轉換為整數，這時候應該會成功
+            plt_df['Points'] = plt_df['Points'].fillna(0).astype(int)  # 如果還有 'NaN'，填充為 0 並轉換為整數
+            plt_df['Rank'] = plt_df['Rank'].fillna(0).astype(int)  # 如果還有 'NaN'，填充為 0 並轉換為整數
+
+            fig, ax1 = plt.subplots(figsize=(10, 6))
+
             # 左Y軸（積分）折線圖
-            fig.add_trace(go.Scatter(
-                x=plt_df['Date'].dt.year,
-                y=plt_df['Points'],
-                mode='lines',
-                line=dict(color='blue'),
-                name='Points'
-            ))
+            sns.lineplot(data=plt_df, x=plt_df['Date'], y='Points', ax=ax1, color='blue')
+            ax1.set_xlabel('Year')
+            ax1.set_ylabel('Points', color='blue')
+            plt.xticks(rotation=45)  # 繪製 x 軸文字旋轉
             
             # 添加一條紅色水平線在 y=0 處
-            fig.add_shape(type="line", x0=plt_df['Date'].dt.year.min(), x1=plt_df['Date'].dt.year.max(),
-                          y0=0, y1=0, line=dict(color="red", dash="dash"))
+            ax1.axhline(y=0, color='red', linestyle='--')
             
             # 右Y軸（Rank）折線圖
-            fig.add_trace(go.Scatter(
-                x=plt_df['Date'].dt.year,
-                y=plt_df['Rank'],
-                mode='lines',
-                line=dict(color='green'),
-                yaxis='y2',  # 使用第二個Y軸
-                name='Rank'
-            ))
+            ax2 = ax1.twinx()  # 共享 x 軸
+            sns.lineplot(data=plt_df, x=plt_df['Date'], y='Rank', ax=ax2, color='green')
+            y_ticks2 = range(0, plt_df['Rank'].max() + 5, 5)  # 自動生成連續刻度
+            ax2.set_ylabel('Rank', color='green')
+            ax2.set_yticks(y_ticks2)
             
-            # 設置右側Y軸刻度
-            fig.update_yaxes(title_text='Rank', side='right', ticks='outside')
+            # 繪製 Y 軸的連續變數刻度
+            y_ticks = range(20000, plt_df['Points'].max() + 10000, 10000)  # 自動生成連續刻度
+            ax1.set_yticks(y_ticks)
             
-            # 設置左側Y軸刻度
-            fig.update_yaxes(title_text='Points', side='left', ticks='outside')
+            # 使用線作為 handles 並顯示圖例
+            red_line = ax1.axhline(y=0, color='red', linestyle='--')
+            ax1.legend(handles=[red_line], labels=['nodata'], fontsize=20, loc='upper left')
             
-            # 更新布局
-            fig.update_layout(
-                xaxis_title='Year',
-                title='Points and Rank over Time',
-                height=600,
-                width=1000,
-            )
-            
-            # 顯示圖表
-            st.plotly_chart(fig)
-            # plt_df=df2.copy()
-            # plt_df['Date'] = pd.to_datetime(plt_df['Date'], format='%m/%d/%Y')
-            #  # 將 'Points' 列轉換為整數，處理 nodata 與 float64 型別
-            # plt_df['Points'] = plt_df['Points'].replace('nodata', np.nan).astype(float)  # 替換 'nodata' 為 np.nan 並轉換為浮點數
-            # plt_df['Rank'] = plt_df['Rank'].replace('nodata', np.nan).astype(float)  # 替換 'nodata' 為 np.nan 並轉換為浮點數
-
-            # # 若仍有 'NaN'，再轉換為整數，這時候應該會成功
-            # plt_df['Points'] = plt_df['Points'].fillna(0).astype(int)  # 如果還有 'NaN'，填充為 0 並轉換為整數
-            # plt_df['Rank'] = plt_df['Rank'].fillna(0).astype(int)  # 如果還有 'NaN'，填充為 0 並轉換為整數
-
-            # fig, ax1 = plt.subplots(figsize=(10, 6))
-
-            # # 左Y軸（積分）折線圖
-            # sns.lineplot(data=plt_df, x=plt_df['Date'], y='Points', ax=ax1, color='blue')
-            # ax1.set_xlabel('Year')
-            # ax1.set_ylabel('Points', color='blue')
-            # plt.xticks(rotation=45)  # 繪製 x 軸文字旋轉
-            
-            # # 添加一條紅色水平線在 y=0 處
-            # ax1.axhline(y=0, color='red', linestyle='--')
-            
-            # # 右Y軸（Rank）折線圖
-            # ax2 = ax1.twinx()  # 共享 x 軸
-            # sns.lineplot(data=plt_df, x=plt_df['Date'], y='Rank', ax=ax2, color='green')
-            # y_ticks2 = range(0, plt_df['Rank'].max() + 5, 5)  # 自動生成連續刻度
-            # ax2.set_ylabel('Rank', color='green')
-            # ax2.set_yticks(y_ticks2)
-            
-            # # 繪製 Y 軸的連續變數刻度
-            # y_ticks = range(20000, plt_df['Points'].max() + 10000, 10000)  # 自動生成連續刻度
-            # ax1.set_yticks(y_ticks)
-            
-            # # 使用線作為 handles 並顯示圖例
-            # red_line = ax1.axhline(y=0, color='red', linestyle='--')
-            # ax1.legend(handles=[red_line], labels=['nodata'], fontsize=20, loc='upper left')
-            
-            # st.pyplot(fig)
+            st.pyplot(fig)
 
     row4_1, row4_2 = st.columns((1,2))
 
