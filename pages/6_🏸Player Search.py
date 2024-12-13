@@ -493,7 +493,7 @@ if st.session_state.df is not None:
             yref="paper",
             showarrow=False,  # 隱藏箭頭
             font=dict(size=15),  # 字體大小與顏色
-            align="left",  # 靠左對齊
+            align="Right",  # 靠左對齊
         )
         
         # 顯示圖表
