@@ -21,6 +21,8 @@ from streamlit_folium import st_folium
 import folium
 
 from datetime import datetime
+import plotly.graph_objects as go
+
 
 
 
@@ -275,35 +277,44 @@ if st.session_state.df is not None:
             index=index,
             key="CP_data",  # 添加唯一的 key
             )
-        if CP_data  :
-            CP_data_id1 = date_id_dict[CP_data]
-            
-            MS_df = scrape_bwf_ranking_by_date(CP_data_id1)
-            MD_df = MDscrape_bwf_ranking_by_date(CP_data_id1)
-            WS_df = WSscrape_bwf_ranking_by_date(CP_data_id1)
-            WD_df = WDscrape_bwf_ranking_by_date(CP_data_id1)
-            MXD_df = MXDscrape_bwf_ranking_by_date(CP_data_id1)        
+        
+    if CP_data  :
+        CP_data_id1 = date_id_dict[CP_data]
+        
+        MS_df = scrape_bwf_ranking_by_date(CP_data_id1)
+        MD_df = MDscrape_bwf_ranking_by_date(CP_data_id1)
+        WS_df = WSscrape_bwf_ranking_by_date(CP_data_id1)
+        WD_df = WDscrape_bwf_ranking_by_date(CP_data_id1)
+        MXD_df = MXDscrape_bwf_ranking_by_date(CP_data_id1)        
 
-            if selected_event == "男子單打":
-                country = MS_df.loc[MS_df['Player'] == player_name, 'Country'].values
-                country=country[0]
-                CP_df_event= MS_df[MS_df['Country'] == country]
-                st.write(CP_df_event)
-            elif selected_event == "男子雙打":
-                country = MD_df.loc[MD_df['Player'] == player_name, 'Country'].values
-                CP_df_event= MD_df[MD_df['Country'] == country]
-                st.write(CP_df_event)
-            elif selected_event == "女子單打":
-                country = WS_df.loc[WS_df['Player'] == player_name, 'Country'].values
-                CP_df_event= WS_df[MW_df['Country'] == country]
-                st.write(CP_df_event)
-            elif selected_event == "女子雙打":
-                country = WD_df.loc[WD_df['Player'] == player_name, 'Country'].values
-                CP_df_event= WD_df[WD_df['Country'] == country]
-                st.write(CP_df_event)
-            elif selected_event == "混合雙打":
-                country = MXC_df.loc[MXD_df['Player'] == player_name, 'Country'].values
-                CP_df_event= MXD_df[MXD_df['Country'] == country]
-                st.write(CP_df_event)
+        if selected_event == "男子單打":
+            country = MS_df.loc[MS_df['Player'] == player_name, 'Country'].values
+            country=country[0]
+            CP_df_event= MS_df[MS_df['Country'] == country]
+            # 繪製 Pie 圖表
+            fig = go.Figure(data=[go.Pie(labels=CP_df_event["player_name"],
+                                         values=CP_df_event["Points"])],
+                            layout=go.Layout(
+                                title=go.layout.Title(text="Points")
+                            ))
             
+            # 在 Streamlit 中顯示 Pie 圖表
+            st.plotly_chart(fig)
+        elif selected_event == "男子雙打":
+            country = MD_df.loc[MD_df['Player'] == player_name, 'Country'].values
+            country=country[0]
+            CP_df_event= MD_df[MD_df['Country'] == country]
+        elif selected_event == "女子單打":
+            country = WS_df.loc[WS_df['Player'] == player_name, 'Country'].values
+            country=country[0]
+            CP_df_event= WS_df[MW_df['Country'] == country]
+        elif selected_event == "女子雙打":
+            country = WD_df.loc[WD_df['Player'] == player_name, 'Country'].values
+            country=country[0]
+            CP_df_event= WD_df[WD_df['Country'] == country]
+        elif selected_event == "混合雙打":
+            country = MXC_df.loc[MXD_df['Player'] == player_name, 'Country'].values
+            country=country[0]
+            CP_df_event= MXD_df[MXD_df['Country'] == country]
+        
             
