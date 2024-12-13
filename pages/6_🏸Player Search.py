@@ -32,7 +32,7 @@ st.markdown(
     """
     <style>
     .stApp {
-        background-image: url('https://img1.wallspic.com/previews/0/4/9/5/5/155940/155940-hei_se_he_bai_se_de-he_yin_ying_de_se_cai-xiang_shi_zhi_chu-x750.jpg'); /* 指定背景圖像的URL或路徑 */
+        background-image: url('https://media.istockphoto.com/id/1055106830/zh/%E5%90%91%E9%87%8F/%E6%90%9C%E7%B4%A2%E6%AC%84%E5%90%91%E9%87%8F%E5%9C%96%E7%A4%BA.jpg?s=612x612&w=0&k=20&c=DtqxRNbysSBV6reBfJyxPw209o6K67RT7PX1jQN9KTs='); /* 指定背景圖像的URL或路徑 */
                 background-size: cover;  /* 讓背景圖像填滿整個視窗 */
 
         background-position: center;  /* 背景圖像居中 */
