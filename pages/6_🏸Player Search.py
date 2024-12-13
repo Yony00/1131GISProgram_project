@@ -417,4 +417,55 @@ if st.session_state.df is not None:
         CP_df_event_WS= WS_df[WS_df['Country'] == country]
         CP_df_event_WD= WD_df[WD_df['Country'] == country]
         CP_df_event_MXD= MXD_df[MXD_df['Country'] == country]
-            
+
+        # 項目名稱列表
+        events = ["Men's Singles", "Women's Singles", "Men's Doubles", "Women's Doubles", "Mixed Doubles"]
+        
+        # 建立圖表
+        fig = go.Figure()
+        
+        # 添加每個項目的長條圖
+        fig.add_trace(go.Bar(
+            name="Men's Singles",
+            x=CP_df_event_MS['Player'],  # X 軸：選手名字
+            y=CP_df_event_MS['Points']        # Y 軸：積分
+        ))
+        
+        fig.add_trace(go.Bar(
+            name="Women's Singles",
+            x=CP_df_event_WS['Player'], 
+            y=CP_df_event_WS['Points']
+        ))
+        
+        fig.add_trace(go.Bar(
+            name="Men's Doubles",
+            x=CP_df_event_MD['Player'], 
+            y=CP_df_event_MD['Points']
+        ))
+        
+        fig.add_trace(go.Bar(
+            name="Women's Doubles",
+            x=CP_df_event_WD['Player'], 
+            y=CP_df_event_WD['Points']
+        ))
+        
+        fig.add_trace(go.Bar(
+            name="Mixed Doubles",
+            x=CP_df_event_MXD['Player'], 
+            y=CP_df_event_MXD['Points']
+        ))
+        
+        # 更新圖表標題與布局
+        fig.update_layout(
+            barmode='group',  # 以群組形式顯示柱狀圖
+            title="同國家不同項目中，不同選手的積分",
+            xaxis_title="Players",
+            yaxis_title="Points",
+            legend_title="Event"
+        )
+        
+        # 顯示圖表
+        st.plotly_chart(fig)
+
+
+
