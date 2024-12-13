@@ -421,111 +421,76 @@ if st.session_state.df is not None:
         
                 # 項目名稱列表
                 events =["男子單打", "男子雙打", "女子單打", "女子雙打", "混合雙打"]
-                # # 建立圖表
-                # fig = go.Figure()
-                
-                # # 添加每個項目的長條圖
-                # fig.add_trace(go.Bar(
-                #     name="男子單打",
-                #     x=CP_df_event_MS['Player'],  # X 軸：選手名字
-                #     y=CP_df_event_MS['Points']    ,    # Y 軸：積分
-                #     text=CP_df_event_MS['Rank'],      # 在長條圖上顯示排名
-                #     textposition='inside',  # 設置文字顯示位置
-                #     textfont=dict(size=18),
-                # ))
-                
-                # fig.add_trace(go.Bar(
-                #     name="女子單打",
-                #     x=CP_df_event_WS['Player'], 
-                #     y=CP_df_event_WS['Points'],
-                #     text=CP_df_event_WS['Rank'],      # 在長條圖上顯示排名
-                #     textposition='inside',  # 設置文字顯示位置
-                #     textfont=dict(size=18),
-                # ))
-                
-                # fig.add_trace(go.Bar(
-                #     name="男子雙打",
-                #     x=CP_df_event_MD['Player'], 
-                #     y=CP_df_event_MD['Points'],
-                #     text=CP_df_event_MD['Rank'],      # 在長條圖上顯示排名
-                #     textposition='inside',  # 設置文字顯示位置
-                #     textfont=dict(size=18),
-                # ))
-                
-                # fig.add_trace(go.Bar(
-                #     name="女子雙打",
-                #     x=CP_df_event_WD['Player'], 
-                #     y=CP_df_event_WD['Points'],
-                #     text=CP_df_event_WD['Rank'],      # 在長條圖上顯示排名
-                #     textposition='inside',  # 設置文字顯示位置
-                #     textfont=dict(size=18),
-                # ))
-                
-                # fig.add_trace(go.Bar(
-                #     name="混合雙打",
-                #     x=CP_df_event_MXD['Player'], 
-                #     y=CP_df_event_MXD['Points'],
-                #     text=CP_df_event_MXD['Rank'],      # 在長條圖上顯示排名
-                #     textposition='inside',  # 設置文字顯示位置
-                #     textfont=dict(size=18),
-                # ))
-                
-                # # 更新圖表標題與布局
-                # fig.update_layout(
-                #     barmode='group',  # 以群組形式顯示柱狀圖
-                #     title=f"該時期 {country} 不同項目中，不同選手的積分、排名，圖中數字為世界排名(Rank)",
-                #     xaxis_title="Players",
-                #     yaxis=dict(
-                #                 title='Points',          # Y 軸的標題
-                #                 range=[0, 110000],        # Y 軸的範圍
-                #                 ),
-                #     legend_title="Event",
-                #     height=1000,  # 調整圖表高度
-                #     width=1500    # 可根據需要設置寬度
-        
-                # )
-           
-                
-                # # 顯示圖表
-                # st.plotly_chart(fig)
-        
-                
-                # 假設這些是您的資料
+                # 建立圖表
                 fig = go.Figure()
-        
-                # 特定的選手        
+                
                 # 添加每個項目的長條圖
-                for event_name, CP_df_event in zip(['男子單打', '女子單打', '男子雙打', '女子雙打', '混合雙打'],
-                                                    [CP_df_event_MS, CP_df_event_WS, CP_df_event_MD, CP_df_event_WD, CP_df_event_MXD]):
-                    is_highlight = CP_df_event['Player'] == highlight_player
-                    
-                    fig.add_trace(go.Bar(
-                        name=event_name,
-                        x=CP_df_event['Player'],  # X 軸：選手名字
-                        y=CP_df_event['Points'],  # Y 軸：積分
-                        text=CP_df_event['Rank'],  # 在長條圖上顯示排名
-                        textposition='inside',  # 設置文字顯示位置
-                        textfont=dict(size=18, weight='bold' if is_highlight.any() else 'normal'),  # 根據是否突出選手來改變字體粗細
-                        marker=dict(
-                            color=['red' if is_highlight else 'blue' for highlight in is_highlight]  # 根據是否突出選手來變更顏色
-                        )
-                    ))
-            
-            # 更新圖表屬性
+                fig.add_trace(go.Bar(
+                    name="男子單打",
+                    x=CP_df_event_MS['Player'],  # X 軸：選手名字
+                    y=CP_df_event_MS['Points']    ,    # Y 軸：積分
+                    text=CP_df_event_MS['Rank'],      # 在長條圖上顯示排名
+                    textposition='inside',  # 設置文字顯示位置
+                    textfont=dict(size=18),
+                ))
+                
+                fig.add_trace(go.Bar(
+                    name="女子單打",
+                    x=CP_df_event_WS['Player'], 
+                    y=CP_df_event_WS['Points'],
+                    text=CP_df_event_WS['Rank'],      # 在長條圖上顯示排名
+                    textposition='inside',  # 設置文字顯示位置
+                    textfont=dict(size=18),
+                ))
+                
+                fig.add_trace(go.Bar(
+                    name="男子雙打",
+                    x=CP_df_event_MD['Player'], 
+                    y=CP_df_event_MD['Points'],
+                    text=CP_df_event_MD['Rank'],      # 在長條圖上顯示排名
+                    textposition='inside',  # 設置文字顯示位置
+                    textfont=dict(size=18),
+                ))
+                
+                fig.add_trace(go.Bar(
+                    name="女子雙打",
+                    x=CP_df_event_WD['Player'], 
+                    y=CP_df_event_WD['Points'],
+                    text=CP_df_event_WD['Rank'],      # 在長條圖上顯示排名
+                    textposition='inside',  # 設置文字顯示位置
+                    textfont=dict(size=18),
+                ))
+                
+                fig.add_trace(go.Bar(
+                    name="混合雙打",
+                    x=CP_df_event_MXD['Player'], 
+                    y=CP_df_event_MXD['Points'],
+                    text=CP_df_event_MXD['Rank'],      # 在長條圖上顯示排名
+                    textposition='inside',  # 設置文字顯示位置
+                    textfont=dict(size=18),
+                ))
+                
+                # 更新圖表標題與布局
                 fig.update_layout(
                     barmode='group',  # 以群組形式顯示柱狀圖
-                    title="該時期不同選手的積分、排名",
+                    title=f"該時期 {country} 不同項目中，不同選手的積分、排名，圖中數字為世界排名(Rank)",
                     xaxis_title="Players",
                     yaxis=dict(
-                        title='Points',  # Y 軸的標題
-                        range=[0, 110000],  # Y 軸的範圍
-                    ),
+                                title='Points',          # Y 軸的標題
+                                range=[0, 110000],        # Y 軸的範圍
+                                ),
                     legend_title="Event",
                     height=1000,  # 調整圖表高度
-                    width=1500  # 可根據需要設置寬度
+                    width=1500    # 可根據需要設置寬度
+        
                 )
-            
+           
+                
+                # 顯示圖表
                 st.plotly_chart(fig)
+        
+                
+  
 
 
 
