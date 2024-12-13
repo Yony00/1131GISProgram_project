@@ -411,3 +411,10 @@ if st.session_state.df is not None:
                 st.plotly_chart(fig)
         
             
+
+        CP_df_event_MS= MS_df[MS_df['Country'] == country]
+        CP_df_event_MD= MD_df[MD_df['Country'] == country]
+        CP_df_event_WS= WS_df[WS_df['Country'] == country]
+        CP_df_event_WD= WD_df[WD_df['Country'] == country]
+        CP_df_event_MXD= MXD_df[MXD_df['Country'] == country]
+            
