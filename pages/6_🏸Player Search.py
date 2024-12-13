@@ -491,7 +491,7 @@ if st.session_state.df is not None:
             xref="paper",  # 以圖表紙張為參考坐標
             yref="paper",
             showarrow=False,  # 隱藏箭頭
-            font=dict(size=15, color="black"),  # 設定文字大小與顏色
+            font=dict(size=15, ),  # 設定文字大小與顏色
             align="center"  # 文本居中
         )
         
