@@ -433,6 +433,7 @@ if st.session_state.df is not None:
             text=CP_df_event_MS['Rank'],      # 在長條圖上顯示排名
             textposition='inside',  # 設置文字顯示位置
             textfont=dict(size=18),
+            marker_color='lightblue'
         ))
         
         fig.add_trace(go.Bar(
@@ -442,6 +443,7 @@ if st.session_state.df is not None:
             text=CP_df_event_WS['Rank'],      # 在長條圖上顯示排名
             textposition='inside',  # 設置文字顯示位置
             textfont=dict(size=18),
+            marker_color='pink'
         ))
         
         fig.add_trace(go.Bar(
@@ -451,6 +453,7 @@ if st.session_state.df is not None:
             text=CP_df_event_MD['Rank'],      # 在長條圖上顯示排名
             textposition='inside',  # 設置文字顯示位置
             textfont=dict(size=18),
+            marker_color='blue'
         ))
         
         fig.add_trace(go.Bar(
@@ -460,6 +463,7 @@ if st.session_state.df is not None:
             text=CP_df_event_WD['Rank'],      # 在長條圖上顯示排名
             textposition='inside',  # 設置文字顯示位置
             textfont=dict(size=18),
+            marker_color='red'
         ))
         
         fig.add_trace(go.Bar(
@@ -469,6 +473,7 @@ if st.session_state.df is not None:
             text=CP_df_event_MXD['Rank'],      # 在長條圖上顯示排名
             textposition='inside',  # 設置文字顯示位置
             textfont=dict(size=18),
+            marker_color='green'
         ))
         
         # 更新圖表標題與布局
