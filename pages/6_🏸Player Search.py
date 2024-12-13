@@ -341,7 +341,7 @@ if st.session_state.df is not None:
         elif selected_event == "女子單打":
             country = WS_df.loc[WS_df['Player'] == player_name, 'Country'].values
             country=country[0]
-            CP_df_event= WS_df[MW_df['Country'] == country]
+            CP_df_event= WS_df[WS_df['Country'] == country]
             # 繪製 Pie 圖表
             with row5_1:
                 # 指定需要凸顯的選手
