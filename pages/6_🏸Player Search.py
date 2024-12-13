@@ -44,7 +44,8 @@ st.markdown(
 
 # 設定頁面標題
 st.title("特定選手/組合搜尋")
-
+logo = "https://www.google.com/url?sa=i&url=https%3A%2F%2Fzh.lovepik.com%2Fimage-401346704%2Fmagnifier.html&psig=AOvVaw3TWHbeU_Z2L-MRat01s_Ot&ust=1734195724653000&source=images&cd=vfe&opi=89978449&ved=0CBQQjRxqFwoTCOj2sdOcpYoDFQAAAAAdAAAAABAE"
+st.sidebar.image(logo)
 highlight_word = " LEE Yang/ WANG Chi-Lin"
 
 st.write(
