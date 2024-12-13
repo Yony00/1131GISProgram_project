@@ -248,6 +248,14 @@ if st.session_state.df is not None:
             
         if user_choice == "右表":
             plt_df=df2.copy()
+            if 'nodata' in plt_df['Points'].astype(str).unique():
+                legend1 = True
+            else:
+                legend1 = False
+            if 'nodata' in plt_df['Rank'].astype(str).unique():
+                legend2 = True
+            else:
+                legend2 = False            
             plt_df['Date'] = pd.to_datetime(plt_df['Date'], format='%m/%d/%Y')
              # 將 'Points' 列轉換為整數，處理 nodata 與 float64 型別
             plt_df['Points'] = plt_df['Points'].replace('nodata', np.nan).astype(float)  # 替換 'nodata' 為 np.nan 並轉換為浮點數
@@ -265,15 +273,24 @@ if st.session_state.df is not None:
             ax1.set_ylabel('Points', color='blue')
             plt.xticks(rotation=45)  # 繪製 x 軸文字旋轉
             # 添加一條紅色水平線在 y=0 處
-            ax1.axhline(y=0, color='red', linestyle='--')
+            if legend1:
+                ax1.axhline(y=0, color='red', linestyle='--')
+                red_line = ax1.axhline(y=0, color='red', linestyle='--')
+                ax1.legend(handles=[red_line], labels=['Points nodata'], fontsize=20, loc='lower left', bbox_to_anchor=(0, 0.1))
+
+
             # 右Y軸（Rank）折線圖
             ax2 = ax1.twinx()  # 共享 x 軸
             sns.lineplot(data=plt_df, x=plt_df['Date'], y='Rank', ax=ax2, color='green')
             y_ticks2 = range(0, plt_df['Rank'].max() + 10, 10)  # 自動生成連續刻度
             ax2.set_ylabel('Rank', color='green')
+            if legend2:
+                ax2.axhline(y=105, color='brown', linestyle='--')
+                brown_line = ax2.axhline(y=105, color='brown', linestyle='--')   
+                ax2.legend(handles=[brown_line], labels=['Rank nodata'], fontsize=20, loc='upper left', bbox_to_anchor=(0, 0.9))
 
             ax2.set_yticks(y_ticks2)
-            
+
             # 繪製 Y 軸的連續變數刻度
             y_ticks = range(20000, plt_df['Points'].max() + 10000, 10000)  # 自動生成連續刻度
             ax1.set_yticks(y_ticks)
