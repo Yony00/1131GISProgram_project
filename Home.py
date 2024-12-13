@@ -1,5 +1,17 @@
 import streamlit as st
 import leafmap.foliumap as leafmap
+st.markdown(
+    """
+    <style>
+    .stApp {
+        background-image: url('https://i.pinimg.com/236x/54/b9/74/54b974d575ab7257db0ed2ccda65a9c4.jpg');  /* 指定背景圖像的URL或路徑 */
+        background-size: cover;  /* 讓背景圖像填滿整個視窗 */
+        background-position: center;  /* 背景圖像居中 */
+    }
+    </style>
+    """,
+    unsafe_allow_html=True
+)
 
 st.set_page_config(page_title="BWF World Ranking", layout="wide")
 
