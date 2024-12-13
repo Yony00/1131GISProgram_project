@@ -267,7 +267,7 @@ if st.session_state.df is not None:
     row4_1, row4_2 = st.columns((1,2))
 
     with row4_1:
-        st.markdown(f"<h4>與該國同時期其他選手/組合比較：</h2>", unsafe_allow_html=True)
+        st.markdown("與該國同時期其他選手/組合比較：")
 
     with row4_2:
         CP_dataoptions = list(date_id_dict.keys())
