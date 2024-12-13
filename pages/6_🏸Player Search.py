@@ -473,7 +473,8 @@ if st.session_state.df is not None:
         # 更新圖表標題與布局
         fig.update_layout(
             barmode='group',  # 以群組形式顯示柱狀圖
-            title=f"該時期 {country} 不同項目中，不同選手的積分、排名",
+            title=f"該時期 {country} 不同項目中，不同選手的積分、排名 \n
+            圖中數字為世界排名(Rank)",
             xaxis_title="Players",
             yaxis=dict(
                         title='Points',          # Y 軸的標題
@@ -484,17 +485,7 @@ if st.session_state.df is not None:
             width=1500    # 可根據需要設置寬度
 
         )
-        # 添加說明文字在圖例下方
-        fig.add_annotation(
-            text="圖中數字表示 \n世界排名(Rank)",  # 說明文字
-            x=1.2,  # 調整到圖例下方
-            y=0.8,  # 視圖例的位置調整
-            xref="paper",
-            yref="paper",
-            showarrow=False,  # 隱藏箭頭
-            font=dict(size=15),  # 字體大小與顏色
-            align="left",  # 靠左對齊
-        )
+   
         
         # 顯示圖表
         st.plotly_chart(fig)
