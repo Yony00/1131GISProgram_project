@@ -32,7 +32,8 @@ st.markdown(
 )
 # 設定頁面標題
 st.title("Women's Singles 女子單打")
-
+logo = "https://imgcdn.cna.com.tw/www/WebPhotos/1024/20231217/1152x768_wmkn_0_C20231217000160.jpg"
+st.sidebar.image(logo)
 row0_1,XX, row0_2 = st.columns((3,1, 4))
 with row0_1:
     st.write(
