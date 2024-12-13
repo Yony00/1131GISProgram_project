@@ -254,89 +254,45 @@ if selected_date2 and user_choice == "是":
     # **左側地圖**
     row4_1, row4_2 = st.columns(2)
     
-    # # 初始化第一個 Folium 地圖
-    # m1 = folium.Map(location=[0, 0], zoom_start=1)
+    # 初始化第一個 Folium 地圖
+    m1 = folium.Map(location=[0, 0], zoom_start=1)
     
-    # # 添加 gdf1 到地圖
-    # folium.GeoJson(
-    #     gdf1,
-    #     name=f"BWF Men's Singles World Ranking for {selected_date1}",
-    #     style_function=style_function_blue,
-    #     popup = folium.GeoJsonPopup(fields=["Country", "player_count","playername"], aliases=["Country:", "Player Count:","Player Name:"]),
-    #     popup_keep_highlighted=True
-    # ).add_to(m1)
+    # 添加 gdf1 到地圖
+    folium.GeoJson(
+        gdf1,
+        name=f"BWF Men's Singles World Ranking for {selected_date1}",
+        style_function=style_function_blue,
+        popup = folium.GeoJsonPopup(fields=["Country", "player_count","playername"], aliases=["Country:", "Player Count:","Player Name:"]),
+        popup_keep_highlighted=True
+    ).add_to(m1)
     
-    # # 將地圖嵌入到 Streamlit 並獲取交互結果
-    # with row4_1:
-    #     output1 = st_folium(m1, height=500, key="map1")
-# 創建 Folium 地圖
-    def initialize_map():
-        m1 = folium.Map(location=[0, 0], zoom_start=1)
-        # 添加 gdf1 到地圖
-        folium.GeoJson(
-            gdf1,
-            name=f"BWF Men's Singles World Ranking for {selected_date1}",
-            style_function=style_function_blue,
-            popup=folium.GeoJsonPopup(fields=["Country", "player_count", "playername"], 
-                                      aliases=["Country:", "Player Count:", "Player Name:"]),
-            popup_keep_highlighted=True
-        ).add_to(m1)
-        return m1
-    
-    # 創建地圖對象
-    if "m1" not in st.session_state:
-        st.session_state["m1"] = initialize_map()
-
+    # 將地圖嵌入到 Streamlit 並獲取交互結果
     with row4_1:
-
-    
-        # 更新地圖的中心點和縮放級別
-        m1 = st.session_state["m1"]
-
-
-        # 嵌入地圖並顯示
         output1 = st_folium(m1, height=500, key="map1")
-        # **右側地圖**
 
-            # 創建 Folium 地圖
-    if 'm2' not in st.session_state:
-        # 如果地圖不存在於 session_state，創建並保存
-        m2 = folium.Map(location=[0, 0], zoom_start=1)
-        st.session_state['m2'] = m2
-    
-        # 添加 gdf1 到地圖
-        folium.GeoJson(
-            gdf2,
-            name=f"BWF Men's Singles World Ranking for {selected_date1}",
-            style_function=style_function_red,
-            popup=folium.GeoJsonPopup(fields=["Country", "player_count", "playername"], 
-                                      aliases=["Country:", "Player Count:", "Player Name:"]),
-            popup_keep_highlighted=True
-        ).add_to(m2)
-    else:
-    # 使用已經存在的地圖
-        m2 = st.session_state['m2']
-    with row4_2:
-        output2 = st_folium(m2, height=500, key="map2")
-        # 獲取中心和縮放
+        **右側地圖**
+
+
+        獲取中心和縮放
         #center = [output1["center"]["lat"], output1["center"]["lng"]]
         #zoom = output1["zoom"]
-
-        # # 初始化第二個 Folium 地圖
-        # m2 = folium.Map(location=center, zoom_start=zoom)
+        center = [0,0]
+        zoom =1
+        # 初始化第二個 Folium 地圖
+        m2 = folium.Map(location=center, zoom_start=zoom)
     
-        # # 添加 gdf2 到地圖
-        # folium.GeoJson(
-        #     gdf2,
-        #     name=f"BWF Men's Singles World Ranking for {selected_date2}",
-        #     style_function=style_function_red,
-        #     popup = folium.GeoJsonPopup(fields=["Country", "player_count","playername"], aliases=["Country:", "Player Count:","Player Name:"]),
-        #     popup_keep_highlighted=True
-        # ).add_to(m2)
+        # 添加 gdf2 到地圖
+        folium.GeoJson(
+            gdf2,
+            name=f"BWF Men's Singles World Ranking for {selected_date2}",
+            style_function=style_function_red,
+            popup = folium.GeoJsonPopup(fields=["Country", "player_count","playername"], aliases=["Country:", "Player Count:","Player Name:"]),
+            popup_keep_highlighted=True
+        ).add_to(m2)
     
-        # # 將地圖嵌入到 Streamlit
-        # with row4_2:
-        #     output2 = st_folium(m2, height=500, key="map2")
+        # 將地圖嵌入到 Streamlit
+        with row4_2:
+            output2 = st_folium(m2, height=500, key="map2")
 
 
 if user_choice == "否" and selected_date2 :
