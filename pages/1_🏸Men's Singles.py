@@ -258,9 +258,8 @@ if selected_date2 and user_choice == "是":
     row4_1, row4_2 = st.columns(2)
     with row4_1:
         # 若 output1 包含中心點信息
-        if "center" in output1:
-            center1 = output1["center"]
-            location1 = [center1["lat"], center1["lng"]] if isinstance(center1, dict) else center1
+        if "center" in st.session_state["map1"]:
+            location1 = [st.session_state["map1"]["center"]["lat"], st.session_state["map1"]["center"]["lng"]]
         else:
             location1 = [0, 0]  # 若沒有找到中心點，使用默認位置
         
@@ -288,9 +287,8 @@ if selected_date2 and user_choice == "是":
     
     with row4_2:
         # 若 output2 包含中心點信息
-        if "center" in output2:
-            center2 = output2["center"]
-            location2 = [center2["lat"], center2["lng"]] if isinstance(center2, dict) else center2
+        if "center" in st.session_state["map2"]:
+            location2 = [st.session_state["map2"]["center"]["lat"], st.session_state["map2"]["center"]["lng"]]
         else:
             location2 = [0, 0]  # 若沒有找到中心點，使用默認位置
     
