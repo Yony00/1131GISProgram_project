@@ -6,9 +6,10 @@ st.markdown(
     """
     <style>
     .stApp {
-background-image: url('https://github.com/RGT1143022/BWF_world_country/releases/download/v1.0.1/background.png'); /* 指定背景圖像的URL或路徑 */
+        background-image: url('https://github.com/RGT1143022/BWF_world_country/releases/download/v1.0.1/background.png'); /* 指定背景圖像的URL或路徑 */
         background-size: cover;  /* 讓背景圖像填滿整個視窗 */
         background-position: center;  /* 背景圖像居中 */
+        filter: brightness(0.7); 
     }
     </style>
     """,
