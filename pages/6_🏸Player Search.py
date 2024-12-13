@@ -496,20 +496,20 @@ if st.session_state.df is not None:
                 # 特定的選手        
                 # 添加每個項目的長條圖
                 for event_name, CP_df_event in zip(['男子單打', '女子單打', '男子雙打', '女子雙打', '混合雙打'],
-                                            [CP_df_event_MS, CP_df_event_WS, CP_df_event_MD, CP_df_event_WD, CP_df_event_MXD]):
-                is_highlight = CP_df_event['Player'] == highlight_player
-                
-                fig.add_trace(go.Bar(
-                    name=event_name,
-                    x=CP_df_event['Player'],  # X 軸：選手名字
-                    y=CP_df_event['Points'],  # Y 軸：積分
-                    text=CP_df_event['Rank'],  # 在長條圖上顯示排名
-                    textposition='inside',  # 設置文字顯示位置
-                    textfont=dict(size=18, weight='bold' if is_highlight.any() else 'normal'),  # 根據是否突出選手來改變字體粗細
-                    marker=dict(
-                        color=['red' if is_highlight else 'blue' for highlight in is_highlight]  # 根據是否突出選手來變更顏色
-                    )
-                ))
+                                                    [CP_df_event_MS, CP_df_event_WS, CP_df_event_MD, CP_df_event_WD, CP_df_event_MXD]):
+                    is_highlight = CP_df_event['Player'] == highlight_player
+                    
+                    fig.add_trace(go.Bar(
+                        name=event_name,
+                        x=CP_df_event['Player'],  # X 軸：選手名字
+                        y=CP_df_event['Points'],  # Y 軸：積分
+                        text=CP_df_event['Rank'],  # 在長條圖上顯示排名
+                        textposition='inside',  # 設置文字顯示位置
+                        textfont=dict(size=18, weight='bold' if is_highlight.any() else 'normal'),  # 根據是否突出選手來改變字體粗細
+                        marker=dict(
+                            color=['red' if is_highlight else 'blue' for highlight in is_highlight]  # 根據是否突出選手來變更顏色
+                        )
+                    ))
             
             # 更新圖表屬性
                 fig.update_layout(
