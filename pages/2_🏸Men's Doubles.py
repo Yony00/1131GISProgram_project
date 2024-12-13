@@ -32,7 +32,8 @@ st.markdown(
 )
 # 設定頁面標題
 st.title("Men's Singles 男子雙打")
-
+logo = "https://pgw.udn.com.tw/gw/photo.php?u=https://uc.udn.com.tw/photo/2024/12/12/0/31074762.jpg&s=Y&x=0&y=28&sw=1279&sh=853&sl=W&fw=800&exp=3600&w=930&nt=1"
+st.sidebar.image(logo)
 row0_1,XX, row0_2 = st.columns((3,1, 4))
 with row0_1:
     st.write(
