@@ -487,8 +487,8 @@ if st.session_state.df is not None:
         # 添加說明文字在圖例下方
         fig.add_annotation(
             text="圖中數字表示世界排名(Rank)",  # 說明文字
-            x=1.5,  # 調整到圖例下方
-            y=0.9,  # 視圖例的位置調整
+            x=1.3,  # 調整到圖例下方
+            y=0.8,  # 視圖例的位置調整
             xref="paper",
             yref="paper",
             showarrow=False,  # 隱藏箭頭
