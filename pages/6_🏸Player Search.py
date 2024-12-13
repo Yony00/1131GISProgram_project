@@ -264,7 +264,7 @@ if st.session_state.df is not None:
             
             st.pyplot(fig)
 
-    row4_1, row4_2 = st.columns((1,2))
+    row4_1, row4_2 = st.columns((2,1))
 
     with row4_1:
         st.markdown("### 與該國同時期其他選手/組合比較：")
