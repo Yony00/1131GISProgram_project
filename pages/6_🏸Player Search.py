@@ -297,7 +297,7 @@ if st.session_state.df is not None:
                 fig = go.Figure(data=[go.Pie(labels= CP_df_event['Player'] + " (Rank: " + CP_df_event['Rank'].astype(str) + ")",
                                              values=CP_df_event["Points"])],
                                 layout=go.Layout(
-                                    title=go.layout.Title(text="Points")
+                                    title=go.layout.Title(text="積分占比")
                                 ))
                 
                 # 在 Streamlit 中顯示 Pie 圖表
