@@ -32,7 +32,7 @@ st.markdown(
     """
     <style>
     .stApp {
-        background-image: url('https://media.istockphoto.com/id/1055106830/zh/%E5%90%91%E9%87%8F/%E6%90%9C%E7%B4%A2%E6%AC%84%E5%90%91%E9%87%8F%E5%9C%96%E7%A4%BA.jpg?s=612x612&w=0&k=20&c=DtqxRNbysSBV6reBfJyxPw209o6K67RT7PX1jQN9KTs='); /* 指定背景圖像的URL或路徑 */
+        background-image: url('https://img1.wallspic.com/previews/0/4/9/5/5/155940/155940-hei_se_he_bai_se_de-he_yin_ying_de_se_cai-xiang_shi_zhi_chu-x750.jpg'); /* 指定背景圖像的URL或路徑 */
                 background-size: cover;  /* 讓背景圖像填滿整個視窗 */
 
         background-position: center;  /* 背景圖像居中 */
@@ -44,7 +44,7 @@ st.markdown(
 
 # 設定頁面標題
 st.title("特定選手/組合搜尋")
-logo = "https://www.google.com/url?sa=i&url=https%3A%2F%2Fzh.lovepik.com%2Fimage-401346704%2Fmagnifier.html&psig=AOvVaw3TWHbeU_Z2L-MRat01s_Ot&ust=1734195724653000&source=images&cd=vfe&opi=89978449&ved=0CBQQjRxqFwoTCOj2sdOcpYoDFQAAAAAdAAAAABAE"
+logo = "https://media.istockphoto.com/id/1055106830/zh/%E5%90%91%E9%87%8F/%E6%90%9C%E7%B4%A2%E6%AC%84%E5%90%91%E9%87%8F%E5%9C%96%E7%A4%BA.jpg?s=612x612&w=0&k=20&c=DtqxRNbysSBV6reBfJyxPw209o6K67RT7PX1jQN9KTs="
 st.sidebar.image(logo)
 highlight_word = " LEE Yang/ WANG Chi-Lin"
 
