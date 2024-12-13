@@ -1,32 +1,19 @@
-import folium
-from streamlit_folium import st_folium
+import leafmap.foliumap as leafmap
 import streamlit as st
 
-# 創建第一個地圖 m1，用 OpenStreetMap
-m1 = folium.Map(location=[0, 0], zoom_start=5)
+# 創建地圖
+m = leafmap.Map(center=(0, 0), zoom=2)
 
-# 創建第二個地圖 m2，用暗色基底
-m2 = folium.Map(location=[0, 0], zoom_start=5)
+# 定義一個函數來同步地圖中心到 Streamlit session state
+def sync_map(event):
+    st.session_state.map_center = event["center"]
 
-# 使用 Streamlit 展示地圖
-row1, row2 = st.columns(2)
+# 顯示地圖並將 `m` 傳遞給 `m.to_streamlit()` 用來監聽移動事件
+m.to_streamlit()
 
-with row1:
-    output1 = st_folium(m1, width=400, height=300, key="map1")
+# 初始化 session state 的地圖中心
+if "map_center" not in st.session_state:
+    st.session_state.map_center = m.center
 
-with row2:
-    output2 = st_folium(m2, width=400, height=300, key="map2")
-
-    # 設定同步移動和縮放
-    if "map_center" not in st.session_state:
-        st.session_state.map_center = output1["center"]
-        st.session_state.map_zoom = output1["zoom"]
-
-    # 更新 m2 的中心和縮放級別
-    def sync_map(event):
-        st.session_state.map_center = event["center"]
-        st.session_state.map_zoom = event["zoom"]
-
-    # 使用 on() 正確的參數設置
-    m1.on_moveend(sync_map)  # 正確的事件名稱與回調函數參數
-
+# 顯示當前地圖中心
+st.write(f"Current center: {st.session_state.map_center}")
