@@ -292,7 +292,7 @@ if st.session_state.df is not None:
             country=country[0]
             CP_df_event= MS_df[MS_df['Country'] == country]
             # 繪製 Pie 圖表
-            fig = go.Figure(data=[go.Pie(labels=CP_df_event["player_name"],
+            fig = go.Figure(data=[go.Pie(labels=CP_df_event["Player"],
                                          values=CP_df_event["Points"])],
                             layout=go.Layout(
                                 title=go.layout.Title(text="Points")
