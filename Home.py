@@ -6,7 +6,7 @@ st.markdown(
     """
     <style>
     .stApp {
-        background-image: url('https://img.pikbest.com/wp/202342/stylish-texture-dark-space-a-textured-paper-background-design_9990020.jpg!w700wp'); /* 指定背景圖像的URL或路徑 */
+        background-image: url('https://img1.wallspic.com/previews/0/4/9/5/5/155940/155940-hei_se_he_bai_se_de-he_yin_ying_de_se_cai-xiang_shi_zhi_chu-x750.jpg'); /* 指定背景圖像的URL或路徑 */
                 background-size: cover;  /* 讓背景圖像填滿整個視窗 */
 
         background-position: center;  /* 背景圖像居中 */
