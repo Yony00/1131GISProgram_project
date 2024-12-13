@@ -10,13 +10,14 @@ m = folium.Map(location=[0, 0], zoom_start=2)
 output = st_folium(m, width=700, height=500, key="map1")
 
 # 創建地圖
-m2 = folium.Map(location=[output['center']['lat'],output['center']['lng']], zoom_start=2)
-folium.Marker([0, 0], popup="This is a point").add_to(m2)
+m2 = folium.Map(location=[output['center']['lat'], output['center']['lng']], zoom_start=2)
 
+# 如果地圖第一次創建，添加標記
+if 'first_marker' not in st.session_state:
+    folium.Marker([0, 0], popup="This is a point").add_to(m2)
+    st.session_state['first_marker'] = True
 
 # 在 Streamlit 中顯示地圖
 output2 = st_folium(m2, width=700, height=500, key="map2")
-
-
 
 
