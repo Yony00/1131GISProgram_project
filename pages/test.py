@@ -20,13 +20,13 @@ with row2:
     output2 = st_folium(m2, width=400, height=300, key="map2")
 
     # 設定同步移動和縮放
-    st.script_runner.heartbeat()
-    st.session_state.map_center = output1["center"]
-    st.session_state.map_zoom = output1["zoom"]
+    if "map_center" not in st.session_state:
+        st.session_state.map_center = output1["center"]
+        st.session_state.map_zoom = output1["zoom"]
 
+    # 使用同步中心和縮放
     def sync_map(event):
-        # 根據另一個地圖的中心位置更新 m2 的中心和縮放級別
-        m2.location = st.session_state.map_center
-        m2.zoom_start = st.session_state.map_zoom
+        st.session_state.map_center = event["center"]
+        st.session_state.map_zoom = event["zoom"]
 
-    st.session_state.sync_map = sync_map
+    m1.on('moveend', sync_map)
