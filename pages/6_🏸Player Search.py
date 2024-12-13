@@ -286,7 +286,8 @@ if st.session_state.df is not None:
 
             if selected_event == "男子單打":
                 country = MS_df.loc[MS_df['Player'] == player_name, 'Country'].values
-                CP_df_event= MS_df[MS_df['Country'] == country].copy()
+                country=country[0]
+                CP_df_event= MS_df[MS_df['Country'] == country]
                 st.write(CP_df_event)
             elif selected_event == "男子雙打":
                 country = MD_df.loc[MD_df['Player'] == player_name, 'Country'].values
