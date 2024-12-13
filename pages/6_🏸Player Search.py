@@ -476,7 +476,7 @@ if st.session_state.df is not None:
             title=f"該時期 {country} 不同項目中，不同選手的積分、排名",
             xaxis_title="Players",
             yaxis_title="Points",
-            yaxis=dict(range=[0, CP_df_event_MXD['Points'].max() * 1.2])
+            yaxis=dict(range=[0, CP_df_event_MXD['Points'].max() * 1.2]),
             legend_title="Event",
             height=1000,  # 調整圖表高度
             width=1500    # 可根據需要設置寬度
