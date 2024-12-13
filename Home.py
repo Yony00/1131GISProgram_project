@@ -5,13 +5,12 @@ st.set_page_config(layout="wide")
 
 # Customize the sidebar
 markdown = """
-A Streamlit map template
-<https://github.com/opengeos/streamlit-map-template>
+資料來源：BWF世界羽球聯盟
 """
 
 st.sidebar.title("About")
 st.sidebar.info(markdown)
-logo = "https://i.imgur.com/UbOXYAU.png"
+logo = "https://upload.wikimedia.org/wikipedia/commons/thumb/c/c9/2012_BWF_logo.svg/1200px-2012_BWF_logo.svg.png"
 st.sidebar.image(logo)
 
 # Customize page title
