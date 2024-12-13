@@ -29,5 +29,6 @@ with row2:
 
     # 更新地圖的中心
     m2.location = [lat, lon]
-    st_folium(m2, width=400, height=300, key="map2")  # 重新顯示最新的地圖，而不是所有地圖
 
+    # 更新 `output2` 的中心位置呈現在 `st_folium` 上
+    output2 = st_folium(m2, width=400, height=300, key="map2")
