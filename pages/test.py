@@ -1,5 +1,7 @@
 import folium
 import streamlit as st
+from streamlit_folium import st_folium
+
 
 # 創建地圖
 m = folium.Map(location=[0, 0], zoom_start=2)
