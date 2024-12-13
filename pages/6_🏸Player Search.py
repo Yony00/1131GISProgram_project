@@ -471,7 +471,10 @@ if st.session_state.df is not None:
             title=f"該時期 {country} 不同項目中，不同選手的積分",
             xaxis_title="Players",
             yaxis_title="Points",
-            legend_title="Event"
+            legend_title="Event",
+            height=800,  # 調整圖表高度
+            width=800    # 可根據需要設置寬度
+
         )
         
         # 顯示圖表
