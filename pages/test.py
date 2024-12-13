@@ -2,13 +2,13 @@ import folium
 from streamlit_folium import st_folium
 import streamlit as st
 
-# 創建第一個地圖 m1
+# 創建第一個地圖 m1，用 OpenStreetMap
 m1 = folium.Map(location=[0, 0], zoom_start=5, control_scale=True)  # 使用控制縮放和比例尺
-folium.TileLayer('Stamen Terrain').add_to(m1)  # 使用不同的底圖 'Stamen Terrain'
+folium.TileLayer('OpenStreetMap', attr='OpenStreetMap').add_to(m1)  # OSM 基底圖
 
-# 創建第二個地圖 m2
+# 創建第二個地圖 m2，用暗色基底
 m2 = folium.Map(location=[0, 0], zoom_start=5, control_scale=True)  # 使用控制縮放和比例尺
-folium.TileLayer('Stamen Toner').add_to(m2)  # 使用不同的底圖 'Stamen Toner'
+folium.TileLayer('Stamen Toner', attr='Stamen Toner Tiles').add_to(m2)  # 暗色基底圖
 
 # 使用 Streamlit 展示地圖
 row1, row2 = st.columns(2)
