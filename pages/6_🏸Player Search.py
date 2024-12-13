@@ -473,8 +473,7 @@ if st.session_state.df is not None:
         # 更新圖表標題與布局
         fig.update_layout(
             barmode='group',  # 以群組形式顯示柱狀圖
-            title=f"該時期 {country} 不同項目中，不同選手的積分、排名 \n
-            圖中數字為世界排名(Rank)",
+            title=f"該時期 {country} 不同項目中，不同選手的積分、排名 \n 圖中數字為世界排名(Rank)",
             xaxis_title="Players",
             yaxis=dict(
                         title='Points',          # Y 軸的標題
