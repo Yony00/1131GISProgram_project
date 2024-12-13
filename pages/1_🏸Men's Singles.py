@@ -259,7 +259,7 @@ if selected_date2 and user_choice == "是":
     with row4_1:
         # 若 output1 包含中心點信息
         if "center" in st.session_state["map1"]:
-            location1 = [st.session_state["map1"]["center"][0], st.session_state["map1"]["center"][1]
+            location1 = [st.session_state["map1"]["center"][0], st.session_state["map1"]["center"][1]]
         else:
             location1 = [0, 0]  # 若沒有找到中心點，使用默認位置
         
