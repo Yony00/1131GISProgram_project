@@ -473,7 +473,7 @@ if st.session_state.df is not None:
             yaxis_title="Points",
             legend_title="Event",
             height=800,  # 調整圖表高度
-            width=800    # 可根據需要設置寬度
+            width=1500    # 可根據需要設置寬度
 
         )
         
