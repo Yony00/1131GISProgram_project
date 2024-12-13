@@ -240,7 +240,7 @@ if st.session_state.df is not None:
             
             # 使用線作為 handles 並顯示圖例
             red_line = ax1.axhline(y=0, color='red', linestyle='--')
-            brown_line = ax1.axhline(y=0, color='coffee', linestyle='--')
+            brown_line = ax1.axhline(y=0, color='brown', linestyle='--')
             ax1.legend(handles=[red_line], labels=['Points nodata'], fontsize=20, loc='upper left')
             ax1.legend(handles=[brown_line], labels=['Rank nodata'], fontsize=20, loc='upper left')
             st.pyplot(fig)
