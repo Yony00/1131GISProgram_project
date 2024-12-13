@@ -32,6 +32,14 @@ st.markdown(
 )
 # 設定頁面標題
 st.title("Mixed Doubles 混合雙打")
+markdown = """
+圖片來源：新華社 \n
+(來點大家愛看的)
+"""
+st.sidebar.info(markdown)
+logo = "https://inews.gtimg.com/om_bt/OFhrTD-qkc0CcxZ77YiqtFbOCq-ofVvtyGEfUI4FPH7pkAA/1000"
+st.sidebar.image(logo)
+
 
 row0_1,XX, row0_2 = st.columns((3,1, 4))
 with row0_1:
