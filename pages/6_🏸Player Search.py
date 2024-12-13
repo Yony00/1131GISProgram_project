@@ -480,7 +480,7 @@ if st.session_state.df is not None:
                         range=[0, 110000],        # Y 軸的範圍
                         ),
             legend_title="Event",
-            height=900,  # 調整圖表高度
+            height=700,  # 調整圖表高度
             width=1500    # 可根據需要設置寬度
 
         )
