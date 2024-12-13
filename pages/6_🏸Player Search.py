@@ -294,8 +294,18 @@ if st.session_state.df is not None:
             CP_df_event= MS_df[MS_df['Country'] == country]
             # 繪製 Pie 圖表
             with row5_1:
+                # 指定需要凸顯的選手
+                highlight_player = player_name
+                
+                # 根據指定選手生成 pull 數據（凸顯效果）
+                CP_df_event['pull'] = CP_df_event['Player'].apply(lambda x: 0.2 if x == highlight_player else 0.0)
+
                 fig = go.Figure(data=[go.Pie(labels= CP_df_event['Player'] + " (Rank: " + CP_df_event['Rank'].astype(str) + ")",
-                                             values=CP_df_event["Points"])],
+                                             values=CP_df_event["Points"],    pull=CP_df_event['pull'],  # 添加凸顯參數
+
+                                            )],
+                                
+
                                 layout=go.Layout(
                                     title=go.layout.Title(text=f"該時期 {country}  {selected_event} 積分占比")
                                 ))
