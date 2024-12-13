@@ -314,7 +314,7 @@ if selected_date2 and user_choice == "是":
             popup=folium.GeoJsonPopup(fields=["Country", "player_count", "playername"], 
                                       aliases=["Country:", "Player Count:", "Player Name:"]),
             popup_keep_highlighted=True
-        ).add_to(m1)
+        ).add_to(m2)
     else:
     # 使用已經存在的地圖
         m1 = st.session_state['m1']
