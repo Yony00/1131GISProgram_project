@@ -18,6 +18,21 @@ import folium
 # 設定頁面配置為寬屏模式
 st.set_page_config(page_title="Men's Singles", layout="wide", page_icon=":🏸")
 
+st.markdown(
+    """
+    <style>
+    .stApp {
+        background-image: url('https://img.pikbest.com/wp/202342/stylish-texture-dark-space-a-textured-paper-background-design_9990020.jpg!w700wp'); /* 指定背景圖像的URL或路徑 */
+                background-size: cover;  /* 讓背景圖像填滿整個視窗 */
+
+        background-position: center;  /* 背景圖像居中 */
+    }
+    </style>
+    """,
+    unsafe_allow_html=True
+)
+
+
 # 設定頁面標題
 st.title("Men's Singles 男子單打")
 
