@@ -387,7 +387,7 @@ if st.session_state.df is not None:
                 # 在 Streamlit 中顯示 Pie 圖表
                 st.plotly_chart(fig)
         elif selected_event == "混合雙打":
-            country = MXC_df.loc[MXD_df['Player'] == player_name, 'Country'].values
+            country = MXD_df.loc[MXD_df['Player'] == player_name, 'Country'].values
             country=country[0]
             CP_df_event= MXD_df[MXD_df['Country'] == country]
             # 繪製 Pie 圖表
