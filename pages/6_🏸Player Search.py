@@ -478,7 +478,7 @@ if st.session_state.df is not None:
             yaxis=dict(
                         title='Points',          # Y 軸的標題
                         range=[0, 110000],        # Y 軸的範圍
-                        )),
+                        ),
             legend_title="Event",
             height=1000,  # 調整圖表高度
             width=1500    # 可根據需要設置寬度
