@@ -265,14 +265,11 @@ if st.session_state.df is not None:
             ax1.set_ylabel('Points', color='blue')
             plt.xticks(rotation=45)  # 繪製 x 軸文字旋轉
             
-            # 添加一條紅色水平線在 y=0 處
-            ax1.axhline(y=0, color='red', linestyle='--')
             # 右Y軸（Rank）折線圖
             ax2 = ax1.twinx()  # 共享 x 軸
             sns.lineplot(data=plt_df, x=plt_df['Date'].dt.year, y='Rank', ax=ax2, color='green')
             y_ticks2 = range(0, plt_df['Rank'].max() + 10, 10)  # 自動生成連續刻度
             ax2.set_ylabel('Rank', color='green')
-            ax2.axhline(y=105, color='brown', linestyle='--')
 
             ax2.set_yticks(y_ticks2)
             
@@ -280,11 +277,6 @@ if st.session_state.df is not None:
             y_ticks = range(20000, plt_df['Points'].max() + 10000, 10000)  # 自動生成連續刻度
             ax1.set_yticks(y_ticks)
             
-            # 使用線作為 handles 並顯示圖例
-            red_line = ax1.axhline(y=0, color='red', linestyle='--')
-            brown_line = ax2.axhline(y=105, color='brown', linestyle='--')
-            ax1.legend(handles=[red_line], labels=['Points nodata'], fontsize=20, loc='lower left', bbox_to_anchor=(0, 0.1))
-            ax2.legend(handles=[brown_line], labels=['Rank nodata'], fontsize=20, loc='upper left', bbox_to_anchor=(0, 0.9))
             
             st.pyplot(fig)
 
