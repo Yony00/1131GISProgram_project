@@ -1,5 +1,7 @@
 import streamlit as st
 import leafmap.foliumap as leafmap
+st.set_page_config(page_title="BWF World Ranking", layout="wide")
+
 st.markdown(
     """
     <style>
@@ -13,7 +15,6 @@ st.markdown(
     unsafe_allow_html=True
 )
 
-st.set_page_config(page_title="BWF World Ranking", layout="wide")
 
 # Customize the sidebar
 markdown = """
