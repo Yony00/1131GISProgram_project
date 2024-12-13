@@ -475,8 +475,10 @@ if st.session_state.df is not None:
             barmode='group',  # 以群組形式顯示柱狀圖
             title=f"該時期 {country} 不同項目中，不同選手的積分、排名",
             xaxis_title="Players",
-            yaxis_title="Points",
-            yaxis=dict(range=[0, 11000]),
+            yaxis=dict(
+                        title='Points',          # Y 軸的標題
+                        range=[0, 110000],        # Y 軸的範圍
+                        )),
             legend_title="Event",
             height=1000,  # 調整圖表高度
             width=1500    # 可根據需要設置寬度
