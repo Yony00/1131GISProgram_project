@@ -466,7 +466,7 @@ if st.session_state.df is not None:
             x=CP_df_event_MXD['Player'], 
             y=CP_df_event_MXD['Points'],
             text="Rank：\n"+CP_df_event_MXD['Rank'],      # 在長條圖上顯示排名
-            textposition='outside',  # 設置文字顯示位置
+            textposition='inside',  # 設置文字顯示位置
             textfont=dict(size=18),
         ))
         
