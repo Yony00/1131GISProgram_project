@@ -309,7 +309,7 @@ if st.session_state.df is not None:
         WD_df = WDscrape_bwf_ranking_by_date(CP_data_id1)
         MXD_df = MXDscrape_bwf_ranking_by_date(CP_data_id1)        
 
-        if selected_event == "男子單打":
+        if search_event == "男子單打":
             country = MS_df.loc[MS_df['Player'] == player_name, 'Country'].values
             country=country[0]
             CP_df_event= MS_df[MS_df['Country'] == country]
@@ -333,7 +333,7 @@ if st.session_state.df is not None:
                 
                 # 在 Streamlit 中顯示 Pie 圖表
                 st.plotly_chart(fig)
-        elif selected_event == "男子雙打":
+        elif search_event == "男子雙打":
             country = MD_df.loc[MD_df['Player'] == player_name, 'Country'].values
             country=country[0]
             CP_df_event= MD_df[MD_df['Country'] == country]
@@ -357,7 +357,7 @@ if st.session_state.df is not None:
                 
                 # 在 Streamlit 中顯示 Pie 圖表
                 st.plotly_chart(fig)
-        elif selected_event == "女子單打":
+        elif search_event == "女子單打":
             country = WS_df.loc[WS_df['Player'] == player_name, 'Country'].values
             country=country[0]
             CP_df_event= WS_df[WS_df['Country'] == country]
@@ -381,7 +381,7 @@ if st.session_state.df is not None:
                 
                 # 在 Streamlit 中顯示 Pie 圖表
                 st.plotly_chart(fig)
-        elif selected_event == "女子雙打":
+        elif search_event == "女子雙打":
             country = WD_df.loc[WD_df['Player'] == player_name, 'Country'].values
             country=country[0]
             CP_df_event= WD_df[WD_df['Country'] == country]
@@ -405,7 +405,7 @@ if st.session_state.df is not None:
                 
                 # 在 Streamlit 中顯示 Pie 圖表
                 st.plotly_chart(fig)
-        elif selected_event == "混合雙打":
+        elif search_event == "混合雙打":
             country = MXD_df.loc[MXD_df['Player'] == player_name, 'Country'].values
             country=country[0]
             CP_df_event= MXD_df[MXD_df['Country'] == country]
