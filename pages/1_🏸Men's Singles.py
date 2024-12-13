@@ -270,11 +270,8 @@ if selected_date2 and user_choice == "是":
     # with row4_1:
     #     output1 = st_folium(m1, height=500, key="map1")
 # 創建 Folium 地圖
-    if 'm1' not in st.session_state:
-        # 如果地圖不存在於 session_state，創建並保存
+    def initialize_map():
         m1 = folium.Map(location=[0, 0], zoom_start=1)
-        st.session_state['m1'] = m1
-    
         # 添加 gdf1 到地圖
         folium.GeoJson(
             gdf1,
@@ -284,21 +281,22 @@ if selected_date2 and user_choice == "是":
                                       aliases=["Country:", "Player Count:", "Player Name:"]),
             popup_keep_highlighted=True
         ).add_to(m1)
-    else:
-        # 使用已經存在的地圖
-        m1 = st.session_state['m1']
+        return m1
     
-    # 允許用戶輸入中心位置並更新地圖
-    #lat = st.number_input('輸入緯度', min_value=-90.0, max_value=90.0, value=37.7749)
-    #lon = st.number_input('輸入經度', min_value=-180.0, max_value=180.0, value=-122.4194)
-    
-    # 更新地圖的中心
-    #m1.location = [lat, lon]
-    
-    # 將地圖嵌入到 Streamlit 並獲取交互結果
+    # 創建地圖對象
+    if "m1" not in st.session_state:
+        st.session_state["m1"] = initialize_map()
+
     with row4_1:
+
+    
+        # 更新地圖的中心點和縮放級別
+        m1 = st.session_state["m1"]
+
+
+        # 嵌入地圖並顯示
         output1 = st_folium(m1, height=500, key="map1")
-    # **右側地圖**
+        # **右側地圖**
 
             # 創建 Folium 地圖
     if 'm2' not in st.session_state:
