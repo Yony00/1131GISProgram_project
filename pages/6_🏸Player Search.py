@@ -429,35 +429,35 @@ if st.session_state.df is not None:
             name="Men's Singles",
             x=CP_df_event_MS['Player'],  # X 軸：選手名字
             y=CP_df_event_MS['Points']    ,    # Y 軸：積分
-            text="Rank：\n"+CP_df_event_MS['Rank'],      # 在長條圖上顯示排名
-            textposition='outside',  # 設置文字顯示位置
-            textfont=dict(size=14),
+            text=CP_df_event_MS['Rank'],      # 在長條圖上顯示排名
+            textposition='inside',  # 設置文字顯示位置
+            textfont=dict(size=18),
         ))
         
         fig.add_trace(go.Bar(
             name="Women's Singles",
             x=CP_df_event_WS['Player'], 
             y=CP_df_event_WS['Points'],
-            text="Rank：\n"+CP_df_event_WS['Rank'],      # 在長條圖上顯示排名
-            textposition='outside',  # 設置文字顯示位置
-            textfont=dict(size=14),
+            text=CP_df_event_WS['Rank'],      # 在長條圖上顯示排名
+            textposition='inside',  # 設置文字顯示位置
+            textfont=dict(size=18),
         ))
         
         fig.add_trace(go.Bar(
             name="Men's Doubles",
             x=CP_df_event_MD['Player'], 
             y=CP_df_event_MD['Points'],
-            text="Rank：\n"+CP_df_event_MD['Rank'],      # 在長條圖上顯示排名
-            textposition='outside',  # 設置文字顯示位置
-            textfont=dict(size=14),
+            text=CP_df_event_MD['Rank'],      # 在長條圖上顯示排名
+            textposition='inside',  # 設置文字顯示位置
+            textfont=dict(size=18),
         ))
         
         fig.add_trace(go.Bar(
             name="Women's Doubles",
             x=CP_df_event_WD['Player'], 
             y=CP_df_event_WD['Points'],
-            text="Rank：\n"+CP_df_event_WD['Rank'],      # 在長條圖上顯示排名
-            textposition='outside',  # 設置文字顯示位置
+            text=CP_df_event_WD['Rank'],      # 在長條圖上顯示排名
+            textposition='inside',  # 設置文字顯示位置
             textfont=dict(size=18),
         ))
         
@@ -465,7 +465,7 @@ if st.session_state.df is not None:
             name="Mixed Doubles",
             x=CP_df_event_MXD['Player'], 
             y=CP_df_event_MXD['Points'],
-            text="Rank：\n"+CP_df_event_MXD['Rank'],      # 在長條圖上顯示排名
+            text=CP_df_event_MXD['Rank'],      # 在長條圖上顯示排名
             textposition='inside',  # 設置文字顯示位置
             textfont=dict(size=18),
         ))
@@ -483,6 +483,16 @@ if st.session_state.df is not None:
             height=1000,  # 調整圖表高度
             width=1500    # 可根據需要設置寬度
 
+        )
+        fig.add_annotation(
+            text="圖中數字為排名(Rank)",
+            x=0.5,  # X 軸對齊，0 表示左，1 表示右，0.5 表示居中
+            y=-0.15,  # Y 軸位置，負數表示圖例下方
+            xref="paper",  # 以圖表紙張為參考坐標
+            yref="paper",
+            showarrow=False,  # 隱藏箭頭
+            font=dict(size=15, color="black"),  # 設定文字大小與顏色
+            align="center"  # 文本居中
         )
         
         # 顯示圖表
