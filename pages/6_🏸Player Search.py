@@ -277,7 +277,8 @@ if st.session_state.df is not None:
             index=index,
             key="CP_data",  # 添加唯一的 key
             )
-        
+    row5_1, row5_2 = st.columns((2,1))
+
     if CP_data  :
         CP_data_id1 = date_id_dict[CP_data]
         
@@ -292,14 +293,15 @@ if st.session_state.df is not None:
             country=country[0]
             CP_df_event= MS_df[MS_df['Country'] == country]
             # 繪製 Pie 圖表
-            fig = go.Figure(data=[go.Pie(labels=CP_df_event["Player"],
-                                         values=CP_df_event["Points"])],
-                            layout=go.Layout(
-                                title=go.layout.Title(text="Points")
-                            ))
-            
-            # 在 Streamlit 中顯示 Pie 圖表
-            st.plotly_chart(fig)
+            with row5_1:
+                fig = go.Figure(data=[go.Pie(labels= CP_df_event['Player'] + " (Rank: " + CP_df_event['Rank'].astype(str) + ")",
+                                             values=CP_df_event["Points"])],
+                                layout=go.Layout(
+                                    title=go.layout.Title(text="Points")
+                                ))
+                
+                # 在 Streamlit 中顯示 Pie 圖表
+                st.plotly_chart(fig)
         elif selected_event == "男子雙打":
             country = MD_df.loc[MD_df['Player'] == player_name, 'Country'].values
             country=country[0]
