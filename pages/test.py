@@ -1,4 +1,7 @@
 import folium
+import pandas as pd
+import geopandas as gpd
+from streamlit_folium import st_folium
 
 # 創建第一個地圖 m1
 m1 = folium.Map(location=[0, 0], zoom_start=5)  # 設定初始中心點和縮放級別
