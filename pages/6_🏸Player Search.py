@@ -264,7 +264,8 @@ if st.session_state.df is not None:
             ax1.set_xlabel('Year')
             ax1.set_ylabel('Points', color='blue')
             plt.xticks(rotation=45)  # 繪製 x 軸文字旋轉
-            
+            # 添加一條紅色水平線在 y=0 處
+            ax1.axhline(y=0, color='red', linestyle='--')
             # 右Y軸（Rank）折線圖
             ax2 = ax1.twinx()  # 共享 x 軸
             sns.lineplot(data=plt_df, x=plt_df['Date'], y='Rank', ax=ax2, color='green')
