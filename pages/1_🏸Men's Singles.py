@@ -257,8 +257,12 @@ if selected_date2 and user_choice == "是":
         st.session_state["map2"] = {"center": [0, 0], "zoom": 1}
     row4_1, row4_2 = st.columns(2)
     with row4_1:
+        # 將中心點轉換為列表格式
+        center1 = st.session_state["map1"]["center"]
+        location1 = [center1["lat"], center1["lng"]] if isinstance(center1, dict) else center1
+    
         # 創建左側地圖
-        m1 = folium.Map(location=st.session_state["map1"]["center"], zoom_start=st.session_state["map1"]["zoom"])
+        m1 = folium.Map(location=location1, zoom_start=st.session_state["map1"]["zoom"])
         folium.GeoJson(
             gdf1,
             name=f"BWF Men's Singles World Ranking for {selected_date1}",
@@ -273,12 +277,19 @@ if selected_date2 and user_choice == "是":
     
         # 保存交互結果
         if output1 and "center" in output1 and "zoom" in output1:
-            st.session_state["map1"]["center"] = output1["center"]
+            st.session_state["map1"]["center"] = {
+                "lat": output1["center"][0],
+                "lng": output1["center"][1],
+            }
             st.session_state["map1"]["zoom"] = output1["zoom"]
     
     with row4_2:
+        # 將中心點轉換為列表格式
+        center2 = st.session_state["map2"]["center"]
+        location2 = [center2["lat"], center2["lng"]] if isinstance(center2, dict) else center2
+    
         # 創建右側地圖
-        m2 = folium.Map(location=st.session_state["map2"]["center"], zoom_start=st.session_state["map2"]["zoom"])
+        m2 = folium.Map(location=location2, zoom_start=st.session_state["map2"]["zoom"])
         folium.GeoJson(
             gdf2,
             name=f"BWF Men's Singles World Ranking for {selected_date2}",
@@ -293,7 +304,10 @@ if selected_date2 and user_choice == "是":
     
         # 保存交互結果
         if output2 and "center" in output2 and "zoom" in output2:
-            st.session_state["map2"]["center"] = output2["center"]
+            st.session_state["map2"]["center"] = {
+                "lat": output2["center"][0],
+                "lng": output2["center"][1],
+            }
             st.session_state["map2"]["zoom"] = output2["zoom"]
     
     # # **左側地圖**
