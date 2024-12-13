@@ -429,7 +429,7 @@ if st.session_state.df is not None:
             name="Men's Singles",
             x=CP_df_event_MS['Player'],  # X 軸：選手名字
             y=CP_df_event_MS['Points']    ,    # Y 軸：積分
-            text=CP_df_event_MS['Rank'],      # 在長條圖上顯示排名
+            text="Rank："+CP_df_event_MS['Rank'],      # 在長條圖上顯示排名
             textposition='outside',  # 設置文字顯示位置
         ))
         
@@ -437,7 +437,7 @@ if st.session_state.df is not None:
             name="Women's Singles",
             x=CP_df_event_WS['Player'], 
             y=CP_df_event_WS['Points'],
-            text=CP_df_event_WS['Rank'],      # 在長條圖上顯示排名
+            text="Rank："+CP_df_event_WS['Rank'],      # 在長條圖上顯示排名
             textposition='outside',  # 設置文字顯示位置
         ))
         
@@ -445,7 +445,7 @@ if st.session_state.df is not None:
             name="Men's Doubles",
             x=CP_df_event_MD['Player'], 
             y=CP_df_event_MD['Points'],
-            text=CP_df_event_MD['Rank'],      # 在長條圖上顯示排名
+            text="Rank："+CP_df_event_MD['Rank'],      # 在長條圖上顯示排名
             textposition='outside',  # 設置文字顯示位置
         ))
         
@@ -453,7 +453,7 @@ if st.session_state.df is not None:
             name="Women's Doubles",
             x=CP_df_event_WD['Player'], 
             y=CP_df_event_WD['Points'],
-            text=CP_df_event_WD['Rank'],      # 在長條圖上顯示排名
+            text="Rank："+CP_df_event_WD['Rank'],      # 在長條圖上顯示排名
             textposition='outside',  # 設置文字顯示位置
         ))
         
@@ -461,7 +461,7 @@ if st.session_state.df is not None:
             name="Mixed Doubles",
             x=CP_df_event_MXD['Player'], 
             y=CP_df_event_MXD['Points'],
-            text=CP_df_event_MXD['Rank'],      # 在長條圖上顯示排名
+            text="Rank："+CP_df_event_MXD['Rank'],      # 在長條圖上顯示排名
             textposition='outside',  # 設置文字顯示位置
         ))
         
