@@ -6,7 +6,7 @@ st.markdown(
     """
     <style>
     .stApp {
-        background-image: url('https://i.pinimg.com/236x/54/b9/74/54b974d575ab7257db0ed2ccda65a9c4.jpg');  /* 指定背景圖像的URL或路徑 */
+        background-image: url('https://img.pikbest.com/wp/202344/contrasting-elements-light-textures-on-a-dark-backdrop_9926069.jpg!w700wp');  /* 指定背景圖像的URL或路徑 */
         background-size: cover;  /* 讓背景圖像填滿整個視窗 */
         background-position: center;  /* 背景圖像居中 */
     }
