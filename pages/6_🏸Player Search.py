@@ -484,15 +484,16 @@ if st.session_state.df is not None:
             width=1500    # 可根據需要設置寬度
 
         )
+        # 添加說明文字在圖例下方
         fig.add_annotation(
-            text="圖中數字為排名(Rank)",
-            x=0.5,  # X 軸對齊，0 表示左，1 表示右，0.5 表示居中
-            y=-0.15,  # Y 軸位置，負數表示圖例下方
-            xref="paper",  # 以圖表紙張為參考坐標
+            text="圖中數字表示世界排名(Rank)",  # 說明文字
+            x=1.02,  # 調整到圖例下方
+            y=0.5,  # 視圖例的位置調整
+            xref="paper",
             yref="paper",
             showarrow=False,  # 隱藏箭頭
-            font=dict(size=15, ),  # 設定文字大小與顏色
-            align="center"  # 文本居中
+            font=dict(size=15),  # 字體大小與顏色
+            align="left",  # 靠左對齊
         )
         
         # 顯示圖表
