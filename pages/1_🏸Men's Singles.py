@@ -257,10 +257,13 @@ if selected_date2 and user_choice == "是":
         st.session_state["map2"] = {"center": [0, 0], "zoom": 1}
     row4_1, row4_2 = st.columns(2)
     with row4_1:
-        # 將中心點轉換為列表格式
-        center1 = st.session_state["map1"]["center"]
-        location1 = [center1["lat"], center1["lng"]] if isinstance(center1, dict) else center1
-    
+        # 若 output1 包含中心點信息
+        if "center" in output1:
+            center1 = output1["center"]
+            location1 = [center1["lat"], center1["lng"]] if isinstance(center1, dict) else center1
+        else:
+            location1 = [0, 0]  # 若沒有找到中心點，使用默認位置
+        
         # 創建左側地圖
         m1 = folium.Map(location=location1, zoom_start=st.session_state["map1"]["zoom"])
         folium.GeoJson(
@@ -271,7 +274,7 @@ if selected_date2 and user_choice == "是":
                                       aliases=["Country:", "Player Count:", "Player Name:"]),
             popup_keep_highlighted=True,
         ).add_to(m1)
-        
+    
         # 嵌入地圖
         output1 = st_folium(m1, height=500, key="map1")
     
@@ -284,9 +287,12 @@ if selected_date2 and user_choice == "是":
             st.session_state["map1"]["zoom"] = output1["zoom"]
     
     with row4_2:
-        # 將中心點轉換為列表格式
-        center2 = st.session_state["map2"]["center"]
-        location2 = [center2["lat"], center2["lng"]] if isinstance(center2, dict) else center2
+        # 若 output2 包含中心點信息
+        if "center" in output2:
+            center2 = output2["center"]
+            location2 = [center2["lat"], center2["lng"]] if isinstance(center2, dict) else center2
+        else:
+            location2 = [0, 0]  # 若沒有找到中心點，使用默認位置
     
         # 創建右側地圖
         m2 = folium.Map(location=location2, zoom_start=st.session_state["map2"]["zoom"])
@@ -298,7 +304,7 @@ if selected_date2 and user_choice == "是":
                                       aliases=["Country:", "Player Count:", "Player Name:"]),
             popup_keep_highlighted=True,
         ).add_to(m2)
-        
+    
         # 嵌入地圖
         output2 = st_folium(m2, height=500, key="map2")
     
