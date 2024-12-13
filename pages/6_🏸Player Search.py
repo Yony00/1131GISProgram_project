@@ -431,6 +431,7 @@ if st.session_state.df is not None:
             y=CP_df_event_MS['Points']    ,    # Y 軸：積分
             text="Rank：\n"+CP_df_event_MS['Rank'],      # 在長條圖上顯示排名
             textposition='outside',  # 設置文字顯示位置
+            textfont=dict(size=14),
         ))
         
         fig.add_trace(go.Bar(
@@ -439,6 +440,7 @@ if st.session_state.df is not None:
             y=CP_df_event_WS['Points'],
             text="Rank：\n"+CP_df_event_WS['Rank'],      # 在長條圖上顯示排名
             textposition='outside',  # 設置文字顯示位置
+            textfont=dict(size=14),
         ))
         
         fig.add_trace(go.Bar(
@@ -447,6 +449,7 @@ if st.session_state.df is not None:
             y=CP_df_event_MD['Points'],
             text="Rank：\n"+CP_df_event_MD['Rank'],      # 在長條圖上顯示排名
             textposition='outside',  # 設置文字顯示位置
+            textfont=dict(size=14),
         ))
         
         fig.add_trace(go.Bar(
@@ -455,6 +458,7 @@ if st.session_state.df is not None:
             y=CP_df_event_WD['Points'],
             text="Rank：\n"+CP_df_event_WD['Rank'],      # 在長條圖上顯示排名
             textposition='outside',  # 設置文字顯示位置
+            textfont=dict(size=14),
         ))
         
         fig.add_trace(go.Bar(
@@ -463,6 +467,7 @@ if st.session_state.df is not None:
             y=CP_df_event_MXD['Points'],
             text="Rank：\n"+CP_df_event_MXD['Rank'],      # 在長條圖上顯示排名
             textposition='outside',  # 設置文字顯示位置
+            textfont=dict(size=14),
         ))
         
         # 更新圖表標題與布局
