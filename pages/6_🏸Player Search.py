@@ -275,4 +275,34 @@ if st.session_state.df is not None:
             index=index,
             key="CP_data",  # 添加唯一的 key
             )
-      
+        if CP_data and :
+            CP_data_id1 = date_id_dict[CP_data]
+            
+            MS_df = scrape_bwf_ranking_by_date(CP_data_id1)
+            MD_df = MDscrape_bwf_ranking_by_date(CP_data_id1)
+            WS_df = WSscrape_bwf_ranking_by_date(CP_data_id1)
+            WD_df = WDscrape_bwf_ranking_by_date(CP_data_id1)
+            MXD_df = MXDscrape_bwf_ranking_by_date(CP_data_id1)        
+
+            if selected_event == "男子單打":
+                country = MS_df.loc[MS_df['Player'] == player_name, 'Country'].values
+                CP_df_event= MS_df[MS_df['country'] == country]
+                st.write(CP_df)
+            elif selected_event == "男子雙打":
+                country = MD_df.loc[MD_df['Player'] == player_name, 'Country'].values
+                CP_df_event= MD_df[MD_df['country'] == country]
+                st.write(CP_df)
+            elif selected_event == "女子單打":
+                country = WS_df.loc[WS_df['Player'] == player_name, 'Country'].values
+                CP_df_event= WS_df[MW_df['country'] == country]
+                st.write(CP_df)
+            elif selected_event == "女子雙打":
+                country = WD_df.loc[WD_df['Player'] == player_name, 'Country'].values
+                CP_df_event= WD_df[WD_df['country'] == country]
+                st.write(CP_df)
+            elif selected_event == "混合雙打":
+                country = MXC_df.loc[MXD_df['Player'] == player_name, 'Country'].values
+                CP_df_event= MXD_df[MXD_df['country'] == country]
+                st.write(CP_df)
+            
+            
