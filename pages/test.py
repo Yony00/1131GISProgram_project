@@ -1,4 +1,3 @@
-
 import folium
 from streamlit_folium import st_folium
 import streamlit as st
@@ -30,4 +29,5 @@ with row2:
         st.session_state.map_center = event["center"]
         st.session_state.map_zoom = event["zoom"]
 
-    m1.on('moveend', sync_map)  # 正確的事件名稱與回調函數參數
+    # 使用 on() 正確的參數設置
+    m1.on_moveend(sync_map)  # 正確的事件名稱與回調函數參數
