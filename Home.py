@@ -18,7 +18,7 @@ st.title("BWF世界羽球聯盟排名資料視覺化與互動地圖")
 
 st.markdown(
     """
-    內建爬蟲程式，抓取BWF世界羽聯網頁(https://bwf.tournamentsoftware.com/ranking/)
+    內建爬蟲程式，抓取BWF世界羽聯網頁(https://bwf.tournamentsoftware.com/ranking/) \n
     可查詢的最早的排名紀錄開始，至今所有週次的世界排名資料，取前100名 \n
     此專案提供單項的排名資料視覺化、互動地圖呈現，並且可選擇與其他週次比較\n
     由於BWF的排名紀錄網頁顯示日期的格式是 ：月/日/年 (m/d/y)，因此以下顯示也依此格式   \n
