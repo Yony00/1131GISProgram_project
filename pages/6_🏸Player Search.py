@@ -470,7 +470,7 @@ if st.session_state.df is not None:
         ))
         #選擇的選手
         fig.add_trace(go.Bar(
-            name=selected_event,
+            name=highlight_player,
             x=[highlight_player], 
             y=CP_df_event.loc[CP_df_event['Player'] == highlight_player, 'Points'].values,
             text=CP_df_event.loc[CP_df_event['Player'] == highlight_player, 'Rank'].values,      # 在長條圖上顯示排名
