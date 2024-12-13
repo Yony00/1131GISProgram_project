@@ -275,7 +275,7 @@ if st.session_state.df is not None:
             index=index,
             key="CP_data",  # 添加唯一的 key
             )
-        if CP_data and :
+        if CP_data  :
             CP_data_id1 = date_id_dict[CP_data]
             
             MS_df = scrape_bwf_ranking_by_date(CP_data_id1)
