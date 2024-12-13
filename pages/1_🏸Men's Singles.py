@@ -255,6 +255,7 @@ if selected_date2 and user_choice == "是":
         st.session_state["map1"] = {"center": [0, 0], "zoom": 1}
     if "map2" not in st.session_state:
         st.session_state["map2"] = {"center": [0, 0], "zoom": 1}
+    row4_1, row4_2 = st.columns(2)
     with row4_1:
         # 創建左側地圖
         m1 = folium.Map(location=st.session_state["map1"]["center"], zoom_start=st.session_state["map1"]["zoom"])
