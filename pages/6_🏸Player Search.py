@@ -27,7 +27,7 @@ import plotly.graph_objects as go
 
 
 # 設定頁面配置為寬屏模式
-st.set_page_config(page_title="Men's Singles", layout="wide", page_icon=":🏸")
+st.set_page_config(page_title="Player Search", layout="wide", page_icon=":🏸")
 
 # 設定頁面標題
 st.title("特定選手/組合搜尋")
@@ -40,9 +40,8 @@ st.write(
     以組為單位執行搜尋，以雙打為例，要輸入： LEE Yang/ WANG Chi-Lin\n 
     注意開頭有空一格\n 
     建議參考下方表格，直接複製選手名欄位\n
-
-    執行結果以季度(三個月)為單位呈現
-    取該月最後一周的排名紀錄
+    呈現部分包括積分排名變化
+    以及與該國同時期其他選手之比較
     ##
     """
 )
@@ -142,6 +141,7 @@ with row1_3:
         st.session_state.clear()
 
 st.markdown(f"<h4>以下是關於 {search_event} 項目， {player_name} 選手的歷年排名、積分變化</h2>", unsafe_allow_html=True)
+st.write("執行結果以季度(三個月)為單位呈現，取該月最後一週的排名紀錄")
 
 row2_1, row2_2, row2_3 = st.columns((1,1,1))
 
@@ -182,10 +182,11 @@ if st.session_state.df is not None:
             df['Date'] = df['Date'].dt.strftime('%m/%d/%Y')  # 恢復日期格式
             st.write("日期已篩選:")
             st.write(df2)
-    row3_1, row3_2 = st.columns((2,1))
+    row3_1, row3_2 = st.columns((1,2))
 
     with row3_1:
         user_choice = st.radio("使用哪張表格繪圖：", ("左表", "右表"))
+    with row3_2:
         if user_choice == "左表":
             plt_df=df.copy()
             plt_df['Date'] = pd.to_datetime(plt_df['Date'], format='%m/%d/%Y')
