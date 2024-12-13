@@ -71,6 +71,7 @@ if "df_initial" not in st.session_state:  # 只有在第一次爬蟲未完成時
 
 if "date_id_dict" in st.session_state:
     date_id_dict = st.session_state.date_id_dict
+    new_date=st.session_state.new_date
 ##################
 
 ##################
@@ -269,7 +270,7 @@ if st.session_state.df is not None:
         st.write("與該國同時期其他選手/組合比較：")
     with row4_2:
         CP_dataoptions = list(date_id_dict.keys())
-        index = CP_dataoptions.index(st.session_state.new_date)
+        index = CP_dataoptions.index(new_date)
 
         CP_data = st.selectbox(
             "選擇欲查詢的日期 (預設最新日期)",
