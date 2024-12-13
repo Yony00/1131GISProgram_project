@@ -24,8 +24,8 @@ with row2:
     output2 = st_folium(m2, width=400, height=300, key="map2")
 
     # 手動輸入中心位置
-    lat = st.number_input('輸入緯度', min_value=-90.0, max_value=90.0, value=output2["center"]["lat"], format="%.6f")
-    lon = st.number_input('輸入經度', min_value=-180.0, max_value=180.0, value=output2["center"]["lng"], format="%.6f")
+    lat = st.number_input('輸入緯度', min_value=-90.0, max_value=90.0, value=float(output2["center"]["lat"]), format="%.6f")
+    lon = st.number_input('輸入經度', min_value=-180.0, max_value=180.0, value=float(output2["center"]["lng"]), format="%.6f")
 
     # 更新地圖的中心
     m2.location = [lat, lon]
