@@ -316,17 +316,97 @@ if st.session_state.df is not None:
             country = MD_df.loc[MD_df['Player'] == player_name, 'Country'].values
             country=country[0]
             CP_df_event= MD_df[MD_df['Country'] == country]
+            # 繪製 Pie 圖表
+            with row5_1:
+                # 指定需要凸顯的選手
+                highlight_player = player_name
+                
+                # 根據指定選手生成 pull 數據（凸顯效果）
+                CP_df_event['pull'] = CP_df_event['Player'].apply(lambda x: 0.2 if x == highlight_player else 0.0)
+
+                fig = go.Figure(data=[go.Pie(labels= CP_df_event['Player'] + " (Rank: " + CP_df_event['Rank'].astype(str) + ")",
+                                             values=CP_df_event["Points"],    pull=CP_df_event['pull'],  # 添加凸顯參數
+
+                                            )],
+                                
+
+                                layout=go.Layout(
+                                    title=go.layout.Title(text=f"該時期 {country}  {selected_event} 積分占比")
+                                ))
+                
+                # 在 Streamlit 中顯示 Pie 圖表
+                st.plotly_chart(fig)
         elif selected_event == "女子單打":
             country = WS_df.loc[WS_df['Player'] == player_name, 'Country'].values
             country=country[0]
             CP_df_event= WS_df[MW_df['Country'] == country]
+            # 繪製 Pie 圖表
+            with row5_1:
+                # 指定需要凸顯的選手
+                highlight_player = player_name
+                
+                # 根據指定選手生成 pull 數據（凸顯效果）
+                CP_df_event['pull'] = CP_df_event['Player'].apply(lambda x: 0.2 if x == highlight_player else 0.0)
+
+                fig = go.Figure(data=[go.Pie(labels= CP_df_event['Player'] + " (Rank: " + CP_df_event['Rank'].astype(str) + ")",
+                                             values=CP_df_event["Points"],    pull=CP_df_event['pull'],  # 添加凸顯參數
+
+                                            )],
+                                
+
+                                layout=go.Layout(
+                                    title=go.layout.Title(text=f"該時期 {country}  {selected_event} 積分占比")
+                                ))
+                
+                # 在 Streamlit 中顯示 Pie 圖表
+                st.plotly_chart(fig)
         elif selected_event == "女子雙打":
             country = WD_df.loc[WD_df['Player'] == player_name, 'Country'].values
             country=country[0]
             CP_df_event= WD_df[WD_df['Country'] == country]
+            # 繪製 Pie 圖表
+            with row5_1:
+                # 指定需要凸顯的選手
+                highlight_player = player_name
+                
+                # 根據指定選手生成 pull 數據（凸顯效果）
+                CP_df_event['pull'] = CP_df_event['Player'].apply(lambda x: 0.2 if x == highlight_player else 0.0)
+
+                fig = go.Figure(data=[go.Pie(labels= CP_df_event['Player'] + " (Rank: " + CP_df_event['Rank'].astype(str) + ")",
+                                             values=CP_df_event["Points"],    pull=CP_df_event['pull'],  # 添加凸顯參數
+
+                                            )],
+                                
+
+                                layout=go.Layout(
+                                    title=go.layout.Title(text=f"該時期 {country}  {selected_event} 積分占比")
+                                ))
+                
+                # 在 Streamlit 中顯示 Pie 圖表
+                st.plotly_chart(fig)
         elif selected_event == "混合雙打":
             country = MXC_df.loc[MXD_df['Player'] == player_name, 'Country'].values
             country=country[0]
             CP_df_event= MXD_df[MXD_df['Country'] == country]
+            # 繪製 Pie 圖表
+            with row5_1:
+                # 指定需要凸顯的選手
+                highlight_player = player_name
+                
+                # 根據指定選手生成 pull 數據（凸顯效果）
+                CP_df_event['pull'] = CP_df_event['Player'].apply(lambda x: 0.2 if x == highlight_player else 0.0)
+
+                fig = go.Figure(data=[go.Pie(labels= CP_df_event['Player'] + " (Rank: " + CP_df_event['Rank'].astype(str) + ")",
+                                             values=CP_df_event["Points"],    pull=CP_df_event['pull'],  # 添加凸顯參數
+
+                                            )],
+                                
+
+                                layout=go.Layout(
+                                    title=go.layout.Title(text=f"該時期 {country}  {selected_event} 積分占比")
+                                ))
+                
+                # 在 Streamlit 中顯示 Pie 圖表
+                st.plotly_chart(fig)
         
             
