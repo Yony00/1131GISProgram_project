@@ -160,7 +160,7 @@ with row1_3:
         st.session_state.clear()
 
 st.markdown(f"<h4>以下是關於 {search_event} 項目， {player_name} 選手的歷年排名、積分變化</h2>", unsafe_allow_html=True)
-st.write("執行結果以季度(三個月)為單位呈現，取該月最後一週的排名紀錄")
+st.write("執行時間約1~2分鐘，結果以季度(三個月)為單位呈現，取該月最後一週的排名紀錄")
 
 row2_1, row2_2, row2_3 = st.columns((1,1,1))
 
