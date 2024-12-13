@@ -286,23 +286,23 @@ if st.session_state.df is not None:
 
             if selected_event == "男子單打":
                 country = MS_df.loc[MS_df['Player'] == player_name, 'Country'].values
-                CP_df_event= MS_df[MS_df['Country'] == country]
-                st.write(CP_df)
+                CP_df_event= MS_df[MS_df['Country'] == country].copy()
+                st.write(CP_df_event)
             elif selected_event == "男子雙打":
                 country = MD_df.loc[MD_df['Player'] == player_name, 'Country'].values
                 CP_df_event= MD_df[MD_df['Country'] == country]
-                st.write(CP_df)
+                st.write(CP_df_event)
             elif selected_event == "女子單打":
                 country = WS_df.loc[WS_df['Player'] == player_name, 'Country'].values
                 CP_df_event= WS_df[MW_df['Country'] == country]
-                st.write(CP_df)
+                st.write(CP_df_event)
             elif selected_event == "女子雙打":
                 country = WD_df.loc[WD_df['Player'] == player_name, 'Country'].values
                 CP_df_event= WD_df[WD_df['Country'] == country]
-                st.write(CP_df)
+                st.write(CP_df_event)
             elif selected_event == "混合雙打":
                 country = MXC_df.loc[MXD_df['Player'] == player_name, 'Country'].values
                 CP_df_event= MXD_df[MXD_df['Country'] == country]
-                st.write(CP_df)
+                st.write(CP_df_event)
             
             
