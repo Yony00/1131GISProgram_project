@@ -413,82 +413,82 @@ if st.session_state.df is not None:
             
 
 
-                CP_df_event_MS= MS_df[MS_df['Country'] == country]
-                CP_df_event_MD= MD_df[MD_df['Country'] == country]
-                CP_df_event_WS= WS_df[WS_df['Country'] == country]
-                CP_df_event_WD= WD_df[WD_df['Country'] == country]
-                CP_df_event_MXD= MXD_df[MXD_df['Country'] == country]
-        
-                # 項目名稱列表
-                events =["男子單打", "男子雙打", "女子單打", "女子雙打", "混合雙打"]
-                # 建立圖表
-                fig = go.Figure()
-                
-                # 添加每個項目的長條圖
-                fig.add_trace(go.Bar(
-                    name="男子單打",
-                    x=CP_df_event_MS['Player'],  # X 軸：選手名字
-                    y=CP_df_event_MS['Points']    ,    # Y 軸：積分
-                    text=CP_df_event_MS['Rank'],      # 在長條圖上顯示排名
-                    textposition='inside',  # 設置文字顯示位置
-                    textfont=dict(size=18),
-                ))
-                
-                fig.add_trace(go.Bar(
-                    name="女子單打",
-                    x=CP_df_event_WS['Player'], 
-                    y=CP_df_event_WS['Points'],
-                    text=CP_df_event_WS['Rank'],      # 在長條圖上顯示排名
-                    textposition='inside',  # 設置文字顯示位置
-                    textfont=dict(size=18),
-                ))
-                
-                fig.add_trace(go.Bar(
-                    name="男子雙打",
-                    x=CP_df_event_MD['Player'], 
-                    y=CP_df_event_MD['Points'],
-                    text=CP_df_event_MD['Rank'],      # 在長條圖上顯示排名
-                    textposition='inside',  # 設置文字顯示位置
-                    textfont=dict(size=18),
-                ))
-                
-                fig.add_trace(go.Bar(
-                    name="女子雙打",
-                    x=CP_df_event_WD['Player'], 
-                    y=CP_df_event_WD['Points'],
-                    text=CP_df_event_WD['Rank'],      # 在長條圖上顯示排名
-                    textposition='inside',  # 設置文字顯示位置
-                    textfont=dict(size=18),
-                ))
-                
-                fig.add_trace(go.Bar(
-                    name="混合雙打",
-                    x=CP_df_event_MXD['Player'], 
-                    y=CP_df_event_MXD['Points'],
-                    text=CP_df_event_MXD['Rank'],      # 在長條圖上顯示排名
-                    textposition='inside',  # 設置文字顯示位置
-                    textfont=dict(size=18),
-                ))
-                
-                # 更新圖表標題與布局
-                fig.update_layout(
-                    barmode='group',  # 以群組形式顯示柱狀圖
-                    title=f"該時期 {country} 不同項目中，不同選手的積分、排名，圖中數字為世界排名(Rank)",
-                    xaxis_title="Players",
-                    yaxis=dict(
-                                title='Points',          # Y 軸的標題
-                                range=[0, 110000],        # Y 軸的範圍
-                                ),
-                    legend_title="Event",
-                    height=1000,  # 調整圖表高度
-                    width=1500    # 可根據需要設置寬度
-        
-                )
-           
-                
-                # 顯示圖表
-                st.plotly_chart(fig)
-        
+            CP_df_event_MS= MS_df[MS_df['Country'] == country]
+            CP_df_event_MD= MD_df[MD_df['Country'] == country]
+            CP_df_event_WS= WS_df[WS_df['Country'] == country]
+            CP_df_event_WD= WD_df[WD_df['Country'] == country]
+            CP_df_event_MXD= MXD_df[MXD_df['Country'] == country]
+    
+            # 項目名稱列表
+            events =["男子單打", "男子雙打", "女子單打", "女子雙打", "混合雙打"]
+            # 建立圖表
+            fig = go.Figure()
+            
+            # 添加每個項目的長條圖
+            fig.add_trace(go.Bar(
+                name="男子單打",
+                x=CP_df_event_MS['Player'],  # X 軸：選手名字
+                y=CP_df_event_MS['Points']    ,    # Y 軸：積分
+                text=CP_df_event_MS['Rank'],      # 在長條圖上顯示排名
+                textposition='inside',  # 設置文字顯示位置
+                textfont=dict(size=18),
+            ))
+            
+            fig.add_trace(go.Bar(
+                name="女子單打",
+                x=CP_df_event_WS['Player'], 
+                y=CP_df_event_WS['Points'],
+                text=CP_df_event_WS['Rank'],      # 在長條圖上顯示排名
+                textposition='inside',  # 設置文字顯示位置
+                textfont=dict(size=18),
+            ))
+            
+            fig.add_trace(go.Bar(
+                name="男子雙打",
+                x=CP_df_event_MD['Player'], 
+                y=CP_df_event_MD['Points'],
+                text=CP_df_event_MD['Rank'],      # 在長條圖上顯示排名
+                textposition='inside',  # 設置文字顯示位置
+                textfont=dict(size=18),
+            ))
+            
+            fig.add_trace(go.Bar(
+                name="女子雙打",
+                x=CP_df_event_WD['Player'], 
+                y=CP_df_event_WD['Points'],
+                text=CP_df_event_WD['Rank'],      # 在長條圖上顯示排名
+                textposition='inside',  # 設置文字顯示位置
+                textfont=dict(size=18),
+            ))
+            
+            fig.add_trace(go.Bar(
+                name="混合雙打",
+                x=CP_df_event_MXD['Player'], 
+                y=CP_df_event_MXD['Points'],
+                text=CP_df_event_MXD['Rank'],      # 在長條圖上顯示排名
+                textposition='inside',  # 設置文字顯示位置
+                textfont=dict(size=18),
+            ))
+            
+            # 更新圖表標題與布局
+            fig.update_layout(
+                barmode='group',  # 以群組形式顯示柱狀圖
+                title=f"該時期 {country} 不同項目中，不同選手的積分、排名，圖中數字為世界排名(Rank)",
+                xaxis_title="Players",
+                yaxis=dict(
+                            title='Points',          # Y 軸的標題
+                            range=[0, 110000],        # Y 軸的範圍
+                            ),
+                legend_title="Event",
+                height=1000,  # 調整圖表高度
+                width=1500    # 可根據需要設置寬度
+    
+            )
+       
+            
+            # 顯示圖表
+            st.plotly_chart(fig)
+    
                 
   
 
