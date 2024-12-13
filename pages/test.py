@@ -5,6 +5,7 @@ from streamlit_folium import st_folium
 
 # 創建地圖
 m = folium.Map(location=[0, 0], zoom_start=2)
+folium.Marker([120, 24], popup="This is a point").add_to(m)
 
 # 在 Streamlit 中顯示地圖
 output = st_folium(m, width=700, height=500, key="map1")
