@@ -17,7 +17,19 @@ import folium
 
 # 設定頁面配置為寬屏模式
 st.set_page_config(page_title="Mixed Doubles", layout="wide", page_icon=":🏸")
+st.markdown(
+    """
+    <style>
+    .stApp {
+        background-image: url('https://img1.wallspic.com/previews/0/4/9/5/5/155940/155940-hei_se_he_bai_se_de-he_yin_ying_de_se_cai-xiang_shi_zhi_chu-x750.jpg'); /* 指定背景圖像的URL或路徑 */
+                background-size: cover;  /* 讓背景圖像填滿整個視窗 */
 
+        background-position: center;  /* 背景圖像居中 */
+    }
+    </style>
+    """,
+    unsafe_allow_html=True
+)
 # 設定頁面標題
 st.title("Mixed Doubles 混合雙打")
 
