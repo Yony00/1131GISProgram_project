@@ -28,16 +28,17 @@ import plotly.graph_objects as go
 
 # 設定頁面配置為寬屏模式
 st.set_page_config(page_title="Player Search", layout="wide", page_icon=":🏸")
-st.markdown(
-    """
-    <style>
-    .stApp {
-        background-image: url('https://img1.wallspic.com/previews/0/4/9/5/5/155940/155940-hei_se_he_bai_se_de-he_yin_ying_de_se_cai-xiang_shi_zhi_chu-x750.jpg'); /* 指定背景圖像的URL或路徑 */
-                background-size: cover;  /* 讓背景圖像填滿整個視窗 */
+highlight_word = " LEE Yang/ WANG Chi-Lin"
 
-        background-position: center;  /* 背景圖像居中 */
-    }
-    </style>
+st.write(
+    f"""
+    此頁面提供單一選手的搜尋\n
+    先選擇項目、再輸入選手名\n
+    以組為單位執行搜尋，以雙打為例，要輸入： **{highlight_word}** \n
+    注意開頭有空一格\n
+    建議參考下方表格，直接複製選手名欄位\n
+    呈現部分包括積分排名變化，以及與該國同時期其他選手之比較
+    ##
     """,
     unsafe_allow_html=True
 )
