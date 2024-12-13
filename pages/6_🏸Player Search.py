@@ -51,7 +51,7 @@ st.write(
     f"""
     此頁面提供單一選手的搜尋\n
     先選擇項目、再輸入選手名\n
-    以組為單位執行搜尋，以雙打為例，要輸入： <mark>{highlight_word}</mark> \n
+    以組為單位執行搜尋，以雙打為例，要輸入： <mark style="background-color: yellow; padding: 0 2px;">{highlight_word}</mark> \n
     注意開頭有空一格\n
     建議參考下方表格，直接複製選手名欄位\n
     呈現部分包括積分排名變化，以及與該國同時期其他選手之比較
@@ -59,6 +59,7 @@ st.write(
     """,
     unsafe_allow_html=True
 )
+
 
 
 
