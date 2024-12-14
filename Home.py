@@ -1,24 +1,7 @@
 import streamlit as st
 import leafmap.foliumap as leafmap
 st.set_page_config(page_title="BWF World Ranking", layout="wide")
-# 設置為暗模式
-# 自訂暗模式樣式
-dark_mode_css = """
-<style>
-:root {
-    --primary-color: #1DB954; /* 主色 */
-    --background-color: #121212; /* 背景色 */
-    --secondary-background-color: #1E1E1E; /* 側邊欄背景色 */
-    --text-color: #FFFFFF; /* 文字顏色 */
-}
-body {
-    background-color: var(--background-color);
-    color: var(--text-color);
-}
-</style>
-"""
 
-st.markdown(dark_mode_css, unsafe_allow_html=True)
 st.markdown(
     """
     <style>
