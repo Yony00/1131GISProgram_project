@@ -168,6 +168,7 @@ m = leafmap.Map(center=(0, 0), zoom=2)
 
 for selected_id1 in date:   
     df_selected1 = scrape_bwf_ranking_by_date(selected_id1)
+    st.write(df_selected1)
     df_selected1.set_index("Rank", inplace=True)
     GB_country= df_selected1.groupby(by=['Country']).agg(
         player_count=('Player', len),
