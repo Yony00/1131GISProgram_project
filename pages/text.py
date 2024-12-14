@@ -161,7 +161,7 @@ if selected_date2:
 
 ########################################
 #設定五個時間
-date=["12/10/2024","12/3/2024","11/26/2024","11/19/2024",11/12/2024"]
+date=["12/10/2024","12/3/2024","11/26/2024","11/19/2024","11/12/2024"]
 world_country=gpd.read_file("https://github.com/RGT1143022/BWF_world_country/releases/download/v1.0.0/BWF_world_country_true.geojson")
     # 創建地圖並添加 GeoDataFrame
 m = leafmap.Map(center=(0, 0), zoom=2)
