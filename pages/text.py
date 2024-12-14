@@ -166,46 +166,55 @@ world_country=gpd.read_file("https://github.com/RGT1143022/BWF_world_country/rel
     # 創建地圖並添加 GeoDataFrame
 m = leafmap.Map(center=(0, 0), zoom=2)
 
+
+# 初始化圖層列表
+layer_names = []
+
 for selected_date1 in date:  
     selected_id1 = date_id_dict[selected_date1]
     df_selected1 = scrape_bwf_ranking_by_date(selected_id1)
     df_selected1.set_index("Rank", inplace=True)
-    GB_country= df_selected1.groupby(by=['Country']).agg(
+    GB_country = df_selected1.groupby(by=['Country']).agg(
         player_count=('Player', len),
         playername=('Player',';'.join)
-        )
-    GB_country_withGEO=pd.merge(GB_country,world_country,how='left',on='Country')
-    GB_country_withGEO = gpd.GeoDataFrame(GB_country_withGEO,geometry=GB_country_withGEO['geometry'])
-        # 讀取 GeoDataFrame
+    )
+    GB_country_withGEO = pd.merge(GB_country, world_country, how='left', on='Country')
+    GB_country_withGEO = gpd.GeoDataFrame(GB_country_withGEO, geometry=GB_country_withGEO['geometry'])
+    
     gdf1 = GB_country_withGEO
-    
-    # 假設 gdf 中的數值欄位名為 'value'
     value_column = 'player_count'
-    
-    # 創建數值正規化範圍
     norm = Normalize(vmin=gdf1[value_column].min(), vmax=gdf1[value_column].max())
     
-    # 定義樣式函數（固定藍色，透明度根據數值設置）
     def style_function(feature):
         value = feature["properties"][value_column]
-        opacity = norm(value)  # 將數值正規化到 [0, 1] 範圍
+        opacity = norm(value)
         return {
-            "fillColor": "#0000FF",  # 固定藍色 (十六進制格式)
-            "color": "black",        # 邊框顏色
-            "weight": 1,             # 邊框寬度
-            "fillOpacity": opacity,  # 根據數值調整透明度
+            "fillColor": "#0000FF",
+            "color": "black",
+            "weight": 1,
+            "fillOpacity": opacity,
         }
+    
+    layer_name = f"BWF Men's Singles {selected_date1}"
+    layer_names.append(layer_name)
+    
     m.add_gdf(
         gdf1,
-        layer_name=f"BWF Men's Singles World Ranking for {selected_date1}:",
+        layer_name=layer_name,
         style_function=style_function,
         info_mode='on_click'
     )
 
+# 滑動條來選擇圖層
+selected_layer_idx = st.slider("Select Date", 0, len(layer_names) - 1, 0)
+selected_layer = layer_names[selected_layer_idx]
 
+# 設置圖層可見性（只顯示選定的圖層）
+for idx, layer_name in enumerate(layer_names):
+    m.set_layer_opacity(layer_name, 1.0 if layer_name == selected_layer else 0.0)
+
+# 顯示地圖
 m.to_streamlit()
-
-
 
 # #########################################
 
