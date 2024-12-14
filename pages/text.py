@@ -181,7 +181,10 @@ for date in dates:
             "weight": 1,
             "fillOpacity": 0.5,
         },
-        tooltip=folium.GeoJsonTooltip(fields=["ADMIN", "value"], aliases=["Country", "Value"]),
+        tooltip=folium.GeoJsonTooltip(
+            fields=["Country", "value"],  # 修改為正確的字段名
+            aliases=["Country", "Value"],  # 為提示框添加別名
+        ),
     ).add_to(feature_group)
     feature_group.add_to(m)
     layers[date] = feature_group
