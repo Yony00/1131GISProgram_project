@@ -166,8 +166,8 @@ world_country=gpd.read_file("https://github.com/RGT1143022/BWF_world_country/rel
     # 創建地圖並添加 GeoDataFrame
 m = leafmap.Map(center=(0, 0), zoom=2)
 
-for selected_id1 in date:   
-    df_selected1 = scrape_bwf_ranking_by_date(selected_id1)
+for i in range(0,6):   
+    df_selected1 = scrape_bwf_ranking_by_date(date[i])
     st.write(df_selected1)
     df_selected1.set_index("Rank", inplace=True)
     GB_country= df_selected1.groupby(by=['Country']).agg(
