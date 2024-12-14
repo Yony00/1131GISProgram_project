@@ -1,7 +1,7 @@
 import streamlit as st
 import leafmap.foliumap as leafmap
 st.set_page_config(page_title="BWF World Ranking", layout="wide",
-                  theme="dark"  # 設置為暗模式)
+                  theme="dark"  )# 設置為暗模式
 
 st.markdown(
     """
