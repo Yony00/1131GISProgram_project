@@ -122,18 +122,18 @@ with row2_1:
     )
 
 # 如果選擇了日期
-if selected_date1:
-    try:
-        selected_id1 = date_id_dict[selected_date1]
-        df_selected1 = scrape_bwf_ranking_by_date(selected_id1)
-        df_selected1.set_index("Rank", inplace=True)
+# if selected_date1:
+#     try:
+#         selected_id1 = date_id_dict[selected_date1]
+#         df_selected1 = scrape_bwf_ranking_by_date(selected_id1)
+#         df_selected1.set_index("Rank", inplace=True)
 
-        # 顯示選擇日期的排名資料於 row1_1
-        with row1_1:
-            st.write(f"下表為 {selected_date1}  時 男子單打排名資料")
-            st.write(df_selected1)
-    except Exception as e:
-        st.error(f"Error occurred while fetching data for {selected_date1}: {e}")
+#         # 顯示選擇日期的排名資料於 row1_1
+#         with row1_1:
+#             st.write(f"下表為 {selected_date1}  時 男子單打排名資料")
+#             st.write(df_selected1)
+#     except Exception as e:
+#         st.error(f"Error occurred while fetching data for {selected_date1}: {e}")
 
 # 第二个 selectbox，选择其他日期
 with row2_2:
