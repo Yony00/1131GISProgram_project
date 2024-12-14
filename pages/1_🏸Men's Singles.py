@@ -73,7 +73,7 @@ with row0_2:
         若不喜歡忽亮忽暗的頁面呈現，請選擇"否"
         """
     )
-    user_choice = st.radio("是否左右圖台聯動：", ("是", "否"))
+    user_choice = st.radio("是否左右圖台聯動：", ("否", "是"))
     st.write(
         """
         ##  
