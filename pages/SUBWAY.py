@@ -12,20 +12,19 @@ st.title("📍尋找自訂範圍內的Subway餐廳")
 col1, col2 = st.columns([3, 1])  # 3:1的比例，左邊占三分之一，右邊占四分之一
 
 with col2:
+import streamlit as st
+
+# 直接嵌入 SVG
 st.markdown(
     """
-    <style>
-    .custom-icon path {
-        fill: blue; /* 改成藍色 */
-    }
-    </style>
     <h3>這是藍色的圖標:</h3>
-    <svg class="custom-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512" width="50">
-        <path d="M287.9 17.8L354 150.2 495.9 171.5 383.5 275.4 415.5 417.5 287.9 349.8 160.3 417.5 192.3 275.4 79.9 171.5 221.8 150.2 287.9 17.8z"/>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512" width="50">
+        <path fill="blue" d="M287.9 17.8L354 150.2 495.9 171.5 383.5 275.4 415.5 417.5 287.9 349.8 160.3 417.5 192.3 275.4 79.9 171.5 221.8 150.2 287.9 17.8z"/>
     </svg>
     """,
     unsafe_allow_html=True
 )
+
 
 
 
