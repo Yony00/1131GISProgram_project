@@ -2,7 +2,7 @@ import streamlit as st
 import folium
 import geopandas as gpd
 import requests
-import pandas as pd  # 加入 pandas 模組
+import pandas as pd
 from streamlit_folium import st_folium
 
 st.set_page_config(layout="wide")
@@ -50,7 +50,7 @@ if combined_gdf is not None and not combined_gdf.empty:
         "麥當勞": "https://cdn-icons-png.flaticon.com/512/3075/3075978.png"   # 麥當勞薯條圖標
     }
 
-    # 當 brand 未定義時，顯示所有品牌的點位
+    # 當 brand 未定義時，顯示三間速食餐廳的圖標
     if 'brand' not in combined_gdf.columns:
         # 顯示所有品牌的點位
         for brand, gdf in geo_dfs.items():
@@ -103,15 +103,47 @@ if combined_gdf is not None and not combined_gdf.empty:
         st.write(f"{restaurant_selection} 餐廳分布:")
         st.write(combined_gdf[['name', 'number', 'address', 'hours']])
 
-    # 統計每個縣市的分店數量
-    if "address" in combined_gdf.columns:
-        # 假設地址欄位包含縣市名稱 (需要根據實際情況調整此處)
-        combined_gdf['county'] = combined_gdf['address'].str.extract(r'(\w+縣|\w+市)')  # 提取縣市名稱
+    # 統計各縣市分店數量
+    if 'address' in combined_gdf.columns:
+        # 只取縣市名稱，假設縣市名稱在地址中（這部分可根據實際情況調整）
+        combined_gdf['county'] = combined_gdf['address'].apply(lambda x: x.split(' ')[0] if isinstance(x, str) else 'Unknown')
 
-        # 根據縣市和品牌統計分店數量
-        store_count_by_county = combined_gdf.groupby(['county', 'brand']).size().reset_index(name='store_count')
+        # 計算各縣市分店數量
+        county_counts = combined_gdf['county'].value_counts().reset_index()
+        county_counts.columns = ['County', 'Store Count']
 
-        st.write(f"{restaurant_selection} 餐廳的縣市分店數量:")
-        st.write(store_count_by_county)
+        # 顯示分店數量
+        st.write("各縣市速食餐廳分店數量：")
+        st.write(county_counts)
+
+        # 繪製面量圖
+        # 確保我們有一個包含縣市的 GeoJSON 來繪製面量圖
+        # 假設你有一個包含各縣市邊界的 GeoJSON 檔案
+        # 我們這裡用假設的 GeoJSON 檔案來做範例
+        geojson_county = "path_to_county_geojson_file.geojson"
+
+        # 讀取縣市 GeoJSON 檔案
+        county_geo = gpd.read_file(geojson_county)
+
+        # 將縣市分店數量合併到 GeoDataFrame
+        county_geo = county_geo.set_index('county_name')  # 假設縣市名稱欄位名稱是 'county_name'
+        county_geo['store_count'] = county_geo.index.map(county_counts.set_index('County')['Store Count'])
+
+        # 初始化面量圖
+        choropleth_map = folium.Map(location=[23.6, 121], zoom_start=8)
+        folium.Choropleth(
+            geo_data=county_geo,
+            name='choropleth',
+            data=county_geo,
+            columns=['county_name', 'store_count'],
+            key_on='feature.properties.county_name',
+            fill_color='YlGnBu',
+            fill_opacity=0.7,
+            line_opacity=0.2,
+            legend_name='Store Count'
+        ).add_to(choropleth_map)
+
+        # 顯示面量圖
+        st_folium(choropleth_map, width=900, height=600)
 else:
     st.error(f"無法載入 {restaurant_selection} 的分布資料。")
