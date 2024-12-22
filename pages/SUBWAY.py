@@ -13,12 +13,13 @@ col1, col2 = st.columns([3, 2])  # 3:1的比例，左邊占三分之一，右邊
 
 with col2:
     st.markdown(
-        """
-        藍色座標點：你的位置\n
-        紅色座標點：離你最近的Subway分點位置\n
-        綠色座標點：{radius}公尺環域範圍內的Subway分店\n
+        f"""
+        - **藍色座標點**：你的位置  
+        - **紅色座標點**：離你最近的 Subway 分點位置  
+        - **綠色座標點**：{radius} 公尺環域內的 Subway 分店  
         """
     )
+
 
 # 假設餐廳的 GeoJSON 檔案 URL
 subway_geojson_url = 'https://raw.githubusercontent.com/Yony00/20241127-class/refs/heads/main/SB10.geojson'
