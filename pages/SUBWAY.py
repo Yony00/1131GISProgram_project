@@ -47,7 +47,7 @@ with col1:
     m = folium.Map(location=[23.6, 121], zoom_start=8)
 
     # 在地圖上顯示使用者點選位置
-    clicked_point = st_folium(m, key="folium_map", width=900, height=900)
+    clicked_point = st_folium(m, key="folium_map", width=1200, height=900)
 
 # 假設餐廳的 GeoJSON 檔案 URL
 subway_geojson_url = 'https://raw.githubusercontent.com/Yony00/20241127-class/refs/heads/main/SB10.geojson'
@@ -116,7 +116,7 @@ if clicked_point and clicked_point.get("last_clicked"):
                         icon=folium.Icon(color='green', icon='cutlery')
                     ).add_to(m2)
 
-    st_folium(m2, key="updated_map", width=900, height=900)
+    st_folium(m2, key="updated_map", width=1200, height=900)
 
     # 顯示範圍內的餐廳資料
     if not nearby_restaurants.empty:
