@@ -54,7 +54,6 @@ if clicked_point and clicked_point.get("last_clicked"):
     st.success(f"您選擇的位置：經度 {lon}, 緯度 {lat}，範圍半徑 {radius} 公尺")
 
     # 顯示下方地圖，顯示選擇的位置和範圍
-    col2 = st.columns([3, 2])  # 增大下方地圖的比例
     with col2:
         m2 = folium.Map(location=[lat, lon], zoom_start=14)
 
