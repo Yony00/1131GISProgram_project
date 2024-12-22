@@ -96,7 +96,7 @@ if combined_gdf is not None and not combined_gdf.empty:
             ).add_to(m)
 
     # 顯示地圖
-    st_folium(m, width=900, height=600)
+    st_folium(m, width=1000, height=800)
 
     # 顯示目前的餐廳分店列表
     if 'name' in combined_gdf.columns:
