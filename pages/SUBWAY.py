@@ -42,7 +42,7 @@ def haversine(lat1, lon1, lat2, lon2):
 radius = st.slider(
     "選擇範圍半徑 (公尺)",
     min_value=0,  # 最小範圍0公尺
-    max_value=20000,  # 最大範圍10000公尺
+    max_value=10000,  # 最大範圍10000公尺
     value=3000,  # 預設值3000公尺
     step=1,  # 步長為500公尺
 )
