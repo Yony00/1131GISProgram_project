@@ -129,5 +129,5 @@ if clicked_point and clicked_point.get("last_clicked"):
 
 markdown = 
 st.sidebar.info(markdown)
-logo = "https://static.wikia.nocookie.net/evchk/images/3/3b/KFC.png/revision/latest?cb=20081120053518"
+logo = "https://raw.githubusercontent.com/Yony00/1131GISProgram_project/refs/heads/main/KFC.jpg"
 st.sidebar.image(logo)
