@@ -40,6 +40,11 @@ with col2:
         - **綠色座標點**：{radius} 公尺環域內的 肯德基 分店  
         """
     )
+    markdown = 
+st.sidebar.info(markdown)
+logo = "https://raw.githubusercontent.com/Yony00/1131GISProgram_project/refs/heads/main/KFC.jpg"
+st.sidebar.image(logo)
+
 
 # 上方地圖：使用者點選位置
 with col1:
@@ -127,7 +132,3 @@ if clicked_point and clicked_point.get("last_clicked"):
 
     st.info("請在左側地圖上點選一個位置")
 
-markdown = 
-st.sidebar.info(markdown)
-logo = "https://raw.githubusercontent.com/Yony00/1131GISProgram_project/refs/heads/main/KFC.jpg"
-st.sidebar.image(logo)
