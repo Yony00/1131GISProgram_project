@@ -32,6 +32,15 @@ with col2:
     else:
         st.info("請在左側地圖上點選一個位置")
 
+    # 圖例說明
+    st.markdown(
+        f"""
+        - **藍色座標點**：你的位置  
+        - **紅色座標點**：離你最近的 Subway 分點位置  
+        - **綠色座標點**：{radius} 公尺環域內的 Subway 分店  
+        """
+    )
+
 # 上方地圖：使用者點選位置
 with col1:
     st.subheader("選擇位置")
@@ -106,22 +115,6 @@ if clicked_point and clicked_point.get("last_clicked"):
                         popup=f"{row['name']}\n距離: {row['距離(m)']:.2f} 米",
                         icon=folium.Icon(color='green', icon='cutlery')
                     ).add_to(m2)
-
-    # 添加圖例
-    legend_html = """
-    <div style="position: fixed; 
-                bottom: 50px; left: 50px; width: 250px; height: 150px; 
-                background-color: white; opacity: 0.8; z-index:9999; font-size:14px; 
-                border-radius: 10px; padding: 10px;">
-        <b>圖例</b><br>
-        <i style="background:blue; width: 10px; height: 10px; display: inline-block; margin-right: 5px;"></i> 您的位置<br>
-        <i style="background:cornflowerblue; width: 10px; height: 10px; display: inline-block; margin-right: 5px;"></i> 範圍內的餐廳<br>
-        <i style="background:red; width: 10px; height: 10px; display: inline-block; margin-right: 5px;"></i> 最近的餐廳<br>
-        <i style="background:green; width: 10px; height: 10px; display: inline-block; margin-right: 5px;"></i> 其他餐廳
-    </div>
-    """
-    # 把圖例 HTML 加入到 folium 地圖
-    m2.get_root().html.add_child(folium.Element(legend_html))
 
     st_folium(m2, key="updated_map", width=750, height=600)
 
