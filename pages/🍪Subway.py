@@ -126,3 +126,6 @@ if clicked_point and clicked_point.get("last_clicked"):
         st.write("範圍內無餐廳")
 else:
     st.info("請在左側地圖上點選一個位置")
+
+logo = "https://logocreator.io/wp-content/uploads/2023/11/SubWayNewLogo.png"
+st.sidebar.image(logo)
