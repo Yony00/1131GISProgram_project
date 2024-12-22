@@ -20,13 +20,13 @@ else:
 
 # 上方地圖：使用者點選位置
 st.subheader("選擇位置")
-col1, col2 = st.columns([2, 1])  # 設定比例，2:1的比例
+col1, col2 = st.columns([3, 2])  # 設定比例，3:2的比例
 
 with col1:
     m = folium.Map(location=[23.6, 121], zoom_start=8)
 
     # 在地圖上顯示使用者點選位置
-    clicked_point = st_folium(m, key="folium_map",width=800, height=1000)
+    clicked_point = st_folium(m, key="folium_map",width=750, height=600)
 
 # 計算距離的haversine函數
 def haversine(lat1, lon1, lat2, lon2):
@@ -111,7 +111,7 @@ if clicked_point and clicked_point.get("last_clicked"):
         """
         m2.get_root().html.add_child(folium.Element(legend_html))
 
-        st_folium(m2, key="updated_map", width=800,height=1000)
+        st_folium(m2, key="updated_map", width=750, height=600)
 
         # 顯示範圍內的餐廳資料
         if not nearby_restaurants.empty:
