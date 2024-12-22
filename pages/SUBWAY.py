@@ -12,13 +12,14 @@ st.title("📍尋找自訂範圍內的Subway餐廳")
 col1, col2 = st.columns([3, 1])  # 3:1的比例，左邊占三分之一，右邊占四分之一
 
 with col2:
-    st.markdown("""
-   https://raw.githubusercontent.com/Yony00/1131GISProgram_project/refs/heads/main/star-solid.svg
-        <i class="fa-solid fa-star"></i> Subway 餐廳1
-        <li><i class="fa fa-cutlery"></i> Subway 餐廳2</li>
-        <li><i class="fa fa-cutlery"></i> Subway 餐廳3</li>
-    </ul>
-    """, unsafe_allow_html=True)
+    st.markdown(
+    """
+    <h3>這是餐廳位置標記:</h3>
+    <p>以下為位置圖示：</p>
+    <img src="https://raw.githubusercontent.com/Yony00/1131GISProgram_project/refs/heads/main/star-solid.svg" alt="Star Icon" width="50">
+    """,
+    unsafe_allow_html=True
+)
 
 # 假設餐廳的 GeoJSON 檔案 URL
 subway_geojson_url = 'https://raw.githubusercontent.com/Yony00/20241127-class/refs/heads/main/SB10.geojson'
