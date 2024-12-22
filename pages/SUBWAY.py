@@ -13,14 +13,14 @@ col1, col2 = st.columns([3, 1])  # 3:1的比例，左邊占三分之一，右邊
 
 with col2:
     st.markdown(
-        
+        '
         內建爬蟲程式，抓取BWF世界羽聯網頁(https://bwf.tournamentsoftware.com/ranking/) \n
         可查詢的最早的排名紀錄開始，至今所有週次的世界排名資料，取前100名 \n
         此專案提供單項的排名資料視覺化、互動地圖呈現，並且可選擇與其他週次比較\n
         另外也提供特定選手(組別)的搜尋與比較   \n
         由於BWF的排名紀錄網頁顯示日期的格式是 ：月/日/年 (m/d/y)，因此以下顯示也依此格式   \n
         此程式ChatGPT出了90%力，感謝哆啦GPT夢    
-        
+        '
     )
 
 # 假設餐廳的 GeoJSON 檔案 URL
