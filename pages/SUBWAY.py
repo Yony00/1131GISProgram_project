@@ -18,7 +18,9 @@ radius = st.slider(
     max_value=10000,  # 最大範圍10000公尺
     value=3000,  # 預設值3000公尺
     step=1,  # 步長為1公尺
+    key="radius_slider",  # 指定唯一的 key
 )
+
 
 # 使用兩欄佈局，左邊顯示地圖，右邊顯示Markdown內容
 col1, col2 = st.columns([3, 2])  # 3:1的比例，左邊占三分之一，右邊占四分之一
