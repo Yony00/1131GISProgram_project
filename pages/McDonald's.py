@@ -6,7 +6,7 @@ import requests
 from math import radians, sin, cos, sqrt, atan2
 
 st.set_page_config(layout="wide")
-st.title("📍尋找自訂範圍內的麥當勞餐廳")
+st.title("📍尋找自訂範圍內的Subway餐廳")
 
 # 使用兩欄佈局，左邊顯示地圖，右邊顯示Markdown內容
 col1, col2 = st.columns([3, 2])  # 3:2 的比例
@@ -36,8 +36,8 @@ with col2:
     st.markdown(
         f"""
         - **藍色座標點**：你的位置  
-        - **紅色座標點**：離你最近的 麥當勞 分點位置  
-        - **綠色座標點**：{radius} 公尺環域內的 麥當勞 分店  
+        - **紅色座標點**：離你最近的 Subway 分點位置  
+        - **綠色座標點**：{radius} 公尺環域內的 Subway 分店  
         """
     )
 
@@ -50,14 +50,14 @@ with col1:
     clicked_point = st_folium(m, key="folium_map", width=1200, height=900)
 
 # 假設餐廳的 GeoJSON 檔案 URL
-McDonald's_geojson_url = 'https://raw.githubusercontent.com/Yony00/20241127-class/refs/heads/main/MM10.geojson'
+subway_geojson_url = 'https://raw.githubusercontent.com/Yony00/20241127-class/refs/heads/main/SB10.geojson'
 
 # 下載 GeoJSON 檔案
-response = requests.get(McDonald's_geojson_url)
+response = requests.get(subway_geojson_url)
 if response.status_code == 200:
-    McDonald's_gdf = gpd.read_file(response.text)
+    subway_gdf = gpd.read_file(response.text)
 else:
-    McDonald's_gdf = None
+    subway_gdf = None
 
 # 計算距離的 haversine 函數
 def haversine(lat1, lon1, lat2, lon2):
@@ -85,14 +85,14 @@ if clicked_point and clicked_point.get("last_clicked"):
     folium.Circle(location=[lat, lon], radius=radius, color="cornflowerblue", fill=True, fill_opacity=0.6).add_to(m2)
 
     # 篩選範圍內的餐廳
-    if McDonald's_gdf is not None:
+    if subway_gdf is not None:
         # 計算每個餐廳與選擇位置的距離
-        McDonald's_gdf['距離(m)'] = McDonald's_gdf.apply(
+        subway_gdf['距離(m)'] = subway_gdf.apply(
             lambda row: haversine(lat, lon, row.geometry.y, row.geometry.x), axis=1
         )
 
         # 篩選出範圍內的餐廳
-        nearby_restaurants = McDonald's_gdf[McDonald's_gdf['距離(m)'] <= radius]
+        nearby_restaurants = subway_gdf[subway_gdf['距離(m)'] <= radius]
 
         if nearby_restaurants.empty:
             folium.Marker(location=[lat, lon], popup="範圍內無餐廳", icon=folium.Icon(color='red')).add_to(m2)
@@ -120,7 +120,7 @@ if clicked_point and clicked_point.get("last_clicked"):
 
     # 顯示範圍內的餐廳資料
     if not nearby_restaurants.empty:
-        st.write("範圍內的McDonald's餐廳：")
+        st.write("範圍內的Subway餐廳：")
         st.table(nearby_restaurants[['name', 'address', 'hours', 'number']])
     else:
         st.write("範圍內無餐廳")
