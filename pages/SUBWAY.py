@@ -26,7 +26,7 @@ with col1:
     m = folium.Map(location=[23.6, 121], zoom_start=8)
 
     # 在地圖上顯示使用者點選位置
-    clicked_point = st_folium(m, key="folium_map",width=1000, height=1000)
+    clicked_point = st_folium(m, key="folium_map",width=800, height=1000)
 
 # 計算距離的haversine函數
 def haversine(lat1, lon1, lat2, lon2):
@@ -85,7 +85,7 @@ if clicked_point and clicked_point.get("last_clicked"):
                         icon=folium.Icon(color='green', icon='cutlery')
                     ).add_to(m2)
 
-        st_folium(m2, key="updated_map", width=1000,height=1000)
+        st_folium(m2, key="updated_map", width=800,height=1000)
 
         # 顯示範圍內的餐廳資料
         if not nearby_restaurants.empty:
