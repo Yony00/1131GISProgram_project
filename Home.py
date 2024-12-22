@@ -43,9 +43,9 @@ if combined_gdf is not None and not combined_gdf.empty:
 
     # 自定義圖標
     icons = {
-        "SUBWAY": "https://cdn-icons-png.flaticon.com/512/1046/1046784.png",
-        "肯德基": "https://cdn-icons-png.flaticon.com/512/1046/1046846.png",
-        "麥當勞": "https://cdn-icons-png.flaticon.com/512/1046/1046825.png"
+        "SUBWAY": "https://cdn-icons-png.flaticon.com/512/1046/1046784.png",  # SUBWAY 預設圖標
+        "肯德基": "https://cdn-icons-png.flaticon.com/512/3075/3075977.png",  # 肯德基炸雞圖標
+        "麥當勞": "https://cdn-icons-png.flaticon.com/512/3075/3075978.png"   # 麥當勞薯條圖標
     }
 
     # 繪製每個點
