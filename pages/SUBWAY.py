@@ -26,7 +26,7 @@ if clicked_point and clicked_point.get("last_clicked"):
     m = folium.Map(location=[lat, lon], zoom_start=14)
 
     # 添加環域到地圖上（半徑為 3 公里 = 3000 米）
-    folium.Circle(
+    circle = folium.Circle(
         location=(lat, lon),
         radius=3000,  # 3 公里
         color="blue",
@@ -41,8 +41,8 @@ if clicked_point and clicked_point.get("last_clicked"):
     # 顯示更新後的地圖
     st_folium(m, key="updated_map", width=700)
 
-    # 顯示 SUBWAY 餐廳地圖
-    st.title("SUBWAY Restaurants within 3km")
+    # 顯示速食餐廳地圖
+    st.title("Fast Food Restaurants Map")
 
     # 下載 GitHub 上的 GeoJSON 檔案
     geojson_url = "https://raw.githubusercontent.com/Yony00/20241127-class/refs/heads/main/SB10.geojson"
@@ -54,35 +54,31 @@ if clicked_point and clicked_point.get("last_clicked"):
         # 將下載的資料轉換為 GeoJSON 格式
         gdf = gpd.read_file(response.text)
 
-        # 將資料轉換為點資料格式
-        gdf['geometry'] = gdf['geometry'].apply(lambda x: Point(x))
-
-        # 建立中心點的地理範圍，3 公里圓形範圍
+        # 創建一個點位的 Shapely 物件，作為篩選的中心
         point = Point(lon, lat)
-        buffer_area = point.buffer(3000)  # 半徑 3 公里
+        
+        # 計算每個餐廳與選中點之間的距離，並過濾掉超過 3 公里的餐廳
+        gdf['distance'] = gdf.geometry.distance(point)
+        gdf_filtered = gdf[gdf['distance'] <= 3000]  # 篩選出 3 公里內的餐廳
 
-        # 篩選出在該範圍內的 SUBWAY 餐廳
-        subway_within_buffer = gdf[gdf.geometry.within(buffer_area)]
+        # 如果有餐廳符合篩選條件，則顯示這些餐廳
+        if not gdf_filtered.empty:
+            # 初始化地圖，將地圖中心設置為第一個餐廳的位置
+            first_location = gdf_filtered.geometry.iloc[0].coords[0]
+            m = folium.Map(location=[first_location[1], first_location[0]], zoom_start=12)
 
-        # 初始化地圖，將地圖中心設置為第一個餐廳的位置
-        first_location = subway_within_buffer.geometry.iloc[0].coords[0]
-        m = folium.Map(location=[first_location[1], first_location[0]], zoom_start=12)
+            # 將篩選後的 GeoJSON 資料加到地圖上
+            folium.GeoJson(gdf_filtered).add_to(m)
 
-        # 在地圖上標註出這些 SUBWAY 餐廳
-        for idx, row in subway_within_buffer.iterrows():
-            folium.Marker(
-                location=[row.geometry.y, row.geometry.x],
-                popup=row['name']
-            ).add_to(m)
+            # 顯示地圖
+            st_folium(m, key="filtered_restaurants_map", width=700)
 
-        # 顯示更新後的地圖
-        st_folium(m, key="subway_map", width=700)
-
-        # 顯示餐廳列表
-        st.write("SUBWAY Locations within 3km:")
-        st.write(subway_within_buffer[['name', 'address']])
+            # 顯示餐廳列表
+            st.write("Restaurant Locations within 3 km:")
+            st.write(gdf_filtered[['name', 'address']])
+        else:
+            st.write("No restaurants found within 3 km.")
     else:
         st.error("Failed to download GeoJSON file from GitHub.")
-
 else:
     st.info("Click on the map to generate a 3 km buffer area.")
