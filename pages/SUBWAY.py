@@ -80,7 +80,7 @@ if clicked_point and clicked_point.get("last_clicked"):
     # 顯示範圍內的餐廳資料
     if not nearby_restaurants.empty:
         st.write("範圍內的Subway餐廳：")
-        st.table(nearby_restaurants[['name', 'address', 'geometry.x', 'geometry.y', '距離(m)']])
+        st.table(nearby_restaurants[['name', 'address', 'hours', 'number', 'latitude', 'longitude']])
     else:
         st.write("範圍內無餐廳")
 else:
