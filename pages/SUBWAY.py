@@ -77,13 +77,24 @@ if clicked_point and clicked_point.get("last_clicked"):
             if nearby_restaurants.empty:
                 folium.Marker(location=[lat, lon], popup="範圍內無餐廳", icon=folium.Icon(color='red')).add_to(m2)
             else:
+                # 找到距離最近的餐廳
+                closest_restaurant = nearby_restaurants.loc[nearby_restaurants['距離(m)'].idxmin()]
+
                 # 顯示範圍內的餐廳
                 for _, row in nearby_restaurants.iterrows():
-                    folium.Marker(
-                        location=[row.geometry.y, row.geometry.x],
-                        popup=f"{row['name']}\n距離: {row['距離(m)']:.2f} 米",
-                        icon=folium.Icon(color='green', icon='cutlery')
-                    ).add_to(m2)
+                    if row['name'] == closest_restaurant['name']:
+                        # 使用不同的顏色標示最近的餐廳
+                        folium.Marker(
+                            location=[row.geometry.y, row.geometry.x],
+                            popup=f"{row['name']} (最近)\n距離: {row['距離(m)']:.2f} 米",
+                            icon=folium.Icon(color='red', icon='cutlery')
+                        ).add_to(m2)
+                    else:
+                        folium.Marker(
+                            location=[row.geometry.y, row.geometry.x],
+                            popup=f"{row['name']}\n距離: {row['距離(m)']:.2f} 米",
+                            icon=folium.Icon(color='green', icon='cutlery')
+                        ).add_to(m2)
 
         st_folium(m2, key="updated_map", width=800,height=1000)
 
