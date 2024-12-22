@@ -45,12 +45,12 @@ if combined_gdf is not None and not combined_gdf.empty:
 
     # 自定義圖標
     icons = {
-        "SUBWAY": "https://raw.githubusercontent.com/Yony00/1131GISProgram_project/refs/heads/main/cookie.png",  # SUBWAY 預設圖標
-        "肯德基": "https://raw.githubusercontent.com/Yony00/1131GISProgram_project/refs/heads/main/fried-chicken.png",  # 肯德基炸雞圖標
-        "麥當勞": "https://raw.githubusercontent.com/Yony00/1131GISProgram_project/refs/heads/main/french-fires.png"   # 麥當勞薯條圖標
+        "SUBWAY": "https://cdn-icons-png.flaticon.com/512/1046/1046784.png",  # SUBWAY 預設圖標
+        "肯德基": "https://cdn-icons-png.flaticon.com/512/3075/3075977.png",  # 肯德基炸雞圖標
+        "麥當勞": "https://cdn-icons-png.flaticon.com/512/3075/3075978.png"   # 麥當勞薯條圖標
     }
 
-    # 當 brand 未定義時，顯示三間速食餐廳的圖標
+    # 當 brand 未定義時，顯示所有品牌的點位
     if 'brand' not in combined_gdf.columns:
         # 顯示所有品牌的點位
         for brand, gdf in geo_dfs.items():
@@ -96,11 +96,22 @@ if combined_gdf is not None and not combined_gdf.empty:
             ).add_to(m)
 
     # 顯示地圖
-    st_folium(m, width=1800, height=800)
+    st_folium(m, width=900, height=600)
 
     # 顯示目前的餐廳分店列表
     if 'name' in combined_gdf.columns:
         st.write(f"{restaurant_selection} 餐廳分布:")
         st.write(combined_gdf[['name', 'number', 'address', 'hours']])
+
+    # 統計每個縣市的分店數量
+    if "address" in combined_gdf.columns:
+        # 假設地址欄位包含縣市名稱 (需要根據實際情況調整此處)
+        combined_gdf['county'] = combined_gdf['address'].str.extract(r'(\w+縣|\w+市)')  # 提取縣市名稱
+
+        # 根據縣市和品牌統計分店數量
+        store_count_by_county = combined_gdf.groupby(['county', 'brand']).size().reset_index(name='store_count')
+
+        st.write(f"{restaurant_selection} 餐廳的縣市分店數量:")
+        st.write(store_count_by_county)
 else:
     st.error(f"無法載入 {restaurant_selection} 的分布資料。")
