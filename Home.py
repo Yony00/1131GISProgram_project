@@ -4,7 +4,6 @@ import geopandas as gpd
 import requests
 import pandas as pd  # 加入 pandas 模組
 from streamlit_folium import st_folium
-import matplotlib.pyplot as plt  # 用來繪製長條圖
 
 st.set_page_config(layout="wide")
 
@@ -103,20 +102,5 @@ if combined_gdf is not None and not combined_gdf.empty:
     if 'name' in combined_gdf.columns:
         st.write(f"{restaurant_selection} 餐廳分布:")
         st.write(combined_gdf[['name', 'number', 'address', 'hours']])
-
-    # 計算不同縣市的分店數量
-    # 假設資料中有縣市的欄位 (如 "city" 或 "county")
-    if 'city' in combined_gdf.columns:
-        city_counts = combined_gdf.groupby(['brand', 'city']).size().unstack(fill_value=0)
-
-        # 顯示分店數量長條圖
-        st.subheader("不同縣市的分店數量")
-        fig, ax = plt.subplots(figsize=(10, 6))
-        city_counts.plot(kind='bar', stacked=False, ax=ax)
-        ax.set_title(f"{restaurant_selection} 各縣市分店數量")
-        ax.set_xlabel("縣市")
-        ax.set_ylabel("分店數量")
-        st.pyplot(fig)
-
 else:
     st.error(f"無法載入 {restaurant_selection} 的分布資料。")
