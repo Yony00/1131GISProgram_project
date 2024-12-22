@@ -126,3 +126,6 @@ if clicked_point and clicked_point.get("last_clicked"):
         st.write("範圍內無餐廳")
 else:
     st.info("請在左側地圖上點選一個位置")
+
+logo = "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRaomD96PlerzZOeCLMh5nuhbY5C5ZJC25GzrkyZ7NcuN94NJSueJhgQ4pWb2E1Wsl4tB8&usqp=CAU"
+st.sidebar.image(logo)
