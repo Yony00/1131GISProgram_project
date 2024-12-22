@@ -26,11 +26,13 @@ geo_dfs = {}
 for name, url in geojson_urls.items():
     response = requests.get(url)
     if response.status_code == 200:
-        geo_dfs[name] = gpd.read_file(response.text)
+        gdf = gpd.read_file(response.text)
+        gdf["brand"] = name  # 如果 brand 欄位不存在，填入對應的品牌
+        geo_dfs[name] = gdf
     else:
         st.error(f"無法下載 GeoJSON 檔案: {name}")
 
-# 選擇性合併資料
+# 根據選擇合併資料
 if restaurant_selection == "全部":
     combined_gdf = gpd.GeoDataFrame(pd.concat(geo_dfs.values(), ignore_index=True))
 else:
@@ -43,31 +45,55 @@ if combined_gdf is not None and not combined_gdf.empty:
 
     # 自定義圖標
     icons = {
-        "SUBWAY": "https://raw.githubusercontent.com/Yony00/1131GISProgram_project/refs/heads/main/cookie.png",  # SUBWAY 預設圖標
-        "肯德基": "https://raw.githubusercontent.com/Yony00/1131GISProgram_project/refs/heads/main/fried-chicken.png",  # 肯德基炸雞圖標
-        "麥當勞": "https://raw.githubusercontent.com/Yony00/1131GISProgram_project/refs/heads/main/french-fires.png"   # 麥當勞薯條圖標
+        "SUBWAY": "https://cdn-icons-png.flaticon.com/512/1046/1046784.png",  # SUBWAY 預設圖標
+        "肯德基": "https://cdn-icons-png.flaticon.com/512/3075/3075977.png",  # 肯德基炸雞圖標
+        "麥當勞": "https://cdn-icons-png.flaticon.com/512/3075/3075978.png"   # 麥當勞薯條圖標
     }
 
-    # 繪製每個點
-    for idx, row in combined_gdf.iterrows():
-        lat, lon = row.geometry.y, row.geometry.x
-        brand = row.get("brand", "SUBWAY")  # 根據資料取得品牌
-        icon_url = icons.get(brand, icons["SUBWAY"])  # 根據品牌選擇對應圖標
-        custom_icon = folium.CustomIcon(icon_url, icon_size=(30, 30))
+    # 當 brand 未定義時，顯示三間速食餐廳的圖標
+    if 'brand' not in combined_gdf.columns:
+        # 顯示所有品牌的點位
+        for brand, gdf in geo_dfs.items():
+            for idx, row in gdf.iterrows():
+                lat, lon = row.geometry.y, row.geometry.x
+                icon_url = icons.get(brand, icons["SUBWAY"])  # 根據品牌選擇對應圖標
+                custom_icon = folium.CustomIcon(icon_url, icon_size=(30, 30))
 
-        # 使用 HTML 格式來顯示 popup 內容
-        popup_content = f"""
-        <strong>分店:</strong> {row['name'] if 'name' in row else 'Unknown'}<br>
-        <strong>電話:</strong> {row['number'] if 'number' in row else 'Not Available'}<br>
-        <strong>地址:</strong> {row['address'] if 'address' in row else 'Not Available'}<br>
-        <strong>營業時間:</strong> {row['hours'] if 'hours' in row else 'Not Available'}<br>
-        """
+                # 使用 HTML 格式來顯示 popup 內容
+                popup_content = f"""
+                <strong>分店:</strong> {row['name'] if 'name' in row else 'Unknown'}<br>
+                <strong>電話:</strong> {row['number'] if 'number' in row else 'Not Available'}<br>
+                <strong>地址:</strong> {row['address'] if 'address' in row else 'Not Available'}<br>
+                <strong>營業時間:</strong> {row['hours'] if 'hours' in row else 'Not Available'}<br>
+                """
 
-        folium.Marker(
-            location=[lat, lon],
-            popup=folium.Popup(popup_content, max_width=300),
-            icon=custom_icon
-        ).add_to(m)
+                folium.Marker(
+                    location=[lat, lon],
+                    popup=folium.Popup(popup_content, max_width=300),
+                    icon=custom_icon
+                ).add_to(m)
+
+    else:
+        # 如果有 brand 欄位，根據選擇顯示指定品牌的圖標
+        for idx, row in combined_gdf.iterrows():
+            lat, lon = row.geometry.y, row.geometry.x
+            brand = row.get("brand", "SUBWAY")  # 預設 brand 如果未定義，填入 SUBWAY
+            icon_url = icons.get(brand, icons["SUBWAY"])  # 根據品牌選擇對應圖標
+            custom_icon = folium.CustomIcon(icon_url, icon_size=(30, 30))
+
+            # 使用 HTML 格式來顯示 popup 內容
+            popup_content = f"""
+            <strong>分店:</strong> {row['name'] if 'name' in row else 'Unknown'}<br>
+            <strong>電話:</strong> {row['number'] if 'number' in row else 'Not Available'}<br>
+            <strong>地址:</strong> {row['address'] if 'address' in row else 'Not Available'}<br>
+            <strong>營業時間:</strong> {row['hours'] if 'hours' in row else 'Not Available'}<br>
+            """
+
+            folium.Marker(
+                location=[lat, lon],
+                popup=folium.Popup(popup_content, max_width=300),
+                icon=custom_icon
+            ).add_to(m)
 
     # 顯示地圖
     st_folium(m, width=900, height=600)
