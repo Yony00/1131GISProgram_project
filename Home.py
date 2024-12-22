@@ -43,15 +43,16 @@ if combined_gdf is not None and not combined_gdf.empty:
 
     # 自定義圖標
     icons = {
-        "SUBWAY": "https://raw.githubusercontent.com/Yony00/1131GISProgram_project/refs/heads/main/cookie.png",  # SUBWAY 預設圖標
-        "肯德基": "https://raw.githubusercontent.com/Yony00/1131GISProgram_project/refs/heads/main/fried-chicken.png",  # 肯德基炸雞圖標
-        "麥當勞": "https://raw.githubusercontent.com/Yony00/1131GISProgram_project/refs/heads/main/french-fires.png"   # 麥當勞薯條圖標
+        "SUBWAY": "https://cdn-icons-png.flaticon.com/512/1046/1046784.png",  # SUBWAY 預設圖標
+        "肯德基": "https://cdn-icons-png.flaticon.com/512/3075/3075977.png",  # 肯德基炸雞圖標
+        "麥當勞": "https://cdn-icons-png.flaticon.com/512/3075/3075978.png"   # 麥當勞薯條圖標
     }
 
     # 繪製每個點
     for idx, row in combined_gdf.iterrows():
         lat, lon = row.geometry.y, row.geometry.x
-        icon_url = icons.get(row.get("brand", restaurant_selection), icons["SUBWAY"])
+        brand = row.get("brand", "SUBWAY")  # 根據資料取得品牌
+        icon_url = icons.get(brand, icons["SUBWAY"])  # 根據品牌選擇對應圖標
         custom_icon = folium.CustomIcon(icon_url, icon_size=(30, 30))
 
         # 使用 HTML 格式來顯示 popup 內容
