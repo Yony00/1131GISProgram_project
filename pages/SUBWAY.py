@@ -41,10 +41,10 @@ def haversine(lat1, lon1, lat2, lon2):
 # 讓使用者自訂範圍半徑
 radius = st.slider(
     "選擇範圍半徑 (公尺)",
-    min_value=500,  # 最小範圍500公尺
-    max_value=5000,  # 最大範圍5000公尺
+    min_value=0,  # 最小範圍0公尺
+    max_value=20000,  # 最大範圍10000公尺
     value=3000,  # 預設值3000公尺
-    step=500,  # 步長為500公尺
+    step=1,  # 步長為500公尺
 )
 
 # 下方顯示範圍和餐廳資料
