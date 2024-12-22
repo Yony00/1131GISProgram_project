@@ -20,7 +20,7 @@ else:
 
 # 上方地圖：使用者點選位置
 st.subheader("選擇位置")
-m = folium.Map(location=[23.6, 121], zoom_start=8.5)
+m = folium.Map(location=[23.6, 121], zoom_start=8)
 
 # 在地圖上顯示使用者點選位置
 clicked_point = st_folium(m, key="folium_map", width=1000, height=1000)
