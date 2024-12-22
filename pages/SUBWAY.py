@@ -13,8 +13,7 @@ col1, col2 = st.columns([3, 1])  # 3:1的比例，左邊占三分之一，右邊
 
 with col2:
     st.markdown("""
-    <h3>這是餐廳列表:</h3>
-    <ul>
+    <i class="fa-solid fa-star"></i>
         <i class="fa-solid fa-star"></i> Subway 餐廳1
         <li><i class="fa fa-cutlery"></i> Subway 餐廳2</li>
         <li><i class="fa fa-cutlery"></i> Subway 餐廳3</li>
