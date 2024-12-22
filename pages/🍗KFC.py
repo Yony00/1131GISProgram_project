@@ -41,7 +41,6 @@ with col2:
         """
     )
     markdown = """
-圖片來源：中華民國羽球協會
 """
 st.sidebar.info(markdown)
 logo = "https://raw.githubusercontent.com/Yony00/1131GISProgram_project/refs/heads/main/KFC.jpg"
