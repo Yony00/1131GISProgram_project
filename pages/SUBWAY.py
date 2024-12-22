@@ -96,6 +96,21 @@ if clicked_point and clicked_point.get("last_clicked"):
                             icon=folium.Icon(color='green', icon='cutlery')
                         ).add_to(m2)
 
+        # 添加圖例
+        legend_html = """
+        <div style="position: fixed; 
+                    bottom: 50px; left: 50px; width: 250px; height: 150px; 
+                    background-color: white; opacity: 0.8; z-index:9999; font-size:14px; 
+                    border-radius: 10px; padding: 10px;">
+            <b>圖例</b><br>
+            <i style="background:blue; width: 10px; height: 10px; display: inline-block; margin-right: 5px;"></i> 您的位置<br>
+            <i style="background:cornflowerblue; width: 10px; height: 10px; display: inline-block; margin-right: 5px;"></i> 範圍內的餐廳<br>
+            <i style="background:red; width: 10px; height: 10px; display: inline-block; margin-right: 5px;"></i> 最近的餐廳<br>
+            <i style="background:green; width: 10px; height: 10px; display: inline-block; margin-right: 5px;"></i> 其他餐廳
+        </div>
+        """
+        m2.get_root().html.add_child(folium.Element(legend_html))
+
         st_folium(m2, key="updated_map", width=800,height=1000)
 
         # 顯示範圍內的餐廳資料
