@@ -11,6 +11,18 @@ st.title("📍尋找自訂範圍內的Subway餐廳")
 # 使用兩欄佈局，左邊顯示地圖，右邊顯示Markdown內容
 col1, col2 = st.columns([3, 2])  # 3:1的比例，左邊占三分之一，右邊占四分之一
 
+# 讓使用者自訂範圍半徑
+radius = st.slider(
+    "選擇範圍半徑 (公尺)",
+    min_value=0,  # 最小範圍0公尺
+    max_value=10000,  # 最大範圍10000公尺
+    value=3000,  # 預設值3000公尺
+    step=1,  # 步長為1公尺
+)
+
+# 使用兩欄佈局，左邊顯示地圖，右邊顯示Markdown內容
+col1, col2 = st.columns([3, 2])  # 3:1的比例，左邊占三分之一，右邊占四分之一
+
 with col2:
     st.markdown(
         f"""
@@ -19,6 +31,7 @@ with col2:
         - **綠色座標點**：{radius} 公尺環域內的 Subway 分店  
         """
     )
+
 
 
 # 假設餐廳的 GeoJSON 檔案 URL
