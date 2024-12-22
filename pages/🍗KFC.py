@@ -133,4 +133,3 @@ markdown = """
 st.sidebar.info(markdown)
 logo = "https://s.yimg.com/ny/api/res/1.2/cbnZaTFzRQOhB1rmmqYqMQ--/YXBwaWQ9aGlnaGxhbmRlcjt3PTk2MDtoPTc4MjtjZj13ZWJw/https://media.zenfs.com/zh-tw/cna.com.tw/2e01b90a56b4e88a94e7e7c877ec4df3"
 st.sidebar.image(logo)
-else:
