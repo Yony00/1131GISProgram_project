@@ -6,7 +6,7 @@ import requests
 from math import radians, sin, cos, sqrt, atan2
 
 st.set_page_config(layout="wide")
-st.title("📍尋找自訂範圍內的Subway餐廳")
+st.title("📍尋找自訂範圍內的麥當勞餐廳")
 
 # 使用兩欄佈局，左邊顯示地圖，右邊顯示Markdown內容
 col1, col2 = st.columns([3, 2])  # 3:2 的比例
@@ -36,8 +36,8 @@ with col2:
     st.markdown(
         f"""
         - **藍色座標點**：你的位置  
-        - **紅色座標點**：離你最近的 Subway 分點位置  
-        - **綠色座標點**：{radius} 公尺環域內的 Subway 分店  
+        - **紅色座標點**：離你最近的 麥當勞 分點位置  
+        - **綠色座標點**：{radius} 公尺環域內的 麥當勞 分店  
         """
     )
 
@@ -120,7 +120,7 @@ if clicked_point and clicked_point.get("last_clicked"):
 
     # 顯示範圍內的餐廳資料
     if not nearby_restaurants.empty:
-        st.write("範圍內的Subway餐廳：")
+        st.write("範圍內的麥當勞餐廳：")
         st.table(nearby_restaurants[['name', 'address', 'hours', 'number']])
     else:
         st.write("範圍內無餐廳")
