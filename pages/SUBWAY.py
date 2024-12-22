@@ -1,84 +1,81 @@
 import streamlit as st
-from streamlit_folium import st_folium
-import folium
+import leafmap.foliumap as leafmap
 import geopandas as gpd
-import requests
-from shapely.geometry import Point
+import folium
+from math import radians, sin, cos, sqrt, atan2
+st.set_page_config(layout="wide")
 
-# 設定頁面標題
-st.title("Interactive Map with Buffer Area")
+st.title("📍尋找5公里內餐廳")
 
-# 初始化地圖
-m = folium.Map(location=[23.6, 121], zoom_start=8)
+# 假設餐廳的 GeoJSON 檔案 URL
+restaurant_geojson_url = 'https://raw.githubusercontent.com/Yony00/20241127-class/refs/heads/main/SB10.geojson'
+restaurants = gpd.read_file(restaurant_geojson_url)
 
-# 使用者點擊地圖時更新座標並顯示環域
-clicked_point = st_folium(m, key="folium_map")
+# 確保資料包含經緯度列
+restaurants['經度'] = restaurants.geometry.x
+restaurants['緯度'] = restaurants.geometry.y
 
-# 檢查是否有點擊
-if clicked_point and clicked_point.get("last_clicked"):
-    lat = clicked_point["last_clicked"]["lat"]
-    lon = clicked_point["last_clicked"]["lng"]
+# 使用者輸入的經緯度
+col1, col2 = st.columns(2)
+with col1:
+    lon = st.number_input("請填入經度", value=None, min_value=119.500, max_value=122.500)
+with col2:
+    lat = st.number_input("請填入緯度", value=None, min_value=22.000, max_value=24.000)
 
-    # 將點擊的座標顯示給使用者
-    st.success(f"You clicked at Latitude: {lat}, Longitude: {lon}")
+if lat is not None and lon is not None:
+    radius = 5000  # 範圍為 5 公里
+    
+    def haversine(lat1, lon1, lat2, lon2):
+        R = 6371000  # 地球半徑（公尺）
+        phi1, phi2 = radians(lat1), radians(lat2)
+        delta_phi = radians(lat2 - lat1)
+        delta_lambda = radians(lon2 - lon1)
+        a = sin(delta_phi / 2)**2 + cos(phi1) * cos(phi2) * sin(delta_lambda / 2)**2
+        c = 2 * atan2(sqrt(a), sqrt(1 - a))
+        return R * c
+    
+    # 計算每個餐廳與輸入位置的距離
+    restaurants['距離(m)'] = restaurants.apply(
+        lambda row: haversine(lat, lon, row['緯度'], row['經度']), axis=1
+    )
+    
+    # 篩選出在 5 公里範圍內的餐廳
+    nearby_restaurants = restaurants[restaurants['距離(m)'] <= radius]
 
-    # 建立新地圖，將環域添加到地圖上
-    m = folium.Map(location=[lat, lon], zoom_start=14)
-
-    # 添加環域到地圖上（半徑為 3 公里 = 3000 米）
-    circle = folium.Circle(
-        location=(lat, lon),
-        radius=3000,  # 3 公里
-        color="blue",
-        fill=True,
-        fill_color="blue",
-        fill_opacity=0.2
+    # 顯示地圖
+    m = leafmap.Map(center=[lat, lon], zoom=12)
+    
+    # 顯示使用者位置
+    folium.Marker(
+        location=[lat, lon],
+        popup=f"使用者位置\n經度: {lon}, 緯度: {lat}",
+        icon=folium.Icon(color='blue', icon='star')
     ).add_to(m)
 
-    # 添加一個標記到點擊的位置
-    folium.Marker(location=(lat, lon), popup="Selected Point").add_to(m)
+    # 顯示範圍
+    folium.Circle(
+        location=[lat, lon],
+        radius=radius,
+        color="cornflowerblue",
+        fill=True,
+        fill_opacity=0.6,
+        opacity=1,
+        popup="{} meters".format(radius)
+    ).add_to(m)
 
-    # 顯示更新後的地圖
-    st_folium(m, key="updated_map", width=700)
+    # 顯示範圍內的餐廳
+    for _, row in nearby_restaurants.iterrows():
+        folium.Marker(
+            location=[row['緯度'], row['經度']],
+            popup=f"{row['餐廳名稱']}\n距離: {row['距離(m)']:.2f} 米",
+            icon=folium.Icon(color='green', icon='cutlery')
+        ).add_to(m)
 
-    # 顯示速食餐廳地圖
-    st.title("Fast Food Restaurants Map")
+    # 顯示地圖
+    m.to_streamlit(height=600)
 
-    # 下載 GitHub 上的 GeoJSON 檔案
-    geojson_url = "https://raw.githubusercontent.com/Yony00/20241127-class/refs/heads/main/SB10.geojson"
-
-    # 使用 requests 下載 GeoJSON 檔案
-    response = requests.get(geojson_url)
-
-    if response.status_code == 200:
-        # 將下載的資料轉換為 GeoJSON 格式
-        gdf = gpd.read_file(response.text)
-
-        # 創建一個點位的 Shapely 物件，作為篩選的中心
-        point = Point(lon, lat)
-        
-        # 計算每個餐廳與選中點之間的距離，並過濾掉超過 3 公里的餐廳
-        gdf['distance'] = gdf.geometry.distance(point)
-        gdf_filtered = gdf[gdf['distance'] <= 3000]  # 篩選出 3 公里內的餐廳
-
-        # 如果有餐廳符合篩選條件，則顯示這些餐廳
-        if not gdf_filtered.empty:
-            # 初始化地圖，將地圖中心設置為第一個餐廳的位置
-            first_location = gdf_filtered.geometry.iloc[0].coords[0]
-            m = folium.Map(location=[first_location[1], first_location[0]], zoom_start=12)
-
-            # 將篩選後的 GeoJSON 資料加到地圖上
-            folium.GeoJson(gdf_filtered).add_to(m)
-
-            # 顯示地圖
-            st_folium(m, key="filtered_restaurants_map", width=700)
-
-            # 顯示餐廳列表
-            st.write("Restaurant Locations within 3 km:")
-            st.write(gdf_filtered[['name', 'address']])
-        else:
-            st.write("No restaurants found within 3 km.")
-    else:
-        st.error("Failed to download GeoJSON file from GitHub.")
+    # 顯示範圍內的餐廳資料
+    st.write("範圍內的餐廳：")
+    st.table(nearby_restaurants[['餐廳名稱', '地址', '經度', '緯度', '距離(m)']])
 else:
-    st.info("Click on the map to generate a 3 km buffer area.")
+    st.write("請填入有效的經緯度")
