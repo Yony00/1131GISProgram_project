@@ -3,6 +3,7 @@ from streamlit_folium import st_folium
 import folium
 import geopandas as gpd
 import requests
+from shapely.geometry import Point
 
 # 設定頁面標題
 st.title("Interactive Map with Buffer Area")
@@ -39,34 +40,45 @@ if clicked_point and clicked_point.get("last_clicked"):
 
     # 顯示更新後的地圖
     st_folium(m, key="updated_map", width=700)
+
+    # 顯示速食餐廳地圖
+    st.title("Fast Food Restaurants Map")
+
+    # 下載 GitHub 上的 GeoJSON 檔案
+    geojson_url = "https://raw.githubusercontent.com/Yony00/20241127-class/refs/heads/main/SB10.geojson"
+
+    # 使用 requests 下載 GeoJSON 檔案
+    response = requests.get(geojson_url)
+
+    if response.status_code == 200:
+        # 將下載的資料轉換為 GeoJSON 格式
+        gdf = gpd.read_file(response.text)
+
+        # 初始化地圖，將地圖中心設置為第一個餐廳的位置
+        first_location = gdf.geometry.iloc[0].coords[0]
+        m = folium.Map(location=[first_location[1], first_location[0]], zoom_start=12)
+
+        # 將 GeoJSON 資料加到地圖上
+        folium.GeoJson(gdf).add_to(m)
+
+        # 顯示地圖
+        st_folium(m, key="restaurants_map", width=700)
+
+        # 篩選出 SUBWAY 分店
+        subway_stores = gdf[gdf['name'].str.contains("SUBWAY", case=False, na=False)]
+
+        # 計算每個 SUBWAY 餐廳到點擊位置的距離，並篩選出在 3 公里範圍內的餐廳
+        selected_point = Point(lon, lat)
+        subway_in_buffer = subway_stores[subway_stores.geometry.distance(selected_point) <= 3000]
+
+        # 顯示在 3 公里範圍內的 SUBWAY 餐廳
+        if not subway_in_buffer.empty:
+            st.write("SUBWAY Stores within 3 km:")
+            st.write(subway_in_buffer[['name', 'address']])
+        else:
+            st.write("No SUBWAY stores found within 3 km.")
+
+    else:
+        st.error("Failed to download GeoJSON file from GitHub.")
 else:
     st.info("Click on the map to generate a 3 km buffer area.")
-
-# 顯示速食餐廳地圖
-st.title("Fast Food Restaurants Map")
-
-# 下載 GitHub 上的 GeoJSON 檔案
-geojson_url = "https://raw.githubusercontent.com/Yony00/20241127-class/refs/heads/main/SB10.geojson"
-
-# 使用 requests 下載 GeoJSON 檔案
-response = requests.get(geojson_url)
-
-if response.status_code == 200:
-    # 將下載的資料轉換為 GeoJSON 格式
-    gdf = gpd.read_file(response.text)
-
-    # 初始化地圖，將地圖中心設置為第一個餐廳的位置
-    first_location = gdf.geometry.iloc[0].coords[0]
-    m = folium.Map(location=[first_location[1], first_location[0]], zoom_start=12)
-
-    # 將 GeoJSON 資料加到地圖上
-    folium.GeoJson(gdf).add_to(m)
-
-    # 顯示地圖
-    st_folium(m, key="restaurants_map", width=700)
-
-    # 顯示餐廳列表
-    st.write("Restaurant Locations:")
-    st.write(gdf[['name', 'address']])
-else:
-    st.error("Failed to download GeoJSON file from GitHub.")
