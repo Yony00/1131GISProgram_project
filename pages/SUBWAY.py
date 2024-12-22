@@ -12,12 +12,7 @@ st.title("📍尋找自訂範圍內的Subway餐廳")
 col1, col2 = st.columns([3, 1])  # 3:1的比例，左邊占三分之一，右邊占四分之一
 
 with col2:
-    st.markdown(
-        """
-        import streamlit as st
-
-# 插入 Font Awesome 圖標到 Markdown 中
-st.markdown("""
+    st.markdown("""
     <h3>這是餐廳列表:</h3>
     <ul>
         <li><i class="fa fa-cutlery"></i> Subway 餐廳1</li>
@@ -25,9 +20,6 @@ st.markdown("""
         <li><i class="fa fa-cutlery"></i> Subway 餐廳3</li>
     </ul>
 """, unsafe_allow_html=True)
-
-        """
-    )
 
 # 假設餐廳的 GeoJSON 檔案 URL
 subway_geojson_url = 'https://raw.githubusercontent.com/Yony00/20241127-class/refs/heads/main/SB10.geojson'
