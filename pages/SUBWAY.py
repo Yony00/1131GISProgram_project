@@ -25,14 +25,25 @@ radius = st.slider(
 # 使用兩欄佈局，左邊顯示地圖，右邊顯示Markdown內容
 col1, col2 = st.columns([3, 2])  # 3:1的比例，左邊占三分之一，右邊占四分之一
 
+# 讓使用者自訂範圍半徑
 with col2:
-    st.markdown(
-        f"""
-        - **藍色座標點**：你的位置  
-        - **紅色座標點**：離你最近的 Subway 分點位置  
-        - **綠色座標點**：{radius} 公尺環域內的 Subway 分店  
-        """
+    st.subheader("設定範圍半徑")
+    radius = st.slider(
+        "選擇範圍半徑 (公尺)",
+        min_value=0,  # 最小範圍0公尺
+        max_value=10000,  # 最大範圍10000公尺
+        value=3000,  # 預設值3000公尺
+        step=1,  # 步長為1公尺
+        key="radius_slider",  # 指定唯一的 key
     )
+
+    # 動態顯示選擇的範圍半徑和位置資訊
+    if clicked_point and clicked_point.get("last_clicked"):
+        lat = clicked_point["last_clicked"]["lat"]
+        lon = clicked_point["last_clicked"]["lng"]
+        st.success(f"您選擇的位置：經度 {lon}, 緯度 {lat}，範圍半徑 {radius} 公尺")
+    else:
+        st.info("請在上方地圖上點選一個位置")
 
 
 
