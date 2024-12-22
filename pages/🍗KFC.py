@@ -40,10 +40,7 @@ with col2:
         - **綠色座標點**：{radius} 公尺環域內的 肯德基 分店  
         """
     )
-    markdown = """
-"""
-st.sidebar.info(markdown)
-logo = "https://raw.githubusercontent.com/Yony00/1131GISProgram_project/refs/heads/main/KFC.jpg"
+    logo = "https://raw.githubusercontent.com/Yony00/1131GISProgram_project/refs/heads/main/KFC.jpg"
 st.sidebar.image(logo)
 
 
