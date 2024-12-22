@@ -15,7 +15,7 @@ with col2:
     st.markdown("""
     <h3>這是餐廳列表:</h3>
     <ul>
-        <li><i class="fa fa-cutlery"></i> Subway 餐廳1</li>
+        <i class="fa-solid fa-star"></i> Subway 餐廳1
         <li><i class="fa fa-cutlery"></i> Subway 餐廳2</li>
         <li><i class="fa fa-cutlery"></i> Subway 餐廳3</li>
     </ul>
