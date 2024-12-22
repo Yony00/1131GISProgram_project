@@ -95,3 +95,5 @@ if clicked_point and clicked_point.get("last_clicked"):
             st.write("範圍內無餐廳")
 else:
     st.info("請在上方地圖上點選一個位置")
+
+col1, col2 = st.columns([2, 2])
