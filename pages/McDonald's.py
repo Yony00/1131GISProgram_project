@@ -50,7 +50,7 @@ with col1:
     clicked_point = st_folium(m, key="folium_map", width=1200, height=900)
 
 # 假設餐廳的 GeoJSON 檔案 URL
-subway_geojson_url = 'https://raw.githubusercontent.com/Yony00/20241127-class/refs/heads/main/SB10.geojson'
+subway_geojson_url = 'https://raw.githubusercontent.com/Yony00/20241127-class/refs/heads/main/MM10.geojson'
 
 # 下載 GeoJSON 檔案
 response = requests.get(subway_geojson_url)
