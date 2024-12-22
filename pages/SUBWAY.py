@@ -12,14 +12,17 @@ st.title("📍尋找自訂範圍內的Subway餐廳")
 col1, col2 = st.columns([3, 1])  # 3:1的比例，左邊占三分之一，右邊占四分之一
 
 with col2:
-    st.markdown(
+# 直接嵌入 SVG
+st.markdown(
     """
-    <h3>這是餐廳位置標記:</h3>
-    <p>以下為位置圖示：</p>
-    <img src="https://raw.githubusercontent.com/Yony00/1131GISProgram_project/refs/heads/main/star-solid.svg" alt="Star Icon" width="50">
+    <h3>這是藍色的圖標:</h3>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512" width="50">
+        <path fill="blue" d="M287.9 17.8L354 150.2 495.9 171.5 383.5 275.4 415.5 417.5 287.9 349.8 160.3 417.5 192.3 275.4 79.9 171.5 221.8 150.2 287.9 17.8z"/>
+    </svg>
     """,
     unsafe_allow_html=True
 )
+
 
 # 假設餐廳的 GeoJSON 檔案 URL
 subway_geojson_url = 'https://raw.githubusercontent.com/Yony00/20241127-class/refs/heads/main/SB10.geojson'
