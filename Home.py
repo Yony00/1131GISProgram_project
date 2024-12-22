@@ -98,9 +98,11 @@ if combined_gdf is not None and not combined_gdf.empty:
     # 顯示地圖
     st_folium(m, width=900, height=600)
 
-    # 顯示目前的餐廳分店列表
-    if 'name' in combined_gdf.columns:
-        st.write(f"{restaurant_selection} 餐廳分布:")
-        st.write(combined_gdf[['name', 'number', 'address', 'hours']])
+    # 顯示分店數量統計
+    if 'county' in combined_gdf.columns:
+        st.write(f"{restaurant_selection} 餐廳各縣市分店數量:")
+        # 計算每個縣市的分店數量
+        city_counts = combined_gdf.groupby('county').size().reset_index(name='分店數量')
+        st.write(city_counts)
 else:
     st.error(f"無法載入 {restaurant_selection} 的分布資料。")
